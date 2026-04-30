@@ -17,6 +17,8 @@ const commands = {
   uninstall:          () => import('../lib/commands/uninstall.js'),
   'add-agent':        () => import('../lib/commands/add-agent.js'),
   'add-engine':       () => import('../lib/commands/add-engine.js'),
+  'add-hooks':        () => import('../lib/commands/add-hooks.js'),
+  'remove-hooks':     () => import('../lib/commands/remove-hooks.js'),
   'export-diagrams':  () => import('../lib/commands/export-diagrams.js'),
 };
 
@@ -42,6 +44,10 @@ ______
     uninstall          Remove o Reversa do projeto
     add-agent          Adiciona um agente ao projeto
     add-engine         Adiciona suporte a uma engine
+    add-hooks          Instala hooks pre/post-edit do Chronicler na engine
+                       Opções: --engine=<id>  --yes
+    remove-hooks       Remove hooks do Chronicler instalados em uma engine
+                       Opções: --engine=<id>  --all  --yes
     export-diagrams    Exporta diagramas Mermaid como imagens SVG/PNG
                        Opções: --format=svg|png  --output=<pasta>
                        Requer: npm install -g @mermaid-js/mermaid-cli

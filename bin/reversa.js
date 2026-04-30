@@ -19,6 +19,7 @@ const commands = {
   'add-engine':       () => import('../lib/commands/add-engine.js'),
   'add-hooks':        () => import('../lib/commands/add-hooks.js'),
   'remove-hooks':     () => import('../lib/commands/remove-hooks.js'),
+  'drift-check':      () => import('../lib/commands/drift-check.js'),
   'export-diagrams':  () => import('../lib/commands/export-diagrams.js'),
 };
 
@@ -48,6 +49,8 @@ ______
                        Opções: --engine=<id>  --yes
     remove-hooks       Remove hooks do Chronicler instalados em uma engine
                        Opções: --engine=<id>  --all  --yes
+    drift-check        CI gate — exit 1 se houver specs com drift pendente
+                       Opções: --format=text|json  --severity=high|medium|low
     export-diagrams    Exporta diagramas Mermaid como imagens SVG/PNG
                        Opções: --format=svg|png  --output=<pasta>
                        Requer: npm install -g @mermaid-js/mermaid-cli

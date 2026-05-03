@@ -278,7 +278,7 @@ flowchart TD
     INS --> IDX[gitnexus analyze --incremental]
     IDX --> DRIFT{npx reversa drift-check<br/>--severity high}
     DRIFT -->|exit 1| BLOCK1[Block: spec drift pending<br/>dev must run /reversa-keeper after locally]
-    DRIFT -->|exit 0| POLICY{policy-check<br/>Phase 2 — planned}
+    DRIFT -->|exit 0| POLICY{policy-check<br/>signature gate}
     POLICY -->|contract broken| BLOCK2[Block: 🟢 contract violated]
     POLICY -->|clean| IMPACT[gitnexus detect_changes<br/>blast radius posted as PR comment]
     IMPACT --> PASS[Ready for review]
@@ -290,7 +290,7 @@ flowchart TD
 | Edit | Local | Engine hook | Event queued |
 | Post-edit | Local | Keeper `after` | Specs updated, drift cleared |
 | CI gate 1 | CI | `drift-check --severity high` | PR fails (drift pending) |
-| CI gate 2 | CI | `policy-check` *(Phase 2)* | PR fails (contract broken) |
+| CI gate 2 | CI | `policy-check --severity high` | PR fails (contract broken) |
 | CI report | CI | `gitnexus impact` | Comment on PR (info only) |
 
 > Keeper is **never run automatically in CI** — it asks 3 questions to the developer and updates specs based on that intent. CI only enforces that drift was resolved locally.

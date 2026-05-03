@@ -1,0 +1,78 @@
+# Reversa control plane — full CircleCI snippet.
+#
+# Pipelines on PRs run drift-check, policy-check, and (if the
+# ANTHROPIC_API_KEY context is set) keeper-auto.
+
+version: 2.1
+
+orbs:
+  node: circleci/node@5
+
+executors:
+  reversa-runner:
+    docker:
+      - image: cimg/node:20.11
+
+jobs:
+  drift-check:
+    executor: reversa-runner
+    steps:
+      - checkout
+      - run: npx reversa drift-check --severity high --format text
+
+  policy-check:
+    executor: reversa-runner
+    steps:
+      - checkout
+      - run: git fetch --depth=2147483647 origin "$CIRCLE_BASE_BRANCH"
+      - run: npx reversa policy-index build
+      - run: |
+          npx reversa policy-check \
+            --base "origin/$CIRCLE_BASE_BRANCH" \
+            --head HEAD \
+            --severity high \
+            --format text
+
+  keeper-auto:
+    executor: reversa-runner
+    steps:
+      - checkout
+      - run:
+          name: Skip when no API key
+          command: |
+            if [ -z "$ANTHROPIC_API_KEY" ]; then
+              circleci-agent step halt
+            fi
+      - restore_cache:
+          keys:
+            - reversa-graph-{{ .Revision }}
+            - reversa-graph-
+      - run: npx reversa keeper auto --format text --max-specs 5
+      - save_cache:
+          key: reversa-graph-{{ .Revision }}
+          paths:
+            - .reversa/context/graph.json
+      - run:
+          name: Commit spec updates
+          command: |
+            if [ -n "$(git status --porcelain _reversa_sdd)" ]; then
+              git config user.name "reversa-keeper[bot]"
+              git config user.email "reversa-keeper@users.noreply.circleci.com"
+              git add _reversa_sdd
+              git commit -m "reversa(keeper): auto-update specs [skip ci]"
+              git push origin "HEAD:$CIRCLE_BRANCH"
+            fi
+      - store_artifacts:
+          path: .reversa/audit
+          destination: reversa-audit
+
+workflows:
+  reversa:
+    jobs:
+      - drift-check
+      - policy-check:
+          requires: [drift-check]
+      - keeper-auto:
+          requires: [policy-check]
+          context:
+            - reversa-anthropic

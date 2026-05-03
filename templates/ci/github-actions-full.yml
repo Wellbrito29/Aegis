@@ -1,0 +1,85 @@
+# Reversa control plane — full GitHub Actions workflow.
+#
+# Runs three jobs on every PR:
+#   1. drift-check       — fails build when specs are out of sync
+#   2. policy-check      — fails build when a protected contract's signature breaks
+#   3. keeper-auto       — opt-in: auto-resolves spec drift via Claude
+#
+# `keeper-auto` is gated behind ANTHROPIC_API_KEY being set as a secret.
+# Without the secret, the job is skipped — the rest of the gate still runs.
+
+name: reversa
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write       # keeper-bot pushes spec-only commits
+  pull-requests: write  # keeper-bot labels + comments
+  issues: write         # GitHub treats PR labels as issue labels
+
+jobs:
+  drift-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npx reversa drift-check --severity high --format text
+
+  policy-check:
+    runs-on: ubuntu-latest
+    needs: drift-check
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Build policy index
+        run: npx reversa policy-index build
+      - name: Run signature gate
+        run: |
+          npx reversa policy-check \
+            --base origin/${{ github.event.pull_request.base.ref }} \
+            --head HEAD \
+            --severity high \
+            --format text
+
+  keeper-auto:
+    runs-on: ubuntu-latest
+    needs: policy-check
+    if: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Cache graph
+        uses: actions/cache@v4
+        with:
+          path: .reversa/context/graph.json
+          key: graph-${{ github.sha }}
+          restore-keys: graph-
+      - name: Run keeper auto
+        run: npx reversa keeper auto --format text --max-specs 5
+      - name: Commit spec updates
+        run: |
+          git config user.name "reversa-keeper[bot]"
+          git config user.email "reversa-keeper[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain _reversa_sdd)" ]; then
+            git add _reversa_sdd
+            git commit -m "reversa(keeper): auto-update specs [skip ci]"
+            git push
+          fi
+      - name: Upload audit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reversa-audit
+          path: .reversa/audit/

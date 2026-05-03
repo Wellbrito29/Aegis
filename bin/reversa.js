@@ -23,6 +23,7 @@ const commands = {
   'export-diagrams':  () => import('../lib/commands/export-diagrams.js'),
   graph:              () => import('../lib/commands/graph.js'),
   'policy-index':     () => import('../lib/commands/policy-index.js'),
+  'policy-check':     () => import('../lib/commands/policy-check.js'),
 };
 
 const green = chalk.hex('#ffa203');
@@ -61,6 +62,9 @@ ______
                        Opções: --json  --since=<ref>  --files=a,b,c
     policy-index       Constrói índice de specs protegidas pra policy gate
                        Subcomandos: build | show
+    policy-check       CI gate — analisa git diff e bloqueia signature breaks
+                       Opções: --base=<ref>  --head=<ref>
+                               --format=text|json  --severity=high|medium|low
 
   Documentação: https://github.com/sandeco/reversa
   `);

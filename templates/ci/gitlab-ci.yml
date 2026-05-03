@@ -1,0 +1,21 @@
+# Reversa policy-check — GitLab CI snippet.
+#
+# Append to your `.gitlab-ci.yml` or include via `include:`. Runs on merge
+# requests and blocks the pipeline when a protected contract's signature
+# breaks. Switch `--severity` to `medium` or `low` to broaden the gate.
+
+reversa:policy-check:
+  image: node:20
+  stage: test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  variables:
+    GIT_DEPTH: 0
+  script:
+    - git fetch origin "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
+    - npx reversa policy-index build
+    - npx reversa policy-check
+        --base "origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
+        --head HEAD
+        --severity high
+        --format text

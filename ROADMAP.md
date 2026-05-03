@@ -51,7 +51,7 @@ L0 (file imports via regex) + L1 (AST symbols/calls via tree-sitter) pra:
 
 ---
 
-## Fase 1 — Hooks leves → v1.7.0 (1-2 dias)
+## Fase 1 — Hooks leves → v1.7.0 (1-2 dias) ✅ shipped (PR #11)
 
 **Objetivo:** parar de onerar sistema. Hook só anota, processa em batch.
 
@@ -77,7 +77,7 @@ L0 (file imports via regex) + L1 (AST symbols/calls via tree-sitter) pra:
 
 ---
 
-## Fase 2 — Graph L0 universal → v1.8.0-alpha.1 (3-4 dias)
+## Fase 2 — Graph L0 universal → v1.8.0-alpha.1 (3-4 dias) ✅ shipped (PR #17)
 
 **Objetivo:** blast radius file-level pra **todas** linguagens via regex.
 
@@ -120,7 +120,7 @@ L0 (file imports via regex) + L1 (AST symbols/calls via tree-sitter) pra:
 
 ---
 
-## Fase 3 — Storage + queries L0 + CLI → v1.8.0-alpha.2 (2-3 dias)
+## Fase 3 — Storage + queries L0 + CLI → v1.8.0-alpha.2 (2-3 dias) ✅ shipped (PR #18)
 
 **Objetivo:** persistir graph + expor queries básicas via CLI.
 
@@ -155,7 +155,7 @@ npx reversa graph stats
 
 ---
 
-## Fase 4 — Basic policy gate (file-level) → v1.8.0-alpha.3 (3-4 dias)
+## Fase 4 — Basic policy gate (file-level) → v1.8.0-alpha.3 (3-4 dias) ✅ shipped (PR #19)
 
 **Objetivo:** Keeper barra pre-edit baseado em path + spec metadata. Sem parsing diff.
 
@@ -198,7 +198,7 @@ protected_files:
 
 ---
 
-## Fase 5 — Keeper integra L0 graph → v1.8.0 (2-3 dias)
+## Fase 5 — Keeper integra L0 graph → v1.8.0 (2-3 dias) ✅ shipped (PR #20)
 
 **Objetivo:** Step 2 do Keeper usa graph em vez de só matrix.
 
@@ -220,7 +220,7 @@ protected_files:
 
 ---
 
-## Fase 6 — Graph L1 JS/TS → v1.9.0-alpha.1 (4-5 dias)
+## Fase 6 — Graph L1 JS/TS → v1.9.0-alpha.1 (4-5 dias) ✅ shipped (PR #21)
 
 **Objetivo:** AST symbols + calls + signatures pra JS/TS. Base pra smart policy.
 
@@ -270,7 +270,9 @@ protected_files:
 
 ---
 
-## Fase 7 — Graph L1 Python → v1.9.0-alpha.2 (3-4 dias)
+## Fase 7 — Graph L1 Python → v1.9.0-alpha.2 (3-4 dias) ✅ shipped (PR #22)
+
+**Implementado:** `tree-sitter-python` via `optionalDependencies` (lazy load + fallback graceful pra L0 quando native binary ausente). Extractor produz mesmo schema canonical de JS/TS (`{ symbols, calls, exports }`). Captura type hints, async, decorators (staticmethod/property/classmethod), `__all__` para exports explícitos, `_prefix` pra nomes privados, superclasses para `extends`. Bonus: Python extractor já popula `from` (caller symbol) em cada call — JS/TS extractor receberá retrofit em follow-up.
 
 | Item | Arquivo |
 |---|---|

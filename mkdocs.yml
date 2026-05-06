@@ -89,6 +89,8 @@ plugins:
             Overview: Visão geral
             Guide with analogies: Guia com analogias
             Reversa (Orchestrator): Reversa (Orquestrador)
+            Translators: Tradutores
+            N8N Translator: N8N Translator
             Generated outputs: Saídas geradas
             Developing from specs: Desenvolvendo com as specs
             Migration: Migração
@@ -117,6 +119,8 @@ plugins:
             Overview: Visión general
             Guide with analogies: Guía con analogías
             Reversa (Orchestrator): Reversa (Orquestador)
+            Translators: Traductores
+            N8N Translator: N8N Translator
             Generated outputs: Salidas generadas
             Developing from specs: Desarrollando con las specs
             Migration: Migración
@@ -153,6 +157,8 @@ nav:
     - Data Master: agentes/data-master.md
     - Design System: agentes/design-system.md
     - Keeper: agentes/keeper.md
+  - Translators:
+    - N8N Translator: agentes/n8n.md
   - Drift loop:
     - Hooks (auto Keeper): hooks.md
     - drift-check (CI gate): drift-check.md

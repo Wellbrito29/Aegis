@@ -14,9 +14,14 @@ Reversa works with the leading AI engines on the market. The installer automatic
 | **Gemini CLI** | `GEMINI.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Windsurf** | `.windsurfrules` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Antigravity** | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Kiro** | `.kiro/steering/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
+| **Kiro** | (none) | `.kiro/skills/reversa-*/` and `.agents/skills/reversa-*/` | `/reversa` |
 | **Opencode** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 | **Kimi CLI** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
+| **Cline** | `.clinerules` | `.agents/skills/reversa-*/` | `/reversa` |
+| **Roo Code** | `.roorules` | `.agents/skills/reversa-*/` | `/reversa` |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/reversa-*/` | `/reversa` |
+| **Aider** | `CONVENTIONS.md` | `.agents/skills/reversa-*/` | `reversa` |
+| **Amazon Q Developer** | `.amazonq/rules/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
 
 ---
 
@@ -52,7 +57,7 @@ Google's agentic development platform, released in November 2025. Reads `AGENTS.
 
 ## Kiro
 
-Amazon's agentic IDE. Uses steering documents in `.kiro/steering/` to instruct the agent: the installer creates `.kiro/steering/reversa.md`. Agents live in `.agents/skills/` and are activated via `/reversa`.
+Amazon's agentic IDE. Kiro natively discovers skills in `.kiro/skills/`, no steering document required. The installer places agents in `.kiro/skills/` (and also in `.agents/skills/` for compatibility with other engines). Activation is via `/reversa` or auto-discovery from the skill description.
 
 ---
 
@@ -65,6 +70,30 @@ Open source coding agent for the terminal (SST). Reads `AGENTS.md` natively, sam
 ## Kimi CLI
 
 Moonshot AI's terminal coding agent. Reads `AGENTS.md` natively (merged from project root to working directory) — same convention as Codex/Opencode. If any of those is already installed, the existing `AGENTS.md` is reused without duplication. Skills are auto-discovered from `.agents/skills/` and `.kimi/skills/`. CLI command: `kimi`. Activation is by agent name: `reversa`.
+
+---
+
+## Cline and Roo Code
+
+VS Code extensions with custom rules support via `.clinerules` and `.roorules` respectively. The pattern is identical to Cursor and Windsurf: a rules file at the project root that instructs the agent when activating `/reversa`.
+
+---
+
+## GitHub Copilot
+
+Uses `.github/copilot-instructions.md` as a custom instructions file, automatically read by Copilot in every session. The installer creates the file inside `.github/` (which may already exist in the project).
+
+---
+
+## Aider
+
+Coding agent for the terminal. The entry file `CONVENTIONS.md` at the root is passed via `--read CONVENTIONS.md` or configured in `.aider.conf.yml`. Like Codex and Opencode, activation is by name: `reversa`.
+
+---
+
+## Amazon Q Developer
+
+AWS AI CLI. Uses rules in `.amazonq/rules/` to instruct the agent per project. The installer creates `.amazonq/rules/reversa.md` without interfering with other rules you may already have in that folder.
 
 ---
 

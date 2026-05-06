@@ -55,6 +55,19 @@ O campo `doc_level` do state.json controla o que gerar:
 ### 5. Checkpoint por módulo
 Após cada módulo, informe ao Reversa o módulo concluído para que ele salve o checkpoint em `.reversa/state.json`.
 
+### 6. Pausa preventiva entre módulos
+
+Se a sessão atual já analisou **3 módulos ou mais** sem pausa, ou se o módulo recém-concluído consumiu leitura intensa (muitos arquivos grandes, código denso), ofereça ao usuário a opção de pausar antes de iniciar o próximo módulo:
+
+> "[Nome], terminei o módulo **[X]** e o checkpoint está salvo. Já analisei [N] módulos nesta sessão. O próximo é **[Y]**. Você quer:
+>
+> 1. Continuar agora
+> 2. Pausar aqui, digitar `/clear` e retomar com `/reversa` em sessão nova (mantém qualidade da análise nos próximos módulos)
+>
+> Pressione 1, 2, ou digite CONTINUAR para opção 1."
+
+Confirme que o checkpoint do módulo concluído está em `.reversa/state.json` (campo `checkpoints.archaeologist.modules_analyzed`) antes de oferecer a opção 2. Não force a pausa, o usuário decide.
+
 ## Saída
 
 **Sempre:**
@@ -70,6 +83,12 @@ Após cada módulo, informe ao Reversa o módulo concluído para que ele salve o
 
 ## Escala de confiança
 🟢 CONFIRMADO | 🟡 INFERIDO | 🔴 LACUNA
+
+## Layout de saída (transversal)
+
+Este agente produz artefatos transversais à organização escolhida em `[specs]` do `config.toml`. Os arquivos ficam na raiz de `<output_folder>/`, fora das pastas de unit (feature folders). Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
+
+**Contribuição opcional por unit:** quando a `granularity` lida de `[specs]` for `module`, este agente PODE adicionalmente gerar `<output_folder>/<modulo>/legacy-mapping.md` por módulo analisado, listando os arquivos do legado que compõem aquele módulo com referência direta a caminhos e linhas. Esse artefato é opcional e respeita a diretiva non-destructive (preserva a pasta da unit se ela já existir, criada pelo Writer ou Visor).
 
 Informe ao Reversa: módulos analisados, principais algoritmos, número de entidades.
 Gere `modules.json` seguindo o schema em `references/modules-schema.md`.

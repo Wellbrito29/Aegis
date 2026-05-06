@@ -160,6 +160,14 @@ Continuous loop (after the initial pipeline): **Keeper** keeps specs synchronize
 | **Reconstructor** | Generates a bottom-up rebuild plan from the specs and executes one task at a time |
 | **Keeper** | Keeps specs synchronized with code changes — drift detection, changelog, dashboard |
 
+### Translators (input adapters)
+
+Use when the legacy "code" is not source code but a structured artifact like a visual workflow. Generates the SDD spec and prepares the state for the main pipeline to take over.
+
+| Agent | Role |
+|-------|------|
+| **N8N Translator** | Reads N8N workflows exported as JSON and produces SDD specs ready for Python reimplementation. Activated via `/reversa-n8n` |
+
 ---
 
 ## What is generated
@@ -220,7 +228,7 @@ Every statement in the specs is marked with:
 | Gemini CLI | `GEMINI.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | Windsurf | `.windsurfrules` | `.agents/skills/reversa-*/` | `/reversa` |
 | Antigravity | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
-| Kiro | `.kiro/steering/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
+| Kiro | (none) | `.kiro/skills/reversa-*/` and `.agents/skills/reversa-*/` | `/reversa` |
 | Opencode | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 | Cline | `.clinerules` | `.agents/skills/reversa-*/` | `/reversa` |
 | Roo Code | `.roorules` | `.agents/skills/reversa-*/` | `/reversa` |

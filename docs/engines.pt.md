@@ -14,7 +14,7 @@ O Reversa funciona com as principais engines de IA do mercado. O instalador dete
 | **Gemini CLI** | `GEMINI.md` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Windsurf** | `.windsurfrules` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Antigravity** | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Kiro** | `.kiro/steering/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
+| **Kiro** | (nenhum) | `.kiro/skills/reversa-*/` e `.agents/skills/reversa-*/` | `/reversa` |
 | **Opencode** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
 | **Cline** | `.clinerules` | `.agents/skills/reversa-*/` | `/reversa` |
 | **Roo Code** | `.roorules` | `.agents/skills/reversa-*/` | `/reversa` |
@@ -57,7 +57,7 @@ Plataforma de desenvolvimento agêntico do Google, lançada em novembro de 2025.
 
 ## Kiro
 
-IDE agêntico da Amazon. Usa steering documents em `.kiro/steering/` para instruir o agente: o instalador cria `.kiro/steering/reversa.md`. Os agentes ficam em `.agents/skills/` e são ativados via `/reversa`.
+IDE agêntico da Amazon. O Kiro descobre skills nativamente em `.kiro/skills/`, sem necessidade de steering documents. O instalador coloca os agentes em `.kiro/skills/` (e também em `.agents/skills/` para compatibilidade com outras engines). A ativação é via `/reversa` ou auto-discovery pela descrição do skill.
 
 ---
 

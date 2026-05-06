@@ -61,7 +61,11 @@ Apresente ao usuário um resumo do que o Scout encontrou e as três opções de 
 
 Aguarde a resposta do usuário. Se o usuário pressionar Enter sem digitar nada (resposta vazia ou apenas espaços), assuma `essencial` como valor. Aceite também o nome por extenso: `essencial`/`completo`/`detalhado`.
 
-Após receber a resposta, salve em `.reversa/state.json` → campo `doc_level` e só então ative o Archaeologist.
+Após receber a resposta, salve em `.reversa/state.json` → campo `doc_level`.
+
+**Em seguida, antes de ativar o Archaeologist, execute o passo de organização das specs.** Leia e siga `references/step-03-specs-organization.md`. Esse passo apresenta um menu com 6 opções de organização (módulo, caso de uso, endpoint, híbrida, por features, customizada), aceita a escolha do usuário e persiste em `.reversa/config.toml`, seção `[specs]`. Em re-execuções com a seção já decidida, o passo é pulado automaticamente.
+
+Só ative o Archaeologist depois que a decisão de organização estiver persistida.
 
 **Sobre paralelismo:** executar etapas do plano sequencialmente é orquestração normal — não requer autorização. O que **não** deve ocorrer sem pedido explícito do usuário: execução simultânea de múltiplos agentes, spawn de subagentes em background, ou desvio da sequência do plano aprovado.
 
@@ -76,6 +80,30 @@ Se o contexto estiver se esgotando:
 1. Salve checkpoint em `.reversa/state.json` imediatamente
 2. Diga: "[Nome], vou pausar aqui. Tudo está salvo. Digite `/reversa` em uma nova sessão para continuar."
 
+## Checkpoint preventivo entre etapas
+
+Não espere o contexto estourar. Em marcos discretos do plano, ofereça uma pausa proativa para o usuário recomeçar limpo. Os marcos são:
+
+- Após cada agente concluído (Scout, Archaeologist, Detective, Architect, Writer, Reviewer e os agentes independentes) **nesta sessão**
+- Antes de iniciar um agente pesado quando o anterior já consumiu sessão longa (Archaeologist, Writer, Reviewer com revisão cruzada)
+
+**🚫 Nunca ofereça este prompt logo após uma retomada (`/reversa` em sessão nova).** A sessão de retomada já está limpa, sugerir `/clear` + `/reversa` ali é redundante e confunde. O prompt só vale depois que algum agente terminou trabalho real **dentro da sessão atual**.
+
+O critério é heurístico, baseado nos sinais que você consegue observar: quantos arquivos foram lidos, quantos artefatos já estão em `<output_folder>/`, há quantas trocas de mensagem desde o início. Não tente estimar tokens, isso é impreciso entre engines.
+
+Quando achar que vale uma pausa, pergunte assim:
+
+> "[Nome], o **[agente concluído]** terminou e o checkpoint está salvo. A próxima etapa é o **[próximo agente]**, que costuma ser longa. Você quer:
+>
+> 1. Continuar agora nesta sessão
+> 2. Pausar aqui, digitar `/clear` para limpar o contexto, e voltar com `/reversa` em sessão nova (recomendado se a sessão atual já está longa)
+>
+> Pressione 1, 2, ou apenas digite CONTINUAR para opção 1."
+
+Antes de oferecer a opção 2, **confirme que o checkpoint está salvo** em `.reversa/state.json` (campo `phase`, `completed`, `checkpoints` do agente que acabou de rodar). Sem checkpoint válido, oferecer pausa é arriscado.
+
+Não force a pausa. O usuário decide. Se ele não responder ou disser para continuar, prossiga normalmente.
+
 ## Escala de confiança
 
 Sempre usar nas specs geradas:
@@ -83,7 +111,13 @@ Sempre usar nas specs geradas:
 - 🟡 **INFERIDO** — baseado em padrões, pode estar errado
 - 🔴 **LACUNA** — requer validação humana
 
+## Verificação de regressão semântica (re-extrações)
+
+Após o **último agente do plano** concluir e antes de declarar a extração finalizada, leia e siga `references/step-04-regression-check.md`. O gatilho é posição (último item do plan.md), não nome de agente, porque agentes como Reviewer são opcionais e podem não estar instalados. Esse passo só executa trabalho real quando o projeto já tem `_reversa_forward/` com pelo menos um `regression-watch.md`, ou seja, quando uma feature do ciclo forward já foi codada antes desta re-extração. Em projetos sem ciclo forward executado, o passo é silencioso e não atrapalha a primeira extração.
+
+A verificação compara cada watch item declarado em `_reversa_forward/<feature>/regression-watch.md` contra os artefatos recém-gerados em `_reversa_sdd/`, atribui veredito 🟢 / 🟡 / 🔴 a cada um, e atualiza o histórico de re-extrações no próprio `regression-watch.md`. Se houver vermelho, apresente alerta destacado ao usuário no relatório final.
+
 ## Regra absoluta
 
 **Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto.**
-O Reversa escreve APENAS em `.reversa/` e `_reversa_sdd/`.
+O Reversa escreve APENAS em `.reversa/`, `_reversa_sdd/` e em `_reversa_forward/<feature>/regression-watch.md` (apenas seção de histórico, nunca a tabela principal).

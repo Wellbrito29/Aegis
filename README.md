@@ -1,13 +1,34 @@
-# Reversa 
-<small>by sandeco</small>
+# Reversa Control Plane
+<small>Fork by Wellbrito29, based on Reversa by sandeco</small>
 
-**Turn legacy systems into executable specifications for AI agents.**
+**Turn legacy systems into executable specifications and keep them aligned as AI agents change code.**
 
 [![English Docs](https://img.shields.io/badge/DOCS-English-009c3b?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/reversa/)<br>
 [![Português Docs](https://img.shields.io/badge/DOCS-Portugu%C3%AAs-ffcc00?style=for-the-badge&logo=material-for-mkdocs&logoColor=black&labelColor=2d2d2d)](https://sandeco.github.io/reversa/pt/)<br>
 [![Español Docs](https://img.shields.io/badge/DOCS-Espa%C3%B1ol-c60b1e?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/reversa/es/)
 
-Reversa is a specification reverse-engineering framework. Install it inside a legacy project and it coordinates a team of specialized AI agents to analyze the existing code and generate complete, traceable specifications ready for use by any coding agent.
+This project is a fork of [`sandeco/reversa`](https://github.com/sandeco/reversa). It keeps the original Reversa idea — reverse-engineering legacy systems into executable specifications — and extends it into a control plane for day-to-day AI-assisted development.
+
+The upstream project focuses on generating specs from legacy code. This fork adds the missing loop after generation: dependency graph, drift detection, policy gates, Keeper hooks, optional auto-resolution, audit logs, bot scaffolding, and CI templates.
+
+---
+
+## About this fork
+
+- Base: includes upstream `sandeco/reversa` through `upstream/main` commit `144aee2` (`v1.2.28`).
+- Fork delta: 24 commits ahead of upstream, released here as `v2.0.0`.
+- Package and CLI remain named `reversa` for compatibility: `npx reversa <command>`.
+- This is not a passive mirror: the fork changes Reversa from a spec-generation framework into a spec + graph + policy control plane.
+
+### Main differences from upstream
+
+- **Keeper**: new `reversa-keeper` agent keeps specs synchronized with code changes.
+- **Graph**: new `lib/graph/` builds `.reversa/context/graph.json` for import impact and L1 symbols/signatures.
+- **Policy gates**: new `policy-index` and `policy-check` commands block protected contract breaks.
+- **Drift loop**: new `drift-check`, hooks, queue, changelog, and drift dashboard flow.
+- **Auto mode**: optional Keeper auto-resolution via `_reversa_sdd/auto-policy.yaml` and `ANTHROPIC_API_KEY`.
+- **CI and bot support**: GitHub/GitLab/CircleCI templates plus `bot/keeper-bot/` scaffold.
+- **Engine coverage**: adds Kimi CLI support and hook generators for Claude, Cursor, Kimi, Codex, and Opencode.
 
 ---
 
@@ -53,7 +74,7 @@ Stage 4 — Control plane →  Keeper + Graph + Policy gate (file-level + signat
                             new code → guarded against drift, signature break, blast-radius edits
 ```
 
-Stage 2 is optional — use it when migrating to a new stack. Stage 4 is what Reversa 2.0 builds out (see [ROADMAP.md](ROADMAP.md)).
+Stage 2 is optional — use it when migrating to a new stack. Stage 4 is the main difference in this fork (see [ROADMAP.md](ROADMAP.md)).
 
 ---
 
@@ -265,7 +286,7 @@ The Keeper closes the cycle between spec and code so new code does not become le
 ### Local flow (developer machine)
 
 ```
-[Edit a file]                 → engine hook → .reversa/keeper-queue.json
+[Edit a file]                 → engine hook → .reversa/keeper-queue.jsonl
                                             → stub in changelog/YYYY-MM-DD.md
                                             → marks spec as 🔴 pending in drift.md
 
@@ -281,25 +302,25 @@ The Keeper closes the cycle between spec and code so new code does not become le
 
 ```mermaid
 flowchart TD
-    PR[PR opened or updated] --> CO[Checkout + restore .gitnexus/ cache]
-    CO --> INS[Install reversa + gitnexus]
-    INS --> IDX[gitnexus analyze --incremental]
+    PR[PR opened or updated] --> CO[Checkout + restore .reversa/context cache]
+    CO --> GRAPH[npx reversa graph build --level L1]
+    GRAPH --> IDX[npx reversa policy-index build]
     IDX --> DRIFT{npx reversa drift-check<br/>--severity high}
     DRIFT -->|exit 1| BLOCK1[Block: spec drift pending<br/>dev must run /reversa-keeper after locally]
     DRIFT -->|exit 0| POLICY{policy-check<br/>signature gate}
     POLICY -->|contract broken| BLOCK2[Block: 🟢 contract violated]
-    POLICY -->|clean| IMPACT[gitnexus detect_changes<br/>blast radius posted as PR comment]
+    POLICY -->|clean| IMPACT[reversa graph impact<br/>blast radius posted as PR comment]
     IMPACT --> PASS[Ready for review]
 ```
 
 | Stage | Where | Tool | On failure |
 |---|---|---|---|
-| Pre-edit | Local | Keeper `before` + GitNexus `context` | Agent reconsiders |
+| Pre-edit | Local | Keeper `before` + Reversa Graph context | Agent reconsiders |
 | Edit | Local | Engine hook | Event queued |
 | Post-edit | Local | Keeper `after` | Specs updated, drift cleared |
 | CI gate 1 | CI | `drift-check --severity high` | PR fails (drift pending) |
 | CI gate 2 | CI | `policy-check --severity high` | PR fails (contract broken) |
-| CI report | CI | `gitnexus impact` | Comment on PR (info only) |
+| CI report | CI | `reversa graph impact` | Comment on PR (info only) |
 
 > Keeper is **never run automatically in CI** — it asks 3 questions to the developer and updates specs based on that intent. CI only enforces that drift was resolved locally.
 
@@ -323,8 +344,10 @@ See [docs/agentes/keeper.md](docs/agentes/keeper.md), [docs/hooks.md](docs/hooks
 ├── plan.md             # Exploration plan (user-editable)
 ├── version             # Installed version
 ├── context/
-│   ├── surface.json    # Generated by Scout
-│   └── modules.json    # Generated by Archaeologist
+│   ├── surface.json       # Generated by Scout
+│   ├── modules.json       # Generated by Archaeologist
+│   ├── graph.json         # Generated by `reversa graph build`
+│   └── policy-index.json  # Generated by `reversa policy-index build`
 └── _config/
     ├── manifest.yaml       # Installation metadata
     └── files-manifest.json # SHA-256 hashes for safe updates
@@ -340,7 +363,7 @@ See [docs/agentes/keeper.md](docs/agentes/keeper.md), [docs/hooks.md](docs/hooks
 Contributions are welcome. Open an issue to discuss before submitting a PR.
 
 ```bash
-git clone https://github.com/sandeco/reversa.git
+git clone https://github.com/Wellbrito29/reversa.git
 cd reversa
 npm install
 ```

@@ -36,7 +36,7 @@ Você é o redator de requisitos do Aegis Spec. Sua missão é converter o argum
 
 Antes de criar feature nova, verifique se já existe uma anterior em andamento. A detecção é baseada em **artefatos físicos da feature**, não em campos auto-declarados, porque é resistente a skills que esquecem de atualizar metadados.
 
-1. Tente ler `aegis/active-requirements.json`
+1. Tente ler `aegis/config/active-requirements.json`
    1.1. Se o arquivo não existir, NÃO há feature em andamento, pule esta seção e siga direto para "Resolução do diretório da feature"
    1.2. Se o JSON estiver inválido ou corrompido, trate como ausente, registre o problema em nota interna e siga adiante
 2. Leia o campo `feature-dir` do JSON
@@ -134,7 +134,7 @@ A diretriz **non-destructive** vale aqui: em nenhuma das três opções a pasta 
 2. Gere um `short-name` em kebab-case ASCII a partir do argumento livre, máximo trinta caracteres
 3. Defina `feature-dir = aegis/forward/<NNN>-<short-name>` (ou `aegis/forward/<TIMESTAMP>-<short-name>`)
 4. Crie `feature-dir` se não existir
-5. Atualize `aegis/active-requirements.json` com o conteúdo abaixo, usando escrita atômica (tempfile mais rename):
+5. Atualize `aegis/config/active-requirements.json` com o conteúdo abaixo, usando escrita atômica (tempfile mais rename):
 
 ```json
 {
@@ -162,7 +162,7 @@ Antes de escrever o requirements, leia, na ordem (pulando o que não existir):
 2. `aegis/reports/domain.md` (regras de negócio confirmadas)
 3. `aegis/reports/inventory.md` (superfície do código)
 4. `aegis/reports/code-analysis.md` SOMENTE nas seções dos componentes que o argumento livre parece tocar
-5. `aegis/principles.md` (princípios do projeto, se existir)
+5. `aegis/config/principles.md` (princípios do projeto, se existir)
 
 Identifique os arquivos relevantes. Cada citação dentro do requirements precisa apontar para essas fontes no formato `aegis/<arquivo>#<seção>`.
 

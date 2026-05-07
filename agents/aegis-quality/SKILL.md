@@ -22,7 +22,7 @@ Esse skill avalia QUALIDADE DE ESCRITA, não COBERTURA DE TESTES de implementaç
 
 ## Verificações Iniciais
 
-1. Leia `aegis/active-requirements.json`
+1. Leia `aegis/config/active-requirements.json`
    1.1. Se ausente, aborte
 2. Verifique a existência de `feature-dir/requirements.md`
 3. Aplique `before-quality` da forma padrão
@@ -40,7 +40,7 @@ Cada item do relatório se encaixa em uma destas categorias:
 | Edge cases | Limites numéricos, vazios, nulos, concorrência foram considerados? |
 | Ausência de jargão | A escrita seria entendida por um humano novo no time? |
 | Ausência de solução implícita | O texto descreve o quê, não o como (sem nome de biblioteca, sem framework) |
-| Alinhamento com princípios | Cada regra do requirements respeita `aegis/principles.md` |
+| Alinhamento com princípios | Cada regra do requirements respeita `aegis/config/principles.md` |
 
 ## Como gerar os itens
 

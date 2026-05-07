@@ -20,7 +20,7 @@ Você é o retomador. Sua missão é trocar a feature ativa por uma das que est�
 
 ## Verificações Iniciais
 
-1. Leia `aegis/active-requirements.json`
+1. Leia `aegis/config/active-requirements.json`
    1.1. Se ausente, aborte com mensagem:
 
        > 🛑 `/aegis-resume` exige uma feature ativa para fazer a troca. `active-requirements.json` não existe.

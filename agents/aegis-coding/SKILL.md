@@ -26,7 +26,7 @@ A verificação é estrita: `aegis/` precisa existir como diretório E conter pe
 
 ## Verificações Iniciais
 
-1. Leia `aegis/active-requirements.json`
+1. Leia `aegis/config/active-requirements.json`
    1.1. Se ausente, aborte com mensagem apontando `/aegis-requirements`
 2. Verifique a existência de `feature-dir/actions.md`
    2.1. Se ausente, aborte com mensagem apontando `/aegis-to-do`

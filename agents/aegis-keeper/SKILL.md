@@ -102,7 +102,7 @@ Combine duas fontes:
 
 **Fonte A — Queue file JSONL** (preenchida por hooks, se instalados):
 
-1. Se `aegis/runtime/queue/keeper-queue.jsonl` existir, renomeie atomicamente para `aegis/keeper-queue.processing.jsonl` antes de ler (evita race com hooks ainda escrevendo).
+1. Se `aegis/runtime/queue/keeper-queue.jsonl` existir, renomeie atomicamente para `aegis/runtime/queue/keeper-queue.processing.jsonl` antes de ler (evita race com hooks ainda escrevendo).
 2. Leia o arquivo `processing` linha-a-linha. Cada linha é um JSON. Schema em `references/queue-schema.md`.
 3. Filtre `phase === "post"`. Ignore `phase === "stop"` (advisory only — sem `files`).
 4. **Deduplique por arquivo** (último entry por arquivo ganha):
@@ -209,7 +209,7 @@ Para specs que esta sessão **não tocou** mas que estão `pending` há mais de 
 
 ### Passo 8 — Limpar a queue
 
-Se `aegis/keeper-queue.processing.jsonl` foi consumida com sucesso: delete o arquivo. Próxima invocação encontra apenas linhas novas em `aegis/runtime/queue/keeper-queue.jsonl` (escritas pelos hooks após o rename).
+Se `aegis/runtime/queue/keeper-queue.processing.jsonl` foi consumida com sucesso: delete o arquivo. Próxima invocação encontra apenas linhas novas em `aegis/runtime/queue/keeper-queue.jsonl` (escritas pelos hooks após o rename).
 
 Em caso de erro durante o processamento: **não** delete `processing.jsonl`. Logue o erro em `aegis/keeper-errors.log` e encerre — próxima invocação retoma do mesmo arquivo.
 

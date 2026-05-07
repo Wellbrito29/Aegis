@@ -29,7 +29,7 @@ Se não existir, encerre:
 
 ### Passo 2 — Verificar plano existente
 
-Verifique se `aegis/reconstruction-plan.md` já existe.
+Verifique se `aegis/migration/reconstruction-plan.md` já existe.
 
 **Se existir:** leia apenas o cabeçalho (primeiras 30 linhas), mostre o status atual e pergunte:
 > "Encontrei um plano existente. [X] tarefas concluídas, [Y] pendentes.
@@ -78,7 +78,7 @@ A partir de `gaps.md` e `confidence-report.md`, identifique gaps 🔴 que bloque
 
 ### Gerar o plano
 
-Gere `aegis/reconstruction-plan.md` seguindo o template em `references/reconstruction-plan-template.md`.
+Gere `aegis/migration/reconstruction-plan.md` seguindo o template em `references/reconstruction-plan-template.md`.
 
 Regras de geração:
 - Cada unit identificada (subpasta de `<output_folder>/` com os 3 arquivos canônicos) vira uma tarefa própria
@@ -103,7 +103,7 @@ Ativado quando o usuário diz "INICIAR", "CONTINUAR", "execute a tarefa N" ou eq
 
 ### Passo 1 — Identificar a tarefa
 
-Leia `aegis/reconstruction-plan.md` e localize:
+Leia `aegis/migration/reconstruction-plan.md` e localize:
 - Se o usuário especificou número: a tarefa com esse número
 - Se disse "continuar" ou "iniciar": a primeira tarefa com status `pending`
 
@@ -134,7 +134,7 @@ Implemente exatamente o que as specs dizem. Não invente comportamentos não doc
 
 ## Saída
 
-- `aegis/reconstruction-plan.md` — criado no Modo Planejamento, atualizado a cada tarefa concluída
+- `aegis/migration/reconstruction-plan.md` — criado no Modo Planejamento, atualizado a cada tarefa concluída
 - Arquivos de código implementados conforme cada tarefa executada
 
 O Reconstructor não modifica nenhum outro arquivo em `aegis/`.

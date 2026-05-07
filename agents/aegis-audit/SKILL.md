@@ -26,7 +26,7 @@ A única escrita permitida é `feature-dir/audit/cross-check.md`.
 
 ## Verificações Iniciais
 
-1. Leia `aegis/active-requirements.json`
+1. Leia `aegis/config/active-requirements.json`
    1.1. Se ausente, aborte
 2. Verifique existência dos três artefatos: `requirements.md`, `roadmap.md`, `actions.md`
    2.1. Se algum estiver ausente, aborte com mensagem listando o que falta e qual skill gera

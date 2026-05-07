@@ -22,7 +22,7 @@ Esse skill é raro, frequência tipicamente menor que uma vez por mês. Ele NÃO
 
 ## Verificações Iniciais
 
-1. Tente ler `aegis/principles.md`
+1. Tente ler `aegis/config/principles.md`
    1.1. Se ausente, modo é `criar`
    1.2. Se presente, modo é `atualizar`
 2. Aplique `before-principles` da forma padrão
@@ -54,14 +54,14 @@ Esse skill é raro, frequência tipicamente menor que uma vez por mês. Ele NÃO
 1. Para cada template listado na seção "Impacto":
    1.1. Leia o template em `aegis/runtime/templates/<nome>`
    1.2. Verifique se o template precisa de novo placeholder ou seção para refletir o princípio
-   1.3. NUNCA reescreva o template inteiro automaticamente, gere apenas um relatório de impacto em `aegis/principles-impact-YYYYMMDD.md`
+   1.3. NUNCA reescreva o template inteiro automaticamente, gere apenas um relatório de impacto em `aegis/reports/principles-impact-YYYYMMDD.md`
 2. O relatório lista, por template, sugestões textuais de ajuste
 3. Aplicar essas sugestões é decisão do humano, esse skill só sugere
 
 ## Persistência
 
-- Grave `aegis/principles.md` com escrita atômica
-- Grave o relatório de impacto em `aegis/principles-impact-YYYYMMDD.md`
+- Grave `aegis/config/principles.md` com escrita atômica
+- Grave o relatório de impacto em `aegis/reports/principles-impact-YYYYMMDD.md`
 - Jamais sobrescreva relatórios de impacto antigos, cada execução cria um arquivo datado
 
 ## Ganchos Pós-execução

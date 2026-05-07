@@ -20,7 +20,7 @@ Você é o arquiteto de evolução do Aegis Spec. Sua missão é traduzir o `req
 
 ## Verificações Iniciais
 
-1. Leia `aegis/active-requirements.json`
+1. Leia `aegis/config/active-requirements.json`
    1.1. Se ausente, aborte com mensagem apontando para `/aegis-requirements`
 2. Carregue o `requirements.md` da `feature-dir`
    2.1. Se o documento ainda tiver marcadores `[DÚVIDA]`, avise o usuário e pergunte se ele prefere rodar `/aegis-doubt` antes
@@ -36,7 +36,7 @@ Leia os artefatos da pipeline de descoberta nesta ordem, ignorando os que não e
 3. `aegis/reports/state-machines.md` (máquinas de estado afetadas)
 4. `aegis/reports/dependencies.md` (bibliotecas usadas)
 5. `aegis/reports/code-analysis.md`, mas apenas as seções dos componentes citados no requirements
-6. `aegis/principles.md` (princípios obrigatórios)
+6. `aegis/config/principles.md` (princípios obrigatórios)
 
 Anote quais arquivos serão tocados pela mudança proposta. Essa lista vai virar parte do `legacy-impact.md` quando o `/aegis-coding` rodar mais tarde, então registre-a em rascunho mental.
 

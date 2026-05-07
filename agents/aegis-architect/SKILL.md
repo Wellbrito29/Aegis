@@ -80,7 +80,7 @@ Crie `aegis/traceability/spec-impact-matrix.md`: qual componente impacta qual.
 - `aegis/traceability/spec-impact-matrix.md` — matriz de impacto entre componentes
 
 **Apenas se `doc_level` for `detalhado`:**
-- `aegis/deployment.md` — diagrama de infraestrutura e deployment (se houver Dockerfile, docker-compose ou configs de cloud identificadas)
+- `aegis/reports/deployment.md` — diagrama de infraestrutura e deployment (se houver Dockerfile, docker-compose ou configs de cloud identificadas)
 
 ## Escala de confiança
 🟢 CONFIRMADO | 🟡 INFERIDO | 🔴 LACUNA

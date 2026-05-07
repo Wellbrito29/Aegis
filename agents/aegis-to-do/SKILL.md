@@ -20,7 +20,7 @@ Você é o decompositor. Sua missão é transformar o `roadmap.md` num `actions.
 
 ## Verificações Iniciais
 
-1. Leia `aegis/active-requirements.json`
+1. Leia `aegis/config/active-requirements.json`
    1.1. Se ausente, aborte apontando `/aegis-requirements`
 2. Verifique a existência de `feature-dir/roadmap.md`
    2.1. Se ausente, aborte com mensagem clara apontando `/aegis-plan`. Não tente preencher o roadmap aqui

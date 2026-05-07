@@ -20,7 +20,7 @@ Você é o esclarecedor. Sua missão é descobrir o que falta saber antes do pla
 
 ## Verificações Iniciais
 
-1. Leia `aegis/active-requirements.json`
+1. Leia `aegis/config/active-requirements.json`
    1.1. Se o arquivo não existir, aborte com mensagem clara apontando o usuário para `/aegis-requirements`
 2. Carregue o `requirements.md` da `feature-dir` indicada
 3. Aplique a regra padrão de ganchos `before-doubt` lida de `aegis/runtime/hooks.yml` (mesma lógica do skill `aegis-requirements`)

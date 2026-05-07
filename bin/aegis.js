@@ -28,51 +28,52 @@ const commands = {
   'migrate-reversa':  () => import('../lib/commands/migrate-reversa.js'),
 };
 
-const orange = chalk.hex('#ffa203');
+const green = chalk.hex('#00e676');
 
 if (!command || command === '--help' || command === '-h') {
-  console.log(orange(`
-    _                            _     
-   / \\   ___ ___  ___ _ __ ___  (_)___ 
-  / _ \\ / __/ __|/ _ \\ '__/ _ \\ | / __|
- / ___ \\__ \\__ \\  __/ | | (_) || \\__ \\
-/_/   \\_\\___/___/\\___|_|  \\___(_)/ |___/
-                               |__/    
-`) + `
-  aegis-spec v${pkg.version}
-
-  Uso: npx aegis-spec <comando>   ou   aegis <comando>
-
-  Comandos:
-    install            Instala o Aegis Spec no projeto atual
-    update             Atualiza os agentes para a última versão
-    status             Mostra o estado atual da análise
-    uninstall          Remove o Aegis Spec do projeto
-    add-agent          Adiciona um agente ao projeto
-    add-engine         Adiciona suporte a uma engine
-    add-hooks          Instala hooks pre/post-edit do Keeper na engine
-                       Opções: --engine=<id>  --yes
-    remove-hooks       Remove hooks do Keeper instalados em uma engine
-                       Opções: --engine=<id>  --all  --yes
-    drift-check        CI gate — exit 1 se houver specs com drift pendente
-                       Opções: --format=text|json  --severity=high|medium|low
-    export-diagrams    Exporta diagramas Mermaid como imagens SVG/PNG
-                       Opções: --format=svg|png  --output=<pasta>
-                       Requer: npm install -g @mermaid-js/mermaid-cli
-    graph              Constrói/consulta o knowledge graph L0 do código
-                       Subcomandos: build | impact | deps | reverse-deps | stats
-                       Opções: --json  --since=<ref>  --files=a,b,c
-    policy-index       Constrói índice de specs protegidas pra policy gate
-                       Subcomandos: build | show
-    policy-check       CI gate — analisa git diff e bloqueia signature breaks
-                       Opções: --base=<ref>  --head=<ref>
-                               --format=text|json  --severity=high|medium|low
-    keeper auto        Auto-resolve drift via LLM (whitelist + classifier)
-                       Opções: --dry-run  --max-specs=N  --format=text|json
-    migrate-reversa    Migra instalação Reversa → Aegis Spec (.reversa → .aegis)
-
-  Documentação: https://github.com/sandeco/reversa
-  `);
+  console.log(green(
+    '\n' +
+    '   █████╗ ███████╗ ██████╗ ██╗███████╗\n' +
+    '  ██╔══██╗██╔════╝██╔════╝ ██║██╔════╝\n' +
+    '  ███████║█████╗  ██║  ███╗██║███████╗\n' +
+    '  ██╔══██║██╔══╝  ██║   ██║██║╚════██║\n' +
+    '  ██║  ██║███████╗╚██████╔╝██║███████║\n' +
+    '  ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝╚══════╝\n'
+  ) + '\n' +
+  '  AEGIS  v' + pkg.version + '\n' +
+  '\n' +
+  '  Uso: npx aegis-spec <comando>   ou   aegis <comando>\n' +
+  '\n' +
+  '  Comandos:\n' +
+  '    install            Instala o Aegis Spec no projeto atual\n' +
+  '    update             Atualiza os agentes para a última versão\n' +
+  '    status             Mostra o estado atual da análise\n' +
+  '    uninstall          Remove o Aegis Spec do projeto\n' +
+  '    add-agent          Adiciona um agente ao projeto\n' +
+  '    add-engine         Adiciona suporte a uma engine\n' +
+  '    add-hooks          Instala hooks pre/post-edit do Keeper na engine\n' +
+  '                       Opções: --engine=<id>  --yes\n' +
+  '    remove-hooks       Remove hooks do Keeper instalados em uma engine\n' +
+  '                       Opções: --engine=<id>  --all  --yes\n' +
+  '    drift-check        CI gate — exit 1 se houver specs com drift pendente\n' +
+  '                       Opções: --format=text|json  --severity=high|medium|low\n' +
+  '    export-diagrams    Exporta diagramas Mermaid como imagens SVG/PNG\n' +
+  '                       Opções: --format=svg|png  --output=<pasta>\n' +
+  '                       Requer: npm install -g @mermaid-js/mermaid-cli\n' +
+  '    graph              Constrói/consulta o knowledge graph L0 do código\n' +
+  '                       Subcomandos: build | impact | deps | reverse-deps | stats\n' +
+  '                       Opções: --json  --since=<ref>  --files=a,b,c\n' +
+  '    policy-index       Constrói índice de specs protegidas pra policy gate\n' +
+  '                       Subcomandos: build | show\n' +
+  '    policy-check       CI gate — analisa git diff e bloqueia signature breaks\n' +
+  '                       Opções: --base=<ref>  --head=<ref>\n' +
+  '                               --format=text|json  --severity=high|medium|low\n' +
+  '    keeper auto        Auto-resolve drift via LLM (whitelist + classifier)\n' +
+  '                       Opções: --dry-run  --max-specs=N  --format=text|json\n' +
+  '    migrate-reversa    Migra instalação Reversa → Aegis Spec (.reversa → .aegis)\n' +
+  '\n' +
+  '  Documentação: https://github.com/Wellbrito29/aegis-spec\n' +
+  '  ');
   process.exit(0);
 }
 

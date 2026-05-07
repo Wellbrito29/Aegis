@@ -30,15 +30,15 @@
     "README.md",
     "LICENSE"
   ],
-  "author": "sandeco",
+  "author": "Wellbrito29",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sandeco/reversa.git"
+    "url": "git+https://github.com/Wellbrito29/aegis-spec.git"
   },
-  "homepage": "https://github.com/sandeco/reversa",
+  "homepage": "https://github.com/Wellbrito29/aegis-spec",
   "bugs": {
-    "url": "https://github.com/sandeco/reversa/issues"
+    "url": "https://github.com/Wellbrito29/aegis-spec/issues"
   },
   "engines": {
     "node": ">=18.0.0"

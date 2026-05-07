@@ -1,13 +1,13 @@
 # Aegis Spec Control Plane
-<small>Fork by Wellbrito29, based on Aegis Spec by sandeco</small>
+<small>Fork by Wellbrito29, based on Reversa by sandeco</small>
 
 **Turn legacy systems into executable specifications and keep them aligned as AI agents change code.**
 
-[![English Docs](https://img.shields.io/badge/DOCS-English-009c3b?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/aegis/)<br>
-[![Português Docs](https://img.shields.io/badge/DOCS-Portugu%C3%AAs-ffcc00?style=for-the-badge&logo=material-for-mkdocs&logoColor=black&labelColor=2d2d2d)](https://sandeco.github.io/aegis/pt/)<br>
-[![Español Docs](https://img.shields.io/badge/DOCS-Espa%C3%B1ol-c60b1e?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://sandeco.github.io/aegis/es/)
+[![English Docs](https://img.shields.io/badge/DOCS-English-009c3b?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://wellbrito29.github.io/aegis-spec/)<br>
+[![Português Docs](https://img.shields.io/badge/DOCS-Portugu%C3%AAs-ffcc00?style=for-the-badge&logo=material-for-mkdocs&logoColor=black&labelColor=2d2d2d)](https://wellbrito29.github.io/aegis-spec/pt/)<br>
+[![Español Docs](https://img.shields.io/badge/DOCS-Espa%C3%B1ol-c60b1e?style=for-the-badge&logo=material-for-mkdocs&logoColor=white&labelColor=2d2d2d)](https://wellbrito29.github.io/aegis-spec/es/)
 
-This project is a fork of [`sandeco/aegis`](https://github.com/sandeco/aegis). It keeps the original Aegis Spec idea — reverse-engineering legacy systems into executable specifications — and extends it into a control plane for day-to-day AI-assisted development.
+This project is a fork of [`sandeco/reversa`](https://github.com/sandeco/reversa). It keeps the original Reversa idea — reverse-engineering legacy systems into executable specifications — and extends it into a control plane for day-to-day AI-assisted development.
 
 The upstream project focuses on generating specs from legacy code. This fork adds the missing loop after generation: dependency graph, drift detection, policy gates, Keeper hooks, optional auto-resolution, audit logs, bot scaffolding, and CI templates.
 
@@ -15,7 +15,7 @@ The upstream project focuses on generating specs from legacy code. This fork add
 
 ## About this fork
 
-- Base: includes upstream `sandeco/aegis` through `upstream/main` commit `144aee2` (`v1.2.28`).
+- Base: includes upstream `sandeco/reversa` through `upstream/main` commit `144aee2` (`v1.2.28`).
 - Fork delta: 24 commits ahead of upstream, released here as `v2.0.0`.
 - Package and CLI remain named `aegis` for compatibility: `npx aegis-spec <command>`.
 - This is not a passive mirror: the fork changes Aegis Spec from a spec-generation framework into a spec + graph + policy control plane.
@@ -363,8 +363,8 @@ See [docs/agentes/keeper.md](docs/agentes/keeper.md), [docs/hooks.md](docs/hooks
 Contributions are welcome. Open an issue to discuss before submitting a PR.
 
 ```bash
-git clone https://github.com/Wellbrito29/aegis.git
-cd aegis
+git clone https://github.com/Wellbrito29/aegis-spec.git
+cd aegis-spec
 npm install
 ```
 

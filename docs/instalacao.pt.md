@@ -26,7 +26,7 @@ O instalador faz tudo isso pra você:
 6. Cria a estrutura `.aegis/` com estado, configuração e plano
 7. Gera o manifesto SHA-256 para atualizações seguras no futuro
 
-É tipo um `npm install`, mas para o seu time de agentes de engenharia aegis.
+É tipo um `npm install`, mas para o seu time de agentes de engenharia reversa.
 
 ---
 

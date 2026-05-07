@@ -13,8 +13,8 @@ Abra uma issue primeiro para discutir o que você quer mudar. Isso evita trabalh
 ## Setup local
 
 ```bash
-git clone https://github.com/sandeco/aegis.git
-cd aegis
+git clone https://github.com/Wellbrito29/aegis-spec.git
+cd aegis-spec
 npm install
 ```
 
@@ -46,4 +46,4 @@ aegis-spec/
 
 ## Licença
 
-MIT. Veja [LICENSE](https://github.com/sandeco/aegis/blob/main/LICENSE) para os detalhes.
+MIT. Veja [LICENSE](https://github.com/Wellbrito29/aegis-spec/blob/main/LICENSE) para os detalhes.

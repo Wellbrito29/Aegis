@@ -1,11 +1,11 @@
 site_name: Aegis Spec
-site_url: https://sandeco.github.io/reversa
-site_description: Transforme sistemas legados em especificações executáveis por agentes de IA.
-site_author: sandeco
-repo_url: https://github.com/sandeco/reversa
-repo_name: sandeco/reversa
+site_url: https://wellbrito29.github.io/aegis-spec
+site_description: Executable specifications and guardrails for AI-assisted software evolution.
+site_author: Wellbrito29
+repo_url: https://github.com/Wellbrito29/aegis-spec
+repo_name: Wellbrito29/aegis-spec
 edit_uri: edit/main/docs/
-copyright: '"Aegis Spec" by sandeco'
+copyright: '"Aegis Spec" by Wellbrito29 — fork of Reversa by sandeco'
 
 theme:
   name: material

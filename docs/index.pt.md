@@ -8,7 +8,7 @@ Sabe aquele sistema que ninguém quer tocar? O que tem 10 anos, roda em produç�
 
 ## O que é o Aegis Spec?
 
-O Aegis Spec é um framework de engenharia aegis de especificações. Você o instala dentro do projeto legado, ativa um agente de IA que já usa no dia a dia, e ele coordena um time de especialistas para analisar o código e gerar especificações completas, rastreáveis e prontas para uso por qualquer agente codificador.
+O Aegis Spec é um framework de engenharia reversa de especificações. Você o instala dentro do projeto legado, ativa um agente de IA que já usa no dia a dia, e ele coordena um time de especialistas para analisar o código e gerar especificações completas, rastreáveis e prontas para uso por qualquer agente codificador.
 
 **Em outras palavras:** o Aegis Spec transforma código sem documentação em contratos operacionais que um agente de IA consegue entender e usar para evoluir o sistema com segurança.
 

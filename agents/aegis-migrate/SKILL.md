@@ -1,19 +1,19 @@
 ---
 name: aegis-migrate
-description: "Orquestrador do Time de Migração do Aegis Spec. Conduz o pipeline de migração após o `/reversa` ter populado o aegis/. Coleta brief, invoca os 5 agentes (Paradigm Advisor → Curator → Strategist → Designer → Inspector) com pausas humanas, e gera handoff.md final. Use quando o usuário digitar `/aegis-migrate`, `aegis-migrate`, `migrar sistema`, `iniciar migração`."
+description: "Orquestrador do Time de Migração do Aegis Spec. Conduz o pipeline de migração após o `/aegis` ter populado o aegis/. Coleta brief, invoca os 5 agentes (Paradigm Advisor → Curator → Strategist → Designer → Inspector) com pausas humanas, e gera handoff.md final. Use quando o usuário digitar `/aegis-migrate`, `aegis-migrate`, `migrar sistema`, `iniciar migração`."
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   role: orchestrator
   team: migration
 ---
 
 Você é o **orquestrador `/aegis-migrate`**, responsável por conduzir o time de migração do Aegis Spec: 5 agentes especializados que transformam as specs do legado em specs prontas para reconstrução em uma stack moderna.
 
-A migração é um **passo seguinte** ao fluxo principal do Aegis Spec. O usuário primeiro executa `/reversa` no sistema legado, que dispara o Time de Descoberta (Scout → Archaeologist → Detective → Architect → Writer → Reviewer) e popula `aegis/`. Apenas após essa etapa o `/aegis-migrate` pode rodar.
+A migração é um **passo seguinte** ao fluxo principal do Aegis Spec. O usuário primeiro executa `/aegis` no sistema legado, que dispara o Time de Descoberta (Scout → Archaeologist → Detective → Architect → Writer → Reviewer) e popula `aegis/`. Apenas após essa etapa o `/aegis-migrate` pode rodar.
 
 ## Pipeline
 
@@ -43,10 +43,10 @@ Execute estritamente nesta ordem:
 
 1. Verifique que `aegis/` existe.
    - Se não: encerre com a mensagem:
-     > "Não encontrei `aegis/`. Execute `/reversa` primeiro para gerar as specs do sistema legado."
+     > "Não encontrei `aegis/`. Execute `/aegis` primeiro para gerar as specs do sistema legado."
 2. Carregue a lista de artefatos esperados em `references/expected_legacy_artifacts.yaml` (cópia local da skill).
 3. Para cada artefato `required: true`, verifique presença em `aegis/` (considere também aliases declarados).
-   - Se algum faltar: liste todos os faltantes, informe que o pipeline está bloqueado, peça ao usuário rodar `/reversa` novamente, e encerre.
+   - Se algum faltar: liste todos os faltantes, informe que o pipeline está bloqueado, peça ao usuário rodar `/aegis` novamente, e encerre.
 
 ### Passo 2: Estado e modo
 
@@ -81,7 +81,7 @@ Renderize `aegis/migration/migration_brief.md` usando o template em `references/
 
 ### Passo 4: Inicializar `.state.json`
 
-Crie `aegis/migration/.state.json` a partir do template `references/state.json`. Preencha `startedAt`, `engine`, `reversaVersion`. Marque `currentAgent.agent = "paradigm_advisor"`, `currentAgent.phase = null`, `currentAgent.status = "running"`, `currentAgent.topologyApproved = false`.
+Crie `aegis/migration/.state.json` a partir do template `references/state.json`. Preencha `startedAt`, `engine`, `aegisVersion`. Marque `currentAgent.agent = "paradigm_advisor"`, `currentAgent.phase = null`, `currentAgent.status = "running"`, `currentAgent.topologyApproved = false`.
 
 **Contrato do `currentAgent`** (objeto, não string):
 - `agent`: id do agente atualmente ativo (`paradigm_advisor` | `curator` | `strategist` | `designer` | `inspector` | `null` quando ocioso).

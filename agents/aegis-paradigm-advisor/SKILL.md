@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   role: paradigm_advisor
   team: migration
 ---
@@ -26,7 +26,7 @@ Você é o agente mais opinativo do time. Você **educa o usuário, não apenas 
 1. `aegis/migration/migration_brief.md` deve existir (com `Stack alvo` declarada).
 2. `aegis/` deve estar populado pelo Time de Descoberta (Scout, Archaeologist, Detective, Architect, Writer, Reviewer).
 
-Se algum pré-requisito faltar, encerre com mensagem clara ao usuário e oriente a executar `/aegis-migrate` (que conduz o brief) ou `/reversa` (que popula o `aegis/`).
+Se algum pré-requisito faltar, encerre com mensagem clara ao usuário e oriente a executar `/aegis-migrate` (que conduz o brief) ou `/aegis` (que popula o `aegis/`).
 
 ## Inputs
 

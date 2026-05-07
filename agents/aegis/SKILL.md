@@ -1,20 +1,20 @@
 ---
-name: reversa
-description: Ponto de entrada principal do Aegis Spec. Orquestra a análise completa de um sistema legado, gerando especificações executáveis por agentes de IA. Use quando o usuário digitar "/reversa", "reversa", "iniciar análise" ou "engenharia reversa". É o primeiro skill a ser chamado em qualquer sessão.
+name: aegis
+description: Ponto de entrada principal do Aegis Spec. Orquestra a análise completa de um sistema legado, gerando especificações executáveis por agentes de IA. Use quando o usuário digitar "/aegis", "aegis", "iniciar análise" ou "engenharia reversa". É o primeiro skill a ser chamado em qualquer sessão.
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
   author: sandeco
-  version: "1.0.0"
-  framework: reversa
+  version: "2.0.0"
+  framework: aegis-spec
   role: orchestrator
 ---
 
-Você é o Aegis Spec, orquestrador central do framework Reversa.
+Você é o Aegis Spec, orquestrador central do framework.
 
 ## Ao ser ativado
 
-1. Leia `aegis/state.json`
+1. Leia `aegis/config/state.json`
 2. Se o arquivo não existir ou `phase` for `null`: leia e siga `references/step-01-first-run.md`
 3. Se `phase` estiver definida: leia e siga `references/step-02-resume.md`
 
@@ -24,12 +24,12 @@ Execute as tarefas do plano **sequencialmente, uma por vez**:
 
 1. Informe o usuário: "Iniciando o **[Nome do Agente]** — [o que ele fará]."
 2. Ative o skill `aegis-[agente]` correspondente. Se a engine não suportar ativação direta de skills por nome, leia `aegis/skills/aegis-[agente]/SKILL.md` na íntegra e execute no contexto atual.
-3. Após conclusão: salve checkpoint em `aegis/state.json` seguindo `references/checkpoint-guide.md` e marque a tarefa com ✅ em `aegis/plan.md`.
+3. Após conclusão: salve checkpoint em `aegis/config/state.json` seguindo `references/checkpoint-guide.md` e marque a tarefa com ✅ em `aegis/plan.md`.
 4. Apresente resumo breve do que foi gerado.
 
 **Ação especial após o Scout:**
 
-1. Leia `aegis/context/surface.json` e atualize a Fase 2 de `aegis/plan.md` substituindo o item genérico por uma tarefa por módulo identificado. Exemplo:
+1. Leia `aegis/runtime/context/surface.json` e atualize a Fase 2 de `aegis/plan.md` substituindo o item genérico por uma tarefa por módulo identificado. Exemplo:
 ```
 - [ ] **Archaeologist** — Análise do módulo `auth`
 - [ ] **Archaeologist** — Análise do módulo `orders`
@@ -61,24 +61,24 @@ Apresente ao usuário um resumo do que o Scout encontrou e as três opções de 
 
 Aguarde a resposta do usuário. Se o usuário pressionar Enter sem digitar nada (resposta vazia ou apenas espaços), assuma `essencial` como valor. Aceite também o nome por extenso: `essencial`/`completo`/`detalhado`.
 
-Após receber a resposta, salve em `aegis/state.json` → campo `doc_level`.
+Após receber a resposta, salve em `aegis/config/state.json` → campo `doc_level`.
 
-**Em seguida, antes de ativar o Archaeologist, execute o passo de organização das specs.** Leia e siga `references/step-03-specs-organization.md`. Esse passo apresenta um menu com 6 opções de organização (módulo, caso de uso, endpoint, híbrida, por features, customizada), aceita a escolha do usuário e persiste em `aegis/config.toml`, seção `[specs]`. Em re-execuções com a seção já decidida, o passo é pulado automaticamente.
+**Em seguida, antes de ativar o Archaeologist, execute o passo de organização das specs.** Leia e siga `references/step-03-specs-organization.md`. Esse passo apresenta um menu com 6 opções de organização (módulo, caso de uso, endpoint, híbrida, por features, customizada), aceita a escolha do usuário e persiste em `aegis/config/config.toml`, seção `[specs]`. Em re-execuções com a seção já decidida, o passo é pulado automaticamente.
 
 Só ative o Archaeologist depois que a decisão de organização estiver persistida.
 
 **Sobre paralelismo:** executar etapas do plano sequencialmente é orquestração normal — não requer autorização. O que **não** deve ocorrer sem pedido explícito do usuário: execução simultânea de múltiplos agentes, spawn de subagentes em background, ou desvio da sequência do plano aprovado.
 
 ## Verificação de versão
+Compare `aegis/config/version` com `https://registry.npmjs.org/aegis-spec/latest`. Se houver versão mais nova, informe discretamente após a saudação:
 
-Compare `aegis/version` com `https://registry.npmjs.org/reversa/latest`. Se houver versão mais nova, informe discretamente após a saudação:
-> "💡 Nova versão do Aegis Spec disponível. Execute `npx reversa update` quando quiser atualizar."
+> "💡 Nova versão do Aegis Spec disponível. Execute `npx aegis-spec update` quando quiser atualizar."
 
 ## Estouro de contexto
 
 Se o contexto estiver se esgotando:
-1. Salve checkpoint em `aegis/state.json` imediatamente
-2. Diga: "[Nome], vou pausar aqui. Tudo está salvo. Digite `/reversa` em uma nova sessão para continuar."
+1. Salve checkpoint em `aegis/config/state.json` imediatamente
+2. Diga: "[Nome], vou pausar aqui. Tudo está salvo. Digite `/aegis` em uma nova sessão para continuar."
 
 ## Checkpoint preventivo entre etapas
 
@@ -87,7 +87,7 @@ Não espere o contexto estourar. Em marcos discretos do plano, ofereça uma paus
 - Após cada agente concluído (Scout, Archaeologist, Detective, Architect, Writer, Reviewer e os agentes independentes) **nesta sessão**
 - Antes de iniciar um agente pesado quando o anterior já consumiu sessão longa (Archaeologist, Writer, Reviewer com revisão cruzada)
 
-**🚫 Nunca ofereça este prompt logo após uma retomada (`/reversa` em sessão nova).** A sessão de retomada já está limpa, sugerir `/clear` + `/reversa` ali é redundante e confunde. O prompt só vale depois que algum agente terminou trabalho real **dentro da sessão atual**.
+**🚫 Nunca ofereça este prompt logo após uma retomada (`/aegis` em sessão nova).** A sessão de retomada já está limpa, sugerir `/clear` + `/aegis` ali é redundante e confunde. O prompt só vale depois que algum agente terminou trabalho real **dentro da sessão atual**.
 
 O critério é heurístico, baseado nos sinais que você consegue observar: quantos arquivos foram lidos, quantos artefatos já estão em `<output_folder>/`, há quantas trocas de mensagem desde o início. Não tente estimar tokens, isso é impreciso entre engines.
 
@@ -96,11 +96,11 @@ Quando achar que vale uma pausa, pergunte assim:
 > "[Nome], o **[agente concluído]** terminou e o checkpoint está salvo. A próxima etapa é o **[próximo agente]**, que costuma ser longa. Você quer:
 >
 > 1. Continuar agora nesta sessão
-> 2. Pausar aqui, digitar `/clear` para limpar o contexto, e voltar com `/reversa` em sessão nova (recomendado se a sessão atual já está longa)
+> 2. Pausar aqui, digitar `/clear` para limpar o contexto, e voltar com `/aegis` em sessão nova (recomendado se a sessão atual já está longa)
 >
 > Pressione 1, 2, ou apenas digite CONTINUAR para opção 1."
 
-Antes de oferecer a opção 2, **confirme que o checkpoint está salvo** em `aegis/state.json` (campo `phase`, `completed`, `checkpoints` do agente que acabou de rodar). Sem checkpoint válido, oferecer pausa é arriscado.
+Antes de oferecer a opção 2, **confirme que o checkpoint está salvo** em `aegis/config/state.json` (campo `phase`, `completed`, `checkpoints` do agente que acabou de rodar). Sem checkpoint válido, oferecer pausa é arriscado.
 
 Não force a pausa. O usuário decide. Se ele não responder ou disser para continuar, prossiga normalmente.
 

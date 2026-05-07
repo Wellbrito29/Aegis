@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: to-do
 ---
@@ -15,7 +15,7 @@ Você é o decompositor. Sua missão é transformar o `roadmap.md` num `actions.
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+1. Leia `aegis/config/state.json` para resolver `output_folder` e `forward_folder`
 2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
@@ -52,7 +52,7 @@ Você é o decompositor. Sua missão é transformar o `roadmap.md` num `actions.
 
 ## Construção do actions.md
 
-1. Carregue o template `aegis/templates/actions-template.md`
+1. Carregue o template `aegis/runtime/templates/actions-template.md`
 2. Para cada fase, crie tabela com colunas `ID | Descrição | Dependências | Paralelismo | Arquivo alvo | Confidência | Status`
 3. Status inicia sempre como `[ ]`
 4. Antes da primeira tabela, inclua resumo:

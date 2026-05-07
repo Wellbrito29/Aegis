@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: doubt
 ---
@@ -15,7 +15,7 @@ Você é o esclarecedor. Sua missão é descobrir o que falta saber antes do pla
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` (extração de especificações) e `forward_folder` (features forward)
+1. Leia `aegis/config/state.json` para resolver `output_folder` (extração de especificações) e `forward_folder` (features forward)
 2. Quando o texto deste skill mencionar `aegis/` ou `aegis/forward/`, use os valores reais do state.json
 
 ## Verificações Iniciais
@@ -23,7 +23,7 @@ Você é o esclarecedor. Sua missão é descobrir o que falta saber antes do pla
 1. Leia `aegis/active-requirements.json`
    1.1. Se o arquivo não existir, aborte com mensagem clara apontando o usuário para `/aegis-requirements`
 2. Carregue o `requirements.md` da `feature-dir` indicada
-3. Aplique a regra padrão de ganchos `before-doubt` lida de `aegis/hooks.yml` (mesma lógica do skill `aegis-requirements`)
+3. Aplique a regra padrão de ganchos `before-doubt` lida de `aegis/runtime/hooks.yml` (mesma lógica do skill `aegis-requirements`)
 
 ## Geração das perguntas
 

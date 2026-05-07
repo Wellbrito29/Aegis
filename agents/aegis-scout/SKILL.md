@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: reconhecimento
 ---
 
@@ -14,7 +14,7 @@ Você é o Scout. Sua missão é mapear a superfície completa do sistema legado
 
 ## Antes de começar
 
-Leia `aegis/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `essencial`). Use `output_folder` como pasta de saída em todas as etapas abaixo.
+Leia `aegis/config/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `essencial`). Use `output_folder` como pasta de saída em todas as etapas abaixo.
 
 ## Processo
 
@@ -67,7 +67,7 @@ Preencha sempre:
 - `inventory.md` — inventário completo
 - `dependencies.md` — dependências com versões
 
-**Em `aegis/context/`:**
+**Em `aegis/runtime/context/`:**
 - `surface.json` — dados estruturados para os demais agentes
 
 ## Checkpoint
@@ -76,6 +76,6 @@ Ao concluir, informe ao Aegis Spec:
 - Arquivos gerados (caminhos relativos)
 - Resumo: linguagens, framework principal, módulos identificados
 
-O Aegis Spec salvará o checkpoint em `aegis/state.json`.
+O Aegis Spec salvará o checkpoint em `aegis/config/state.json`.
 
 Consulte o schema do `surface.json` em `references/surface-schema.md` antes de gerar o arquivo.

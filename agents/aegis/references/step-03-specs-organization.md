@@ -6,8 +6,8 @@ Este passo acontece imediatamente após o usuário escolher o `doc_level` (Essen
 
 Leia, nesta ordem, e mescle chave a chave (precedência total para `config.user.toml`):
 
-1. `aegis/config.toml`, seção `[specs]` (config gerenciado pelo Aegis Spec)
-2. `aegis/config.user.toml`, seção `[specs]` (override manual do usuário)
+1. `aegis/config/config.toml`, seção `[specs]` (config gerenciado pelo Aegis Spec)
+2. `aegis/config/config.user.toml`, seção `[specs]` (override manual do usuário)
 
 A mescla é avaliada por chave: cada chave presente em `config.user.toml` substitui a correspondente em `config.toml`. Chaves ausentes continuam vindas de `config.toml`.
 
@@ -20,7 +20,7 @@ A seção é considerada **decidida** quando, após a mescla, `granularity` est�
 
 Se `granularity` está vazia em `config.toml` (ou a seção foi removida) **e** existe seção `[specs]` em `config.user.toml` com qualquer chave preenchida, avise o usuário antes de exibir o menu. Use exatamente este formato:
 
-> "Detectei que `aegis/config.toml` não tem decisão de organização das specs, mas `aegis/config.user.toml` contém um override em `[specs]`. O override continuará ativo após a sua escolha e pode sobrescrever campos que você decidir agora.
+> "Detectei que `aegis/config/config.toml` não tem decisão de organização das specs, mas `aegis/config/config.user.toml` contém um override em `[specs]`. O override continuará ativo após a sua escolha e pode sobrescrever campos que você decidir agora.
 >
 > Override atual em `config.user.toml`:
 > [listar chaves e valores]
@@ -31,7 +31,7 @@ Aguarde resposta afirmativa explícita antes de seguir para o menu. Resposta vaz
 
 ## 2. Apresentar o menu
 
-Leia `aegis/context/surface.json` → `organization_suggestion`. Use o campo `granularity` para pré-marcar a opção sugerida e o campo `rationale` para mostrar a razão.
+Leia `aegis/runtime/context/surface.json` → `organization_suggestion`. Use o campo `granularity` para pré-marcar a opção sugerida e o campo `rationale` para mostrar a razão.
 
 Se o `surface.json` não tiver `organization_suggestion` preenchida (Scout não rodou ou falhou), exiba o menu sem default e peça que o usuário escolha manualmente, conforme EC-01 da spec de organização.
 
@@ -99,7 +99,7 @@ A detecção é heurística e best-effort: comparar nomes de subpastas top-level
 
 ## 4. Persistir a decisão (RNF-03, atomic write)
 
-Atualize `aegis/config.toml`, seção `[specs]`, com:
+Atualize `aegis/config/config.toml`, seção `[specs]`, com:
 
 ```toml
 [specs]
@@ -115,7 +115,7 @@ Regras:
 - **Atomic write:** escreva em um arquivo temporário no mesmo diretório (`config.toml.tmp`) e faça rename atômico para `config.toml`. Falha durante a escrita não pode deixar `config.toml` corrompido.
 - **scout_suggestion é imutável** (RF-14): se a seção `[specs]` já existia mas estava com `granularity` vazia e `scout_suggestion` preenchida, preserve `scout_suggestion`. Em primeira execução, copie o valor atual de `organization_suggestion.granularity` do `surface.json`.
 - **Non-destructive:** preserve qualquer chave/seção que você não esteja explicitamente atualizando. Não toque em `[project]`, `[user]`, `[output]`, `[agents]`, `[engines]`, `[analysis]` ou outras seções.
-- **Não mexa em `aegis/config.user.toml`.** Esse arquivo pertence ao usuário.
+- **Não mexa em `aegis/config/config.user.toml`.** Esse arquivo pertence ao usuário.
 - **Falha de IO** (disco cheio, sem permissão, EC-06): exiba erro claro, não crie pastas de spec, não considere a escolha como confirmada. O usuário pode tentar de novo na próxima execução.
 
 ## 5. Continuação do fluxo
@@ -124,7 +124,7 @@ Após a persistência bem-sucedida, prossiga com a invocação do Archaeologist 
 
 ## 6. Reapresentação manual (RF-17)
 
-Não existe flag de CLI dedicada para reconfigurar. O usuário reapresenta o menu removendo manualmente a seção `[specs]` de `aegis/config.toml` (ou esvaziando `granularity`). Na próxima execução, este passo detecta o estado "não decidido" e roda novamente.
+Não existe flag de CLI dedicada para reconfigurar. O usuário reapresenta o menu removendo manualmente a seção `[specs]` de `aegis/config/config.toml` (ou esvaziando `granularity`). Na próxima execução, este passo detecta o estado "não decidido" e roda novamente.
 
 ## Idioma das pastas (RF-10)
 

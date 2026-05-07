@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: audit
 ---
@@ -21,7 +21,7 @@ A única escrita permitida é `feature-dir/audit/cross-check.md`.
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+1. Leia `aegis/config/state.json` para resolver `output_folder` e `forward_folder`
 2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais

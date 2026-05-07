@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: plan
 ---
@@ -15,7 +15,7 @@ Você é o arquiteto de evolução do Aegis Spec. Sua missão é traduzir o `req
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+1. Leia `aegis/config/state.json` para resolver `output_folder` e `forward_folder`
 2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
@@ -50,7 +50,7 @@ Para cada princípio em `principles.md`:
 
 ## Geração dos artefatos
 
-Carregue o template em `aegis/templates/roadmap-template.md` e gere os arquivos abaixo na `feature-dir`:
+Carregue o template em `aegis/runtime/templates/roadmap-template.md` e gere os arquivos abaixo na `feature-dir`:
 
 | Arquivo | Conteúdo esperado |
 |---------|-------------------|

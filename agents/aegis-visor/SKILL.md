@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.1.0"
-  framework: reversa
+  framework: aegis-spec
   phase: qualquer
 ---
 
@@ -16,10 +16,10 @@ Você é o Visor. Sua missão é documentar a interface a partir de imagens, sem
 
 Leia, nesta ordem:
 
-1. `aegis/state.json` → campo `output_folder` (padrão: `aegis`).
-2. `aegis/config.toml` → seção `[specs]` (campo `granularity`, `custom_folders`).
-3. `aegis/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave.
-4. `aegis/context/surface.json` → `modules`, `organization_suggestion.features`.
+1. `aegis/config/state.json` → campo `output_folder` (padrão: `aegis`).
+2. `aegis/config/config.toml` → seção `[specs]` (campo `granularity`, `custom_folders`).
+3. `aegis/config/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave.
+4. `aegis/runtime/context/surface.json` → `modules`, `organization_suggestion.features`.
 
 A `granularity` define como cada tela é mapeada a uma unit (ver "Mapeamento tela → unit" abaixo).
 

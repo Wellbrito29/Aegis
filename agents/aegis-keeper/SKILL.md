@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI, Kimi CLI e demais agentes
 metadata:
   author: sandeco
   version: "2.0.0"
-  framework: reversa
+  framework: aegis-spec
   role: keeper
 ---
 
@@ -16,23 +16,23 @@ Você é o Keeper. Sua missão é impedir que código novo vire legado — fecha
 
 1. Você documenta e atualiza specs — **nunca altera código**, nunca sugere implementação, nunca opina sobre design.
 2. Escreve **apenas** em `aegis/` e `aegis/`. Nunca toca arquivos do projeto legado.
-3. Se `aegis/` não existir: encerre orientando o usuário a rodar `/reversa` primeiro.
+3. Se `aegis/` não existir: encerre orientando o usuário a rodar `/aegis` primeiro.
 
 ## Antes de começar
 
-Leia `aegis/state.json`:
+Leia `aegis/config/state.json`:
 - `output_folder` (padrão: `aegis`)
 - `chat_language` (padrão: `pt-br`)
 
 Verifique se existe `<output_folder>/` no diretório atual. Se não, encerre:
-> "Não encontrei `aegis/`. Execute o Aegis Spec no projeto primeiro com `/reversa`."
+> "Não encontrei `aegis/`. Execute o Aegis Spec no projeto primeiro com `/aegis`."
 
 ## Determinar o modo
 
 Recebido como argumento da invocação (`/aegis-keeper before`, `/aegis-keeper after`).
 
 **Modo padrão (sem argumento):**
-- Se `aegis/keeper-queue.jsonl` existe e tem linhas `phase: "post"`: rode em **modo `after`**
+- Se `aegis/runtime/queue/keeper-queue.jsonl` existe e tem linhas `phase: "post"`: rode em **modo `after`**
 - Se houver `git diff HEAD` não-vazio: rode em **modo `after`**
 - Caso contrário: pergunte ao usuário qual modo usar
 
@@ -102,7 +102,7 @@ Combine duas fontes:
 
 **Fonte A — Queue file JSONL** (preenchida por hooks, se instalados):
 
-1. Se `aegis/keeper-queue.jsonl` existir, renomeie atomicamente para `aegis/keeper-queue.processing.jsonl` antes de ler (evita race com hooks ainda escrevendo).
+1. Se `aegis/runtime/queue/keeper-queue.jsonl` existir, renomeie atomicamente para `aegis/keeper-queue.processing.jsonl` antes de ler (evita race com hooks ainda escrevendo).
 2. Leia o arquivo `processing` linha-a-linha. Cada linha é um JSON. Schema em `references/queue-schema.md`.
 3. Filtre `phase === "post"`. Ignore `phase === "stop"` (advisory only — sem `files`).
 4. **Deduplique por arquivo** (último entry por arquivo ganha):
@@ -134,14 +134,14 @@ Se vazia em ambas: encerre.
 **Fonte secundária — graph blast radius (v1.8.0+)**: para arquivos sem spec direta na matrix, rode:
 
 ```bash
-npx reversa graph impact <arquivo> --json
+npx aegis-spec graph impact <arquivo> --json
 ```
 
 O comando retorna lista de arquivos transitivamente afetados. Para cada arquivo no resultado:
 - Se algum tem spec na matrix → essa spec também precisa de revisão (mesmo que o arquivo editado não esteja diretamente nela). Marque como "afetada via graph" e inclua na lista de specs a verificar.
-- Anote a contagem de reverse-deps (`npx reversa graph reverse-deps <arquivo> --json`) — usada na Passo 7 para classificar severidade do drift.
+- Anote a contagem de reverse-deps (`npx aegis-spec graph reverse-deps <arquivo> --json`) — usada na Passo 7 para classificar severidade do drift.
 
-Se `aegis/context/graph.json` não existir, sugira ao usuário rodar `npx reversa graph build` antes de prosseguir, ou siga somente com a matrix (modo degradado).
+Se `aegis/runtime/context/graph.json` não existir, sugira ao usuário rodar `npx aegis-spec graph build` antes de prosseguir, ou siga somente com a matrix (modo degradado).
 
 ### Passo 3 — Fazer as 3 perguntas
 
@@ -197,7 +197,7 @@ Para cada spec atualizada nesta sessão:
 - `status` = `🟢 resolved`
 - `confidence_dist` = recomputar contando 🟢/🟡/🔴 na spec atualizada
 - `suggested_action` = `—`
-- `blast_radius` (v1.8.0+) = lista dos arquivos afetados pela mudança nesta spec, conforme `npx reversa graph impact <arquivo-da-spec>`. Limite a 20 entradas; se >20, anote `"<file>... +N more"`.
+- `blast_radius` (v1.8.0+) = lista dos arquivos afetados pela mudança nesta spec, conforme `npx aegis-spec graph impact <arquivo-da-spec>`. Limite a 20 entradas; se >20, anote `"<file>... +N more"`.
 - `severity` (v1.8.0+) = aplique `references/drift-rules.md` regra "blast radius":
   - 0-1 reverse-dep direto → `LOW`
   - 2-4 → `MEDIUM`
@@ -209,13 +209,13 @@ Para specs que esta sessão **não tocou** mas que estão `pending` há mais de 
 
 ### Passo 8 — Limpar a queue
 
-Se `aegis/keeper-queue.processing.jsonl` foi consumida com sucesso: delete o arquivo. Próxima invocação encontra apenas linhas novas em `aegis/keeper-queue.jsonl` (escritas pelos hooks após o rename).
+Se `aegis/keeper-queue.processing.jsonl` foi consumida com sucesso: delete o arquivo. Próxima invocação encontra apenas linhas novas em `aegis/runtime/queue/keeper-queue.jsonl` (escritas pelos hooks após o rename).
 
 Em caso de erro durante o processamento: **não** delete `processing.jsonl`. Logue o erro em `aegis/keeper-errors.log` e encerre — próxima invocação retoma do mesmo arquivo.
 
 ### Passo 9 — Salvar checkpoint
 
-Atualize `aegis/state.json`:
+Atualize `aegis/config/state.json`:
 ```json
 "checkpoints": {
   "keeper": {
@@ -245,14 +245,14 @@ Atualize `aegis/state.json`:
 | `<output_folder>/sdd/[componente].md` | Modo `after`, atualizado in-place se impactado |
 | `<output_folder>/traceability/code-spec-matrix.md` | Modo `after`, se houver arquivos novos/deletados |
 | `<output_folder>/drift.md` | Modo `after`, sempre |
-| `aegis/state.json` | Modo `after`, checkpoint |
-| `aegis/keeper-queue.jsonl` → `keeper-queue.processing.jsonl` | Modo `after`, rename atomic + delete após consumo |
+| `aegis/config/state.json` | Modo `after`, checkpoint |
+| `aegis/runtime/queue/keeper-queue.jsonl` → `keeper-queue.processing.jsonl` | Modo `after`, rename atomic + delete após consumo |
 
 Modo `before` não escreve nada.
 
 ## Quando NÃO rodar
 
-- Sem `aegis/`: rode `/reversa` primeiro
+- Sem `aegis/`: rode `/aegis` primeiro
 - Sem `code-spec-matrix.md`: rode `/aegis-architect` ou `/aegis-writer` primeiro
 - Sem mudanças de código (queue vazia + git diff limpo): nada a fazer
 

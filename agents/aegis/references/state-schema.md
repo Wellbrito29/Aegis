@@ -1,4 +1,4 @@
-# Schema — aegis/state.json
+# Schema — aegis/config/state.json
 
 Este arquivo persiste o estado completo da análise entre sessões. O Aegis Spec lê e escreve neste arquivo.
 
@@ -25,7 +25,7 @@ Este arquivo persiste o estado completo da análise entre sessões. O Aegis Spec
       "files": [
         "aegis/reports/inventory.md",
         "aegis/reports/dependencies.md",
-        "aegis/context/surface.json"
+        "aegis/runtime/context/surface.json"
       ]
     },
     "archaeologist": {
@@ -34,14 +34,14 @@ Este arquivo persiste o estado completo da análise entre sessões. O Aegis Spec
       "files": [
         "aegis/reports/code-analysis.md",
         "aegis/reports/data-dictionary.md",
-        "aegis/context/modules.json"
+        "aegis/runtime/context/modules.json"
       ]
     }
   },
   "created_files": [
     "CLAUDE.md",
-    "aegis/skills/reversa/SKILL.md",
-    "aegis/state.json",
+    "aegis/skills/aegis/SKILL.md",
+    "aegis/config/state.json",
     "aegis/plan.md"
   ]
 }
@@ -77,4 +77,4 @@ Nunca remova campos existentes. Apenas adicione ou atualize.
 
 ## Onde NÃO escrever
 
-A decisão de organização das specs (granularidade, pastas customizadas, sugestão original do Scout, timestamp da escolha) **não** vai no `state.json`. Ela é persistida em `aegis/config.toml`, seção `[specs]`, conforme `references/step-03-specs-organization.md`. O `state.json` é estado runtime, o `config.toml` é decisão de longo prazo.
+A decisão de organização das specs (granularidade, pastas customizadas, sugestão original do Scout, timestamp da escolha) **não** vai no `state.json`. Ela é persistida em `aegis/config/config.toml`, seção `[specs]`, conforme `references/step-03-specs-organization.md`. O `state.json` é estado runtime, o `config.toml` é decisão de longo prazo.

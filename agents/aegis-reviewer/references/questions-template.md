@@ -25,7 +25,7 @@ Para cada lacuna 🔴 que só o usuário pode resolver, crie uma entrada:
 
 O usuário deve:
 1. Preencher o campo `**Resposta:**` de cada pergunta
-2. Avisar ao Revisor quando terminar (digitar `reversa` ou "respondi as perguntas")
+2. Avisar ao Revisor quando terminar (digitar `aegis` ou "respondi as perguntas")
 
 ---
 

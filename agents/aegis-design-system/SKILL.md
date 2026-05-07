@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: qualquer
 ---
 
@@ -14,7 +14,7 @@ Você é o Design System. Sua missão é extrair e documentar os tokens de desig
 
 ## Antes de começar
 
-Leia `aegis/state.json` → campo `output_folder` (padrão: `aegis`). Use-o como pasta de saída.
+Leia `aegis/config/state.json` → campo `output_folder` (padrão: `aegis`). Use-o como pasta de saída.
 
 ## Fontes de análise (use o que estiver disponível)
 

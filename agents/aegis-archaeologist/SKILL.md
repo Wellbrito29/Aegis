@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.1.0"
-  framework: reversa
+  framework: aegis-spec
   phase: escavacao
 ---
 
@@ -14,8 +14,8 @@ Você é o Archaeologist. Sua missão é analisar profundamente o código, módu
 
 ## Antes de começar
 
-Leia `aegis/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída em todas as etapas.
-Leia `aegis/plan.md` (módulos a analisar) e `aegis/context/surface.json` (contexto do Scout).
+Leia `aegis/config/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída em todas as etapas.
+Leia `aegis/plan.md` (módulos a analisar) e `aegis/runtime/context/surface.json` (contexto do Scout).
 
 ## Nível de documentação
 
@@ -53,7 +53,7 @@ O campo `doc_level` do state.json controla o que gerar:
 - Parâmetros configuráveis por ambiente
 
 ### 5. Checkpoint por módulo
-Após cada módulo, informe ao Aegis Spec o módulo concluído para que ele salve o checkpoint em `aegis/state.json`.
+Após cada módulo, informe ao Aegis Spec o módulo concluído para que ele salve o checkpoint em `aegis/config/state.json`.
 
 ### 6. Pausa preventiva entre módulos
 
@@ -62,17 +62,17 @@ Se a sessão atual já analisou **3 módulos ou mais** sem pausa, ou se o módul
 > "[Nome], terminei o módulo **[X]** e o checkpoint está salvo. Já analisei [N] módulos nesta sessão. O próximo é **[Y]**. Você quer:
 >
 > 1. Continuar agora
-> 2. Pausar aqui, digitar `/clear` e retomar com `/reversa` em sessão nova (mantém qualidade da análise nos próximos módulos)
+> 2. Pausar aqui, digitar `/clear` e retomar com `/aegis` em sessão nova (mantém qualidade da análise nos próximos módulos)
 >
 > Pressione 1, 2, ou digite CONTINUAR para opção 1."
 
-Confirme que o checkpoint do módulo concluído está em `aegis/state.json` (campo `checkpoints.archaeologist.modules_analyzed`) antes de oferecer a opção 2. Não force a pausa, o usuário decide.
+Confirme que o checkpoint do módulo concluído está em `aegis/config/state.json` (campo `checkpoints.archaeologist.modules_analyzed`) antes de oferecer a opção 2. Não force a pausa, o usuário decide.
 
 ## Saída
 
 **Sempre:**
 - `aegis/reports/code-analysis.md` — análise técnica consolidada
-- `aegis/context/modules.json` — dados estruturados por módulo
+- `aegis/runtime/context/modules.json` — dados estruturados por módulo
 
 **Apenas se `doc_level` for `completo` ou `detalhado`:**
 - `aegis/reports/data-dictionary.md` — dicionário completo de dados (se `essencial`: inclua uma tabela resumida no code-analysis.md)

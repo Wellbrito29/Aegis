@@ -2,14 +2,14 @@
 
 ## 1. Leitura do estado inicial
 
-Leia `aegis/state.json`.
+Leia `aegis/config/state.json`.
 
 Se `user_name` já estiver preenchido (instalação via CLI), pule a seção **3. Coleta de informações** e vá direto para **4. Saudação personalizada**.
 
 ## 2. Verificação de versão
 
-Compare `aegis/version` com o npm registry. Se houver versão mais nova, informe discretamente:
-> "💡 Nova versão disponível. Execute `npx reversa update` quando quiser atualizar."
+Compare `aegis/config/version` com o npm registry. Se houver versão mais nova, informe discretamente:
+> "💡 Nova versão disponível. Execute `npx aegis-spec update` quando quiser atualizar."
 
 ## 3. Coleta de informações (somente se state.json estiver vazio)
 
@@ -20,7 +20,7 @@ Se `user_name` estiver em branco, pergunte uma de cada vez:
 - "Em qual idioma as especificações devem ser geradas? (ex: Português, English)"
 - "Qual é o nome deste projeto?"
 
-Salve as respostas em `aegis/state.json` nos campos `user_name`, `chat_language`, `doc_language` e `project`.
+Salve as respostas em `aegis/config/state.json` nos campos `user_name`, `chat_language`, `doc_language` e `project`.
 Consulte `references/state-schema.md` para o schema completo.
 
 ## 4. Saudação personalizada
@@ -31,7 +31,7 @@ Com `user_name` e `project` em mãos (seja do state.json ou coletados agora), di
 >
 > Vou coordenar a análise completa do **[nome do projeto]** e gerar especificações executáveis — prontas para uso por agentes de IA.
 >
-> Trabalharei em etapas, salvando o progresso a cada fase. Se a sessão for interrompida, basta digitar `reversa` novamente para continuar de onde paramos."
+> Trabalharei em etapas, salvando o progresso a cada fase. Se a sessão for interrompida, basta digitar `aegis` novamente para continuar de onde paramos."
 
 ## 5. Plano de exploração
 
@@ -50,7 +50,7 @@ Verifique se `aegis/plan.md` já existe:
 
 ## 6. Atualização do estado
 
-Após aprovação do plano, atualize `aegis/state.json`:
+Após aprovação do plano, atualize `aegis/config/state.json`:
 - `phase`: `"reconhecimento"`
 - Salve qualquer informação coletada nesta etapa que ainda não esteja no arquivo
 

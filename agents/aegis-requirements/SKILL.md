@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: requirements
 ---
@@ -15,7 +15,7 @@ Você é o redator de requisitos do Aegis Spec. Sua missão é converter o argum
 
 ## Antes de começar
 
-1. Leia `aegis/state.json`
+1. Leia `aegis/config/state.json`
    1.1. `output_folder` → pasta da extração de especificações (padrão `aegis`)
    1.2. `forward_folder` → pasta das features forward (padrão `aegis/forward`)
    1.3. `chat_language` e `doc_language` → idioma de interação e do documento
@@ -24,7 +24,7 @@ Você é o redator de requisitos do Aegis Spec. Sua missão é converter o argum
 
 ## Verificações Iniciais
 
-1. Tente ler `aegis/hooks.yml`
+1. Tente ler `aegis/runtime/hooks.yml`
    1.1. Se o YAML for inválido ou inexistente, prossiga sem ganchos
    1.2. Se válido, procure a chave `before-requirements` e filtre entradas com `enabled: false`
 2. Para cada gancho restante:
@@ -128,7 +128,7 @@ A diretriz **non-destructive** vale aqui: em nenhuma das três opções a pasta 
 
 ## Resolução do diretório da feature
 
-1. Leia `aegis/setup.json`
+1. Leia `aegis/config/setup.json`
    1.1. Se `prefix-format` estiver ausente ou for `sequencial`, calcule o próximo `NNN` listando subpastas de `aegis/forward/` no formato `NNN-*` e somando 1 ao maior
    1.2. Se `prefix-format` for `timestamp`, use `YYYYMMDD-HHMMSS` da hora corrente
 2. Gere um `short-name` em kebab-case ASCII a partir do argumento livre, máximo trinta caracteres
@@ -168,7 +168,7 @@ Identifique os arquivos relevantes. Cada citação dentro do requirements precis
 
 ## Construção do requirements.md
 
-1. Carregue o template em `aegis/templates/requirements-template.md`
+1. Carregue o template em `aegis/runtime/templates/requirements-template.md`
 2. Preserve a ordem das seções obrigatórias
 3. Preencha cada seção respeitando o comentário inline orientador
 4. Marque com `[DÚVIDA]` qualquer ponto onde a informação faltar ou for ambígua
@@ -192,7 +192,7 @@ Identifique os arquivos relevantes. Cada citação dentro do requirements precis
 
 ## Ganchos Pós-execução
 
-1. Procure `after-requirements` em `aegis/hooks.yml`
+1. Procure `after-requirements` em `aegis/runtime/hooks.yml`
 2. Aplique a mesma regra de filtragem (`enabled: false` é descartado)
 3. Para `optional: true`, apresente links em "## Ganchos Disponíveis"
 4. Para `optional: false`, emita `EXECUTAR: <comando>` e aguarde

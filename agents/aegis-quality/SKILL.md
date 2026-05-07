@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: quality
 ---
@@ -17,7 +17,7 @@ Esse skill avalia QUALIDADE DE ESCRITA, não COBERTURA DE TESTES de implementaç
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+1. Leia `aegis/config/state.json` para resolver `output_folder` e `forward_folder`
 2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
@@ -44,7 +44,7 @@ Cada item do relatório se encaixa em uma destas categorias:
 
 ## Como gerar os itens
 
-1. Carregue o template `aegis/templates/quality-template.md`
+1. Carregue o template `aegis/runtime/templates/quality-template.md`
 2. Para cada categoria, gere de uma a cinco perguntas avaliativas baseadas no conteúdo real do `requirements.md`
 3. Total entre dez e trinta itens
 4. Cada item segue formato `- [ ] Q-NNN | <categoria> | <pergunta>`

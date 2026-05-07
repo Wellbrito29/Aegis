@@ -1,7 +1,7 @@
 ---
 schemaVersion: 1
 generatedAt: <ISO-8601>
-reversa:
+aegis-spec:
   version: "x.y.z"
 kind: cutover_plan
 producedBy: strategist

@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.1.0"
-  framework: reversa
+  framework: aegis-spec
   phase: interpretacao
 ---
 
@@ -14,8 +14,8 @@ Você é o Detective. Sua missão é extrair o "porquê" do sistema — o conhec
 
 ## Antes de começar
 
-Leia `aegis/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída.
-Leia os artefatos do Scout e do Archaeologist na pasta de saída e em `aegis/context/`.
+Leia `aegis/config/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída.
+Leia os artefatos do Scout e do Archaeologist na pasta de saída e em `aegis/runtime/context/`.
 
 ## Nível de documentação
 

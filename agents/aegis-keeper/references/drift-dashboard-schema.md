@@ -2,7 +2,7 @@
 
 Dashboard de saúde das specs — mostra para cada spec o quão sincronizada está com o código atual.
 
-Mantido pelo Keeper no modo `after`. Pode ser lido por humanos e parseado pelo comando `npx reversa drift-check` (CI gate).
+Mantido pelo Keeper no modo `after`. Pode ser lido por humanos e parseado pelo comando `npx aegis-spec drift-check` (CI gate).
 
 ---
 
@@ -105,7 +105,7 @@ Histórico de mudanças vive em `<output_folder>/changelog/YYYY-MM-DD.md`.
 
 ## Parsing pelo `drift-check` CLI
 
-O comando `npx reversa drift-check` parseia este arquivo procurando o emoji de status na coluna `Status`:
+O comando `npx aegis-spec drift-check` parseia este arquivo procurando o emoji de status na coluna `Status`:
 
 - Conta linhas com `🔴 pending` → `pendingCount`
 - Conta linhas com `🟡 stale` → `staleCount`
@@ -114,7 +114,7 @@ O comando `npx reversa drift-check` parseia este arquivo procurando o emoji de s
 Exit codes:
 - `0` se `pendingCount == 0` (limpo)
 - `1` se `pendingCount > 0` (drift não-resolvido — falha CI)
-- `2` se `drift.md` não existe (orienta rodar `/reversa` primeiro)
+- `2` se `drift.md` não existe (orienta rodar `/aegis` primeiro)
 
 Filtros opcionais:
 - `--severity high`: conta apenas `pending`

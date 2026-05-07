@@ -1,4 +1,4 @@
-# Schema do `aegis/keeper-queue.jsonl`
+# Schema do `aegis/runtime/queue/keeper-queue.jsonl`
 
 Arquivo de comunicação entre os hooks de engine e o agente Keeper. **Formato JSONL** (uma entrada JSON por linha) — append-only, atomic em filesystems POSIX.
 
@@ -61,7 +61,7 @@ Após processar todas as entradas no modo `after`:
 3. Deduplicar por `files` (último entry por arquivo ganha)
 4. Processar (atualizar specs, drift.md, changelog)
 5. Deletar `keeper-processing.jsonl`
-6. Salvar timestamp em `aegis/state.json.checkpoints.keeper.last_run`
+6. Salvar timestamp em `aegis/config/state.json.checkpoints.keeper.last_run`
 
 Se houver erro: deixar `processing.jsonl` no lugar e logar em `aegis/keeper-errors.log`. Próxima invocação retoma.
 

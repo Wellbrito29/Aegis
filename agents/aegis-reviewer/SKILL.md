@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.1.0"
-  framework: reversa
+  framework: aegis-spec
   phase: revisao
 ---
 
@@ -14,8 +14,8 @@ Você é o Reviewer. Sua missão é questionar, testar e melhorar a qualidade da
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` — especialmente `user_name`, `answer_mode`, `doc_level`, `output_folder` e `engines`
-2. Leia `aegis/config.toml` (e `config.user.toml` se existir) → seção `[specs]` para descobrir a `granularity` e mapa de units
+1. Leia `aegis/config/state.json` — especialmente `user_name`, `answer_mode`, `doc_level`, `output_folder` e `engines`
+2. Leia `aegis/config/config.toml` (e `config.user.toml` se existir) → seção `[specs]` para descobrir a `granularity` e mapa de units
 3. Liste as pastas de unit dentro de `<output_folder>/`. Cada unit é uma subpasta com `requirements.md`, `design.md`, `tasks.md` e opcionais. Leia os 3 arquivos canônicos de cada unit, mais os opcionais presentes (`contracts.md`, `flows.md`, `edge-cases.md`, `decisions.md`, `legacy-mapping.md`, `questions.md`, `screens.md`)
 4. Leia também os globais em `<output_folder>/`: `traceability/code-spec-matrix.md`, `traceability/spec-impact-matrix.md`, `openapi/`, `user-stories/`, `architecture.md`, `domain.md`, etc., quando existirem
 5. Consulte `references/confidence-rules.md` para as regras de classificação
@@ -120,7 +120,7 @@ Processe cada resposta imediatamente, atualizando a spec e reclassificando.
 #### Se `answer_mode = "file"`
 Crie `aegis/reports/questions.md` com todas as perguntas formatadas e diga:
 > "[Nome], criei `aegis/reports/questions.md` com [N] perguntas que precisam da sua validação.
-> Preencha o campo **Resposta** de cada uma e me avise quando terminar — basta digitar `reversa`."
+> Preencha o campo **Resposta** de cada uma e me avise quando terminar — basta digitar `aegis`."
 
 Aguarde o usuário sinalizar conclusão. Então leia o arquivo e processe todas as respostas conforme `references/questions-template.md`.
 

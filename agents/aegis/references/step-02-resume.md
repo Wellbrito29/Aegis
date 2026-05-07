@@ -2,12 +2,12 @@
 
 ## 1. Leitura do estado
 
-Leia `aegis/state.json` e `aegis/plan.md`.
+Leia `aegis/config/state.json` e `aegis/plan.md`.
 
 ## 2. Verificação de versão
 
-Compare `aegis/version` com o npm registry. Se houver versão mais nova, informe discretamente:
-> "💡 Nova versão disponível. Execute `npx reversa update` quando quiser atualizar."
+Compare `aegis/config/version` com o npm registry. Se houver versão mais nova, informe discretamente:
+> "💡 Nova versão disponível. Execute `npx aegis-spec update` quando quiser atualizar."
 
 ## 3. Saudação
 
@@ -40,6 +40,6 @@ Pergunte apenas: "Continuamos de onde paramos? (CONTINUAR para seguir)"
 
 Após confirmação, retome a próxima tarefa pendente no plano (`aegis/plan.md`).
 
-**🚫 Não ofereça `/clear` + `/reversa` neste momento.** O usuário acabou de retomar a sessão; pedir para limpar e reabrir agora é redundante. O prompt de pausa entre etapas (descrito em `SKILL.md`, seção "Checkpoint preventivo entre etapas") só vale **depois** que um agente concluir trabalho dentro desta sessão, nunca na própria saudação de retomada.
+**🚫 Não ofereça `/clear` + `/aegis` neste momento.** O usuário acabou de retomar a sessão; pedir para limpar e reabrir agora é redundante. O prompt de pausa entre etapas (descrito em `SKILL.md`, seção "Checkpoint preventivo entre etapas") só vale **depois** que um agente concluir trabalho dentro desta sessão, nunca na própria saudação de retomada.
 
 Consulte `references/checkpoint-guide.md` para as regras de escrita no state.json.

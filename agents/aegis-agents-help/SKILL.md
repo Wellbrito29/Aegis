@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   role: help
 ---
 
@@ -21,7 +21,7 @@ O Aegis Spec é um time de especialistas. Cada agente faz uma coisa só — e fa
 ---
 
 ## 🎼 Aegis Spec — orquestrador central
-**Comando:** `/reversa`
+**Comando:** `/aegis`
 
 Um regente de orquestra não toca nenhum instrumento. Ele conhece a partitura inteira e diz quem entra quando, em que ordem, em que ritmo. Sem ele, cada músico tocaria sua parte sem se conectar com os outros.
 
@@ -113,7 +113,7 @@ O estilista cataloga o guarda-roupa: paleta de cores, tipografia, espaçamentos,
 ## Sequência recomendada
 
 ```
-/reversa → orquestra tudo automaticamente
+/aegis → orquestra tudo automaticamente
 
 Ou manualmente:
 Scout → Archaeologist (N sessões) → Detective → Architect → Writer → Reviewer

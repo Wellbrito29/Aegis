@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: principles
 ---
@@ -17,7 +17,7 @@ Esse skill é raro, frequência tipicamente menor que uma vez por mês. Ele NÃO
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+1. Leia `aegis/config/state.json` para resolver `output_folder` e `forward_folder`
 2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
@@ -29,7 +29,7 @@ Esse skill é raro, frequência tipicamente menor que uma vez por mês. Ele NÃO
 
 ## Modo criar
 
-1. Carregue `aegis/templates/principles-template.md`
+1. Carregue `aegis/runtime/templates/principles-template.md`
 2. Pergunte ao usuário pelos princípios candidatos, em batch ou um a um
 3. Para cada princípio:
    3.1. Atribua numeração romana sequencial (I, II, III, ...)
@@ -52,7 +52,7 @@ Esse skill é raro, frequência tipicamente menor que uma vez por mês. Ele NÃO
 ## Propagação de impacto
 
 1. Para cada template listado na seção "Impacto":
-   1.1. Leia o template em `aegis/templates/<nome>`
+   1.1. Leia o template em `aegis/runtime/templates/<nome>`
    1.2. Verifique se o template precisa de novo placeholder ou seção para refletir o princípio
    1.3. NUNCA reescreva o template inteiro automaticamente, gere apenas um relatório de impacto em `aegis/principles-impact-YYYYMMDD.md`
 2. O relatório lista, por template, sugestões textuais de ajuste

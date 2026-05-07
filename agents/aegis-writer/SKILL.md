@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.2.0"
-  framework: reversa
+  framework: aegis-spec
   phase: geracao
 ---
 
@@ -16,11 +16,11 @@ Você é o Writer. Sua missão é transformar o conhecimento extraído em especi
 
 Leia, nesta ordem:
 
-1. `aegis/state.json` → campos `output_folder` (padrão: `aegis`), `doc_level` (padrão: `completo`) e `doc_language`.
-2. `aegis/config.toml` → seção `[specs]` (campos `granularity`, `custom_folders`).
-3. `aegis/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave sobre `config.toml`.
-4. `aegis/context/surface.json` → especialmente `modules` e `organization_suggestion.features`.
-5. Demais artefatos em `<output_folder>/` e `aegis/context/` (gerados por agentes anteriores).
+1. `aegis/config/state.json` → campos `output_folder` (padrão: `aegis`), `doc_level` (padrão: `completo`) e `doc_language`.
+2. `aegis/config/config.toml` → seção `[specs]` (campos `granularity`, `custom_folders`).
+3. `aegis/config/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave sobre `config.toml`.
+4. `aegis/runtime/context/surface.json` → especialmente `modules` e `organization_suggestion.features`.
+5. Demais artefatos em `<output_folder>/` e `aegis/runtime/context/` (gerados por agentes anteriores).
 
 Se a seção `[specs]` ainda não está decidida (granularity vazia), pare e peça ao orquestrador Aegis Spec para executar `references/step-03-specs-organization.md` antes de continuar.
 
@@ -125,7 +125,7 @@ Para cada item do plano, em sequência:
 2. Gere apenas aquele arquivo, baseando-se no template correspondente em `references/`.
 3. Se a pasta da unit ainda não existe, crie-a; se já existe (EC-05), preserve qualquer conteúdo presente e apenas adicione os arquivos faltantes. Nunca sobrescreva arquivos já existentes sem confirmação.
 4. Marque o item como concluído no plano.
-5. Salve o progresso em `aegis/state.json` (campo `redator_progress`).
+5. Salve o progresso em `aegis/config/state.json` (campo `redator_progress`).
 6. Informe: `"✅ [arquivo] concluído. Próximo: [próximo item]. Digite CONTINUAR para prosseguir."`
 7. Pare e aguarde a resposta do usuário.
 
@@ -136,11 +136,11 @@ Só avance para o próximo item após resposta. Isso permite que o usuário revi
 > "✅ [arquivo] concluído. Unit **[X]** está completa e o checkpoint está salvo. Próxima unit: **[Y]**. Você quer:
 >
 > 1. Continuar agora
-> 2. Pausar aqui, digitar `/clear` e retomar com `/reversa` em sessão nova (recomendado se a sessão atual já está longa, preserva qualidade nas próximas units)
+> 2. Pausar aqui, digitar `/clear` e retomar com `/aegis` em sessão nova (recomendado se a sessão atual já está longa, preserva qualidade nas próximas units)
 >
 > Pressione 1, 2, ou digite CONTINUAR para opção 1."
 
-Antes de oferecer a opção 2, confirme que `redator_progress` em `aegis/state.json` reflete o último arquivo concluído. Não force a pausa, o usuário decide.
+Antes de oferecer a opção 2, confirme que `redator_progress` em `aegis/config/state.json` reflete o último arquivo concluído. Não force a pausa, o usuário decide.
 
 ### Passo 3, Globais
 

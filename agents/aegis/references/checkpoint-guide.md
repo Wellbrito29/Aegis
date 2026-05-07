@@ -1,4 +1,4 @@
-# Guia de Checkpoints — aegis/state.json
+# Guia de Checkpoints — aegis/config/state.json
 
 O Aegis Spec é o único agente que **escreve** no state.json. Os demais agentes apenas leem.
 
@@ -27,7 +27,7 @@ O Aegis Spec é o único agente que **escreve** no state.json. Os demais agentes
       "files": [
         "aegis/reports/inventory.md",
         "aegis/reports/dependencies.md",
-        "aegis/context/surface.json"
+        "aegis/runtime/context/surface.json"
       ]
     }
   }
@@ -85,7 +85,7 @@ Ao mover de fase:
       "files": [
         "aegis/reports/inventory.md",
         "aegis/reports/dependencies.md",
-        "aegis/context/surface.json"
+        "aegis/runtime/context/surface.json"
       ]
     },
     "archaeologist": {
@@ -103,4 +103,4 @@ Ao mover de fase:
 
 Se o contexto estiver se esgotando, salve o checkpoint atual e diga:
 
-> "[Nome], vou pausar aqui para preservar o contexto. Tudo está salvo em `aegis/state.json`. Digite `reversa` em uma nova sessão para continuar de onde paramos."
+> "[Nome], vou pausar aqui para preservar o contexto. Tudo está salvo em `aegis/config/state.json`. Digite `reversa` em uma nova sessão para continuar de onde paramos."

@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   role: reconstructor
 ---
 
@@ -44,7 +44,7 @@ Verifique se `aegis/reconstruction-plan.md` já existe.
 
 Leia APENAS estes arquivos (nesta ordem):
 
-1. `aegis/state.json` — se existir: extrai `project`, `user_name`, `chat_language`
+1. `aegis/config/state.json` — se existir: extrai `project`, `user_name`, `chat_language`
 2. `aegis/reports/gaps.md` — se existir
 3. `aegis/reports/confidence-report.md` — se existir
 4. `aegis/architecture/architecture.md`

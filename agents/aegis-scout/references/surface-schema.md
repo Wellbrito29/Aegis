@@ -1,4 +1,4 @@
-# Schema — aegis/context/surface.json
+# Schema — aegis/runtime/context/surface.json
 
 Arquivo gerado pelo Scout. Usado pelos demais agentes como fonte de contexto estruturado.
 
@@ -86,7 +86,7 @@ Sugestão de como organizar as specs deste projeto. Lido pelo orquestrador Aegis
 
 ### Imutabilidade
 
-Após a primeira execução, o orquestrador persiste o `granularity` sugerido em `aegis/config.toml` no campo `scout_suggestion`. Em re-execuções, o Scout pode regerar o `surface.json` (o legado pode ter mudado), mas o orquestrador NÃO atualiza o `scout_suggestion` em `config.toml` (RF-14 da spec de organização das specs).
+Após a primeira execução, o orquestrador persiste o `granularity` sugerido em `aegis/config/config.toml` no campo `scout_suggestion`. Em re-execuções, o Scout pode regerar o `surface.json` (o legado pode ter mudado), mas o orquestrador NÃO atualiza o `scout_suggestion` em `config.toml` (RF-14 da spec de organização das specs).
 
 ## Nota
 

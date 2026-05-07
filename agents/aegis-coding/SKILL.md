@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: coding
 ---
@@ -15,7 +15,7 @@ Você é o executor. Sua missão é transformar `actions.md` em código real, fa
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+1. Leia `aegis/config/state.json` para resolver `output_folder` e `forward_folder`
 2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Pré-requisito inegociável: extração de especificações
@@ -35,19 +35,19 @@ A verificação é estrita: `aegis/` precisa existir como diretório E conter pe
 
        > 🛑 `/aegis-coding` exige a pipeline de descoberta executada antes. A pasta `aegis/` não foi encontrada.
        >
-       > Execute `/reversa` para gerar a extração do legado e depois volte para cá. Sem esse contexto, `legacy-impact.md` e `regression-watch.md` ficariam sem âncora e o ciclo forward perderia seu diferencial.
+       > Execute `/aegis` para gerar a extração do legado e depois volte para cá. Sem esse contexto, `legacy-impact.md` e `regression-watch.md` ficariam sem âncora e o ciclo forward perderia seu diferencial.
 
    3.2. Se `aegis/` existir mas faltar `architecture.md`, aborte com a mensagem:
 
        > 🛑 `/aegis-coding` exige `aegis/architecture/architecture.md` (gerado pelo Architect na pipeline de descoberta). O arquivo está ausente, talvez a extração tenha sido parcial.
        >
-       > Execute `/reversa` em modo completo (mínimo `essencial`) e volte para cá.
+       > Execute `/aegis` em modo completo (mínimo `essencial`) e volte para cá.
 
    3.3. Se `aegis/architecture/architecture.md` existir mas faltar `aegis/reports/domain.md`, aborte com a mensagem:
 
        > 🛑 `/aegis-coding` exige `aegis/reports/domain.md` (gerado pelo Detective na pipeline de descoberta). O arquivo está ausente.
        >
-       > Execute `/reversa` para completar a extração e volte para cá.
+       > Execute `/aegis` para completar a extração e volte para cá.
 
    3.4. Em todos os casos do passo 3, NÃO crie `legacy-impact.md`, NÃO crie `regression-watch.md`, NÃO toque em `actions.md`, NÃO escreva `progress.jsonl`. Apenas relate e encerre.
 
@@ -107,7 +107,7 @@ Estrutura:
 
 1. Cabeçalho com identificador da feature
 2. Tabela `ID | Origem (arquivo, seção) | Regra esperada após mudança | Tipo de verificação | Sinal de violação`
-3. Seção "Histórico de re-extrações" inicialmente vazia, será preenchida pelo agente reverso quando rodar `/reversa` de novo
+3. Seção "Histórico de re-extrações" inicialmente vazia, será preenchida pelo agente reverso quando rodar `/aegis` de novo
 4. Seção "Arquivadas" inicialmente vazia
 
 NUNCA inclua no watch principal regras que originalmente eram 🟡 ou 🔴, essas vão para uma seção "Observações" sem peso de regressão.
@@ -134,11 +134,11 @@ Aplique `after-coding` da forma padrão.
 2. Quantas falharam (se houver)
 3. Caminho absoluto de `actions.md`, `progress.jsonl`, `legacy-impact.md`, `regression-watch.md`
 4. Quantos watch items foram criados nessa rodada
-5. Aviso explícito: para fechar o ciclo, rode `/reversa` (extração de especificações) novamente em algum momento futuro
+5. Aviso explícito: para fechar o ciclo, rode `/aegis` (extração de especificações) novamente em algum momento futuro
 6. Se a execução foi parcial, indique a próxima fase ou ação pendente
 
 NUNCA dispare a re-extração sozinho, isso é decisão do usuário.
 
 Termine com:
 
-> Digite **CONTINUAR** para prosseguir com `/reversa` (re-extração) ou outra ação que o usuário quiser.
+> Digite **CONTINUAR** para prosseguir com `/aegis` (re-extração) ou outra ação que o usuário quiser.

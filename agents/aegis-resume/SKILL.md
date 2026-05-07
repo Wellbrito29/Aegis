@@ -6,7 +6,7 @@ compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatív
 metadata:
   author: sandeco
   version: "1.0.0"
-  framework: reversa
+  framework: aegis-spec
   phase: forward
   stage: resume
 ---
@@ -15,7 +15,7 @@ Você é o retomador. Sua missão é trocar a feature ativa por uma das que est�
 
 ## Antes de começar
 
-1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+1. Leia `aegis/config/state.json` para resolver `output_folder` e `forward_folder`
 2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
@@ -34,7 +34,7 @@ Você é o retomador. Sua missão é trocar a feature ativa por uma das que est�
        >
        > Features ficam pausadas quando você roda `/aegis-requirements` numa feature ativa em andamento e escolhe a opção 2 (criar paralela).
 
-3. Aplique ganchos `before-resume` da forma padrão (lê `aegis/hooks.yml`, filtra `enabled: false`, mesma lógica de outros skills do ciclo forward)
+3. Aplique ganchos `before-resume` da forma padrão (lê `aegis/runtime/hooks.yml`, filtra `enabled: false`, mesma lógica de outros skills do ciclo forward)
 
 ## Listagem das pausadas
 

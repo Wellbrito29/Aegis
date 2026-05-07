@@ -1,12 +1,12 @@
 # Keeper × Graph integração
 
-A partir da v1.8.0, o Keeper consulta o graph de dependências L0 (`.aegis/context/graph.json`) além do `code-spec-matrix.md` pra ampliar o blast radius e classificar severidade do drift.
+A partir da v1.8.0, o Keeper consulta o graph de dependências L0 (`aegis/context/graph.json`) além do `code-spec-matrix.md` pra ampliar o blast radius e classificar severidade do drift.
 
 ## O que mudou em `/aegis-keeper after`
 
 **Passo 2** (mapear specs impactadas) agora usa duas fontes, nesta ordem:
 
-1. **Matrix** (`_aegis_sdd/traceability/code-spec-matrix.md`) — mapeamento primário `arquivo → spec`.
+1. **Matrix** (`aegis/traceability/code-spec-matrix.md`) — mapeamento primário `arquivo → spec`.
 2. **Graph** — pra arquivos **sem** entrada na matrix, roda `npx aegis-spec graph impact <arquivo>`. Qualquer arquivo no resultado que **tenha** entrada na matrix entra na lista de specs a revisar.
 
 Edit em arquivo sem spec ainda dispara atualização de spec à jusante — Keeper acha via import graph em vez de desistir.
@@ -23,7 +23,7 @@ Edit em arquivo sem spec ainda dispara atualização de spec à jusante — Keep
 
 O hook `Stop` (Claude Code) e `session.end` (Opencode) fazem **update incremental do graph** dos arquivos dirty no final de cada sessão, antes do próximo `/aegis-keeper after`. Outras engines (Cursor, Kimi, Codex) atualizam o graph no commit via git pre-commit fallback (Fase 1).
 
-Se `.aegis/context/graph.json` não existe, o update é pulado silenciosamente. Rode `npx aegis-spec graph build` uma vez pra inicializar.
+Se `aegis/context/graph.json` não existe, o update é pulado silenciosamente. Rode `npx aegis-spec graph build` uma vez pra inicializar.
 
 ## O que mudou em `drift-check`
 
@@ -34,7 +34,7 @@ Se `.aegis/context/graph.json` não existe, o update é pulado silenciosamente. 
   "severity": "high",
   "blocking": [
     {
-      "spec": "_aegis_sdd/sdd/auth.md",
+      "spec": "aegis/sdd/auth.md",
       "status": "🔴 pending",
       "action": "Rodar /aegis-keeper after",
       "affected_files": [

@@ -49,7 +49,7 @@ this is the safety boundary.
 
 ## Audit log
 
-Every decision is appended to `.aegis/audit/YYYY-MM-DD.jsonl` (see
+Every decision is appended to `aegis/audit/YYYY-MM-DD.jsonl` (see
 `lib/audit/schema.md`). When running in CI, persist the audit dir as an
 artifact if you want a long-term trail.
 

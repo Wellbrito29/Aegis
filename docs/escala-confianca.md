@@ -55,4 +55,4 @@ The code calls the gateway, but there's no timeout error handling. The actual be
 
 The Reviewer collects all 🔴 gaps and presents them as questions for you to answer. After you answer, it updates the specs and reclassifies: 🔴 becomes 🟢 if you confirmed with evidence, or 🟡 if you gave an answer but without absolute certainty.
 
-Gaps that couldn't be answered remain in `_aegis_sdd/gaps.md` for later handling.
+Gaps that couldn't be answered remain in `aegis/gaps.md` for later handling.

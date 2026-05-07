@@ -71,7 +71,7 @@ npx aegis-spec uninstall
 Elimina Aegis Spec del proyecto: borra los archivos creados por la instalación.
 
 !!! info "Tus archivos quedan intactos"
-    `uninstall` elimina **solo** lo que Aegis Spec creó. Ningún archivo original del proyecto es tocado. Las especificaciones generadas en `_aegis_sdd/` también se conservan por defecto. Los hooks instalados vía `add-hooks` también son eliminados.
+    `uninstall` elimina **solo** lo que Aegis Spec creó. Ningún archivo original del proyecto es tocado. Las especificaciones generadas en `aegis/` también se conservan por defecto. Los hooks instalados vía `add-hooks` también son eliminados.
 
 ---
 
@@ -104,4 +104,4 @@ Elimina hooks del Keeper. Otros hooks añadidos manualmente se preservan.
 npx aegis-spec drift-check
 ```
 
-CI gate. Lee `_aegis_sdd/drift.md` y exit 1 si hay specs pendientes. Ver [drift-check](drift-check.es.md).
+CI gate. Lee `aegis/drift.md` y exit 1 si hay specs pendientes. Ver [drift-check](drift-check.es.md).

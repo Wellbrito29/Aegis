@@ -1,6 +1,6 @@
 # Saídas geradas
 
-Tudo que o Aegis Spec produz vai para a pasta `_aegis_sdd/` (ou o nome que você configurar em `config.toml`). O projeto legado nunca é tocado.
+Tudo que o Aegis Spec produz vai para a pasta `aegis/` (ou o nome que você configurar em `config.toml`). O projeto legado nunca é tocado.
 
 O conjunto de artefatos gerados depende do **nível de documentação** escolhido no início da análise:
 
@@ -15,7 +15,7 @@ O conjunto de artefatos gerados depende do **nível de documentação** escolhid
 ## Estrutura completa
 
 ```
-_aegis_sdd/
+aegis/
 ├── inventory.md              # Inventário do projeto — todos
 ├── dependencies.md           # Dependências com versões — todos
 ├── code-analysis.md          # Análise técnica por módulo — todos
@@ -90,10 +90,10 @@ Sugestão de `.gitignore` para não versionar as saídas do Aegis Spec junto com
 
 ```gitignore
 # Saídas do Aegis Spec (opcional: remova se quiser versionar as specs)
-_aegis_sdd/
+aegis/
 
 # Configuração pessoal do Aegis Spec (nunca commitar)
-.aegis/config.user.toml
+aegis/config.user.toml
 ```
 
 ---

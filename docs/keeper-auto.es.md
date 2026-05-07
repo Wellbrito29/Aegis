@@ -11,7 +11,7 @@ npx aegis-spec keeper auto --dry-run
 
 ## Archivo de policy
 
-`_aegis_sdd/auto-policy.yaml` se lee en cada ejecución. Auto está **off**
+`aegis/auto-policy.yaml` se lee en cada ejecución. Auto está **off**
 por defecto — requiere `auto_resolve.enabled: true`.
 
 ```yaml
@@ -60,9 +60,9 @@ npx aegis-spec keeper auto [--dry-run] [--max-specs N] [--cwd <path>]
 
 ## Audit log
 
-Toda decisión va a `.aegis/audit/YYYY-MM-DD.jsonl`. Esquema en
+Toda decisión va a `aegis/audit/YYYY-MM-DD.jsonl`. Esquema en
 `lib/audit/schema.md`. Configure redacción vía
-`_aegis_sdd/audit-policy.json`:
+`aegis/audit-policy.json`:
 
 ```json
 { "redact": ["diff", "commit_message"] }
@@ -72,4 +72,4 @@ Toda decisión va a `.aegis/audit/YYYY-MM-DD.jsonl`. Esquema en
 
 `bot/keeper-bot/` trae un handler agnóstico de webhook. Setup en
 `bot/keeper-bot/install.md`. El bot está restringido a commits bajo
-`_aegis_sdd/**` — cualquier cambio fuera de ese prefijo aborta el push.
+`aegis/**` — cualquier cambio fuera de ese prefijo aborta el push.

@@ -1,13 +1,13 @@
 # Configuration
 
-Aegis Spec stores all its configuration and analysis state inside the `.aegis/` folder at the project root. You can open and edit the files whenever you want.
+Aegis Spec stores all its configuration and analysis state inside the `aegis/` folder at the project root. You can open and edit the files whenever you want.
 
 ---
 
-## The `.aegis/` folder structure
+## The `aegis/` folder structure
 
 ```
-.aegis/
+aegis/
 ├── state.json          ← analysis state between sessions
 ├── config.toml         ← project configuration
 ├── config.user.toml    ← your personal preferences (don't commit)
@@ -76,7 +76,7 @@ Controls how the Reviewer raises validation questions for you:
 | Mode | Behavior |
 |------|----------|
 | `chat` (default) | Questions appear in the chat, one by one. You answer in the conversation. |
-| `file` | The Reviewer generates a `_aegis_sdd/questions.md` file with all questions. You fill it in and notify when done. |
+| `file` | The Reviewer generates a `aegis/questions.md` file with all questions. You fill it in and notify when done. |
 
 The `file` mode is useful when there are many questions and you want to answer at your own pace, outside the session.
 
@@ -92,4 +92,4 @@ Defines the volume of artifacts each agent generates during the analysis. **Not 
 | `completo` | Medium projects, small teams | Everything in essential + full C4 diagrams, ERD, ADRs, OpenAPI, user stories, traceability matrices |
 | `detalhado` | Enterprise systems, high criticality | Everything in complete + per-function flowcharts, expanded ADRs, deployment diagram, mandatory cross-review |
 
-The choice is saved in `.aegis/state.json` under the `doc_level` field. You can edit it manually at any time to adjust the level mid-analysis.
+The choice is saved in `aegis/state.json` under the `doc_level` field. You can edit it manually at any time to adjust the level mid-analysis.

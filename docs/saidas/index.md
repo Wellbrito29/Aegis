@@ -1,6 +1,6 @@
 # Generated outputs
 
-Everything Aegis Spec produces goes to the `_aegis_sdd/` folder (or whatever name you configure in `config.toml`). The legacy project is never touched.
+Everything Aegis Spec produces goes to the `aegis/` folder (or whatever name you configure in `config.toml`). The legacy project is never touched.
 
 The set of artifacts generated depends on the **documentation level** chosen at the start of the analysis:
 
@@ -15,7 +15,7 @@ The set of artifacts generated depends on the **documentation level** chosen at 
 ## Full structure
 
 ```
-_aegis_sdd/
+aegis/
 ├── inventory.md              # Project inventory — all levels
 ├── dependencies.md           # Dependencies with versions — all levels
 ├── code-analysis.md          # Technical analysis per module — all levels
@@ -90,10 +90,10 @@ Suggested `.gitignore` to avoid versioning Aegis Spec outputs alongside code (un
 
 ```gitignore
 # Aegis Spec outputs (optional: remove if you want to version the specs)
-_aegis_sdd/
+aegis/
 
 # Personal Aegis Spec configuration (never commit)
-.aegis/config.user.toml
+aegis/config.user.toml
 ```
 
 ---

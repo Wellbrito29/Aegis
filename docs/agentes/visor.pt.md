@@ -47,6 +47,6 @@ Mande as imagens e ele cuida do resto.
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| `_aegis_sdd/ui/inventory.md` | Inventário completo de telas |
-| `_aegis_sdd/ui/flow.md` | Fluxo de navegação em Mermaid |
-| `_aegis_sdd/ui/screens/[nome-da-tela].md` | Spec detalhada por tela |
+| `aegis/ui/inventory.md` | Inventário completo de telas |
+| `aegis/ui/flow.md` | Fluxo de navegação em Mermaid |
+| `aegis/ui/screens/[nome-da-tela].md` | Spec detalhada por tela |

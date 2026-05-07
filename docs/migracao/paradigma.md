@@ -24,7 +24,7 @@ The Paradigm Advisor catches that early.
 
 ## What it does
 
-1. **Detects** the legacy paradigm from the specs in `_aegis_sdd/`. Looks for concrete markers: class structure, data access patterns, presence of events, linear synchronous flow, and so on.
+1. **Detects** the legacy paradigm from the specs in `aegis/`. Looks for concrete markers: class structure, data access patterns, presence of events, linear synchronous flow, and so on.
 
 2. **Infers** the natural paradigm of the target stack declared in the brief. Modern Node is async/event-driven. Go is CSP/goroutines. Elixir is actor model. There is no "neutral" choice.
 

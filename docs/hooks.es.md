@@ -25,14 +25,14 @@ npx aegis-spec remove-hooks --all
 
 ## Qué hace el hook
 
-Cuando la engine dispara un tool que edita archivos, el hook invoca el runner en `.aegis/_hooks/runner.js`. El runner:
+Cuando la engine dispara un tool que edita archivos, el hook invoca el runner en `aegis/_hooks/runner.js`. El runner:
 
-1. Append en `.aegis/keeper-queue.json` (con lock para concurrencia)
-2. Stub en `_aegis_sdd/changelog/YYYY-MM-DD.md`
-3. Marca specs afectadas como `🔴 pending` en `_aegis_sdd/drift.md`
+1. Append en `aegis/keeper-queue.json` (con lock para concurrencia)
+2. Stub en `aegis/changelog/YYYY-MM-DD.md`
+3. Marca specs afectadas como `🔴 pending` en `aegis/drift.md`
 4. Warning en stderr si se afectó spec de alta confianza
 
-Nunca bloquea la engine. Nunca modifica tu código. Errores en `.aegis/keeper-errors.log`.
+Nunca bloquea la engine. Nunca modifica tu código. Errores en `aegis/keeper-errors.log`.
 
 ---
 

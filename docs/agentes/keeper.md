@@ -26,7 +26,7 @@ Read-only briefing. Use this **before** you start a change.
 ```
 
 The agent:
-1. Reads `_aegis_sdd/traceability/code-spec-matrix.md` to find which specs cover the affected files
+1. Reads `aegis/traceability/code-spec-matrix.md` to find which specs cover the affected files
 2. Reads only those specs (token-aware — does not scan everything)
 3. Surfaces the contracts, invariants, and business rules the change must respect
 4. Asks if your planned change still respects them
@@ -42,7 +42,7 @@ Default mode if there are uncommitted changes or queued hook events. Use this **
 ```
 
 The agent:
-1. Collects modified files from `git diff HEAD` and (if hooks installed) `.aegis/keeper-queue.json`
+1. Collects modified files from `git diff HEAD` and (if hooks installed) `aegis/keeper-queue.json`
 2. Maps files to impacted specs via `code-spec-matrix.md`
 3. Asks 3 short questions: **Why** the change, any **breaking impact**, **extra context**
 4. Updates each impacted spec in-place, reclassifies confidence (🟢/🟡/🔴) per the rules in `references/drift-rules.md`
@@ -56,11 +56,11 @@ The agent:
 
 | File | When |
 |---|---|
-| `_aegis_sdd/changelog/YYYY-MM-DD.md` | Mode `after`, always |
-| `_aegis_sdd/sdd/[component].md` | Mode `after`, updated in-place if impacted |
-| `_aegis_sdd/traceability/code-spec-matrix.md` | Mode `after`, when files added/deleted |
-| `_aegis_sdd/drift.md` | Mode `after`, always (the dashboard) |
-| `.aegis/state.json` | Mode `after`, checkpoint |
+| `aegis/changelog/YYYY-MM-DD.md` | Mode `after`, always |
+| `aegis/sdd/[component].md` | Mode `after`, updated in-place if impacted |
+| `aegis/traceability/code-spec-matrix.md` | Mode `after`, when files added/deleted |
+| `aegis/drift.md` | Mode `after`, always (the dashboard) |
+| `aegis/state.json` | Mode `after`, checkpoint |
 
 Mode `before` writes nothing.
 
@@ -95,13 +95,13 @@ After processing a change, the Keeper may upgrade or downgrade confidence on exi
 
 You can run the Keeper **manually** via `/aegis-keeper` at any time — works on every supported engine without any setup.
 
-For **automatic** invocation when files are edited, install hooks via [`npx aegis-spec add-hooks`](../hooks.md). Hooks queue change events to `.aegis/keeper-queue.json` and pre-fill stub entries in the changelog. The next time you run `/aegis-keeper after`, the agent enriches them with the 3 questions and updates specs.
+For **automatic** invocation when files are edited, install hooks via [`npx aegis-spec add-hooks`](../hooks.md). Hooks queue change events to `aegis/keeper-queue.json` and pre-fill stub entries in the changelog. The next time you run `/aegis-keeper after`, the agent enriches them with the 3 questions and updates specs.
 
 ---
 
 ## When NOT to run
 
-- Without `_aegis_sdd/`: run `/aegis` first to bootstrap
+- Without `aegis/`: run `/aegis` first to bootstrap
 - Without `code-spec-matrix.md`: run `/aegis-architect` or `/aegis-writer` first
 - Without code changes (queue empty + git diff clean): nothing to do
 

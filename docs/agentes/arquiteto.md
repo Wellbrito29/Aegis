@@ -55,9 +55,9 @@ A matrix showing which component impacts which. Useful for knowing the blast rad
 
 | File | Content |
 |------|---------|
-| `_aegis_sdd/architecture.md` | Architectural overview |
-| `_aegis_sdd/c4-context.md` | C4 Diagram: Context |
-| `_aegis_sdd/c4-containers.md` | C4 Diagram: Containers |
-| `_aegis_sdd/c4-components.md` | C4 Diagram: Components |
-| `_aegis_sdd/erd-complete.md` | Full ERD in Mermaid |
-| `_aegis_sdd/traceability/spec-impact-matrix.md` | Impact matrix |
+| `aegis/architecture.md` | Architectural overview |
+| `aegis/c4-context.md` | C4 Diagram: Context |
+| `aegis/c4-containers.md` | C4 Diagram: Containers |
+| `aegis/c4-components.md` | C4 Diagram: Components |
+| `aegis/erd-complete.md` | Full ERD in Mermaid |
+| `aegis/traceability/spec-impact-matrix.md` | Impact matrix |

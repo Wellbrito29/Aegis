@@ -26,7 +26,7 @@ Briefing read-only. Use **antes** de começar a mudança.
 ```
 
 O agente:
-1. Lê `_aegis_sdd/traceability/code-spec-matrix.md` para identificar specs que cobrem os arquivos afetados
+1. Lê `aegis/traceability/code-spec-matrix.md` para identificar specs que cobrem os arquivos afetados
 2. Lê apenas essas specs (consciente de tokens — não percorre tudo)
 3. Apresenta os contratos, invariantes e regras de negócio que a mudança precisa respeitar
 4. Pergunta se sua mudança planejada respeita esses pontos
@@ -42,7 +42,7 @@ Modo padrão se houver mudanças não-commitadas ou eventos enfileirados pelos h
 ```
 
 O agente:
-1. Coleta arquivos modificados via `git diff HEAD` e (se hooks instalados) `.aegis/keeper-queue.json`
+1. Coleta arquivos modificados via `git diff HEAD` e (se hooks instalados) `aegis/keeper-queue.json`
 2. Mapeia arquivos pra specs impactadas via `code-spec-matrix.md`
 3. Faz 3 perguntas curtas: **Por quê** a mudança, **quebra de compatibilidade**, **contexto extra**
 4. Atualiza cada spec impactada in-place, reclassifica confiança (🟢/🟡/🔴) seguindo as regras em `references/drift-rules.md`
@@ -56,11 +56,11 @@ O agente:
 
 | Arquivo | Quando |
 |---|---|
-| `_aegis_sdd/changelog/YYYY-MM-DD.md` | Modo `after`, sempre |
-| `_aegis_sdd/sdd/[componente].md` | Modo `after`, atualizado in-place se impactado |
-| `_aegis_sdd/traceability/code-spec-matrix.md` | Modo `after`, quando arquivos adicionados/deletados |
-| `_aegis_sdd/drift.md` | Modo `after`, sempre (o dashboard) |
-| `.aegis/state.json` | Modo `after`, checkpoint |
+| `aegis/changelog/YYYY-MM-DD.md` | Modo `after`, sempre |
+| `aegis/sdd/[componente].md` | Modo `after`, atualizado in-place se impactado |
+| `aegis/traceability/code-spec-matrix.md` | Modo `after`, quando arquivos adicionados/deletados |
+| `aegis/drift.md` | Modo `after`, sempre (o dashboard) |
+| `aegis/state.json` | Modo `after`, checkpoint |
 
 Modo `before` não escreve nada.
 
@@ -95,13 +95,13 @@ Após processar uma mudança, o Keeper pode subir ou descer a confiança de afir
 
 Você pode rodar o Keeper **manualmente** via `/aegis-keeper` a qualquer momento — funciona em todas as engines suportadas sem setup adicional.
 
-Para invocação **automática** quando arquivos são editados, instale hooks via [`npx aegis-spec add-hooks`](../hooks.pt.md). Os hooks enfileiram eventos em `.aegis/keeper-queue.json` e pré-preenchem stubs no changelog. Da próxima vez que você rodar `/aegis-keeper after`, o agente enriquece com as 3 perguntas e atualiza as specs.
+Para invocação **automática** quando arquivos são editados, instale hooks via [`npx aegis-spec add-hooks`](../hooks.pt.md). Os hooks enfileiram eventos em `aegis/keeper-queue.json` e pré-preenchem stubs no changelog. Da próxima vez que você rodar `/aegis-keeper after`, o agente enriquece com as 3 perguntas e atualiza as specs.
 
 ---
 
 ## Quando NÃO rodar
 
-- Sem `_aegis_sdd/`: rode `/aegis` primeiro pra fazer bootstrap
+- Sem `aegis/`: rode `/aegis` primeiro pra fazer bootstrap
 - Sem `code-spec-matrix.md`: rode `/aegis-architect` ou `/aegis-writer` primeiro
 - Sem mudanças de código (queue vazia + git diff limpo): nada a fazer
 

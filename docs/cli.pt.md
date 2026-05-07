@@ -68,10 +68,10 @@ Adiciona suporte a uma engine de IA que não estava presente quando você instal
 npx aegis-spec uninstall
 ```
 
-Remove o Aegis Spec do projeto: apaga os arquivos criados pela instalação (`.aegis/`, `.agents/skills/aegis-*/`, os arquivos de entrada das engines).
+Remove o Aegis Spec do projeto: apaga os arquivos criados pela instalação (`aegis/`, `aegis/skills/aegis-*/`, os arquivos de entrada das engines).
 
 !!! info "Seus arquivos continuam intactos"
-    O `uninstall` remove **apenas** o que o Aegis Spec criou. Nenhum arquivo original do projeto é tocado. As especificações geradas em `_aegis_sdd/` também são preservadas por padrão. Hooks instalados via `add-hooks` também são removidos.
+    O `uninstall` remove **apenas** o que o Aegis Spec criou. Nenhum arquivo original do projeto é tocado. As especificações geradas em `aegis/` também são preservadas por padrão. Hooks instalados via `add-hooks` também são removidos.
 
 ---
 
@@ -105,4 +105,4 @@ npx aegis-spec drift-check
 npx aegis-spec drift-check --severity medium --format json
 ```
 
-CI gate. Lê `_aegis_sdd/drift.md` e exit 1 se houver specs pendentes no severity escolhido. Engine-agnostic — não carrega código de agente. Veja [drift-check](drift-check.pt.md) pra referência completa.
+CI gate. Lê `aegis/drift.md` e exit 1 se houver specs pendentes no severity escolhido. Engine-agnostic — não carrega código de agente. Veja [drift-check](drift-check.pt.md) pra referência completa.

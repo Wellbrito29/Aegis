@@ -24,6 +24,6 @@ El ilustrador forense trabaja solo con imágenes. Le envías screenshots y él r
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_aegis_sdd/ui/inventory.md` | Inventario completo de pantallas |
-| `_aegis_sdd/ui/flow.md` | Flujo de navegación en Mermaid |
-| `_aegis_sdd/ui/screens/[nombre-pantalla].md` | Spec detallada por pantalla |
+| `aegis/ui/inventory.md` | Inventario completo de pantallas |
+| `aegis/ui/flow.md` | Flujo de navegación en Mermaid |
+| `aegis/ui/screens/[nombre-pantalla].md` | Spec detallada por pantalla |

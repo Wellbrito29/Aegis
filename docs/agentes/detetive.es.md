@@ -23,7 +23,7 @@ No excava más código. Interpreta lo que fue excavado. Es el especialista en ex
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_aegis_sdd/domain.md` | Glosario y reglas de dominio |
-| `_aegis_sdd/state-machines.md` | Máquinas de estado en Mermaid |
-| `_aegis_sdd/permissions.md` | Matriz de permisos |
-| `_aegis_sdd/adrs/[numero]-[titulo].md` | Un ADR por decisión identificada |
+| `aegis/domain.md` | Glosario y reglas de dominio |
+| `aegis/state-machines.md` | Máquinas de estado en Mermaid |
+| `aegis/permissions.md` | Matriz de permisos |
+| `aegis/adrs/[numero]-[titulo].md` | Un ADR por decisión identificada |

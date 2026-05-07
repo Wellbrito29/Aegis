@@ -23,10 +23,10 @@ The upstream project focuses on generating specs from legacy code. This fork add
 ### Main differences from upstream
 
 - **Keeper**: new `aegis-keeper` agent keeps specs synchronized with code changes.
-- **Graph**: new `lib/graph/` builds `.aegis/context/graph.json` for import impact and L1 symbols/signatures.
+- **Graph**: new `lib/graph/` builds `aegis/runtime/context/graph.json` for import impact and L1 symbols/signatures.
 - **Policy gates**: new `policy-index` and `policy-check` commands block protected contract breaks.
 - **Drift loop**: new `drift-check`, hooks, queue, changelog, and drift dashboard flow.
-- **Auto mode**: optional Keeper auto-resolution via `_aegis_sdd/auto-policy.yaml` and `ANTHROPIC_API_KEY`.
+- **Auto mode**: optional Keeper auto-resolution via `aegis/config/auto-policy.yaml` and `ANTHROPIC_API_KEY`.
 - **CI and bot support**: GitHub/GitLab/CircleCI templates plus `bot/keeper-bot/` scaffold.
 - **Engine coverage**: adds Kimi CLI support and hook generators for Claude, Cursor, Kimi, Codex, and Opencode.
 
@@ -52,7 +52,7 @@ Aegis Spec is built as a **control plane for AI coding agents**, on three pillar
 
 | Pillar | Role | Tool |
 |---|---|---|
-| **Aegis Spec** | Spec authority — features, contracts, invariants, ADRs | `_aegis_sdd/` + agents (Architect, Writer, Archaeologist…) |
+| **Aegis Spec** | Spec authority — features, contracts, invariants, ADRs | `aegis/` + agents (Architect, Writer, Archaeologist…) |
 | **Keeper** | Drift gate — keeps specs in sync with code | Hooks + `/aegis-keeper [before\|after]` + `drift-check` |
 | **Graph** *(in-house, MIT)* | Codebase oracle — knowledge graph of the actual code | `lib/graph/` + `npx aegis-spec graph` (L0 universal, L1 per-language) |
 
@@ -62,10 +62,10 @@ Together: agents must respect what the code **should be** (Aegis Spec specs), se
 
 ```
 Stage 1 — Discovery     →  Scout, Archaeologist, Detective, Architect, Writer, Reviewer
-                            legacy code → _aegis_sdd/ specs
+                             legacy code → aegis/ specs
 
 Stage 2 — Migration     →  Paradigm Advisor, Curator, Strategist, Designer, Inspector
-                            _aegis_sdd/ → _aegis_sdd/migration/ plan + parity tests
+                             aegis/ → aegis/migration/ plan + parity tests
 
 Stage 3 — Build         →  user's coding agent (Claude / Codex / Cursor / Gemini / Kimi)
                             migration plan → new code
@@ -90,13 +90,13 @@ The installer will:
 1. Detect the AI engines present in the environment (Claude Code, Codex, Cursor, etc.)
 2. Ask which agents to install — all selected by default
 3. Collect project name, language, and preferences
-4. Copy agents to `.agents/skills/` (and `.claude/skills/` for Claude Code)
+4. Copy agents to `aegis/skills/`
 5. Create the engine entry file (`CLAUDE.md`, `AGENTS.md`, etc.)
-6. Create the `.aegis/` structure with state, configuration, and plan
+6. Create the `aegis/` structure with state, configuration, and plan
 7. Generate SHA-256 manifest for safe updates
 
 > Aegis Spec **never deletes or modifies** existing files in your project.
-> Agents write only to `.aegis/` and the output folder (`_aegis_sdd/` by default).
+> Agents write only to `aegis/`.
 
 **Requirements:** Node.js 18+
 
@@ -105,7 +105,7 @@ The installer will:
 > [!IMPORTANT]
 > ### 🔒 Guaranteed immutability of the legacy project
 >
-> The installer only creates new files (`CLAUDE.md`, `AGENTS.md`, `.agents/skills/`, etc.) and **never modifies or deletes any existing file** in your project. During analysis, agents operate under a strict and inviolable directive: **all writes are restricted to `.aegis/` and `_aegis_sdd/`** — no other file in your project is touched.
+> The installer only creates new files (`CLAUDE.md`, `AGENTS.md`, `aegis/skills/`, etc.) and **never modifies or deletes any existing file** in your project. During analysis, agents operate under a strict and inviolable directive: **all writes are restricted to `aegis/`** — no other file in your project is touched.
 
 > [!CAUTION]
 > ### 💾 Back up your project before starting
@@ -137,7 +137,7 @@ For engines without slash command support (like Codex):
 aegis
 ```
 
-Aegis Spec will introduce itself, create a personalized exploration plan, and coordinate the entire analysis. Progress is saved in `.aegis/state.json` at each checkpoint — if the session is interrupted, just type `aegis` to resume where you left off.
+Aegis Spec will introduce itself, create a personalized exploration plan, and coordinate the entire analysis. Progress is saved in `aegis/config/state.json` at each checkpoint — if the session is interrupted, just type `aegis` to resume where you left off.
 
 ---
 
@@ -194,37 +194,53 @@ Use when the legacy "code" is not source code but a structured artifact like a v
 ## What is generated
 
 ```
-_aegis_sdd/
-├── inventory.md              # Project inventory
-├── dependencies.md           # Dependencies with versions
-├── code-analysis.md          # Technical analysis per module
-├── data-dictionary.md        # Data dictionary
-├── domain.md                 # Glossary and business rules
-├── state-machines.md         # State machines in Mermaid
-├── permissions.md            # Permission matrix
-├── architecture.md           # Architectural overview
-├── c4-context.md             # C4 Diagram: Context
-├── c4-containers.md          # C4 Diagram: Containers
-├── c4-components.md          # C4 Diagram: Components
-├── erd-complete.md           # Full ERD in Mermaid
-├── confidence-report.md      # Confidence report 🟢🟡🔴
-├── gaps.md                   # Identified gaps
-├── questions.md              # Questions for human validation
-├── changelog/                # Code change log (Keeper — by date)
-├── drift.md                  # Spec ↔ code drift dashboard (Keeper)
-├── sdd/                      # Specs per component
-│   └── [component].md
-├── openapi/                  # API specs (if applicable)
-├── user-stories/             # User stories (if applicable)
-├── adrs/                     # Retroactive architectural decisions
-├── flowcharts/               # Flowcharts in Mermaid
-├── sequences/                # Sequence diagrams
-├── ui/                       # Interface specs (Visor)
-├── database/                 # Database specs (Data Master)
-├── design-system/            # Design tokens (Design System)
-└── traceability/
-    ├── spec-impact-matrix.md # Which spec impacts which
-    └── code-spec-matrix.md   # Code file to corresponding spec
+aegis/
+├── config/
+│   ├── state.json            # Analysis state between sessions
+│   ├── config.toml           # Project configuration
+│   ├── config.user.toml      # Personal preferences (don't commit)
+│   ├── manifest.yaml         # Installation metadata
+│   └── files-manifest.json   # SHA-256 hashes for safe updates
+├── runtime/
+│   ├── context/
+│   │   ├── surface.json      # Generated by Scout
+│   │   ├── modules.json      # Generated by Archaeologist
+│   │   ├── graph.json        # Generated by `aegis graph build`
+│   │   └── policy-index.json # Generated by `aegis policy-index build`
+│   ├── queue/
+│   │   └── keeper-queue.jsonl
+│   └── audit/
+│       └── YYYY-MM-DD.jsonl  # Decision audit log
+├── skills/                   # Installed agent skills
+├── specs/
+│   ├── sdd/                  # Specs per component
+│   │   └── [component].md
+│   ├── user-stories/         # User stories (if applicable)
+│   ├── adrs/                 # Retroactive architectural decisions
+│   └── openapi/              # API specs (if applicable)
+├── reports/
+│   ├── inventory.md          # Project inventory
+│   ├── dependencies.md       # Dependencies with versions
+│   ├── code-analysis.md      # Technical analysis per module
+│   ├── data-dictionary.md    # Data dictionary
+│   ├── domain.md             # Glossary and business rules
+│   ├── state-machines.md     # State machines in Mermaid
+│   ├── permissions.md        # Permission matrix
+│   ├── confidence-report.md  # Confidence report 🟢🟡🔴
+│   ├── gaps.md               # Identified gaps
+│   ├── questions.md          # Questions for human validation
+│   ├── drift.md              # Spec ↔ code drift dashboard (Keeper)
+│   └── changelog/            # Code change log (Keeper — by date)
+├── architecture/
+│   ├── architecture.md       # Architectural overview
+│   ├── c4-context.md         # C4 Diagram: Context
+│   ├── c4-containers.md      # C4 Diagram: Containers
+│   ├── c4-components.md      # C4 Diagram: Components
+│   └── erd-complete.md       # Full ERD in Mermaid
+├── traceability/
+│   ├── spec-impact-matrix.md # Which spec impacts which
+│   └── code-spec-matrix.md   # Code file to corresponding spec
+└── migration/                # Migration plans (optional)
 ```
 
 ### Confidence scale
@@ -243,20 +259,20 @@ Every statement in the specs is marked with:
 
 | Engine | File created | Skills path | Activation |
 |--------|-------------|-------------|------------|
-| Claude Code ⭐ | `CLAUDE.md` | `.claude/skills/aegis-*/` and `.agents/skills/aegis-*/` | `/aegis` |
-| Codex ⭐ | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| Cursor ⭐ | `.cursorrules` | `.agents/skills/aegis-*/` | `/aegis` |
-| Gemini CLI | `GEMINI.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| Windsurf | `.windsurfrules` | `.agents/skills/aegis-*/` | `/aegis` |
-| Antigravity | `AGENTS.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| Kiro | (none) | `.kiro/skills/aegis-*/` and `.agents/skills/aegis-*/` | `/aegis` |
-| Opencode | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| Cline | `.clinerules` | `.agents/skills/aegis-*/` | `/aegis` |
-| Roo Code | `.roorules` | `.agents/skills/aegis-*/` | `/aegis` |
-| GitHub Copilot | `.github/copilot-instructions.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| Aider | `CONVENTIONS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| Amazon Q Developer | `.amazonq/rules/aegis.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| Kimi CLI | `AGENTS.md` | `.agents/skills/aegis-*/` and `.kimi/skills/aegis-*/` | `aegis` |
+| Claude Code ⭐ | `CLAUDE.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| Codex ⭐ | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| Cursor ⭐ | `.cursorrules` | `aegis/skills/aegis-*/` | `/aegis` |
+| Gemini CLI | `GEMINI.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| Windsurf | `.windsurfrules` | `aegis/skills/aegis-*/` | `/aegis` |
+| Antigravity | `AGENTS.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| Kiro | (none) | `aegis/skills/aegis-*/` | `/aegis` |
+| Opencode | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| Cline | `.clinerules` | `aegis/skills/aegis-*/` | `/aegis` |
+| Roo Code | `.roorules` | `aegis/skills/aegis-*/` | `/aegis` |
+| GitHub Copilot | `.github/copilot-instructions.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| Aider | `CONVENTIONS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| Amazon Q Developer | `.amazonq/rules/aegis.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| Kimi CLI | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
 
 ---
 
@@ -286,7 +302,7 @@ The Keeper closes the cycle between spec and code so new code does not become le
 ### Local flow (developer machine)
 
 ```
-[Edit a file]                 → engine hook → .aegis/keeper-queue.jsonl
+[Edit a file]                 → engine hook → aegis/runtime/queue/keeper-queue.jsonl
                                             → stub in changelog/YYYY-MM-DD.md
                                             → marks spec as 🔴 pending in drift.md
 
@@ -337,23 +353,22 @@ See [docs/agentes/keeper.md](docs/agentes/keeper.md), [docs/hooks.md](docs/hooks
 ## Internal structure
 
 ```
-.aegis/
-├── state.json          # Analysis state between sessions
-├── config.toml         # Project configuration
-├── config.user.toml    # Personal preferences (don't commit)
-├── plan.md             # Exploration plan (user-editable)
-├── version             # Installed version
-├── context/
-│   ├── surface.json       # Generated by Scout
-│   ├── modules.json       # Generated by Archaeologist
-│   ├── graph.json         # Generated by `aegis graph build`
-│   └── policy-index.json  # Generated by `aegis policy-index build`
-└── _config/
-    ├── manifest.yaml       # Installation metadata
-    └── files-manifest.json # SHA-256 hashes for safe updates
-
-.agents/skills/         # Universal skills (all compatible agents)
-.claude/skills/         # Mirror for Claude Code
+aegis/
+├── config/
+│   ├── state.json          # Analysis state between sessions
+│   ├── config.toml         # Project configuration
+│   ├── config.user.toml    # Personal preferences (don't commit)
+│   ├── plan.md             # Exploration plan (user-editable)
+│   ├── version             # Installed version
+│   ├── manifest.yaml       # Installation metadata
+│   └── files-manifest.json # SHA-256 hashes for safe updates
+├── runtime/
+│   └── context/
+│       ├── surface.json       # Generated by Scout
+│       ├── modules.json       # Generated by Archaeologist
+│       ├── graph.json         # Generated by `aegis graph build`
+│       └── policy-index.json  # Generated by `aegis policy-index build`
+└── skills/               # Installed agent skills
 ```
 
 ---

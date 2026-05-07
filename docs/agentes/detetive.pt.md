@@ -60,10 +60,10 @@ Para cada entidade com campo de status/estado, o Detetive mapeia:
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| `_aegis_sdd/domain.md` | Glossário e regras de domínio |
-| `_aegis_sdd/state-machines.md` | Máquinas de estado em Mermaid |
-| `_aegis_sdd/permissions.md` | Matriz de permissões |
-| `_aegis_sdd/adrs/[numero]-[titulo].md` | Um ADR por decisão identificada |
+| `aegis/domain.md` | Glossário e regras de domínio |
+| `aegis/state-machines.md` | Máquinas de estado em Mermaid |
+| `aegis/permissions.md` | Matriz de permissões |
+| `aegis/adrs/[numero]-[titulo].md` | Um ADR por decisão identificada |
 
 ---
 

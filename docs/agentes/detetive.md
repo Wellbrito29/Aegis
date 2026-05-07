@@ -60,10 +60,10 @@ For each entity with a status/state field, the Detective maps:
 
 | File | Content |
 |------|---------|
-| `_aegis_sdd/domain.md` | Glossary and domain rules |
-| `_aegis_sdd/state-machines.md` | State machines in Mermaid |
-| `_aegis_sdd/permissions.md` | Permission matrix |
-| `_aegis_sdd/adrs/[number]-[title].md` | One ADR per identified decision |
+| `aegis/domain.md` | Glossary and domain rules |
+| `aegis/state-machines.md` | State machines in Mermaid |
+| `aegis/permissions.md` | Permission matrix |
+| `aegis/adrs/[number]-[title].md` | One ADR per identified decision |
 
 ---
 

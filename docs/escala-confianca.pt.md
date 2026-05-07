@@ -55,4 +55,4 @@ O código chama a gateway, mas não há tratamento de erro para timeout. O compo
 
 O Reviewer coleta todas as lacunas 🔴 e as apresenta como perguntas para você responder. Depois que você responde, ele atualiza as specs e reclassifica: 🔴 vira 🟢 se você confirmou com evidência, ou 🟡 se você deu uma resposta mas sem certeza absoluta.
 
-Lacunas que não puderam ser respondidas ficam em `_aegis_sdd/gaps.md` para tratamento posterior.
+Lacunas que não puderam ser respondidas ficam em `aegis/gaps.md` para tratamento posterior.

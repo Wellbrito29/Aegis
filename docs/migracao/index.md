@@ -6,7 +6,7 @@ The Migration Team is the next step after the Discovery Team. While Discovery pr
 
 ## Prerequisite
 
-You must have run `/aegis` first and have `_aegis_sdd/` populated with legacy specs. Without that, `/aegis-migrate` aborts with a clear message.
+You must have run `/aegis` first and have `aegis/` populated with legacy specs. Without that, `/aegis-migrate` aborts with a clear message.
 
 ---
 
@@ -16,7 +16,7 @@ You must have run `/aegis` first and have `_aegis_sdd/` populated with legacy sp
 /aegis-migrate
 ```
 
-The first execution conducts an interview (objective, success metrics, constraints, target stack) and generates `_aegis_sdd/migration/migration_brief.md`. Subsequent runs reuse the brief.
+The first execution conducts an interview (objective, success metrics, constraints, target stack) and generates `aegis/migration/migration_brief.md`. Subsequent runs reuse the brief.
 
 ---
 
@@ -50,11 +50,11 @@ Between agents there is a **human decision pause**. Default mode is interactive.
 
 ## Where artifacts land
 
-The Migration Team never touches legacy code or Discovery Team artifacts. Every `/aegis-migrate` output lands in `_aegis_sdd/migration/`, a subfolder inside the original specs.
+The Migration Team never touches legacy code or Discovery Team artifacts. Every `/aegis-migrate` output lands in `aegis/migration/`, a subfolder inside the original specs.
 
 ```
 <your-legacy-project>/
-└── _aegis_sdd/                  ← Discovery Team writes here
+└── aegis/                  ← Discovery Team writes here
     ├── inventory.md               (Scout)
     ├── dependencies.md            (Scout)
     ├── code-analysis.md           (Archaeologist)

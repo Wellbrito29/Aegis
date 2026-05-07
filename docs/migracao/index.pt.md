@@ -6,7 +6,7 @@ O Time de Migração é o passo seguinte ao Time de Descoberta. Enquanto a Desco
 
 ## Pré-requisito
 
-Você precisa ter rodado `/aegis` antes e ter o `_aegis_sdd/` populado com as specs do legado. Sem isso, o `/aegis-migrate` aborta com mensagem clara.
+Você precisa ter rodado `/aegis` antes e ter o `aegis/` populado com as specs do legado. Sem isso, o `/aegis-migrate` aborta com mensagem clara.
 
 ---
 
@@ -16,7 +16,7 @@ Você precisa ter rodado `/aegis` antes e ter o `_aegis_sdd/` populado com as sp
 /aegis-migrate
 ```
 
-A primeira execução conduz uma entrevista (objetivo, métricas, restrições, stack alvo) e gera `_aegis_sdd/migration/migration_brief.md`. Em execuções seguintes o brief é reusado.
+A primeira execução conduz uma entrevista (objetivo, métricas, restrições, stack alvo) e gera `aegis/migration/migration_brief.md`. Em execuções seguintes o brief é reusado.
 
 ---
 
@@ -50,11 +50,11 @@ Entre cada agente há uma **pausa para decisão humana**. O modo padrão é inte
 
 ## Onde os artefatos aparecem
 
-O Time de Migração nunca toca em código legado nem nos artefatos do Time de Descoberta. Todo output do `/aegis-migrate` vai para `_aegis_sdd/migration/`, uma subpasta dentro das specs originais.
+O Time de Migração nunca toca em código legado nem nos artefatos do Time de Descoberta. Todo output do `/aegis-migrate` vai para `aegis/migration/`, uma subpasta dentro das specs originais.
 
 ```
 <seu-projeto-legado>/
-└── _aegis_sdd/                  ← Time de Descoberta escreve aqui
+└── aegis/                  ← Time de Descoberta escreve aqui
     ├── inventory.md               (Scout)
     ├── dependencies.md            (Scout)
     ├── code-analysis.md           (Archaeologist)

@@ -21,9 +21,9 @@ The installer does all of this for you:
 1. Detects the AI engines present in the environment (Claude Code, Codex, Cursor, Gemini CLI, Windsurf)
 2. Asks which agents to install (all selected by default)
 3. Collects project name, language, and preferences
-4. Copies agents to `.agents/skills/` and `.claude/skills/` (for Claude Code)
+4. Copies agents to `aegis/skills/` and `aegis/skills/` (for Claude Code)
 5. Creates the engine entry file (`CLAUDE.md`, `AGENTS.md`, etc.)
-6. Creates the `.aegis/` structure with state, configuration, and plan
+6. Creates the `aegis/` structure with state, configuration, and plan
 7. Generates the SHA-256 manifest for safe future updates
 
 It's like `npm install`, but for your reverse engineering agent team.
@@ -34,12 +34,12 @@ It's like `npm install`, but for your reverse engineering agent team.
 
 ```
 legacy-project/
-├── .aegis/               ← analysis state, config, and context
-├── .agents/skills/         ← universal agents (all engines)
-├── .claude/skills/         ← mirror for Claude Code
+├── aegis/               ← analysis state, config, and context
+├── aegis/skills/         ← universal agents (all engines)
+├── aegis/skills/         ← mirror for Claude Code
 ├── CLAUDE.md               ← entry point for Claude Code (if detected)
 ├── AGENTS.md               ← entry point for Codex (if detected)
-└── _aegis_sdd/           ← where specs will be generated (empty initially)
+└── aegis/           ← where specs will be generated (empty initially)
 ```
 
 !!! success "Your files stay intact"

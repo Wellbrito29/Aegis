@@ -1,6 +1,6 @@
 # Salidas generadas
 
-Todo lo que Aegis Spec produce va a la carpeta `_aegis_sdd/`. El proyecto heredado nunca es tocado.
+Todo lo que Aegis Spec produce va a la carpeta `aegis/`. El proyecto heredado nunca es tocado.
 
 El conjunto de artefactos generados depende del **nivel de documentación** elegido al inicio del análisis:
 
@@ -15,7 +15,7 @@ El conjunto de artefactos generados depende del **nivel de documentación** eleg
 ## Estructura completa
 
 ```
-_aegis_sdd/
+aegis/
 ├── inventory.md              # Inventario del proyecto — todos
 ├── dependencies.md           # Dependencias con versiones — todos
 ├── code-analysis.md          # Análisis técnico por módulo — todos

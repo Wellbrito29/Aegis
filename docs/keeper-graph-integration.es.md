@@ -1,12 +1,12 @@
 # Keeper × Graph integración
 
-Desde v1.8.0, el Keeper consulta el graph de dependencias L0 (`.aegis/context/graph.json`) además del `code-spec-matrix.md` para ampliar el blast radius y clasificar la severidad del drift.
+Desde v1.8.0, el Keeper consulta el graph de dependencias L0 (`aegis/context/graph.json`) además del `code-spec-matrix.md` para ampliar el blast radius y clasificar la severidad del drift.
 
 ## Qué cambió en `/aegis-keeper after`
 
 **Paso 2** (mapear specs impactadas) ahora usa dos fuentes, en este orden:
 
-1. **Matrix** (`_aegis_sdd/traceability/code-spec-matrix.md`) — mapeo primario `archivo → spec`.
+1. **Matrix** (`aegis/traceability/code-spec-matrix.md`) — mapeo primario `archivo → spec`.
 2. **Graph** — para archivos **sin** entrada en la matrix, ejecuta `npx aegis-spec graph impact <archivo>`. Cualquier archivo del resultado que **sí** tenga entrada en la matrix aporta su spec a la lista a revisar.
 
 Una edición en un archivo sin spec aún dispara actualizaciones de spec aguas abajo — Keeper las encuentra vía import graph en lugar de rendirse.
@@ -23,7 +23,7 @@ Una edición en un archivo sin spec aún dispara actualizaciones de spec aguas a
 
 El hook `Stop` (Claude Code) y `session.end` (Opencode) hacen **update incremental del graph** de los archivos dirty al final de cada sesión, antes del próximo `/aegis-keeper after`. Otras engines (Cursor, Kimi, Codex) actualizan el graph en el commit vía git pre-commit fallback (Fase 1).
 
-Si `.aegis/context/graph.json` no existe, el update se omite silenciosamente. Ejecuta `npx aegis-spec graph build` una vez para inicializar.
+Si `aegis/context/graph.json` no existe, el update se omite silenciosamente. Ejecuta `npx aegis-spec graph build` una vez para inicializar.
 
 ## Qué cambió en `drift-check`
 
@@ -34,7 +34,7 @@ Si `.aegis/context/graph.json` no existe, el update se omite silenciosamente. Ej
   "severity": "high",
   "blocking": [
     {
-      "spec": "_aegis_sdd/sdd/auth.md",
+      "spec": "aegis/sdd/auth.md",
       "status": "🔴 pending",
       "action": "Ejecutar /aegis-keeper after",
       "affected_files": [

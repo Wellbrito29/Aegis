@@ -29,9 +29,9 @@ Si el plugin de Codex está activo en la sesión, el Reviewer ofrece solicitar u
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_aegis_sdd/questions.md` | Preguntas para validación humana |
-| `_aegis_sdd/confidence-report.md` | Conteo de 🟢/🟡/🔴 por unit y porcentaje general |
-| `_aegis_sdd/gaps.md` | Brechas que quedaron sin respuesta |
-| `_aegis_sdd/cross-review-result.md` | Hallazgos de Codex (si se solicitó revisión cruzada) |
+| `aegis/questions.md` | Preguntas para validación humana |
+| `aegis/confidence-report.md` | Conteo de 🟢/🟡/🔴 por unit y porcentaje general |
+| `aegis/gaps.md` | Brechas que quedaron sin respuesta |
+| `aegis/cross-review-result.md` | Hallazgos de Codex (si se solicitó revisión cruzada) |
 
 El Reviewer revisa carpeta por carpeta de unit dentro de `<output_folder>/`, leyendo los 3 archivos canónicos (`requirements.md`, `design.md`, `tasks.md`) de cada una. Las reclasificaciones se aplican in-place en cada unit; los artefactos propios del Reviewer quedan en la raíz, fuera de las carpetas de unit.

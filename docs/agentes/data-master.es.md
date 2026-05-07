@@ -33,8 +33,8 @@ El Scout hace un escaneo superficial de la base de datos (solo lista los archivo
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_aegis_sdd/database/erd.md` | ERD completo en Mermaid |
-| `_aegis_sdd/database/data-dictionary.md` | Todas las tablas y columnas |
-| `_aegis_sdd/database/relationships.md` | Relaciones detalladas |
-| `_aegis_sdd/database/business-rules.md` | Reglas de negocio en la base de datos |
-| `_aegis_sdd/database/procedures.md` | Stored procedures y funciones (si los hay) |
+| `aegis/database/erd.md` | ERD completo en Mermaid |
+| `aegis/database/data-dictionary.md` | Todas las tablas y columnas |
+| `aegis/database/relationships.md` | Relaciones detalladas |
+| `aegis/database/business-rules.md` | Reglas de negocio en la base de datos |
+| `aegis/database/procedures.md` | Stored procedures y funciones (si los hay) |

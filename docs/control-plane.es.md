@@ -5,7 +5,7 @@ Tres pilares trabajan juntos:
 
 | Pilar | Qué hace | Dónde vive |
 |---|---|---|
-| **Aegis Spec** | Autoridad de spec — features, contratos, invariantes, ADRs | `_aegis_sdd/` |
+| **Aegis Spec** | Autoridad de spec — features, contratos, invariantes, ADRs | `aegis/` |
 | **Keeper** | Drift gate — mantiene spec y código en sync, opcionalmente vía LLM | `agents/aegis-keeper/` + `lib/auto/` |
 | **Graph** | Oráculo del código — knowledge graph del código real | `lib/graph/` |
 
@@ -29,7 +29,7 @@ Stages 1–2 producen specs. Stage 3 produce código. Stage 4 mantiene ambos hon
 | **Hook pre-edit** | `Stop` / `afterFileEdit` en tu IDE | Bloquea signature break por edit |
 | **CLI `policy-check`** | CI en cada PR | Bloquea PR con cambio de contrato |
 | **`keeper auto`** | Después de que CI pase (o vía bot) | Actualiza specs o escala a humano |
-| **Audit log** | Cada decisión | Persiste quién/qué/por qué en `.aegis/audit/` |
+| **Audit log** | Cada decisión | Persiste quién/qué/por qué en `aegis/audit/` |
 
 ## Lenguajes
 
@@ -52,7 +52,7 @@ nativo falta, el lenguaje cae a L0.
 | **Hybrid** (recomendado) | Auto whitelist + HITL blacklist | Default en producción |
 
 Auto mode exige `ANTHROPIC_API_KEY` y `auto_resolve.enabled: true` en
-`_aegis_sdd/auto-policy.yaml`. Ver `docs/keeper-auto.es.md`.
+`aegis/auto-policy.yaml`. Ver `docs/keeper-auto.es.md`.
 
 ## CI
 

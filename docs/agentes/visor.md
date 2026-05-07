@@ -47,6 +47,6 @@ Send the images and it handles the rest.
 
 | File | Content |
 |------|---------|
-| `_aegis_sdd/ui/inventory.md` | Complete screen inventory |
-| `_aegis_sdd/ui/flow.md` | Navigation flow in Mermaid |
-| `_aegis_sdd/ui/screens/[screen-name].md` | Detailed spec per screen |
+| `aegis/ui/inventory.md` | Complete screen inventory |
+| `aegis/ui/flow.md` | Navigation flow in Mermaid |
+| `aegis/ui/screens/[screen-name].md` | Detailed spec per screen |

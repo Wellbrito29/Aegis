@@ -1,13 +1,13 @@
 # Configuración
 
-Aegis Spec guarda toda su configuración y estado del análisis dentro de la carpeta `.aegis/` en la raíz del proyecto.
+Aegis Spec guarda toda su configuración y estado del análisis dentro de la carpeta `aegis/` en la raíz del proyecto.
 
 ---
 
-## Estructura de la carpeta `.aegis/`
+## Estructura de la carpeta `aegis/`
 
 ```
-.aegis/
+aegis/
 ├── state.json          ← estado del análisis entre sesiones
 ├── config.toml         ← configuración del proyecto
 ├── config.user.toml    ← tus preferencias personales (no commitear)
@@ -60,7 +60,7 @@ answer_mode = "chat"  # "chat" o "file"
 | Modo | Comportamiento |
 |------|----------------|
 | `chat` (por defecto) | Las preguntas aparecen en el chat, una a una. Respondes en la conversación. |
-| `file` | El Reviewer genera un archivo `_aegis_sdd/questions.md` con todas las preguntas. Lo rellenas y avisas cuando termines. |
+| `file` | El Reviewer genera un archivo `aegis/questions.md` con todas las preguntas. Lo rellenas y avisas cuando termines. |
 
 ---
 
@@ -74,4 +74,4 @@ Define el volumen de artefactos que cada agente genera durante el análisis. **N
 | `completo` | Proyectos medianos, equipos pequeños | Todo lo esencial + diagramas C4 completos, ERD, ADRs, OpenAPI, user stories, matrices de trazabilidad |
 | `detalhado` | Sistemas enterprise, alta criticidad | Todo lo completo + flowcharts por función, ADRs expandidos, diagrama de deployment, revisión cruzada obligatoria |
 
-La elección se guarda en `.aegis/state.json` en el campo `doc_level`. Puedes editarlo manualmente en cualquier momento para ajustar el nivel durante un análisis en curso.
+La elección se guarda en `aegis/state.json` en el campo `doc_level`. Puedes editarlo manualmente en cualquier momento para ajustar el nivel durante un análisis en curso.

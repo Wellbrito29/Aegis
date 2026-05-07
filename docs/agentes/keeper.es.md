@@ -26,7 +26,7 @@ Briefing solo lectura. Úsalo **antes** del cambio.
 ```
 
 El agente:
-1. Lee `_aegis_sdd/traceability/code-spec-matrix.md` para identificar specs que cubren los archivos afectados
+1. Lee `aegis/traceability/code-spec-matrix.md` para identificar specs que cubren los archivos afectados
 2. Lee solo esas specs (consciente de tokens)
 3. Presenta contratos, invariantes y reglas de negocio que el cambio debe respetar
 4. Pregunta si tu cambio planeado los respeta
@@ -42,7 +42,7 @@ Modo predeterminado si hay cambios sin commitear o eventos en cola. Úsalo **des
 ```
 
 El agente:
-1. Recolecta archivos modificados de `git diff HEAD` y (si hay hooks) `.aegis/keeper-queue.json`
+1. Recolecta archivos modificados de `git diff HEAD` y (si hay hooks) `aegis/keeper-queue.json`
 2. Mapea archivos a specs impactadas vía `code-spec-matrix.md`
 3. Hace 3 preguntas: **Por qué** el cambio, **breaking change**, **contexto extra**
 4. Actualiza cada spec impactada in-place, reclasifica confianza (🟢/🟡/🔴)
@@ -56,11 +56,11 @@ El agente:
 
 | Archivo | Cuándo |
 |---|---|
-| `_aegis_sdd/changelog/YYYY-MM-DD.md` | Modo `after`, siempre |
-| `_aegis_sdd/sdd/[componente].md` | Modo `after`, in-place si impactado |
-| `_aegis_sdd/traceability/code-spec-matrix.md` | Modo `after`, con archivos nuevos/eliminados |
-| `_aegis_sdd/drift.md` | Modo `after`, siempre (dashboard) |
-| `.aegis/state.json` | Modo `after`, checkpoint |
+| `aegis/changelog/YYYY-MM-DD.md` | Modo `after`, siempre |
+| `aegis/sdd/[componente].md` | Modo `after`, in-place si impactado |
+| `aegis/traceability/code-spec-matrix.md` | Modo `after`, con archivos nuevos/eliminados |
+| `aegis/drift.md` | Modo `after`, siempre (dashboard) |
+| `aegis/state.json` | Modo `after`, checkpoint |
 
 ---
 
@@ -74,7 +74,7 @@ Automatizado: instala hooks vía [`npx aegis-spec add-hooks`](../hooks.es.md). L
 
 ## Cuándo NO ejecutar
 
-- Sin `_aegis_sdd/`: corre `/aegis` primero
+- Sin `aegis/`: corre `/aegis` primero
 - Sin `code-spec-matrix.md`: corre `/aegis-architect` primero
 - Sin cambios de código: nada que hacer
 

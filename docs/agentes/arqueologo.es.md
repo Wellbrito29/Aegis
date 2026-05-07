@@ -27,7 +27,7 @@ El Archaeologist analiza un módulo a la vez, a propósito. Para proyectos con m
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_aegis_sdd/code-analysis.md` | Análisis técnico consolidado |
-| `_aegis_sdd/data-dictionary.md` | Diccionario completo de datos |
-| `_aegis_sdd/flowcharts/[modulo].md` | Diagrama de flujo en Mermaid por módulo |
-| `.aegis/context/modules.json` | Datos estructurados por módulo para los próximos agentes |
+| `aegis/code-analysis.md` | Análisis técnico consolidado |
+| `aegis/data-dictionary.md` | Diccionario completo de datos |
+| `aegis/flowcharts/[modulo].md` | Diagrama de flujo en Mermaid por módulo |
+| `aegis/context/modules.json` | Datos estructurados por módulo para los próximos agentes |

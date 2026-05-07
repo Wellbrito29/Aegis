@@ -25,16 +25,16 @@ npx aegis-spec remove-hooks --all                # todas as engines de uma vez
 
 ## O que o hook faz
 
-Quando a engine dispara um tool que edita arquivo (`Edit`, `Write`, `MultiEdit`, `apply_patch`, `afterFileEdit`, etc.), o hook invoca o **Aegis Spec hook runner** — um script Node pequeno instalado em `.aegis/_hooks/runner.js`.
+Quando a engine dispara um tool que edita arquivo (`Edit`, `Write`, `MultiEdit`, `apply_patch`, `afterFileEdit`, etc.), o hook invoca o **Aegis Spec hook runner** — um script Node pequeno instalado em `aegis/_hooks/runner.js`.
 
 O runner:
 
-1. Faz append de uma entrada em `.aegis/keeper-queue.json` (com lock para edições concorrentes)
-2. Escreve um stub em `_aegis_sdd/changelog/YYYY-MM-DD.md` pra mudança ser mencionada mesmo se você nunca rodar o Keeper
-3. Marca specs afetadas como `🔴 pending` em `_aegis_sdd/drift.md`
+1. Faz append de uma entrada em `aegis/keeper-queue.json` (com lock para edições concorrentes)
+2. Escreve um stub em `aegis/changelog/YYYY-MM-DD.md` pra mudança ser mencionada mesmo se você nunca rodar o Keeper
+3. Marca specs afetadas como `🔴 pending` em `aegis/drift.md`
 4. Imprime warning no terminal se uma spec de alta confiança foi tocada
 
-O runner **nunca bloqueia** a engine e **nunca modifica seu código**. Erros são logados silenciosamente em `.aegis/keeper-errors.log`.
+O runner **nunca bloqueia** a engine e **nunca modifica seu código**. Erros são logados silenciosamente em `aegis/keeper-errors.log`.
 
 Depois, quando você roda `/aegis-keeper after`, o agente lê a queue, faz as 3 perguntas, enriquece o changelog, atualiza as specs e limpa a queue.
 
@@ -87,10 +87,10 @@ Assim: hooks mantêm queue e dashboard atualizados enquanto o dev codifica local
 [Hook da engine → spawna runner]
         │
         ▼
-[.aegis/_hooks/runner.js]
-        ├─→ append em .aegis/keeper-queue.json
-        ├─→ stub em _aegis_sdd/changelog/YYYY-MM-DD.md
-        ├─→ marca _aegis_sdd/drift.md como pending
+[aegis/_hooks/runner.js]
+        ├─→ append em aegis/keeper-queue.json
+        ├─→ stub em aegis/changelog/YYYY-MM-DD.md
+        ├─→ marca aegis/drift.md como pending
         └─→ warning no stderr (specs de alta confiança)
         │
         ▼ (depois, quando dev roda o agente)

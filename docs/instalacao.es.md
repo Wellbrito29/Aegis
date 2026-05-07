@@ -21,9 +21,9 @@ El instalador hace todo esto por ti:
 1. Detecta los motores de IA presentes en el entorno (Claude Code, Codex, Cursor, Gemini CLI, Windsurf)
 2. Pregunta qué agentes instalar (todos seleccionados por defecto)
 3. Recopila el nombre del proyecto, idioma y preferencias
-4. Copia los agentes a `.agents/skills/` y `.claude/skills/` (para Claude Code)
+4. Copia los agentes a `aegis/skills/` y `aegis/skills/` (para Claude Code)
 5. Crea el archivo de entrada del motor (`CLAUDE.md`, `AGENTS.md`, etc.)
-6. Crea la estructura `.aegis/` con estado, configuración y plan
+6. Crea la estructura `aegis/` con estado, configuración y plan
 7. Genera el manifiesto SHA-256 para actualizaciones seguras en el futuro
 
 Es como `npm install`, pero para tu equipo de agentes de ingeniería inversa.
@@ -34,12 +34,12 @@ Es como `npm install`, pero para tu equipo de agentes de ingeniería inversa.
 
 ```
 proyecto-heredado/
-├── .aegis/               ← estado, config y contexto del análisis
-├── .agents/skills/         ← agentes universales (todos los motores)
-├── .claude/skills/         ← mirror para Claude Code
+├── aegis/               ← estado, config y contexto del análisis
+├── aegis/skills/         ← agentes universales (todos los motores)
+├── aegis/skills/         ← mirror para Claude Code
 ├── CLAUDE.md               ← punto de entrada para Claude Code (si se detecta)
 ├── AGENTS.md               ← punto de entrada para Codex (si se detecta)
-└── _aegis_sdd/           ← donde se generarán las specs (vacío inicialmente)
+└── aegis/           ← donde se generarán las specs (vacío inicialmente)
 ```
 
 !!! success "Tus archivos quedan intactos"

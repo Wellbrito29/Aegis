@@ -1,6 +1,6 @@
 # Developing from specs
 
-Once Aegis Spec has generated all specs in `_aegis_sdd/`, you can take those files to any machine and start building the system from scratch. Here is the recommended order.
+Once Aegis Spec has generated all specs in `aegis/`, you can take those files to any machine and start building the system from scratch. Here is the recommended order.
 
 ---
 
@@ -10,9 +10,9 @@ Start by reading these three files:
 
 | File | Why read first |
 |---|---|
-| `_aegis_sdd/confidence-report.md` | Shows what is high-confidence (green) vs. gaps (red). Avoids building on wrong inferences. |
-| `_aegis_sdd/gaps.md` | Lists what Aegis Spec could not determine. Fill these in manually before starting. |
-| `_aegis_sdd/architecture.md` + C4 diagrams | Shows the big picture: layers, modules, system boundaries. |
+| `aegis/confidence-report.md` | Shows what is high-confidence (green) vs. gaps (red). Avoids building on wrong inferences. |
+| `aegis/gaps.md` | Lists what Aegis Spec could not determine. Fill these in manually before starting. |
+| `aegis/architecture.md` + C4 diagrams | Shows the big picture: layers, modules, system boundaries. |
 
 ---
 
@@ -30,7 +30,7 @@ Start by reading these three files:
 
 ## Which unit comes first
 
-Open `_aegis_sdd/traceability/code-spec-matrix.md`. It lists each unit and its dependencies.
+Open `aegis/traceability/code-spec-matrix.md`. It lists each unit and its dependencies.
 
 Implement the units that depend on nothing else first (leaf nodes in the dependency tree), then work up toward the units that integrate multiple components.
 
@@ -38,7 +38,7 @@ Implement the units that depend on nothing else first (leaf nodes in the depende
 
 ## Keeping traceability alive during development
 
-Use `_aegis_sdd/traceability/code-spec-matrix.md` as a reference while developing to know which piece of implemented code corresponds to which spec. This keeps traceability accurate as the codebase grows.
+Use `aegis/traceability/code-spec-matrix.md` as a reference while developing to know which piece of implemented code corresponds to which spec. This keeps traceability accurate as the codebase grows.
 
 ---
 

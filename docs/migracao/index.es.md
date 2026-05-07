@@ -6,7 +6,7 @@ El Equipo de Migración es el paso siguiente al Equipo de Descubrimiento. Mientr
 
 ## Prerrequisito
 
-Necesitas haber ejecutado `/aegis` antes y tener `_aegis_sdd/` poblado con las specs del sistema legado. Sin eso, `/aegis-migrate` aborta con un mensaje claro.
+Necesitas haber ejecutado `/aegis` antes y tener `aegis/` poblado con las specs del sistema legado. Sin eso, `/aegis-migrate` aborta con un mensaje claro.
 
 ---
 
@@ -16,7 +16,7 @@ Necesitas haber ejecutado `/aegis` antes y tener `_aegis_sdd/` poblado con las s
 /aegis-migrate
 ```
 
-La primera ejecución conduce una entrevista (objetivo, métricas de éxito, restricciones, stack objetivo) y genera `_aegis_sdd/migration/migration_brief.md`. En ejecuciones posteriores el brief se reutiliza.
+La primera ejecución conduce una entrevista (objetivo, métricas de éxito, restricciones, stack objetivo) y genera `aegis/migration/migration_brief.md`. En ejecuciones posteriores el brief se reutiliza.
 
 ---
 
@@ -50,11 +50,11 @@ Entre cada agente hay una **pausa para decisión humana**. El modo predeterminad
 
 ## Dónde aparecen los artefactos
 
-El Equipo de Migración nunca toca código legado ni los artefactos del Equipo de Descubrimiento. Todo output del `/aegis-migrate` va a `_aegis_sdd/migration/`, una subcarpeta dentro de las specs originales.
+El Equipo de Migración nunca toca código legado ni los artefactos del Equipo de Descubrimiento. Todo output del `/aegis-migrate` va a `aegis/migration/`, una subcarpeta dentro de las specs originales.
 
 ```
 <tu-proyecto-legado>/
-└── _aegis_sdd/                  ← Equipo de Descubrimiento escribe aquí
+└── aegis/                  ← Equipo de Descubrimiento escribe aquí
     ├── inventory.md               (Scout)
     ├── dependencies.md            (Scout)
     ├── code-analysis.md           (Archaeologist)

@@ -33,9 +33,9 @@ How many modules are there? What language? What framework? What are the critical
 
 | File | Content |
 |------|---------|
-| `_aegis_sdd/inventory.md` | Complete project inventory |
-| `_aegis_sdd/dependencies.md` | Dependencies with versions |
-| `.aegis/context/surface.json` | Structured data for the other agents |
+| `aegis/inventory.md` | Complete project inventory |
+| `aegis/dependencies.md` | Dependencies with versions |
+| `aegis/context/surface.json` | Structured data for the other agents |
 
 The `surface.json` is especially important: Aegis Spec uses it to customize Phase 2 tasks based on identified modules.
 

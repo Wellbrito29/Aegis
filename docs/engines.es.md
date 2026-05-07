@@ -8,26 +8,26 @@ Aegis Spec funciona con los principales motores de IA del mercado. El instalador
 
 | Motor | Archivo creado | Skills path | Cómo activar |
 |-------|---------------|-------------|--------------|
-| **Claude Code** ⭐ | `CLAUDE.md` | `.claude/skills/aegis-*/` y `.agents/skills/aegis-*/` | `/aegis` |
-| **Codex** ⭐ | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| **Cursor** ⭐ | `.cursorrules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Gemini CLI** | `GEMINI.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Windsurf** | `.windsurfrules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Antigravity** | `AGENTS.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Kiro** | (ninguno) | `.kiro/skills/aegis-*/` y `.agents/skills/aegis-*/` | `/aegis` |
-| **Opencode** | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| **Kimi CLI** | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| **Cline** | `.clinerules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Roo Code** | `.roorules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Aider** | `CONVENTIONS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| **Amazon Q Developer** | `.amazonq/rules/aegis.md` | `.agents/skills/aegis-*/` | `/aegis` |
+| **Claude Code** ⭐ | `CLAUDE.md` | `aegis/skills/aegis-*/` y `aegis/skills/aegis-*/` | `/aegis` |
+| **Codex** ⭐ | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| **Cursor** ⭐ | `.cursorrules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Gemini CLI** | `GEMINI.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Windsurf** | `.windsurfrules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Antigravity** | `AGENTS.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Kiro** | (ninguno) | `.kiro/skills/aegis-*/` y `aegis/skills/aegis-*/` | `/aegis` |
+| **Opencode** | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| **Kimi CLI** | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| **Cline** | `.clinerules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Roo Code** | `.roorules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Aider** | `CONVENTIONS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| **Amazon Q Developer** | `.amazonq/rules/aegis.md` | `aegis/skills/aegis-*/` | `/aegis` |
 
 ---
 
 ## Claude Code
 
-El motor más probado y con mejor soporte. Usa slash commands nativos, lo que hace la activación intuitiva. Aegis Spec crea los archivos en `.claude/skills/` y en `.agents/skills/` (para compatibilidad con otros motores que puedan agregarse después).
+El motor más probado y con mejor soporte. Usa slash commands nativos, lo que hace la activación intuitiva. Aegis Spec crea los archivos en `aegis/skills/` y en `aegis/skills/` (para compatibilidad con otros motores que puedan agregarse después).
 
 ---
 
@@ -45,7 +45,7 @@ Compatible vía `.cursorrules`. Cursor lee las reglas de ese archivo y los agent
 
 ## Gemini CLI y Windsurf
 
-Soporte completo. Los agentes viven en `.agents/skills/` y se acceden mediante los mecanismos nativos de cada motor.
+Soporte completo. Los agentes viven en `aegis/skills/` y se acceden mediante los mecanismos nativos de cada motor.
 
 ---
 
@@ -57,7 +57,7 @@ Plataforma de desarrollo agéntico de Google, lanzada en noviembre de 2025. Lee 
 
 ## Kiro
 
-IDE agéntico de Amazon. Kiro descubre skills nativamente en `.kiro/skills/`, sin necesidad de steering documents. El instalador coloca los agentes en `.kiro/skills/` (y también en `.agents/skills/` para compatibilidad con otros motores). La activación es vía `/aegis` o auto-discovery por la descripción del skill.
+IDE agéntico de Amazon. Kiro descubre skills nativamente en `.kiro/skills/`, sin necesidad de steering documents. El instalador coloca los agentes en `.kiro/skills/` (y también en `aegis/skills/` para compatibilidad con otros motores). La activación es vía `/aegis` o auto-discovery por la descripción del skill.
 
 ---
 
@@ -93,6 +93,6 @@ CLI de IA de AWS. Usa reglas en `.amazonq/rules/` para instruir al agente por pr
 
 ## Múltiples motores en el mismo proyecto
 
-Puedes tener todos los motores instalados al mismo tiempo. Los agentes en `.agents/skills/` son compartidos por todos. El instalador crea los archivos de entrada específicos de cada motor sin conflicto entre ellos.
+Puedes tener todos los motores instalados al mismo tiempo. Los agentes en `aegis/skills/` son compartidos por todos. El instalador crea los archivos de entrada específicos de cada motor sin conflicto entre ellos.
 
 Si trabajas en equipo y cada persona usa un motor diferente, funciona con normalidad: cada uno usa el archivo de entrada de su motor, pero todos los agentes están en el mismo lugar.

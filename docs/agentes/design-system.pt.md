@@ -61,8 +61,8 @@ Se houver biblioteca de componentes própria: lista de componentes, variantes e 
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| `_aegis_sdd/design-system/color-palette.md` | Paleta completa com valores |
-| `_aegis_sdd/design-system/typography.md` | Sistema tipográfico |
-| `_aegis_sdd/design-system/spacing.md` | Espaçamento, grid e breakpoints |
-| `_aegis_sdd/design-system/tokens.md` | Todos os tokens em tabela |
-| `_aegis_sdd/design-system/design-system.md` | Documento consolidado |
+| `aegis/design-system/color-palette.md` | Paleta completa com valores |
+| `aegis/design-system/typography.md` | Sistema tipográfico |
+| `aegis/design-system/spacing.md` | Espaçamento, grid e breakpoints |
+| `aegis/design-system/tokens.md` | Todos os tokens em tabela |
+| `aegis/design-system/design-system.md` | Documento consolidado |

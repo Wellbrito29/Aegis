@@ -8,26 +8,26 @@ O Aegis Spec funciona com as principais engines de IA do mercado. O instalador d
 
 | Engine | Arquivo criado | Skills path | Como ativar |
 |--------|---------------|-------------|-------------|
-| **Claude Code** ⭐ | `CLAUDE.md` | `.claude/skills/aegis-*/` e `.agents/skills/aegis-*/` | `/aegis` |
-| **Codex** ⭐ | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| **Cursor** ⭐ | `.cursorrules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Gemini CLI** | `GEMINI.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Windsurf** | `.windsurfrules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Antigravity** | `AGENTS.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Kiro** | (nenhum) | `.kiro/skills/aegis-*/` e `.agents/skills/aegis-*/` | `/aegis` |
-| **Opencode** | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| **Cline** | `.clinerules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Roo Code** | `.roorules` | `.agents/skills/aegis-*/` | `/aegis` |
-| **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Aider** | `CONVENTIONS.md` | `.agents/skills/aegis-*/` | `aegis` |
-| **Amazon Q Developer** | `.amazonq/rules/aegis.md` | `.agents/skills/aegis-*/` | `/aegis` |
-| **Kimi CLI** | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
+| **Claude Code** ⭐ | `CLAUDE.md` | `aegis/skills/aegis-*/` e `aegis/skills/aegis-*/` | `/aegis` |
+| **Codex** ⭐ | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| **Cursor** ⭐ | `.cursorrules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Gemini CLI** | `GEMINI.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Windsurf** | `.windsurfrules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Antigravity** | `AGENTS.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Kiro** | (nenhum) | `.kiro/skills/aegis-*/` e `aegis/skills/aegis-*/` | `/aegis` |
+| **Opencode** | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| **Cline** | `.clinerules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Roo Code** | `.roorules` | `aegis/skills/aegis-*/` | `/aegis` |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Aider** | `CONVENTIONS.md` | `aegis/skills/aegis-*/` | `aegis` |
+| **Amazon Q Developer** | `.amazonq/rules/aegis.md` | `aegis/skills/aegis-*/` | `/aegis` |
+| **Kimi CLI** | `AGENTS.md` | `aegis/skills/aegis-*/` | `aegis` |
 
 ---
 
 ## Claude Code
 
-A engine mais testada e com melhor suporte. Usa slash commands nativos, o que torna a ativação intuitiva. O Aegis Spec cria os arquivos em `.claude/skills/` e em `.agents/skills/` (para compatibilidade com outras engines que possam ser adicionadas depois).
+A engine mais testada e com melhor suporte. Usa slash commands nativos, o que torna a ativação intuitiva. O Aegis Spec cria os arquivos em `aegis/skills/` e em `aegis/skills/` (para compatibilidade com outras engines que possam ser adicionadas depois).
 
 ---
 
@@ -45,7 +45,7 @@ Compatível via `.cursorrules`. O Cursor lê as regras desse arquivo e os agente
 
 ## Gemini CLI e Windsurf
 
-Suporte completo. Os agentes ficam em `.agents/skills/` e são acessados via os mecanismos nativos de cada engine.
+Suporte completo. Os agentes ficam em `aegis/skills/` e são acessados via os mecanismos nativos de cada engine.
 
 ---
 
@@ -57,7 +57,7 @@ Plataforma de desenvolvimento agêntico do Google, lançada em novembro de 2025.
 
 ## Kiro
 
-IDE agêntico da Amazon. O Kiro descobre skills nativamente em `.kiro/skills/`, sem necessidade de steering documents. O instalador coloca os agentes em `.kiro/skills/` (e também em `.agents/skills/` para compatibilidade com outras engines). A ativação é via `/aegis` ou auto-discovery pela descrição do skill.
+IDE agêntico da Amazon. O Kiro descobre skills nativamente em `.kiro/skills/`, sem necessidade de steering documents. O instalador coloca os agentes em `.kiro/skills/` (e também em `aegis/skills/` para compatibilidade com outras engines). A ativação é via `/aegis` ou auto-discovery pela descrição do skill.
 
 ---
 
@@ -93,12 +93,12 @@ CLI de IA da AWS. Usa regras em `.amazonq/rules/` para instruir o agente por pro
 
 ## Kimi CLI
 
-Agente de codificação para terminal da Moonshot AI. Lê `AGENTS.md` nativamente (mesclado da raiz do projeto até o working directory) — mesma convenção do Codex/Opencode. Se qualquer um deles já estiver instalado, o `AGENTS.md` existente é reaproveitado sem duplicação. Skills são auto-descobertas em `.agents/skills/` e `.kimi/skills/`. Comando CLI: `kimi`. Ativação pelo nome do agente: `aegis`.
+Agente de codificação para terminal da Moonshot AI. Lê `AGENTS.md` nativamente (mesclado da raiz do projeto até o working directory) — mesma convenção do Codex/Opencode. Se qualquer um deles já estiver instalado, o `AGENTS.md` existente é reaproveitado sem duplicação. Skills são auto-descobertas em `aegis/skills/` e `.kimi/skills/`. Comando CLI: `kimi`. Ativação pelo nome do agente: `aegis`.
 
 ---
 
 ## Múltiplas engines no mesmo projeto
 
-Você pode ter todas as engines instaladas ao mesmo tempo. Os agentes em `.agents/skills/` são compartilhados por todas. O instalador cria os arquivos de entrada específicos de cada engine sem conflito entre eles.
+Você pode ter todas as engines instaladas ao mesmo tempo. Os agentes em `aegis/skills/` são compartilhados por todas. O instalador cria os arquivos de entrada específicos de cada engine sem conflito entre eles.
 
 Se você trabalha em equipe e cada pessoa usa uma engine diferente, isso funciona normalmente: cada um usa o arquivo de entrada da sua engine, mas todos os agentes estão no mesmo lugar.

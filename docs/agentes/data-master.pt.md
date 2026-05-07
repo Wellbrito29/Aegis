@@ -59,11 +59,11 @@ Gerado em Mermaid (`erDiagram`). Para bancos grandes, gera ERDs parciais por dom
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| `_aegis_sdd/database/erd.md` | ERD completo em Mermaid |
-| `_aegis_sdd/database/data-dictionary.md` | Todas as tabelas e colunas |
-| `_aegis_sdd/database/relationships.md` | Relacionamentos detalhados |
-| `_aegis_sdd/database/business-rules.md` | Regras de negócio no banco |
-| `_aegis_sdd/database/procedures.md` | Stored procedures e funções (se existirem) |
+| `aegis/database/erd.md` | ERD completo em Mermaid |
+| `aegis/database/data-dictionary.md` | Todas as tabelas e colunas |
+| `aegis/database/relationships.md` | Relacionamentos detalhados |
+| `aegis/database/business-rules.md` | Regras de negócio no banco |
+| `aegis/database/procedures.md` | Stored procedures e funções (se existirem) |
 
 ---
 

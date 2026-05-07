@@ -61,8 +61,8 @@ If there's a custom component library: list of components, variants, and main pr
 
 | File | Content |
 |------|---------|
-| `_aegis_sdd/design-system/color-palette.md` | Complete palette with values |
-| `_aegis_sdd/design-system/typography.md` | Typography system |
-| `_aegis_sdd/design-system/spacing.md` | Spacing, grid, and breakpoints |
-| `_aegis_sdd/design-system/tokens.md` | All tokens in a table |
-| `_aegis_sdd/design-system/design-system.md` | Consolidated document |
+| `aegis/design-system/color-palette.md` | Complete palette with values |
+| `aegis/design-system/typography.md` | Typography system |
+| `aegis/design-system/spacing.md` | Spacing, grid, and breakpoints |
+| `aegis/design-system/tokens.md` | All tokens in a table |
+| `aegis/design-system/design-system.md` | Consolidated document |

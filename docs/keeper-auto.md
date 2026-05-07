@@ -11,7 +11,7 @@ npx aegis-spec keeper auto --dry-run
 
 ## Policy file
 
-`_aegis_sdd/auto-policy.yaml` is read at every run. Auto mode is **off**
+`aegis/auto-policy.yaml` is read at every run. Auto mode is **off**
 by default — it requires `auto_resolve.enabled: true`.
 
 ```yaml
@@ -60,9 +60,9 @@ npx aegis-spec keeper auto [--dry-run] [--max-specs N] [--cwd <path>]
 
 ## Audit log
 
-Every decision is appended to `.aegis/audit/YYYY-MM-DD.jsonl`. Schema
+Every decision is appended to `aegis/audit/YYYY-MM-DD.jsonl`. Schema
 documented in `lib/audit/schema.md`. Configure redaction with
-`_aegis_sdd/audit-policy.json`:
+`aegis/audit-policy.json`:
 
 ```json
 { "redact": ["diff", "commit_message"] }
@@ -72,5 +72,5 @@ documented in `lib/audit/schema.md`. Configure redaction with
 
 `bot/keeper-bot/` ships a webhook-shape-agnostic handler. See
 `bot/keeper-bot/install.md` for setup. The bot is restricted to commits
-under `_aegis_sdd/**` — any change outside that prefix aborts the
+under `aegis/**` — any change outside that prefix aborts the
 push.

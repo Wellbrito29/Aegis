@@ -58,7 +58,7 @@ Para cada lacuna 🔴 que só um humano que conhece o negócio pode resolver, o 
 
 **`chat` (padrão):** as perguntas aparecem direto no chat, uma a uma. Você responde na conversa e ele atualiza as specs em tempo real.
 
-**`file`:** o Reviewer cria `_aegis_sdd/questions.md` com todas as perguntas. Você preenche com calma e avisa quando terminar.
+**`file`:** o Reviewer cria `aegis/questions.md` com todas as perguntas. Você preenche com calma e avisa quando terminar.
 
 ---
 
@@ -66,9 +66,9 @@ Para cada lacuna 🔴 que só um humano que conhece o negócio pode resolver, o 
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| `_aegis_sdd/questions.md` | Perguntas para validação humana |
-| `_aegis_sdd/confidence-report.md` | Contagem de 🟢/🟡/🔴 por spec e percentual geral |
-| `_aegis_sdd/gaps.md` | Lacunas que ficaram sem resposta |
-| `_aegis_sdd/cross-review-result.md` | Apontamentos do Codex (se revisão cruzada solicitada) |
+| `aegis/questions.md` | Perguntas para validação humana |
+| `aegis/confidence-report.md` | Contagem de 🟢/🟡/🔴 por spec e percentual geral |
+| `aegis/gaps.md` | Lacunas que ficaram sem resposta |
+| `aegis/cross-review-result.md` | Apontamentos do Codex (se revisão cruzada solicitada) |
 
 Specs em cada pasta de unit dentro de `<output_folder>/` são atualizadas in-place com as reclassificações. Os artefatos próprios do Reviewer (`questions.md`, `confidence-report.md`, `gaps.md`, `cross-review-result.md`) ficam na raiz, fora das pastas de unit.

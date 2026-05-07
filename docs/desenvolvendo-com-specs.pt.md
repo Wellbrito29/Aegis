@@ -1,6 +1,6 @@
 # Desenvolvendo com as specs
 
-Depois que o Aegis Spec gerou todas as specs em `_aegis_sdd/`, você pode copiar esses arquivos para qualquer máquina e começar a construir o sistema do zero. Veja a ordem recomendada.
+Depois que o Aegis Spec gerou todas as specs em `aegis/`, você pode copiar esses arquivos para qualquer máquina e começar a construir o sistema do zero. Veja a ordem recomendada.
 
 ---
 
@@ -10,9 +10,9 @@ Comece lendo esses três arquivos:
 
 | Arquivo | Por que ler primeiro |
 |---|---|
-| `_aegis_sdd/confidence-report.md` | Mostra o que tem alta confiança (verde) vs. lacunas (vermelho). Evita implementar algo baseado em inferência errada. |
-| `_aegis_sdd/gaps.md` | Lista o que o Aegis Spec não conseguiu determinar. Preencha manualmente antes de começar. |
-| `_aegis_sdd/architecture.md` + diagramas C4 | Mostra a visão macro: camadas, módulos, fronteiras do sistema. |
+| `aegis/confidence-report.md` | Mostra o que tem alta confiança (verde) vs. lacunas (vermelho). Evita implementar algo baseado em inferência errada. |
+| `aegis/gaps.md` | Lista o que o Aegis Spec não conseguiu determinar. Preencha manualmente antes de começar. |
+| `aegis/architecture.md` + diagramas C4 | Mostra a visão macro: camadas, módulos, fronteiras do sistema. |
 
 ---
 
@@ -30,7 +30,7 @@ Comece lendo esses três arquivos:
 
 ## Qual unit vem primeiro
 
-Abra `_aegis_sdd/traceability/code-spec-matrix.md`. Ele lista cada unit e suas dependências.
+Abra `aegis/traceability/code-spec-matrix.md`. Ele lista cada unit e suas dependências.
 
 Implemente primeiro as units que não dependem de nenhuma outra (folhas da árvore de dependências), e suba em direção às units que integram múltiplos componentes.
 
@@ -38,7 +38,7 @@ Implemente primeiro as units que não dependem de nenhuma outra (folhas da árvo
 
 ## Mantendo a rastreabilidade durante o desenvolvimento
 
-Use a `_aegis_sdd/traceability/code-spec-matrix.md` como referência durante o desenvolvimento para saber qual trecho de código implementado corresponde a qual spec. Isso mantém a rastreabilidade precisa conforme o código cresce.
+Use a `aegis/traceability/code-spec-matrix.md` como referência durante o desenvolvimento para saber qual trecho de código implementado corresponde a qual spec. Isso mantém a rastreabilidade precisa conforme o código cresce.
 
 ---
 

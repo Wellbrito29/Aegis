@@ -76,7 +76,7 @@ Pronto. O Aegis Spec assume o volante e guia você até o fim.
     Se algo inesperado acontecer durante a análise, você pode restaurar o estado original com `git restore .` ou a partir da cópia de backup.
 
 !!! warning "O Aegis Spec nunca toca nos seus arquivos"
-    Os agentes escrevem **apenas** em `.aegis/` e `_aegis_sdd/`. Nenhum arquivo do seu projeto é modificado, apagado ou sobrescrito. Nunca.
+    Os agentes escrevem **apenas** em `aegis/` e `aegis/`. Nenhum arquivo do seu projeto é modificado, apagado ou sobrescrito. Nunca.
 
 !!! info "Sem chaves de API"
     O Aegis Spec não solicita, não armazena e não transmite chaves de API de nenhum serviço. A inteligência vem do agente que você já usa no ambiente.

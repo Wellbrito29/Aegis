@@ -12,7 +12,7 @@ Exit codes:
 |---|---|
 | 0 | Limpio — sin drift al severity elegido |
 | 1 | Drift detectado — bloquea el build |
-| 2 | `_aegis_sdd/drift.md` ausente — proyecto sin inicializar |
+| 2 | `aegis/drift.md` ausente — proyecto sin inicializar |
 
 ---
 

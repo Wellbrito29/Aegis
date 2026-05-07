@@ -23,8 +23,8 @@ El estilista cataloga el guardarropa del sistema: paleta de colores, tipografía
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_aegis_sdd/design-system/color-palette.md` | Paleta completa con valores |
-| `_aegis_sdd/design-system/typography.md` | Sistema tipográfico |
-| `_aegis_sdd/design-system/spacing.md` | Espaciado, grid y breakpoints |
-| `_aegis_sdd/design-system/tokens.md` | Todos los tokens en tabla |
-| `_aegis_sdd/design-system/design-system.md` | Documento consolidado |
+| `aegis/design-system/color-palette.md` | Paleta completa con valores |
+| `aegis/design-system/typography.md` | Sistema tipográfico |
+| `aegis/design-system/spacing.md` | Espaciado, grid y breakpoints |
+| `aegis/design-system/tokens.md` | Todos los tokens en tabla |
+| `aegis/design-system/design-system.md` | Documento consolidado |

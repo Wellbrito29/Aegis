@@ -59,11 +59,11 @@ Generated in Mermaid (`erDiagram`). For large databases, generates partial ERDs 
 
 | File | Content |
 |------|---------|
-| `_aegis_sdd/database/erd.md` | Full ERD in Mermaid |
-| `_aegis_sdd/database/data-dictionary.md` | All tables and columns |
-| `_aegis_sdd/database/relationships.md` | Detailed relationships |
-| `_aegis_sdd/database/business-rules.md` | Business rules in the database |
-| `_aegis_sdd/database/procedures.md` | Stored procedures and functions (if any) |
+| `aegis/database/erd.md` | Full ERD in Mermaid |
+| `aegis/database/data-dictionary.md` | All tables and columns |
+| `aegis/database/relationships.md` | Detailed relationships |
+| `aegis/database/business-rules.md` | Business rules in the database |
+| `aegis/database/procedures.md` | Stored procedures and functions (if any) |
 
 ---
 

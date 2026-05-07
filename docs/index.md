@@ -76,7 +76,7 @@ That's it. Aegis Spec takes the wheel and guides you to the end.
     If something unexpected happens during analysis, you can restore the original state with `git restore .` or from the backup copy.
 
 !!! warning "Aegis Spec never touches your files"
-    Agents write **only** to `.aegis/` and `_aegis_sdd/`. No file in your project is modified, deleted, or overwritten. Ever.
+    Agents write **only** to `aegis/` and `aegis/`. No file in your project is modified, deleted, or overwritten. Ever.
 
 !!! info "No API keys"
     Aegis Spec does not request, store, or transmit API keys from any service. The intelligence comes from the agent you already use in your environment.

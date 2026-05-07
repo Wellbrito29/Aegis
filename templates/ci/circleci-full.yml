@@ -1,4 +1,4 @@
-# Reversa control plane — full CircleCI snippet.
+# Aegis Spec control plane — full CircleCI snippet.
 #
 # Pipelines on PRs run drift-check, policy-check, and (if the
 # ANTHROPIC_API_KEY context is set) keeper-auto.
@@ -18,16 +18,16 @@ jobs:
     executor: aegis-runner
     steps:
       - checkout
-      - run: npx reversa drift-check --severity high --format text
+      - run: npx aegis-spec drift-check --severity high --format text
 
   policy-check:
     executor: aegis-runner
     steps:
       - checkout
       - run: git fetch --depth=2147483647 origin "$CIRCLE_BASE_BRANCH"
-      - run: npx reversa policy-index build
+      - run: npx aegis-spec policy-index build
       - run: |
-          npx reversa policy-check \
+          npx aegis-spec policy-check \
             --base "origin/$CIRCLE_BASE_BRANCH" \
             --head HEAD \
             --severity high \
@@ -47,7 +47,7 @@ jobs:
           keys:
             - aegis-graph-{{ .Revision }}
             - aegis-graph-
-      - run: npx reversa keeper auto --format text --max-specs 5
+      - run: npx aegis-spec keeper auto --format text --max-specs 5
       - save_cache:
           key: aegis-graph-{{ .Revision }}
           paths:
@@ -59,7 +59,7 @@ jobs:
               git config user.name "aegis-keeper[bot]"
               git config user.email "aegis-keeper@users.noreply.circleci.com"
               git add _aegis_sdd
-              git commit -m "reversa(keeper): auto-update specs [skip ci]"
+              git commit -m "aegis-spec(keeper): auto-update specs [skip ci]"
               git push origin "HEAD:$CIRCLE_BRANCH"
             fi
       - store_artifacts:
@@ -67,7 +67,7 @@ jobs:
           destination: aegis-audit
 
 workflows:
-  reversa:
+  aegis-spec:
     jobs:
       - drift-check
       - policy-check:

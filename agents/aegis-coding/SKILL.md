@@ -15,37 +15,37 @@ Você é o executor. Sua missão é transformar `actions.md` em código real, fa
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json` para resolver `output_folder` e `forward_folder`
-2. Use os valores reais nos lugares onde o texto mencionar `_reversa_sdd/` ou `_reversa_forward/`
+1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
-## Pré-requisito inegociável: extração reversa
+## Pré-requisito inegociável: extração de especificações
 
-Esse skill **EXIGE** que a pipeline reversa tenha sido executada antes pelo menos uma vez. Sem `_reversa_sdd/`, os dois artefatos centrais do skill (`legacy-impact.md` e `regression-watch.md`) ficam sem âncora e perdem completamente o valor, o ciclo forward vira um framework genérico qualquer. O Reversa só faz sentido com a ponte legado-código viva.
+Esse skill **EXIGE** que a pipeline de descoberta tenha sido executada antes pelo menos uma vez. Sem `aegis/`, os dois artefatos centrais do skill (`legacy-impact.md` e `regression-watch.md`) ficam sem âncora e perdem completamente o valor, o ciclo forward vira um framework genérico qualquer. O Aegis Spec só faz sentido com a ponte legado-código viva.
 
-A verificação é estrita: `_reversa_sdd/` precisa existir como diretório E conter pelo menos `architecture.md` E `domain.md`. Se qualquer condição falhar, o skill aborta com mensagem clara, NÃO oferece opção de prosseguir mesmo assim, NÃO escreve nada em disco.
+A verificação é estrita: `aegis/` precisa existir como diretório E conter pelo menos `architecture.md` E `domain.md`. Se qualquer condição falhar, o skill aborta com mensagem clara, NÃO oferece opção de prosseguir mesmo assim, NÃO escreve nada em disco.
 
 ## Verificações Iniciais
 
-1. Leia `.reversa/active-requirements.json`
+1. Leia `aegis/active-requirements.json`
    1.1. Se ausente, aborte com mensagem apontando `/aegis-requirements`
 2. Verifique a existência de `feature-dir/actions.md`
    2.1. Se ausente, aborte com mensagem apontando `/aegis-to-do`
-3. Verifique o pré-requisito da extração reversa:
-   3.1. Se `_reversa_sdd/` não existir como diretório, aborte com a mensagem:
+3. Verifique o pré-requisito da extração de especificações:
+   3.1. Se `aegis/` não existir como diretório, aborte com a mensagem:
 
-       > 🛑 `/aegis-coding` exige a pipeline reversa executada antes. A pasta `_reversa_sdd/` não foi encontrada.
+       > 🛑 `/aegis-coding` exige a pipeline de descoberta executada antes. A pasta `aegis/` não foi encontrada.
        >
        > Execute `/reversa` para gerar a extração do legado e depois volte para cá. Sem esse contexto, `legacy-impact.md` e `regression-watch.md` ficariam sem âncora e o ciclo forward perderia seu diferencial.
 
-   3.2. Se `_reversa_sdd/` existir mas faltar `architecture.md`, aborte com a mensagem:
+   3.2. Se `aegis/` existir mas faltar `architecture.md`, aborte com a mensagem:
 
-       > 🛑 `/aegis-coding` exige `_reversa_sdd/architecture.md` (gerado pelo Architect na pipeline reversa). O arquivo está ausente, talvez a extração tenha sido parcial.
+       > 🛑 `/aegis-coding` exige `aegis/architecture/architecture.md` (gerado pelo Architect na pipeline de descoberta). O arquivo está ausente, talvez a extração tenha sido parcial.
        >
        > Execute `/reversa` em modo completo (mínimo `essencial`) e volte para cá.
 
-   3.3. Se `_reversa_sdd/architecture.md` existir mas faltar `_reversa_sdd/domain.md`, aborte com a mensagem:
+   3.3. Se `aegis/architecture/architecture.md` existir mas faltar `aegis/reports/domain.md`, aborte com a mensagem:
 
-       > 🛑 `/aegis-coding` exige `_reversa_sdd/domain.md` (gerado pelo Detective na pipeline reversa). O arquivo está ausente.
+       > 🛑 `/aegis-coding` exige `aegis/reports/domain.md` (gerado pelo Detective na pipeline de descoberta). O arquivo está ausente.
        >
        > Execute `/reversa` para completar a extração e volte para cá.
 
@@ -79,10 +79,10 @@ Para cada fase, na ordem Preparação, Testes, Núcleo, Integração, Polimento:
 
 Após executar (mesmo que parcialmente):
 
-1. Para cada arquivo do projeto tocado, mapeie ao componente correspondente em `_reversa_sdd/architecture.md` quando possível
+1. Para cada arquivo do projeto tocado, mapeie ao componente correspondente em `aegis/architecture/architecture.md` quando possível
 2. Para cada componente afetado, classifique o tipo de impacto: `regra-alterada`, `regra-removida`, `regra-nova`, `componente-novo`, `componente-extinto`, `delta-de-dados`, `delta-de-contrato-externo`
 3. Atribua severidade alinhada com `/aegis-audit` (CRITICAL, HIGH, MEDIUM, LOW)
-4. Liste regras 🟢 do `_reversa_sdd/domain.md` que continuam intactas (vão para a seção "Preservadas")
+4. Liste regras 🟢 do `aegis/reports/domain.md` que continuam intactas (vão para a seção "Preservadas")
 5. Liste regras 🟢 que foram alteradas ou removidas (vão para a seção "Modificadas")
 
 Estrutura do arquivo:
@@ -134,7 +134,7 @@ Aplique `after-coding` da forma padrão.
 2. Quantas falharam (se houver)
 3. Caminho absoluto de `actions.md`, `progress.jsonl`, `legacy-impact.md`, `regression-watch.md`
 4. Quantos watch items foram criados nessa rodada
-5. Aviso explícito: para fechar o ciclo, rode `/reversa` (extração reversa) novamente em algum momento futuro
+5. Aviso explícito: para fechar o ciclo, rode `/reversa` (extração de especificações) novamente em algum momento futuro
 6. Se a execução foi parcial, indique a próxima fase ou ação pendente
 
 NUNCA dispare a re-extração sozinho, isso é decisão do usuário.

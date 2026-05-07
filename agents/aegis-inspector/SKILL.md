@@ -21,23 +21,23 @@ Os artefatos produzidos são **specs de paridade**, não testes executáveis. O 
 
 ## Pré-requisitos
 
-- `_reversa_sdd/migration/paradigm_decision.md`
-- `_reversa_sdd/migration/migration_strategy.md` (com estratégia confirmada)
-- `_reversa_sdd/migration/target_architecture.md` (Designer concluído e arquitetura aprovada)
+- `aegis/migration/paradigm_decision.md`
+- `aegis/migration/migration_strategy.md` (com estratégia confirmada)
+- `aegis/migration/target_architecture.md` (Designer concluído e arquitetura aprovada)
 
 ## Inputs
 
 - Os três pré-requisitos.
-- `_reversa_sdd/code-analysis.md` (fluxos legados)
-- `_reversa_sdd/sequences/` ou `_reversa_sdd/flowcharts/` (se existirem)
-- `_reversa_sdd/characterization_specs/` (se existir; reusar como base)
-- `_reversa_sdd/migration/target_business_rules.md` (regras MIGRAR)
-- `_reversa_sdd/migration/target_domain_model.md`
+- `aegis/reports/code-analysis.md` (fluxos legados)
+- `aegis/sequences/` ou `aegis/flowcharts/` (se existirem)
+- `aegis/characterization_specs/` (se existir; reusar como base)
+- `aegis/migration/target_business_rules.md` (regras MIGRAR)
+- `aegis/migration/target_domain_model.md`
 
 ## Outputs
 
-- `_reversa_sdd/migration/parity_specs.md`
-- `_reversa_sdd/migration/parity_tests/*.feature` (um arquivo por fluxo crítico)
+- `aegis/migration/parity_specs.md`
+- `aegis/migration/parity_tests/*.feature` (um arquivo por fluxo crítico)
 
 ## Procedimento
 
@@ -94,7 +94,7 @@ Cada `.feature` deve:
 
 ### 5. Reusar characterization_specs
 
-Se `_reversa_sdd/characterization_specs/` existir, leia e reuse como base. Adapte:
+Se `aegis/characterization_specs/` existir, leia e reuse como base. Adapte:
 
 - Entradas / saídas para o sistema novo.
 - Critérios de aceitação ao paradigma alvo.
@@ -119,11 +119,11 @@ Se `_reversa_sdd/characterization_specs/` existir, leia e reuse como base. Adapt
 
 ## Layout de saída (transversal)
 
-Este agente faz parte do Time de Migração e escreve exclusivamente em `_reversa_sdd/migration/`. Essa pasta é transversal à organização escolhida em `[specs]` do `config.toml`, fora das pastas de unit (feature folders) do Time de Descoberta. Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
+Este agente faz parte do Time de Migração e escreve exclusivamente em `aegis/migration/`. Essa pasta é transversal à organização escolhida em `[specs]` do `config.toml`, fora das pastas de unit (feature folders) do Time de Descoberta. Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
 
 ## Regras absolutas
 
-- Não escrever fora de `_reversa_sdd/migration/`.
+- Não escrever fora de `aegis/migration/`.
 - Arquivos `.feature` são **specs**, não testes executáveis. Não introduza chamadas a frameworks.
 - Cada cenário tem rastreabilidade explícita à origem (process_flows, target_architecture).
 - Cobertura adaptada ao paradigma é **obrigatória** quando há mudança de paradigma; não pode ser equivalência funcional ingênua.

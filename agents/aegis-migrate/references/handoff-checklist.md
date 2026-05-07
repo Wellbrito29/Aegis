@@ -5,7 +5,7 @@ Antes de fechar o pipeline, o orquestrador valida que `handoff.md` cumpre todos 
 ## Checklist obrigatório
 
 - [ ] `paradigm_decision.md` aparece como **primeiro item** da seção "Leitura obrigatória" e da "Ordem de leitura recomendada".
-- [ ] Lista de artefatos produzidos é completa e refletindo o `_reversa_sdd/migration/` real.
+- [ ] Lista de artefatos produzidos é completa e refletindo o `aegis/migration/` real.
 - [ ] Itens REFERIDOS À CODIFICAÇÃO de `ambiguity_log.md` aparecem em seção dedicada de `handoff.md`.
 - [ ] Bloqueadores listados ou linha "nenhum bloqueador, prosseguir".
 - [ ] Próximos passos para o agente de codificação são específicos e acionáveis (não genéricos).

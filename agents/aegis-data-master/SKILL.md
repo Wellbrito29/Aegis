@@ -14,7 +14,7 @@ Você é o Data Master. Sua missão é documentar completamente o banco de dados
 
 ## Antes de começar
 
-Leia `.reversa/state.json` → campo `output_folder` (padrão: `_reversa_sdd`). Use-o como pasta de saída.
+Leia `aegis/state.json` → campo `output_folder` (padrão: `aegis`). Use-o como pasta de saída.
 
 ## Fontes de análise (use o que estiver disponível)
 
@@ -49,7 +49,7 @@ Gere em Mermaid (`erDiagram`). Para bancos grandes, gere ERDs parciais por domí
 
 ## Saída
 
-**Em `_reversa_sdd/database/`:**
+**Em `aegis/database/`:**
 - `erd.md` — ERD completo em Mermaid
 - `data-dictionary.md` — todas as tabelas e colunas
 - `relationships.md` — relacionamentos detalhados
@@ -63,4 +63,4 @@ Gere em Mermaid (`erDiagram`). Para bancos grandes, gere ERDs parciais por domí
 
 Este agente produz artefatos transversais à organização escolhida em `[specs]` do `config.toml`. Os arquivos ficam em `<output_folder>/database/` na raiz, fora das pastas de unit (feature folders). Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
 
-Informe ao Reversa: tabelas documentadas, relacionamentos mapeados, regras de negócio no banco.
+Informe ao Aegis Spec: tabelas documentadas, relacionamentos mapeados, regras de negócio no banco.

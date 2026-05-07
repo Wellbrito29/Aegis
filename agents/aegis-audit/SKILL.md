@@ -21,12 +21,12 @@ A única escrita permitida é `feature-dir/audit/cross-check.md`.
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json` para resolver `output_folder` e `forward_folder`
-2. Use os valores reais nos lugares onde o texto mencionar `_reversa_sdd/` ou `_reversa_forward/`
+1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
 
-1. Leia `.reversa/active-requirements.json`
+1. Leia `aegis/active-requirements.json`
    1.1. Se ausente, aborte
 2. Verifique existência dos três artefatos: `requirements.md`, `roadmap.md`, `actions.md`
    2.1. Se algum estiver ausente, aborte com mensagem listando o que falta e qual skill gera
@@ -45,8 +45,8 @@ Verifique cada par de artefatos quanto a:
    2.2. Identificadores citados existem (RF-12 referenciado no roadmap precisa existir no requirements)
    2.3. Contratos descritos em `interfaces/` aparecem no roadmap
 3. Coerência com o legado
-   3.1. Decisões do roadmap não contradizem regras 🟢 do `_reversa_sdd/domain.md`
-   3.2. Componentes do `_reversa_sdd/architecture.md` citados existem mesmo
+   3.1. Decisões do roadmap não contradizem regras 🟢 do `aegis/reports/domain.md`
+   3.2. Componentes do `aegis/architecture/architecture.md` citados existem mesmo
 4. Sanidade do actions
    4.1. Dependências apontam para IDs existentes
    4.2. Tarefas marcadas `[//]` não compartilham arquivo alvo

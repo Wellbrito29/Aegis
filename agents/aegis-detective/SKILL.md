@@ -14,8 +14,8 @@ Você é o Detective. Sua missão é extrair o "porquê" do sistema — o conhec
 
 ## Antes de começar
 
-Leia `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída.
-Leia os artefatos do Scout e do Archaeologist na pasta de saída e em `.reversa/context/`.
+Leia `aegis/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída.
+Leia os artefatos do Scout e do Archaeologist na pasta de saída e em `aegis/context/`.
 
 ## Nível de documentação
 
@@ -63,12 +63,12 @@ Se existirem arquivos de log, identifique eventos de negócio monitorados e erro
 ## Saída
 
 **Sempre:**
-- `_reversa_sdd/domain.md` — glossário e regras de domínio
+- `aegis/reports/domain.md` — glossário e regras de domínio
 
 **Condicionais por `doc_level`:**
-- `_reversa_sdd/state-machines.md` — se `completo` ou `detalhado`; se `essencial`, gere só se houver entidade central com múltiplos status
-- `_reversa_sdd/permissions.md` — se `completo` ou `detalhado`; se `essencial`, gere só se RBAC for central ao sistema
-- `_reversa_sdd/adrs/[numero]-[titulo].md` — se `completo` ou `detalhado` (pule se `essencial`); se `detalhado`, inclua seções "Alternativas consideradas" e "Consequências" em cada ADR
+- `aegis/reports/state-machines.md` — se `completo` ou `detalhado`; se `essencial`, gere só se houver entidade central com múltiplos status
+- `aegis/reports/permissions.md` — se `completo` ou `detalhado`; se `essencial`, gere só se RBAC for central ao sistema
+- `aegis/specs/adrs/[numero]-[titulo].md` — se `completo` ou `detalhado` (pule se `essencial`); se `detalhado`, inclua seções "Alternativas consideradas" e "Consequências" em cada ADR
 
 ## Escala de confiança
 Seja rigoroso — muito aqui será 🟡.
@@ -78,4 +78,4 @@ Seja rigoroso — muito aqui será 🟡.
 
 Este agente produz artefatos transversais à organização escolhida em `[specs]` do `config.toml`. Os arquivos ficam na raiz de `<output_folder>/`, fora das pastas de unit (feature folders). Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
 
-Informe ao Reversa: regras identificadas, ADRs gerados, máquinas de estado, lacunas 🔴.
+Informe ao Aegis Spec: regras identificadas, ADRs gerados, máquinas de estado, lacunas 🔴.

@@ -1,4 +1,4 @@
-# Schema do `.reversa/keeper-queue.jsonl`
+# Schema do `aegis/keeper-queue.jsonl`
 
 Arquivo de comunicação entre os hooks de engine e o agente Keeper. **Formato JSONL** (uma entrada JSON por linha) — append-only, atomic em filesystems POSIX.
 
@@ -7,7 +7,7 @@ Arquivo de comunicação entre os hooks de engine e o agente Keeper. **Formato J
 
 Modo manual (sem hooks instalados): este arquivo pode não existir. Keeper usa `git diff HEAD` como fonte alternativa.
 
-> **Histórico:** versões anteriores (≤ v1.6) usavam `.reversa/keeper-queue.json` como snapshot único com locking. Trocado em v1.7 por JSONL append-only para reduzir overhead dos hooks de ~150-300ms por edit para ~10ms.
+> **Histórico:** versões anteriores (≤ v1.6) usavam `aegis/keeper-queue.json` como snapshot único com locking. Trocado em v1.7 por JSONL append-only para reduzir overhead dos hooks de ~150-300ms por edit para ~10ms.
 
 ---
 
@@ -61,9 +61,9 @@ Após processar todas as entradas no modo `after`:
 3. Deduplicar por `files` (último entry por arquivo ganha)
 4. Processar (atualizar specs, drift.md, changelog)
 5. Deletar `keeper-processing.jsonl`
-6. Salvar timestamp em `.reversa/state.json.checkpoints.keeper.last_run`
+6. Salvar timestamp em `aegis/state.json.checkpoints.keeper.last_run`
 
-Se houver erro: deixar `processing.jsonl` no lugar e logar em `.reversa/keeper-errors.log`. Próxima invocação retoma.
+Se houver erro: deixar `processing.jsonl` no lugar e logar em `aegis/keeper-errors.log`. Próxima invocação retoma.
 
 ---
 

@@ -14,8 +14,8 @@ Você é o Architect. Sua missão é sintetizar tudo que foi descoberto em docum
 
 ## Antes de começar
 
-Leia `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída.
-Leia todos os artefatos na pasta de saída e em `.reversa/context/`.
+Leia `aegis/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída.
+Leia todos os artefatos na pasta de saída e em `aegis/context/`.
 
 ## Nível de documentação
 
@@ -65,22 +65,22 @@ O campo `doc_level` do state.json controla o que gerar:
 - Ausência de testes em módulos críticos
 
 ### 7. Spec Impact Matrix
-Crie `_reversa_sdd/traceability/spec-impact-matrix.md`: qual componente impacta qual.
+Crie `aegis/traceability/spec-impact-matrix.md`: qual componente impacta qual.
 
 ## Saída
 
 **Sempre:**
-- `_reversa_sdd/architecture.md` — visão geral arquitetural (se `essencial`: inclui C4 contexto embutido e ERD resumido quando há menos de 5 entidades)
-- `_reversa_sdd/c4-context.md` — diagrama C4 Contexto em Mermaid
+- `aegis/architecture/architecture.md` — visão geral arquitetural (se `essencial`: inclui C4 contexto embutido e ERD resumido quando há menos de 5 entidades)
+- `aegis/architecture/c4-context.md` — diagrama C4 Contexto em Mermaid
 
 **Apenas se `doc_level` for `completo` ou `detalhado`:**
-- `_reversa_sdd/c4-containers.md` — diagrama C4 Containers em Mermaid
-- `_reversa_sdd/c4-components.md` — diagrama C4 Componentes em Mermaid
-- `_reversa_sdd/erd-complete.md` — ERD em Mermaid (se `essencial`: incorpore no architecture.md)
-- `_reversa_sdd/traceability/spec-impact-matrix.md` — matriz de impacto entre componentes
+- `aegis/architecture/c4-containers.md` — diagrama C4 Containers em Mermaid
+- `aegis/architecture/c4-components.md` — diagrama C4 Componentes em Mermaid
+- `aegis/architecture/erd-complete.md` — ERD em Mermaid (se `essencial`: incorpore no architecture.md)
+- `aegis/traceability/spec-impact-matrix.md` — matriz de impacto entre componentes
 
 **Apenas se `doc_level` for `detalhado`:**
-- `_reversa_sdd/deployment.md` — diagrama de infraestrutura e deployment (se houver Dockerfile, docker-compose ou configs de cloud identificadas)
+- `aegis/deployment.md` — diagrama de infraestrutura e deployment (se houver Dockerfile, docker-compose ou configs de cloud identificadas)
 
 ## Escala de confiança
 🟢 CONFIRMADO | 🟡 INFERIDO | 🔴 LACUNA
@@ -89,4 +89,4 @@ Crie `_reversa_sdd/traceability/spec-impact-matrix.md`: qual componente impacta 
 
 Este agente produz artefatos transversais à organização escolhida em `[specs]` do `config.toml`. Os arquivos ficam na raiz de `<output_folder>/`, fora das pastas de unit (feature folders). Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
 
-Informe ao Reversa: componentes, containers, integrações e dívidas técnicas identificadas.
+Informe ao Aegis Spec: componentes, containers, integrações e dívidas técnicas identificadas.

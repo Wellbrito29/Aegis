@@ -1,10 +1,10 @@
-# Reversa policy-check — GitLab CI snippet.
+# Aegis Spec policy-check — GitLab CI snippet.
 #
 # Append to your `.gitlab-ci.yml` or include via `include:`. Runs on merge
 # requests and blocks the pipeline when a protected contract's signature
 # breaks. Switch `--severity` to `medium` or `low` to broaden the gate.
 
-reversa:policy-check:
+aegis-spec:policy-check:
   image: node:20
   stage: test
   rules:
@@ -13,8 +13,8 @@ reversa:policy-check:
     GIT_DEPTH: 0
   script:
     - git fetch origin "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
-    - npx reversa policy-index build
-    - npx reversa policy-check
+    - npx aegis-spec policy-index build
+    - npx aegis-spec policy-check
         --base "origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
         --head HEAD
         --severity high

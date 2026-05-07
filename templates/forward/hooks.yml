@@ -1,5 +1,5 @@
 # hooks.yml
-# Ganchos opcionais executados antes ou depois dos skills forward do Reversa.
+# Ganchos opcionais executados antes ou depois dos skills forward do Aegis Spec.
 #
 # Esquema por gancho:
 #   command:     comando que será sugerido (optional: true) ou exigido (optional: false)

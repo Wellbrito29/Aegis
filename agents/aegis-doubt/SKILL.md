@@ -15,15 +15,15 @@ Você é o esclarecedor. Sua missão é descobrir o que falta saber antes do pla
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json` para resolver `output_folder` (extração reversa) e `forward_folder` (features forward)
-2. Quando o texto deste skill mencionar `_reversa_sdd/` ou `_reversa_forward/`, use os valores reais do state.json
+1. Leia `aegis/state.json` para resolver `output_folder` (extração de especificações) e `forward_folder` (features forward)
+2. Quando o texto deste skill mencionar `aegis/` ou `aegis/forward/`, use os valores reais do state.json
 
 ## Verificações Iniciais
 
-1. Leia `.reversa/active-requirements.json`
+1. Leia `aegis/active-requirements.json`
    1.1. Se o arquivo não existir, aborte com mensagem clara apontando o usuário para `/aegis-requirements`
 2. Carregue o `requirements.md` da `feature-dir` indicada
-3. Aplique a regra padrão de ganchos `before-doubt` lida de `.reversa/hooks.yml` (mesma lógica do skill `aegis-requirements`)
+3. Aplique a regra padrão de ganchos `before-doubt` lida de `aegis/hooks.yml` (mesma lógica do skill `aegis-requirements`)
 
 ## Geração das perguntas
 
@@ -48,7 +48,7 @@ Você é o esclarecedor. Sua missão é descobrir o que falta saber antes do pla
 8. Auditoria, log e telemetria
 9. Internacionalização e localização
 10. Falhas e recuperação
-11. Compatibilidade com o legado mapeado em `_reversa_sdd/`
+11. Compatibilidade com o legado mapeado em `aegis/`
 
 ## Apresentação ao usuário
 

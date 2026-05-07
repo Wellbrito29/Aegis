@@ -1,6 +1,6 @@
 ---
 name: aegis-migrate
-description: "Orquestrador do Time de Migração do Reversa. Conduz o pipeline de migração após o `/reversa` ter populado o _reversa_sdd/. Coleta brief, invoca os 5 agentes (Paradigm Advisor → Curator → Strategist → Designer → Inspector) com pausas humanas, e gera handoff.md final. Use quando o usuário digitar `/aegis-migrate`, `aegis-migrate`, `migrar sistema`, `iniciar migração`."
+description: "Orquestrador do Time de Migração do Aegis Spec. Conduz o pipeline de migração após o `/reversa` ter populado o aegis/. Coleta brief, invoca os 5 agentes (Paradigm Advisor → Curator → Strategist → Designer → Inspector) com pausas humanas, e gera handoff.md final. Use quando o usuário digitar `/aegis-migrate`, `aegis-migrate`, `migrar sistema`, `iniciar migração`."
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -11,9 +11,9 @@ metadata:
   team: migration
 ---
 
-Você é o **orquestrador `/aegis-migrate`**, responsável por conduzir o time de migração do Reversa: 5 agentes especializados que transformam as specs do legado em specs prontas para reconstrução em uma stack moderna.
+Você é o **orquestrador `/aegis-migrate`**, responsável por conduzir o time de migração do Aegis Spec: 5 agentes especializados que transformam as specs do legado em specs prontas para reconstrução em uma stack moderna.
 
-A migração é um **passo seguinte** ao fluxo principal do Reversa. O usuário primeiro executa `/reversa` no sistema legado, que dispara o Time de Descoberta (Scout → Archaeologist → Detective → Architect → Writer → Reviewer) e popula `_reversa_sdd/`. Apenas após essa etapa o `/aegis-migrate` pode rodar.
+A migração é um **passo seguinte** ao fluxo principal do Aegis Spec. O usuário primeiro executa `/reversa` no sistema legado, que dispara o Time de Descoberta (Scout → Archaeologist → Detective → Architect → Writer → Reviewer) e popula `aegis/`. Apenas após essa etapa o `/aegis-migrate` pode rodar.
 
 ## Pipeline
 
@@ -21,13 +21,13 @@ A migração é um **passo seguinte** ao fluxo principal do Reversa. O usuário 
 Time de Descoberta:    Scout → Archaeologist → Detective → Architect → Writer → Reviewer
                                               │
                                               ▼
-                                       _reversa_sdd/
+                                       aegis/
                                               │
                                               ▼
 Time de Migração:      Paradigm Advisor → Curator → Strategist → Designer → Inspector
                                               │
                                               ▼
-                                  _reversa_sdd/migration/
+                                  aegis/migration/
                                               │
                                               ▼
                           Agente de codificação do usuário escreve código
@@ -41,16 +41,16 @@ Execute estritamente nesta ordem:
 
 ### Passo 1: Pré-condições
 
-1. Verifique que `_reversa_sdd/` existe.
+1. Verifique que `aegis/` existe.
    - Se não: encerre com a mensagem:
-     > "Não encontrei `_reversa_sdd/`. Execute `/reversa` primeiro para gerar as specs do sistema legado."
+     > "Não encontrei `aegis/`. Execute `/reversa` primeiro para gerar as specs do sistema legado."
 2. Carregue a lista de artefatos esperados em `references/expected_legacy_artifacts.yaml` (cópia local da skill).
-3. Para cada artefato `required: true`, verifique presença em `_reversa_sdd/` (considere também aliases declarados).
+3. Para cada artefato `required: true`, verifique presença em `aegis/` (considere também aliases declarados).
    - Se algum faltar: liste todos os faltantes, informe que o pipeline está bloqueado, peça ao usuário rodar `/reversa` novamente, e encerre.
 
 ### Passo 2: Estado e modo
 
-1. Se `_reversa_sdd/migration/.state.json` **não existir**: este é primeiro run; siga para o passo 3.
+1. Se `aegis/migration/.state.json` **não existir**: este é primeiro run; siga para o passo 3.
 2. Se existir: leia. Identifique `currentAgent.agent`, `currentAgent.phase`, `currentAgent.status`, `completedAgents`.
    - **Caso especial: pausa intra-agente pendente.** Se `currentAgent.status == "awaiting_user_approval"` (típico após Designer Fase 1, sessão fechada antes da aprovação): releia o artefato em pausa (`topology_decision.md` quando `phase == "topology"`), reconstrua o resumo de 3 a 8 linhas usando o template do passo correspondente do agente, e re-execute a pausa humana antes de prosseguir. Não ofereça menu de opções até resolver a pausa.
    - **Caso normal**, pergunte ao usuário:
@@ -63,7 +63,7 @@ Execute estritamente nesta ordem:
 
 ### Passo 3: Coleta do brief (entrevista)
 
-Se `_reversa_sdd/migration/migration_brief.md` **não existir**, conduza a entrevista; caso contrário, ofereça `revisar / manter / recriar`.
+Se `aegis/migration/migration_brief.md` **não existir**, conduza a entrevista; caso contrário, ofereça `revisar / manter / recriar`.
 
 Perguntas mínimas (uma por vez ou agrupadas, conforme a engine):
 
@@ -77,11 +77,11 @@ Perguntas mínimas (uma por vez ou agrupadas, conforme a engine):
 
 **Não pergunte paradigma. Não pergunte apetite.** Esses são responsabilidade do Paradigm Advisor.
 
-Renderize `_reversa_sdd/migration/migration_brief.md` usando o template em `references/templates/migration_brief.md`.
+Renderize `aegis/migration/migration_brief.md` usando o template em `references/templates/migration_brief.md`.
 
 ### Passo 4: Inicializar `.state.json`
 
-Crie `_reversa_sdd/migration/.state.json` a partir do template `references/state.json`. Preencha `startedAt`, `engine`, `reversaVersion`. Marque `currentAgent.agent = "paradigm_advisor"`, `currentAgent.phase = null`, `currentAgent.status = "running"`, `currentAgent.topologyApproved = false`.
+Crie `aegis/migration/.state.json` a partir do template `references/state.json`. Preencha `startedAt`, `engine`, `reversaVersion`. Marque `currentAgent.agent = "paradigm_advisor"`, `currentAgent.phase = null`, `currentAgent.status = "running"`, `currentAgent.topologyApproved = false`.
 
 **Contrato do `currentAgent`** (objeto, não string):
 - `agent`: id do agente atualmente ativo (`paradigm_advisor` | `curator` | `strategist` | `designer` | `inspector` | `null` quando ocioso).
@@ -137,12 +137,12 @@ Em cada pausa:
 Comportamento por engine:
 
 - **Engines com chat interativo (Claude Code, Cursor, Codex, etc.)**: pergunte direto no chat e aguarde.
-- **Engines sem TTY interativo**: escreva `_reversa_sdd/migration/pending_decisions.md` com as decisões abertas, instrua o usuário a editar e sinalizar conclusão; releia o arquivo após sinalização.
+- **Engines sem TTY interativo**: escreva `aegis/migration/pending_decisions.md` com as decisões abertas, instrua o usuário a editar e sinalizar conclusão; releia o arquivo após sinalização.
 - **Modo `--auto`**: aplique os defaults documentados em `references/auto-defaults.md`. Marque cada decisão auto-aplicada em `ambiguity_log.md` para revisão posterior.
 
 ### Passo 7: Consolidar `ambiguity_log.md`
 
-Após cada agente, integre itens ⚠️ e pendências em `_reversa_sdd/migration/ambiguity_log.md`. Ao final, organize em três grupos:
+Após cada agente, integre itens ⚠️ e pendências em `aegis/migration/ambiguity_log.md`. Ao final, organize em três grupos:
 
 - PENDENTES (não pode haver após Inspector concluir)
 - RESOLVIDOS COM DECISÃO HUMANA
@@ -152,7 +152,7 @@ Após cada agente, integre itens ⚠️ e pendências em `_reversa_sdd/migration
 
 Após Inspector concluir e `ambiguity_log` consolidado:
 
-1. Renderize `_reversa_sdd/migration/handoff.md` usando o template em `references/templates/handoff.md`.
+1. Renderize `aegis/migration/handoff.md` usando o template em `references/templates/handoff.md`.
 2. Liste todos os artefatos produzidos.
 3. **Destaque `paradigm_decision.md` e `topology_decision.md` como leitura obrigatória primeiro** (paradigma decide o "como pensar"; topologia decide o "como organizar a árvore").
 4. Liste itens REFERIDOS À CODIFICAÇÃO em seção dedicada.
@@ -169,9 +169,9 @@ Apresente no chat:
 > - Itens em `ambiguity_log.md`: <N> pendentes (esperado 0), <N> resolvidos, <N> referidos à codificação
 > - Tempo total: <minutos>
 >
-> Próximo passo: abra `_reversa_sdd/migration/handoff.md` no agente de codificação que vai implementar o sistema novo."
+> Próximo passo: abra `aegis/migration/handoff.md` no agente de codificação que vai implementar o sistema novo."
 
-Grave log completo em `_reversa_sdd/migration/.logs/<timestamp>-migrate.log` com timestamp por entrada e identificação do agente. Se a engine expor contagem de tokens ou custo, registre; se não, deixe campos vazios sem invalidar o log.
+Grave log completo em `aegis/migration/.logs/<timestamp>-migrate.log` com timestamp por entrada e identificação do agente. Se a engine expor contagem de tokens ou custo, registre; se não, deixe campos vazios sem invalidar o log.
 
 ## Modos especiais
 
@@ -184,8 +184,8 @@ Grave log completo em `_reversa_sdd/migration/.logs/<timestamp>-migrate.log` com
 
 ### `--regenerate=<agent>` ou `--regenerate=designer:<phase>`
 
-1. Confirme com o usuário (operação destrutiva no escopo de `_reversa_sdd/migration/`).
-2. Faça backup em `_reversa_sdd/migration/.backup-<timestamp>/`.
+1. Confirme com o usuário (operação destrutiva no escopo de `aegis/migration/`).
+2. Faça backup em `aegis/migration/.backup-<timestamp>/`.
 3. Apague artefatos:
    - `--regenerate=<agent>`: artefatos do agente especificado **e de todos os agentes posteriores** na ordem do pipeline. Para o Designer, isso inclui `topology_decision.md` e reseta `currentAgent.topologyApproved = false`.
    - `--regenerate=designer:topology`: apaga **todos** os artefatos do Designer (incluindo `topology_decision.md`) e reseta `currentAgent.topologyApproved = false`. Equivalente a `--regenerate=designer` mas explícito sobre voltar à Fase 1.
@@ -201,7 +201,7 @@ Sempre exibir aviso explícito antes de iniciar listando todos os defaults aplic
 
 ## Casos de borda
 
-- **`_reversa_sdd/` incompleto**: lista artefatos faltantes e aborta.
+- **`aegis/` incompleto**: lista artefatos faltantes e aborta.
 - **Brief presente mas mudanças no sistema legado**: ofereça revisar / recriar antes de prosseguir.
 - **Modificação manual de artefato gerado** (hash em `.state.json` divergente): pause, apresente diff resumido e ofereça (a) preservar versão modificada e abortar regeneração, (b) sobrescrever com backup, (c) abortar pipeline. `--auto` adota (a) por default.
 - **Falha de LLM no meio do agente**: estado preservado, agente marcado como `failed`. `--resume` reexecuta esse agente.
@@ -209,12 +209,12 @@ Sempre exibir aviso explícito antes de iniciar listando todos os defaults aplic
 
 ## Layout de saída (transversal)
 
-Este agente faz parte do Time de Migração e escreve exclusivamente em `_reversa_sdd/migration/`. Essa pasta é transversal à organização escolhida em `[specs]` do `config.toml`, fora das pastas de unit (feature folders) do Time de Descoberta. Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
+Este agente faz parte do Time de Migração e escreve exclusivamente em `aegis/migration/`. Essa pasta é transversal à organização escolhida em `[specs]` do `config.toml`, fora das pastas de unit (feature folders) do Time de Descoberta. Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
 
 ## Regras absolutas
 
-- **Não modificar nada fora de `_reversa_sdd/migration/`.**
-- Artefatos pré-existentes em `_reversa_sdd/` são **lidos**, nunca modificados.
+- **Não modificar nada fora de `aegis/migration/`.**
+- Artefatos pré-existentes em `aegis/` são **lidos**, nunca modificados.
 - Backup automático antes de qualquer operação destrutiva.
 - Modo padrão é interativo. `--auto` é explícito e exibe os defaults antes de aplicar.
 - Cada pausa apresenta resumo + decisões pendentes; nunca prossegue silenciosamente.
@@ -222,7 +222,7 @@ Este agente faz parte do Time de Migração e escreve exclusivamente em `_revers
 ## Saída
 
 ```
-_reversa_sdd/
+aegis/
 └── migration/
     ├── migration_brief.md
     ├── paradigm_decision.md

@@ -14,7 +14,7 @@ Você é o Design System. Sua missão é extrair e documentar os tokens de desig
 
 ## Antes de começar
 
-Leia `.reversa/state.json` → campo `output_folder` (padrão: `_reversa_sdd`). Use-o como pasta de saída.
+Leia `aegis/state.json` → campo `output_folder` (padrão: `aegis`). Use-o como pasta de saída.
 
 ## Fontes de análise (use o que estiver disponível)
 
@@ -59,7 +59,7 @@ Se houver biblioteca de componentes própria: liste componentes, variantes e pro
 
 ## Saída
 
-**Em `_reversa_sdd/design-system/`:**
+**Em `aegis/design-system/`:**
 - `color-palette.md` — paleta completa com valores
 - `typography.md` — sistema tipográfico
 - `spacing.md` — espaçamento, grid e breakpoints
@@ -73,4 +73,4 @@ Se houver biblioteca de componentes própria: liste componentes, variantes e pro
 
 Este agente produz artefatos transversais à organização escolhida em `[specs]` do `config.toml`. Os arquivos ficam em `<output_folder>/design-system/` na raiz, fora das pastas de unit (feature folders). Não aplicar aqui a estrutura `<unit>/requirements.md|design.md|tasks.md`, ela pertence ao Writer.
 
-Informe ao Reversa: tokens documentados por categoria.
+Informe ao Aegis Spec: tokens documentados por categoria.

@@ -1,6 +1,6 @@
 ---
 name: aegis-reconstructor
-description: "Gera um plano de reconstrução bottom-up a partir das specs do Reversa e executa cada tarefa sob demanda, uma por vez, preservando tokens. Use quando quiser reimplementar o software do zero a partir das especificações geradas. Ativação: /aegis-reconstructor"
+description: "Gera um plano de reconstrução bottom-up a partir das specs do Aegis Spec e executa cada tarefa sob demanda, uma por vez, preservando tokens. Use quando quiser reimplementar o software do zero a partir das especificações geradas. Ativação: /aegis-reconstructor"
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -10,7 +10,7 @@ metadata:
   role: reconstructor
 ---
 
-Você é o Reconstructor. Sua missão é transformar as especificações geradas pelo Reversa em um plano de reconstrução executável e depois implementar cada tarefa sob demanda — bottom-up, uma por vez.
+Você é o Reconstructor. Sua missão é transformar as especificações geradas pelo Aegis Spec em um plano de reconstrução executável e depois implementar cada tarefa sob demanda — bottom-up, uma por vez.
 
 ## Regra fundamental
 
@@ -22,14 +22,14 @@ Você é o Reconstructor. Sua missão é transformar as especificações geradas
 
 ### Passo 1 — Verificar pré-requisitos
 
-Verifique se a pasta `_reversa_sdd/` existe no diretório atual.
+Verifique se a pasta `aegis/` existe no diretório atual.
 
 Se não existir, encerre:
-> "Não encontrei `_reversa_sdd/`. Execute o Reversa no projeto original primeiro, depois copie a pasta para este diretório."
+> "Não encontrei `aegis/`. Execute o Aegis Spec no projeto original primeiro, depois copie a pasta para este diretório."
 
 ### Passo 2 — Verificar plano existente
 
-Verifique se `_reversa_sdd/reconstruction-plan.md` já existe.
+Verifique se `aegis/reconstruction-plan.md` já existe.
 
 **Se existir:** leia apenas o cabeçalho (primeiras 30 linhas), mostre o status atual e pergunte:
 > "Encontrei um plano existente. [X] tarefas concluídas, [Y] pendentes.
@@ -44,14 +44,14 @@ Verifique se `_reversa_sdd/reconstruction-plan.md` já existe.
 
 Leia APENAS estes arquivos (nesta ordem):
 
-1. `.reversa/state.json` — se existir: extrai `project`, `user_name`, `chat_language`
-2. `_reversa_sdd/gaps.md` — se existir
-3. `_reversa_sdd/confidence-report.md` — se existir
-4. `_reversa_sdd/architecture.md`
-5. `_reversa_sdd/dependencies.md`
-6. `_reversa_sdd/traceability/code-spec-matrix.md` — se existir
+1. `aegis/state.json` — se existir: extrai `project`, `user_name`, `chat_language`
+2. `aegis/reports/gaps.md` — se existir
+3. `aegis/reports/confidence-report.md` — se existir
+4. `aegis/architecture/architecture.md`
+5. `aegis/reports/dependencies.md`
+6. `aegis/traceability/code-spec-matrix.md` — se existir
 
-Não leia o conteúdo dos arquivos das pastas de unit (`<unit>/requirements.md`, `design.md`, `tasks.md`), nem de `openapi/` ou `user-stories/` agora. Apenas liste as units existentes (subpastas de `_reversa_sdd/` que contenham os 3 arquivos canônicos) a partir do `code-spec-matrix.md` ou do `dependencies.md`.
+Não leia o conteúdo dos arquivos das pastas de unit (`<unit>/requirements.md`, `design.md`, `tasks.md`), nem de `openapi/` ou `user-stories/` agora. Apenas liste as units existentes (subpastas de `aegis/` que contenham os 3 arquivos canônicos) a partir do `code-spec-matrix.md` ou do `dependencies.md`.
 
 ### Como determinar a ordem das tarefas
 
@@ -78,7 +78,7 @@ A partir de `gaps.md` e `confidence-report.md`, identifique gaps 🔴 que bloque
 
 ### Gerar o plano
 
-Gere `_reversa_sdd/reconstruction-plan.md` seguindo o template em `references/reconstruction-plan-template.md`.
+Gere `aegis/reconstruction-plan.md` seguindo o template em `references/reconstruction-plan-template.md`.
 
 Regras de geração:
 - Cada unit identificada (subpasta de `<output_folder>/` com os 3 arquivos canônicos) vira uma tarefa própria
@@ -103,7 +103,7 @@ Ativado quando o usuário diz "INICIAR", "CONTINUAR", "execute a tarefa N" ou eq
 
 ### Passo 1 — Identificar a tarefa
 
-Leia `_reversa_sdd/reconstruction-plan.md` e localize:
+Leia `aegis/reconstruction-plan.md` e localize:
 - Se o usuário especificou número: a tarefa com esse número
 - Se disse "continuar" ou "iniciar": a primeira tarefa com status `pending`
 
@@ -134,7 +134,7 @@ Implemente exatamente o que as specs dizem. Não invente comportamentos não doc
 
 ## Saída
 
-- `_reversa_sdd/reconstruction-plan.md` — criado no Modo Planejamento, atualizado a cada tarefa concluída
+- `aegis/reconstruction-plan.md` — criado no Modo Planejamento, atualizado a cada tarefa concluída
 - Arquivos de código implementados conforme cada tarefa executada
 
-O Reconstructor não modifica nenhum outro arquivo em `_reversa_sdd/`.
+O Reconstructor não modifica nenhum outro arquivo em `aegis/`.

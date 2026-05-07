@@ -1,4 +1,4 @@
-# Reversa control plane — full GitLab CI snippet.
+# Aegis Spec control plane — full GitLab CI snippet.
 #
 # Drop into your `.gitlab-ci.yml` (or include via `include:`). Three jobs run
 # on merge requests: drift-check, policy-check, keeper-auto. The auto job is
@@ -8,35 +8,35 @@ stages:
   - quality
   - keeper
 
-reversa:drift-check:
+aegis-spec:drift-check:
   image: node:20
   stage: quality
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
-    - npx reversa drift-check --severity high --format text
+    - npx aegis-spec drift-check --severity high --format text
 
-reversa:policy-check:
+aegis-spec:policy-check:
   image: node:20
   stage: quality
-  needs: ["reversa:drift-check"]
+  needs: ["aegis-spec:drift-check"]
   variables:
     GIT_DEPTH: 0
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - git fetch origin "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
-    - npx reversa policy-index build
-    - npx reversa policy-check
+    - npx aegis-spec policy-index build
+    - npx aegis-spec policy-check
         --base "origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
         --head HEAD
         --severity high
         --format text
 
-reversa:keeper-auto:
+aegis-spec:keeper-auto:
   image: node:20
   stage: keeper
-  needs: ["reversa:policy-check"]
+  needs: ["aegis-spec:policy-check"]
   variables:
     GIT_DEPTH: 0
   rules:
@@ -46,13 +46,13 @@ reversa:keeper-auto:
     paths:
       - .aegis/context/graph.json
   script:
-    - npx reversa keeper auto --format text --max-specs 5
+    - npx aegis-spec keeper auto --format text --max-specs 5
     - |
       if [ -n "$(git status --porcelain _aegis_sdd)" ]; then
         git config user.name "aegis-keeper[bot]"
         git config user.email "aegis-keeper@users.noreply.gitlab.com"
         git add _aegis_sdd
-        git commit -m "reversa(keeper): auto-update specs [skip ci]"
+        git commit -m "aegis-spec(keeper): auto-update specs [skip ci]"
         git push "https://oauth2:${KEEPER_PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" \
           "HEAD:${CI_COMMIT_REF_NAME}"
       fi

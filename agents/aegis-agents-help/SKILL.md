@@ -1,6 +1,6 @@
 ---
 name: aegis-agents-help
-description: Explica com analogias o que cada agente do Reversa faz e quando usá-lo. Ative com /aegis-agents-help.
+description: Explica com analogias o que cada agente do Aegis Spec faz e quando usá-lo. Ative com /aegis-agents-help.
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -14,18 +14,18 @@ Apresente exatamente o texto abaixo, sem alterações, sem resumir.
 
 ---
 
-# Agentes do Reversa — guia com analogias
+# Agentes do Aegis Spec — guia com analogias
 
-O Reversa é um time de especialistas. Cada agente faz uma coisa só — e faz bem.
+O Aegis Spec é um time de especialistas. Cada agente faz uma coisa só — e faz bem.
 
 ---
 
-## 🎼 Reversa — orquestrador central
+## 🎼 Aegis Spec — orquestrador central
 **Comando:** `/reversa`
 
 Um regente de orquestra não toca nenhum instrumento. Ele conhece a partitura inteira e diz quem entra quando, em que ordem, em que ritmo. Sem ele, cada músico tocaria sua parte sem se conectar com os outros.
 
-> Use o Reversa para iniciar ou retomar a análise completa. Ele cuida da sequência por você.
+> Use o Aegis Spec para iniciar ou retomar a análise completa. Ele cuida da sequência por você.
 
 ---
 

@@ -46,7 +46,7 @@ Mudança que viola o que a spec descrevia como invariante:
 
 ### 4. Drift semântico — código diverge de regra de negócio
 
-Código viola regra documentada em `_reversa_sdd/domain.md`:
+Código viola regra documentada em `aegis/reports/domain.md`:
 
 - Validação de regra de negócio removida ou afrouxada
 - Estado permitido que não deveria ser (state machine quebrada)
@@ -55,7 +55,7 @@ Código viola regra documentada em `_reversa_sdd/domain.md`:
 **Ação:**
 1. **Não atualize a regra silenciosamente.** Pergunte ao usuário: "A regra de negócio em `domain.md` mudou intencionalmente, ou o código está com bug?"
 2. Se intencional: atualize `domain.md` + spec, marque entrada de changelog com `**Impacto:** Mudança de regra de negócio — revisar com stakeholders`
-3. Se bug: NÃO atualize a spec. Adicione entrada em `_reversa_sdd/drift.md` como `pending` com `suggested_action: "Reverter mudança ou alinhar regra"`
+3. Se bug: NÃO atualize a spec. Adicione entrada em `aegis/reports/drift.md` como `pending` com `suggested_action: "Reverter mudança ou alinhar regra"`
 
 ### 5. Drift por deleção
 
@@ -119,7 +119,7 @@ Adicione essas sugestões na mensagem final ao usuário.
 
 ## Severidade por blast radius (v1.8.0+)
 
-Quando o graph L0 (`.reversa/context/graph.json`) está disponível, classifique a severidade de cada drift pela contagem de **reverse-deps diretas** do arquivo modificado:
+Quando o graph L0 (`aegis/context/graph.json`) está disponível, classifique a severidade de cada drift pela contagem de **reverse-deps diretas** do arquivo modificado:
 
 | Reverse-deps diretas | Severidade | Ação |
 |---|---|---|

@@ -17,19 +17,19 @@ Esse skill é raro, frequência tipicamente menor que uma vez por mês. Ele NÃO
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json` para resolver `output_folder` e `forward_folder`
-2. Use os valores reais nos lugares onde o texto mencionar `_reversa_sdd/` ou `_reversa_forward/`
+1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
 
-1. Tente ler `.reversa/principles.md`
+1. Tente ler `aegis/principles.md`
    1.1. Se ausente, modo é `criar`
    1.2. Se presente, modo é `atualizar`
 2. Aplique `before-principles` da forma padrão
 
 ## Modo criar
 
-1. Carregue `.reversa/templates/principles-template.md`
+1. Carregue `aegis/templates/principles-template.md`
 2. Pergunte ao usuário pelos princípios candidatos, em batch ou um a um
 3. Para cada princípio:
    3.1. Atribua numeração romana sequencial (I, II, III, ...)
@@ -52,16 +52,16 @@ Esse skill é raro, frequência tipicamente menor que uma vez por mês. Ele NÃO
 ## Propagação de impacto
 
 1. Para cada template listado na seção "Impacto":
-   1.1. Leia o template em `.reversa/templates/<nome>`
+   1.1. Leia o template em `aegis/templates/<nome>`
    1.2. Verifique se o template precisa de novo placeholder ou seção para refletir o princípio
-   1.3. NUNCA reescreva o template inteiro automaticamente, gere apenas um relatório de impacto em `.reversa/principles-impact-YYYYMMDD.md`
+   1.3. NUNCA reescreva o template inteiro automaticamente, gere apenas um relatório de impacto em `aegis/principles-impact-YYYYMMDD.md`
 2. O relatório lista, por template, sugestões textuais de ajuste
 3. Aplicar essas sugestões é decisão do humano, esse skill só sugere
 
 ## Persistência
 
-- Grave `.reversa/principles.md` com escrita atômica
-- Grave o relatório de impacto em `.reversa/principles-impact-YYYYMMDD.md`
+- Grave `aegis/principles.md` com escrita atômica
+- Grave o relatório de impacto em `aegis/principles-impact-YYYYMMDD.md`
 - Jamais sobrescreva relatórios de impacto antigos, cada execução cria um arquivo datado
 
 ## Ganchos Pós-execução

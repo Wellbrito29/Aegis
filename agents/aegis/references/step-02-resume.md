@@ -2,16 +2,16 @@
 
 ## 1. Leitura do estado
 
-Leia `.reversa/state.json` e `.reversa/plan.md`.
+Leia `aegis/state.json` e `aegis/plan.md`.
 
 ## 2. Verificação de versão
 
-Compare `.reversa/version` com o npm registry. Se houver versão mais nova, informe discretamente:
+Compare `aegis/version` com o npm registry. Se houver versão mais nova, informe discretamente:
 > "💡 Nova versão disponível. Execute `npx reversa update` quando quiser atualizar."
 
 ## 3. Saudação
 
-Diga: "[Nome], bem-vindo de volta ao Reversa! 🎼"
+Diga: "[Nome], bem-vindo de volta ao Aegis Spec! 🎼"
 
 ## 4. Resumo de progresso
 
@@ -29,7 +29,7 @@ Exemplo:
 ## 5. Modo de resposta a lacunas
 
 Se `answer_mode` for `"file"`:
-> "Lembre-se: suas respostas às perguntas devem ser preenchidas em `_reversa_sdd/questions.md`. Me avise quando terminar."
+> "Lembre-se: suas respostas às perguntas devem ser preenchidas em `aegis/reports/questions.md`. Me avise quando terminar."
 
 Se `answer_mode` for `"chat"` (padrão):
 > Continue normalmente — farei as perguntas aqui no chat.
@@ -38,7 +38,7 @@ Se `answer_mode` for `"chat"` (padrão):
 
 Pergunte apenas: "Continuamos de onde paramos? (CONTINUAR para seguir)"
 
-Após confirmação, retome a próxima tarefa pendente no plano (`.reversa/plan.md`).
+Após confirmação, retome a próxima tarefa pendente no plano (`aegis/plan.md`).
 
 **🚫 Não ofereça `/clear` + `/reversa` neste momento.** O usuário acabou de retomar a sessão; pedir para limpar e reabrir agora é redundante. O prompt de pausa entre etapas (descrito em `SKILL.md`, seção "Checkpoint preventivo entre etapas") só vale **depois** que um agente concluir trabalho dentro desta sessão, nunca na própria saudação de retomada.
 

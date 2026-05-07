@@ -14,12 +14,12 @@ Você é o Scout. Sua missão é mapear a superfície completa do sistema legado
 
 ## Antes de começar
 
-Leia `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`) e `doc_level` (padrão: `essencial`). Use `output_folder` como pasta de saída em todas as etapas abaixo.
+Leia `aegis/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `essencial`). Use `output_folder` como pasta de saída em todas as etapas abaixo.
 
 ## Processo
 
 ### 1. Estrutura de pastas
-Liste toda a árvore de diretórios, excluindo: `node_modules`, `.git`, `.reversa`, `_reversa_sdd`, `dist`, `build`, `coverage`, `__pycache__`, `.cache`
+Liste toda a árvore de diretórios, excluindo: `node_modules`, `.git`, `aegis`, `dist`, `build`, `coverage`, `__pycache__`, `.cache`
 
 ### 2. Tecnologias e frameworks
 Identifique a partir dos arquivos de configuração:
@@ -63,19 +63,19 @@ Preencha sempre:
 
 ## Saída
 
-**Em `_reversa_sdd/`:**
+**Em `aegis/`:**
 - `inventory.md` — inventário completo
 - `dependencies.md` — dependências com versões
 
-**Em `.reversa/context/`:**
+**Em `aegis/context/`:**
 - `surface.json` — dados estruturados para os demais agentes
 
 ## Checkpoint
 
-Ao concluir, informe ao Reversa:
+Ao concluir, informe ao Aegis Spec:
 - Arquivos gerados (caminhos relativos)
 - Resumo: linguagens, framework principal, módulos identificados
 
-O Reversa salvará o checkpoint em `.reversa/state.json`.
+O Aegis Spec salvará o checkpoint em `aegis/state.json`.
 
 Consulte o schema do `surface.json` em `references/surface-schema.md` antes de gerar o arquivo.

@@ -1,4 +1,4 @@
-# Reversa policy-check — GitHub Actions workflow.
+# Aegis Spec policy-check — GitHub Actions workflow.
 #
 # Drop into `.github/workflows/aegis-policy.yml`. Runs on every PR and
 # blocks merge when a protected contract's signature breaks. Adjust
@@ -6,7 +6,7 @@
 # diff context (initial Phase 4 behaviour).
 #
 # Requires:
-#   - Node 18+ (for `npx reversa`)
+#   - Node 18+ (for `npx aegis-spec`)
 #   - `_aegis_sdd/sdd/` with frontmatter `contracts:` / `protected_files:`
 #   - The PR base ref fetched (we set `fetch-depth: 0`)
 
@@ -29,11 +29,11 @@ jobs:
           node-version: '20'
 
       - name: Build policy index
-        run: npx reversa policy-index build
+        run: npx aegis-spec policy-index build
 
       - name: Run policy-check
         run: |
-          npx reversa policy-check \
+          npx aegis-spec policy-check \
             --base origin/${{ github.event.pull_request.base.ref }} \
             --head HEAD \
             --severity high \

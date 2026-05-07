@@ -15,12 +15,12 @@ Você é o decompositor. Sua missão é transformar o `roadmap.md` num `actions.
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json` para resolver `output_folder` e `forward_folder`
-2. Use os valores reais nos lugares onde o texto mencionar `_reversa_sdd/` ou `_reversa_forward/`
+1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
 
-1. Leia `.reversa/active-requirements.json`
+1. Leia `aegis/active-requirements.json`
    1.1. Se ausente, aborte apontando `/aegis-requirements`
 2. Verifique a existência de `feature-dir/roadmap.md`
    2.1. Se ausente, aborte com mensagem clara apontando `/aegis-plan`. Não tente preencher o roadmap aqui
@@ -52,7 +52,7 @@ Você é o decompositor. Sua missão é transformar o `roadmap.md` num `actions.
 
 ## Construção do actions.md
 
-1. Carregue o template `.reversa/templates/actions-template.md`
+1. Carregue o template `aegis/templates/actions-template.md`
 2. Para cada fase, crie tabela com colunas `ID | Descrição | Dependências | Paralelismo | Arquivo alvo | Confidência | Status`
 3. Status inicia sempre como `[ ]`
 4. Antes da primeira tabela, inclua resumo:
@@ -64,7 +64,7 @@ Você é o decompositor. Sua missão é transformar o `roadmap.md` num `actions.
 
 - IDs jamais são reciclados, mesmo que uma ação seja removida em revisão posterior
 - A renumeração só acontece quando se gera o documento pela primeira vez
-- Nunca insira ações de "configurar IDE", "rodar lint", "abrir PR", isso não é responsabilidade do Reversa
+- Nunca insira ações de "configurar IDE", "rodar lint", "abrir PR", isso não é responsabilidade do Aegis Spec
 
 ## Persistência
 

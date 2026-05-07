@@ -1,29 +1,29 @@
 # Passo 4, verificação de regressão semântica
 
-> Este passo só roda em **re-extrações**, ou seja, quando uma pipeline reversa é executada num projeto que já passou por pelo menos um ciclo `/aegis-coding`. Em projetos sem `_reversa_forward/` ou sem `regression-watch.md`, este passo é silenciosamente pulado.
+> Este passo só roda em **re-extrações**, ou seja, quando uma pipeline de descoberta é executada num projeto que já passou por pelo menos um ciclo `/aegis-coding`. Em projetos sem `aegis/forward/` ou sem `regression-watch.md`, este passo é silenciosamente pulado.
 
 ## Por que existe
 
-O Reversa não é só extração one-shot. Cada `/aegis-coding` deixa em `_reversa_forward/<feature>/regression-watch.md` uma lista de regras que precisam continuar verdadeiras na próxima extração. A pipeline reversa, ao re-rodar, tem o dever de checar essas regras contra o código atual e reportar regressões. Esse é o diferencial competitivo do Reversa frente a frameworks forward puros.
+O Aegis Spec não é só extração one-shot. Cada `/aegis-coding` deixa em `aegis/forward/<feature>/regression-watch.md` uma lista de regras que precisam continuar verdadeiras na próxima extração. A pipeline de descoberta, ao re-rodar, tem o dever de checar essas regras contra o código atual e reportar regressões. Esse é o diferencial competitivo do Aegis Spec frente a frameworks forward puros.
 
 ## Quando rodar
 
-Após o **último agente do plano** concluir, antes da mensagem final de "extração concluída". O gatilho é posição (último item de `.reversa/plan.md`), não nome de agente, porque o último agente varia conforme os opcionais selecionados no install (Reviewer pode estar ausente, por exemplo). Faça os checks na ordem:
+Após o **último agente do plano** concluir, antes da mensagem final de "extração concluída". O gatilho é posição (último item de `aegis/plan.md`), não nome de agente, porque o último agente varia conforme os opcionais selecionados no install (Reviewer pode estar ausente, por exemplo). Faça os checks na ordem:
 
-1. Verifique se `_reversa_forward/` existe na raiz do projeto. Se não existir, encerre este passo silenciosamente.
-2. Liste todas as subpastas de `_reversa_forward/` que contêm `regression-watch.md`.
+1. Verifique se `aegis/forward/` existe na raiz do projeto. Se não existir, encerre este passo silenciosamente.
+2. Liste todas as subpastas de `aegis/forward/` que contêm `regression-watch.md`.
 3. Se a lista estiver vazia, encerre.
 4. Caso contrário, prossiga com o procedimento abaixo, uma feature por vez.
 
 ## Procedimento por feature
 
-Para cada `_reversa_forward/<feature>/regression-watch.md`:
+Para cada `aegis/forward/<feature>/regression-watch.md`:
 
 1. Carregue o arquivo. Identifique a tabela principal de watch items (colunas `ID | Origem | Regra esperada após mudança | Tipo de verificação | Sinal de violação`).
 2. Para cada watch item da tabela principal (não os arquivados):
    2.1. Identifique o `Tipo de verificação`, valores possíveis: `presença`, `ausência`, `redação`, `confidência`.
-   2.2. Aplique a verificação correspondente contra os artefatos recém-gerados em `_reversa_sdd/`:
-        - `presença`: a regra precisa estar presente em `_reversa_sdd/domain.md` (ou no arquivo apontado pela coluna Origem) com a mesma essência semântica.
+   2.2. Aplique a verificação correspondente contra os artefatos recém-gerados em `aegis/`:
+        - `presença`: a regra precisa estar presente em `aegis/reports/domain.md` (ou no arquivo apontado pela coluna Origem) com a mesma essência semântica.
         - `ausência`: a regra original NÃO pode mais aparecer no SDD.
         - `redação`: o texto foi alterado deliberadamente, verifique se a versão nova bate com a expectativa.
         - `confidência`: a regra continua presente, mas a confidência (🟢, 🟡, 🔴) deve ser igual ou maior à esperada.
@@ -38,7 +38,7 @@ Para cada `_reversa_forward/<feature>/regression-watch.md`:
 
 | ID | Veredito | Observação |
 |----|----------|------------|
-| W001 | 🟢 verde | regra preservada em _reversa_sdd/domain.md#regra-X |
+| W001 | 🟢 verde | regra preservada em aegis/reports/domain.md#regra-X |
 | W005 | 🔴 vermelho | regra removida do código atual; mudança não pretendida |
 | W010 | 🟡 amarelo | texto equivalente mas difere literalmente; aguarda julgamento |
 ```
@@ -67,11 +67,11 @@ Se houver pelo menos um vermelho, apresente um aviso destacado:
 
 > 🔴 **Atenção**, foram detectadas **N regressões semânticas** em features previamente codadas. Revise antes de seguir.
 
-Se a `setup.json#watch.block-on-red` for `true`, sugira ao usuário **não** prosseguir com novos `/aegis-requirements` até que cada vermelho seja triado. O Reversa apenas alerta, jamais bloqueia automaticamente o fluxo do usuário.
+Se a `setup.json#watch.block-on-red` for `true`, sugira ao usuário **não** prosseguir com novos `/aegis-requirements` até que cada vermelho seja triado. O Aegis Spec apenas alerta, jamais bloqueia automaticamente o fluxo do usuário.
 
-## Caso especial, sem `_reversa_sdd/`
+## Caso especial, sem `aegis/`
 
-Se durante o procedimento o `_reversa_sdd/` não tiver os arquivos esperados (porque a re-extração foi parcial ou o nível de documentação foi reduzido), registre veredito 🟡 amarelo com observação `evidência ausente, _reversa_sdd/<arquivo> não foi gerado nesta extração` e siga em frente.
+Se durante o procedimento o `aegis/` não tiver os arquivos esperados (porque a re-extração foi parcial ou o nível de documentação foi reduzido), registre veredito 🟡 amarelo com observação `evidência ausente, aegis/<arquivo> não foi gerado nesta extração` e siga em frente.
 
 ## Lacuna conhecida
 

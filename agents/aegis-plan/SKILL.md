@@ -11,16 +11,16 @@ metadata:
   stage: plan
 ---
 
-Você é o arquiteto de evolução do Reversa. Sua missão é traduzir o `requirements.md` da feature ativa numa proposta técnica concreta, expressa como delta sobre o que já existe no legado.
+Você é o arquiteto de evolução do Aegis Spec. Sua missão é traduzir o `requirements.md` da feature ativa numa proposta técnica concreta, expressa como delta sobre o que já existe no legado.
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json` para resolver `output_folder` e `forward_folder`
-2. Use os valores reais nos lugares onde o texto mencionar `_reversa_sdd/` ou `_reversa_forward/`
+1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
 
-1. Leia `.reversa/active-requirements.json`
+1. Leia `aegis/active-requirements.json`
    1.1. Se ausente, aborte com mensagem apontando para `/aegis-requirements`
 2. Carregue o `requirements.md` da `feature-dir`
    2.1. Se o documento ainda tiver marcadores `[DÚVIDA]`, avise o usuário e pergunte se ele prefere rodar `/aegis-doubt` antes
@@ -29,14 +29,14 @@ Você é o arquiteto de evolução do Reversa. Sua missão é traduzir o `requir
 
 ## Coleta de contexto técnico
 
-Leia os artefatos da pipeline reversa nesta ordem, ignorando os que não existirem:
+Leia os artefatos da pipeline de descoberta nesta ordem, ignorando os que não existirem:
 
-1. `_reversa_sdd/architecture.md` (componentes, dependências internas)
-2. `_reversa_sdd/c4-context.md` (fronteiras externas)
-3. `_reversa_sdd/state-machines.md` (máquinas de estado afetadas)
-4. `_reversa_sdd/dependencies.md` (bibliotecas usadas)
-5. `_reversa_sdd/code-analysis.md`, mas apenas as seções dos componentes citados no requirements
-6. `.reversa/principles.md` (princípios obrigatórios)
+1. `aegis/architecture/architecture.md` (componentes, dependências internas)
+2. `aegis/architecture/c4-context.md` (fronteiras externas)
+3. `aegis/reports/state-machines.md` (máquinas de estado afetadas)
+4. `aegis/reports/dependencies.md` (bibliotecas usadas)
+5. `aegis/reports/code-analysis.md`, mas apenas as seções dos componentes citados no requirements
+6. `aegis/principles.md` (princípios obrigatórios)
 
 Anote quais arquivos serão tocados pela mudança proposta. Essa lista vai virar parte do `legacy-impact.md` quando o `/aegis-coding` rodar mais tarde, então registre-a em rascunho mental.
 
@@ -50,13 +50,13 @@ Para cada princípio em `principles.md`:
 
 ## Geração dos artefatos
 
-Carregue o template em `.reversa/templates/roadmap-template.md` e gere os arquivos abaixo na `feature-dir`:
+Carregue o template em `aegis/templates/roadmap-template.md` e gere os arquivos abaixo na `feature-dir`:
 
 | Arquivo | Conteúdo esperado |
 |---------|-------------------|
 | `roadmap.md` | resumo da abordagem, princípios aplicados, decisões técnicas, delta arquitetural, delta de dados, delta de contratos, plano de migração, riscos, critério de pronto |
 | `investigation.md` | pesquisa de fundo, alternativas avaliadas, links para fontes externas, padrões aplicáveis |
-| `data-delta.md` | diff conceitual sobre o modelo extraído em `_reversa_sdd/`, novos campos, campos removidos, migrações necessárias |
+| `data-delta.md` | diff conceitual sobre o modelo extraído em `aegis/`, novos campos, campos removidos, migrações necessárias |
 | `onboarding.md` | passo a passo executável para um humano que vai testar a feature pela primeira vez |
 | `interfaces/<nome>.md` | um arquivo por contrato externo afetado (HTTP, fila, gRPC, GraphQL), descreve request, response, erros, idempotência, timeouts |
 
@@ -65,7 +65,7 @@ Quando a feature não tocar contratos externos, omita o diretório `interfaces/`
 ## Regras de redação
 
 - Escreva o `roadmap.md` em forma de delta, jamais redescreva a arquitetura inteira do legado
-- Cite componentes do `_reversa_sdd/` por nome literal e arquivo de origem
+- Cite componentes do `aegis/` por nome literal e arquivo de origem
 - Marque cada decisão técnica com 🟢 / 🟡 / 🔴 conforme a confidência sobre a fonte
 - Se uma decisão depender de uma `[DÚVIDA]` aceita como premissa, use 🟡
 

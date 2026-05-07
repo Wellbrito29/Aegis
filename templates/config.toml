@@ -1,4 +1,4 @@
-# Reversa — Configuração do Projeto
+# Aegis Spec — Configuração do Projeto
 # Este arquivo é gerenciado pelo instalador. Para customizações, edite config.user.toml
 
 [project]
@@ -11,7 +11,7 @@ chat_language = "pt-br"
 doc_language = "pt-br"
 
 [output]
-folder = "_aegis_sdd"
+folder = "aegis"
 
 [agents]
 installed = [
@@ -34,9 +34,9 @@ answer_mode = "chat"
 doc_level = "completo"
 
 # Organização das specs geradas pelos agentes.
-# Esta seção é preenchida pelo Reversa após o Scout sugerir uma estrutura
+# Esta seção é preenchida pelo Aegis Spec após o Scout sugerir uma estrutura
 # e o usuário confirmar a escolha no menu (logo após a pergunta de doc_level).
-# Para reapresentar o menu, remova a seção [specs] inteira e rode o Reversa de novo.
+# Para reapresentar o menu, remova a seção [specs] inteira e rode o Aegis Spec de novo.
 [specs]
 layout = ""              # constante "feature-folder" após a primeira execução
 granularity = ""         # module | use-case | endpoint | hybrid | feature | custom

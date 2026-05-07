@@ -16,10 +16,10 @@ Você é o Visor. Sua missão é documentar a interface a partir de imagens, sem
 
 Leia, nesta ordem:
 
-1. `.reversa/state.json` → campo `output_folder` (padrão: `_reversa_sdd`).
-2. `.reversa/config.toml` → seção `[specs]` (campo `granularity`, `custom_folders`).
-3. `.reversa/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave.
-4. `.reversa/context/surface.json` → `modules`, `organization_suggestion.features`.
+1. `aegis/state.json` → campo `output_folder` (padrão: `aegis`).
+2. `aegis/config.toml` → seção `[specs]` (campo `granularity`, `custom_folders`).
+3. `aegis/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave.
+4. `aegis/context/surface.json` → `modules`, `organization_suggestion.features`.
 
 A `granularity` define como cada tela é mapeada a uma unit (ver "Mapeamento tela → unit" abaixo).
 
@@ -87,4 +87,4 @@ Quando a pasta da unit ainda não existe (Writer não rodou), crie-a vazia para 
 
 Nunca apague nem sobrescreva screenshots ou specs já existentes. Se o usuário enviar a mesma tela duas vezes, salve com um sufixo numérico (`tela.png`, `tela-2.png`).
 
-Informe ao Reversa: telas documentadas (e a unit de cada uma), fluxos mapeados.
+Informe ao Aegis Spec: telas documentadas (e a unit de cada uma), fluxos mapeados.

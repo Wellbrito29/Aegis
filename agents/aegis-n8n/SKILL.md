@@ -36,11 +36,11 @@ A skill usa uma pasta dedicada como ponto de entrada para os JSONs exportados do
 
    Se faltar qualquer campo, pare e informe o usuário qual campo está ausente antes de continuar.
 
-### Pasta de saída: `_reversa_n8n/<slug>/`
+### Pasta de saída: `aegis/n8n/<slug>/`
 
 4. Determine o slug a partir do `name` do workflow normalizado em kebab-case (minúsculas, espaços viram hífen, caracteres especiais removidos, acentos normalizados).
 
-5. Se a pasta `_reversa_n8n/<slug>/` já existir, pergunte: sobrescrever, criar versão nova (`-v2`, `-v3`...) ou cancelar.
+5. Se a pasta `aegis/n8n/<slug>/` já existir, pergunte: sobrescrever, criar versão nova (`-v2`, `-v3`...) ou cancelar.
 
 ## Processo
 
@@ -135,32 +135,32 @@ Gere três arquivos seguindo o padrão SDD:
 - Configuração: variáveis de ambiente e secrets necessários
 - Testes recomendados: unitários por módulo, integração nos pontos com APIs externas
 
-### 7. Handoff para o pipeline Reversa
+### 7. Handoff para o pipeline Aegis Spec
 
 Após gerar os três artefatos da spec, prepare o estado para que o `/reversa` possa orquestrar os agentes seguintes (Scout, Archaeologist, Detective, Architect, Writer, Reviewer) sobre o resultado.
 
-#### 7.1 Criação de `.reversa/state.json`
+#### 7.1 Criação de `aegis/state.json`
 
-Se `.reversa/state.json` ainda não existir, crie a partir do template em `templates/state.json` e popule:
+Se `aegis/state.json` ainda não existir, crie a partir do template em `templates/state.json` e popule:
 
-- `version`: ler de `package.json` do Reversa (campo `version`)
+- `version`: ler de `package.json` do Aegis Spec (campo `version`)
 - `project`: o `name` do workflow N8N (humano, sem slug)
 - `user_name`: se já estiver preenchido em outro state existente, manter; senão, perguntar ao usuário antes do handoff
 - `chat_language`: `pt-br` por padrão (ou seguir o que o usuário usou na conversa)
 - `doc_language`: `Português` por padrão
 - `doc_level`: `essencial` (a spec do N8N já é compacta, o pipeline não precisa expandir muito)
-- `output_folder`: `_reversa_sdd` (default do pipeline principal)
+- `output_folder`: `aegis` (default do pipeline principal)
 - `phase`: `null` (deixar o `/reversa` definir como `reconhecimento` ao iniciar)
 - `engines`: lista vazia (será preenchida pelo /reversa)
 - `agents`: lista vazia
 - `created_files`: lista vazia
-- Adicione um campo `source` com valor `"n8n"` e `source_artifacts` apontando para `_reversa_n8n/<slug>/` para que o Scout saiba que existe pré-análise.
+- Adicione um campo `source` com valor `"n8n"` e `source_artifacts` apontando para `aegis/n8n/<slug>/` para que o Scout saiba que existe pré-análise.
 
-Se `.reversa/state.json` já existir, **não sobrescreva**. Apenas atualize os campos `source` e `source_artifacts` adicionando o novo workflow processado a `source_artifacts` (lista).
+Se `aegis/state.json` já existir, **não sobrescreva**. Apenas atualize os campos `source` e `source_artifacts` adicionando o novo workflow processado a `source_artifacts` (lista).
 
-#### 7.2 Criação de `.reversa/plan.md`
+#### 7.2 Criação de `aegis/plan.md`
 
-Se `.reversa/plan.md` ainda não existir, crie a partir do template em `templates/plan.md` e substitua:
+Se `aegis/plan.md` ainda não existir, crie a partir do template em `templates/plan.md` e substitua:
 - `{{PROJECT}}`: nome do workflow N8N
 - `{{DATE}}`: data atual no formato ISO
 
@@ -169,20 +169,20 @@ Adicione uma seção `## Fase 0: Origem N8N 🔁` no topo (antes da Fase 1) com 
 ```markdown
 ## Fase 0: Origem N8N 🔁
 
-> A análise foi iniciada a partir de um workflow N8N. A pré-análise gerou specs em `_reversa_n8n/<slug>/`. O Scout deve incluir esses artefatos no inventário.
+> A análise foi iniciada a partir de um workflow N8N. A pré-análise gerou specs em `aegis/n8n/<slug>/`. O Scout deve incluir esses artefatos no inventário.
 
 - [x] **N8N Translator**: conversão do workflow `<slug>` para spec SDD
 ```
 
-Se `.reversa/plan.md` já existir, apenas adicione a linha do N8N Translator na seção apropriada (ou crie a seção Fase 0 se ainda não existir).
+Se `aegis/plan.md` já existir, apenas adicione a linha do N8N Translator na seção apropriada (ou crie a seção Fase 0 se ainda não existir).
 
 #### 7.3 Confirmação ao usuário
 
 Após criar os arquivos, mostre:
 ```
-✅ Spec gerada em _reversa_n8n/<slug>/
-✅ Estado inicial criado em .reversa/state.json
-✅ Plano criado em .reversa/plan.md
+✅ Spec gerada em aegis/n8n/<slug>/
+✅ Estado inicial criado em aegis/state.json
+✅ Plano criado em aegis/plan.md
 
 Para continuar com o pipeline completo (Scout, Archaeologist, etc.), digite /reversa.
 ```
@@ -216,19 +216,19 @@ Registre cada ambiguidade no `workflow-overview.md` em `## Ambiguidades`, com fo
 n8n_json_workflows/                  (entrada, criada se não existir)
 └── <arquivo>.json
 
-_reversa_n8n/<slug-do-workflow>/     (spec gerada da fonte)
+aegis/n8n/<slug-do-workflow>/     (spec gerada da fonte)
 ├── workflow-overview.md
 ├── requirements.md
 └── design.md
 
-.reversa/                            (estado para handoff ao /reversa)
+aegis/                            (estado para handoff ao /reversa)
 ├── state.json
 └── plan.md
 ```
 
 ## Layout transversal
 
-Os artefatos da spec ficam em `_reversa_n8n/<slug>/`. Os arquivos de estado para o pipeline principal ficam em `.reversa/`. Os JSONs de entrada permanecem em `n8n_json_workflows/` intactos. Não escrever em `_reversa_sdd/` aqui (essa pasta é populada pelos agentes do pipeline principal a partir do `/reversa`).
+Os artefatos da spec ficam em `aegis/n8n/<slug>/`. Os arquivos de estado para o pipeline principal ficam em `aegis/`. Os JSONs de entrada permanecem em `n8n_json_workflows/` intactos. Não escrever em `aegis/` aqui (essa pasta é populada pelos agentes do pipeline principal a partir do `/reversa`).
 
 ## Próximo passo
 
@@ -238,7 +238,7 @@ Ao concluir, informe ao usuário:
 - Ambiguidades pendentes (se houver)
 
 Sugira ao usuário:
-1. Revisar a spec em `_reversa_n8n/<slug>/`
+1. Revisar a spec em `aegis/n8n/<slug>/`
 2. Digitar `/reversa` para acionar o pipeline completo (Scout em diante) sobre a pré-análise N8N
 3. Ou processar outro workflow direto, se houver mais arquivos em `n8n_json_workflows/`
 
@@ -247,8 +247,8 @@ Termine com: `Digite CONTINUAR para processar outro workflow, ou /reversa para i
 ## Regras absolutas
 
 - Nunca modificar o arquivo JSON original em `n8n_json_workflows/`
-- Escrever apenas em `n8n_json_workflows/` (criar a pasta), `_reversa_n8n/` e `.reversa/`
-- Nunca sobrescrever `.reversa/state.json` se já existir, apenas atualizar os campos `source` e `source_artifacts`
+- Escrever apenas em `n8n_json_workflows/` (criar a pasta), `aegis/n8n/` e `aegis/`
+- Nunca sobrescrever `aegis/state.json` se já existir, apenas atualizar os campos `source` e `source_artifacts`
 - Nunca expor credenciais, tokens ou secrets em nenhum artefato (registrar apenas o tipo e o serviço)
 - Nunca inventar funcionalidades não presentes no workflow
 - Marcar com 🔴 LACUNA tudo que não puder ser confirmado pela leitura do JSON

@@ -16,13 +16,13 @@ Você é o Writer. Sua missão é transformar o conhecimento extraído em especi
 
 Leia, nesta ordem:
 
-1. `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`), `doc_level` (padrão: `completo`) e `doc_language`.
-2. `.reversa/config.toml` → seção `[specs]` (campos `granularity`, `custom_folders`).
-3. `.reversa/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave sobre `config.toml`.
-4. `.reversa/context/surface.json` → especialmente `modules` e `organization_suggestion.features`.
-5. Demais artefatos em `<output_folder>/` e `.reversa/context/` (gerados por agentes anteriores).
+1. `aegis/state.json` → campos `output_folder` (padrão: `aegis`), `doc_level` (padrão: `completo`) e `doc_language`.
+2. `aegis/config.toml` → seção `[specs]` (campos `granularity`, `custom_folders`).
+3. `aegis/config.user.toml` → seção `[specs]` se existir, com precedência chave a chave sobre `config.toml`.
+4. `aegis/context/surface.json` → especialmente `modules` e `organization_suggestion.features`.
+5. Demais artefatos em `<output_folder>/` e `aegis/context/` (gerados por agentes anteriores).
 
-Se a seção `[specs]` ainda não está decidida (granularity vazia), pare e peça ao orquestrador Reversa para executar `references/step-03-specs-organization.md` antes de continuar.
+Se a seção `[specs]` ainda não está decidida (granularity vazia), pare e peça ao orquestrador Aegis Spec para executar `references/step-03-specs-organization.md` antes de continuar.
 
 ## Layout de saída, pasta-por-unit
 
@@ -125,7 +125,7 @@ Para cada item do plano, em sequência:
 2. Gere apenas aquele arquivo, baseando-se no template correspondente em `references/`.
 3. Se a pasta da unit ainda não existe, crie-a; se já existe (EC-05), preserve qualquer conteúdo presente e apenas adicione os arquivos faltantes. Nunca sobrescreva arquivos já existentes sem confirmação.
 4. Marque o item como concluído no plano.
-5. Salve o progresso em `.reversa/state.json` (campo `redator_progress`).
+5. Salve o progresso em `aegis/state.json` (campo `redator_progress`).
 6. Informe: `"✅ [arquivo] concluído. Próximo: [próximo item]. Digite CONTINUAR para prosseguir."`
 7. Pare e aguarde a resposta do usuário.
 
@@ -140,7 +140,7 @@ Só avance para o próximo item após resposta. Isso permite que o usuário revi
 >
 > Pressione 1, 2, ou digite CONTINUAR para opção 1."
 
-Antes de oferecer a opção 2, confirme que `redator_progress` em `.reversa/state.json` reflete o último arquivo concluído. Não force a pausa, o usuário decide.
+Antes de oferecer a opção 2, confirme que `redator_progress` em `aegis/state.json` reflete o último arquivo concluído. Não force a pausa, o usuário decide.
 
 ### Passo 3, Globais
 
@@ -156,7 +156,7 @@ Arquivos sem unit correspondente ficam com `n/a`, são candidatos a análise adi
 
 ### Passo 4, Encerramento
 
-Ao concluir, informe ao Reversa:
+Ao concluir, informe ao Aegis Spec:
 - Units geradas (quantidade)
 - Total de arquivos canônicos + opcionais
 - Globais gerados

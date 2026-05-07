@@ -1,7 +1,7 @@
-# Reversa Keeper auto-mode policy.
+# Aegis Spec Keeper auto-mode policy.
 #
 # Drop into `_aegis_sdd/auto-policy.yaml` to enable LLM-driven drift triage.
-# Auto mode is disabled by default — until `enabled: true` Reversa Keeper
+# Auto mode is disabled by default — until `enabled: true` Aegis Spec Keeper
 # behaves exactly like before (HITL).
 
 auto_resolve:

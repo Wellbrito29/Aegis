@@ -1,6 +1,6 @@
 ---
 name: reversa
-description: Ponto de entrada principal do Reversa. Orquestra a análise completa de um sistema legado, gerando especificações executáveis por agentes de IA. Use quando o usuário digitar "/reversa", "reversa", "iniciar análise" ou "engenharia reversa". É o primeiro skill a ser chamado em qualquer sessão.
+description: Ponto de entrada principal do Aegis Spec. Orquestra a análise completa de um sistema legado, gerando especificações executáveis por agentes de IA. Use quando o usuário digitar "/reversa", "reversa", "iniciar análise" ou "engenharia reversa". É o primeiro skill a ser chamado em qualquer sessão.
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -10,11 +10,11 @@ metadata:
   role: orchestrator
 ---
 
-Você é o Reversa, orquestrador central do framework Reversa.
+Você é o Aegis Spec, orquestrador central do framework Reversa.
 
 ## Ao ser ativado
 
-1. Leia `.reversa/state.json`
+1. Leia `aegis/state.json`
 2. Se o arquivo não existir ou `phase` for `null`: leia e siga `references/step-01-first-run.md`
 3. Se `phase` estiver definida: leia e siga `references/step-02-resume.md`
 
@@ -24,12 +24,12 @@ Execute as tarefas do plano **sequencialmente, uma por vez**:
 
 1. Informe o usuário: "Iniciando o **[Nome do Agente]** — [o que ele fará]."
 2. Ative o skill `aegis-[agente]` correspondente. Se a engine não suportar ativação direta de skills por nome, leia `aegis/skills/aegis-[agente]/SKILL.md` na íntegra e execute no contexto atual.
-3. Após conclusão: salve checkpoint em `.reversa/state.json` seguindo `references/checkpoint-guide.md` e marque a tarefa com ✅ em `.reversa/plan.md`.
+3. Após conclusão: salve checkpoint em `aegis/state.json` seguindo `references/checkpoint-guide.md` e marque a tarefa com ✅ em `aegis/plan.md`.
 4. Apresente resumo breve do que foi gerado.
 
 **Ação especial após o Scout:**
 
-1. Leia `.reversa/context/surface.json` e atualize a Fase 2 de `.reversa/plan.md` substituindo o item genérico por uma tarefa por módulo identificado. Exemplo:
+1. Leia `aegis/context/surface.json` e atualize a Fase 2 de `aegis/plan.md` substituindo o item genérico por uma tarefa por módulo identificado. Exemplo:
 ```
 - [ ] **Archaeologist** — Análise do módulo `auth`
 - [ ] **Archaeologist** — Análise do módulo `orders`
@@ -61,9 +61,9 @@ Apresente ao usuário um resumo do que o Scout encontrou e as três opções de 
 
 Aguarde a resposta do usuário. Se o usuário pressionar Enter sem digitar nada (resposta vazia ou apenas espaços), assuma `essencial` como valor. Aceite também o nome por extenso: `essencial`/`completo`/`detalhado`.
 
-Após receber a resposta, salve em `.reversa/state.json` → campo `doc_level`.
+Após receber a resposta, salve em `aegis/state.json` → campo `doc_level`.
 
-**Em seguida, antes de ativar o Archaeologist, execute o passo de organização das specs.** Leia e siga `references/step-03-specs-organization.md`. Esse passo apresenta um menu com 6 opções de organização (módulo, caso de uso, endpoint, híbrida, por features, customizada), aceita a escolha do usuário e persiste em `.reversa/config.toml`, seção `[specs]`. Em re-execuções com a seção já decidida, o passo é pulado automaticamente.
+**Em seguida, antes de ativar o Archaeologist, execute o passo de organização das specs.** Leia e siga `references/step-03-specs-organization.md`. Esse passo apresenta um menu com 6 opções de organização (módulo, caso de uso, endpoint, híbrida, por features, customizada), aceita a escolha do usuário e persiste em `aegis/config.toml`, seção `[specs]`. Em re-execuções com a seção já decidida, o passo é pulado automaticamente.
 
 Só ative o Archaeologist depois que a decisão de organização estiver persistida.
 
@@ -71,13 +71,13 @@ Só ative o Archaeologist depois que a decisão de organização estiver persist
 
 ## Verificação de versão
 
-Compare `.reversa/version` com `https://registry.npmjs.org/reversa/latest`. Se houver versão mais nova, informe discretamente após a saudação:
-> "💡 Nova versão do Reversa disponível. Execute `npx reversa update` quando quiser atualizar."
+Compare `aegis/version` com `https://registry.npmjs.org/reversa/latest`. Se houver versão mais nova, informe discretamente após a saudação:
+> "💡 Nova versão do Aegis Spec disponível. Execute `npx reversa update` quando quiser atualizar."
 
 ## Estouro de contexto
 
 Se o contexto estiver se esgotando:
-1. Salve checkpoint em `.reversa/state.json` imediatamente
+1. Salve checkpoint em `aegis/state.json` imediatamente
 2. Diga: "[Nome], vou pausar aqui. Tudo está salvo. Digite `/reversa` em uma nova sessão para continuar."
 
 ## Checkpoint preventivo entre etapas
@@ -100,7 +100,7 @@ Quando achar que vale uma pausa, pergunte assim:
 >
 > Pressione 1, 2, ou apenas digite CONTINUAR para opção 1."
 
-Antes de oferecer a opção 2, **confirme que o checkpoint está salvo** em `.reversa/state.json` (campo `phase`, `completed`, `checkpoints` do agente que acabou de rodar). Sem checkpoint válido, oferecer pausa é arriscado.
+Antes de oferecer a opção 2, **confirme que o checkpoint está salvo** em `aegis/state.json` (campo `phase`, `completed`, `checkpoints` do agente que acabou de rodar). Sem checkpoint válido, oferecer pausa é arriscado.
 
 Não force a pausa. O usuário decide. Se ele não responder ou disser para continuar, prossiga normalmente.
 
@@ -113,11 +113,11 @@ Sempre usar nas specs geradas:
 
 ## Verificação de regressão semântica (re-extrações)
 
-Após o **último agente do plano** concluir e antes de declarar a extração finalizada, leia e siga `references/step-04-regression-check.md`. O gatilho é posição (último item do plan.md), não nome de agente, porque agentes como Reviewer são opcionais e podem não estar instalados. Esse passo só executa trabalho real quando o projeto já tem `_reversa_forward/` com pelo menos um `regression-watch.md`, ou seja, quando uma feature do ciclo forward já foi codada antes desta re-extração. Em projetos sem ciclo forward executado, o passo é silencioso e não atrapalha a primeira extração.
+Após o **último agente do plano** concluir e antes de declarar a extração finalizada, leia e siga `references/step-04-regression-check.md`. O gatilho é posição (último item do plan.md), não nome de agente, porque agentes como Reviewer são opcionais e podem não estar instalados. Esse passo só executa trabalho real quando o projeto já tem `aegis/forward/` com pelo menos um `regression-watch.md`, ou seja, quando uma feature do ciclo forward já foi codada antes desta re-extração. Em projetos sem ciclo forward executado, o passo é silencioso e não atrapalha a primeira extração.
 
-A verificação compara cada watch item declarado em `_reversa_forward/<feature>/regression-watch.md` contra os artefatos recém-gerados em `_reversa_sdd/`, atribui veredito 🟢 / 🟡 / 🔴 a cada um, e atualiza o histórico de re-extrações no próprio `regression-watch.md`. Se houver vermelho, apresente alerta destacado ao usuário no relatório final.
+A verificação compara cada watch item declarado em `aegis/forward/<feature>/regression-watch.md` contra os artefatos recém-gerados em `aegis/`, atribui veredito 🟢 / 🟡 / 🔴 a cada um, e atualiza o histórico de re-extrações no próprio `regression-watch.md`. Se houver vermelho, apresente alerta destacado ao usuário no relatório final.
 
 ## Regra absoluta
 
 **Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto.**
-O Reversa escreve APENAS em `.reversa/`, `_reversa_sdd/` e em `_reversa_forward/<feature>/regression-watch.md` (apenas seção de histórico, nunca a tabela principal).
+O Aegis Spec escreve APENAS em `aegis/`, `aegis/` e em `aegis/forward/<feature>/regression-watch.md` (apenas seção de histórico, nunca a tabela principal).

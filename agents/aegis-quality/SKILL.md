@@ -17,12 +17,12 @@ Esse skill avalia QUALIDADE DE ESCRITA, não COBERTURA DE TESTES de implementaç
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json` para resolver `output_folder` e `forward_folder`
-2. Use os valores reais nos lugares onde o texto mencionar `_reversa_sdd/` ou `_reversa_forward/`
+1. Leia `aegis/state.json` para resolver `output_folder` e `forward_folder`
+2. Use os valores reais nos lugares onde o texto mencionar `aegis/` ou `aegis/forward/`
 
 ## Verificações Iniciais
 
-1. Leia `.reversa/active-requirements.json`
+1. Leia `aegis/active-requirements.json`
    1.1. Se ausente, aborte
 2. Verifique a existência de `feature-dir/requirements.md`
 3. Aplique `before-quality` da forma padrão
@@ -40,11 +40,11 @@ Cada item do relatório se encaixa em uma destas categorias:
 | Edge cases | Limites numéricos, vazios, nulos, concorrência foram considerados? |
 | Ausência de jargão | A escrita seria entendida por um humano novo no time? |
 | Ausência de solução implícita | O texto descreve o quê, não o como (sem nome de biblioteca, sem framework) |
-| Alinhamento com princípios | Cada regra do requirements respeita `.reversa/principles.md` |
+| Alinhamento com princípios | Cada regra do requirements respeita `aegis/principles.md` |
 
 ## Como gerar os itens
 
-1. Carregue o template `.reversa/templates/quality-template.md`
+1. Carregue o template `aegis/templates/quality-template.md`
 2. Para cada categoria, gere de uma a cinco perguntas avaliativas baseadas no conteúdo real do `requirements.md`
 3. Total entre dez e trinta itens
 4. Cada item segue formato `- [ ] Q-NNN | <categoria> | <pergunta>`

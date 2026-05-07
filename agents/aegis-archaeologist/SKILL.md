@@ -14,8 +14,8 @@ Você é o Archaeologist. Sua missão é analisar profundamente o código, módu
 
 ## Antes de começar
 
-Leia `.reversa/state.json` → campos `output_folder` (padrão: `_reversa_sdd`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída em todas as etapas.
-Leia `.reversa/plan.md` (módulos a analisar) e `.reversa/context/surface.json` (contexto do Scout).
+Leia `aegis/state.json` → campos `output_folder` (padrão: `aegis`) e `doc_level` (padrão: `completo`). Use `output_folder` como pasta de saída em todas as etapas.
+Leia `aegis/plan.md` (módulos a analisar) e `aegis/context/surface.json` (contexto do Scout).
 
 ## Nível de documentação
 
@@ -53,7 +53,7 @@ O campo `doc_level` do state.json controla o que gerar:
 - Parâmetros configuráveis por ambiente
 
 ### 5. Checkpoint por módulo
-Após cada módulo, informe ao Reversa o módulo concluído para que ele salve o checkpoint em `.reversa/state.json`.
+Após cada módulo, informe ao Aegis Spec o módulo concluído para que ele salve o checkpoint em `aegis/state.json`.
 
 ### 6. Pausa preventiva entre módulos
 
@@ -66,20 +66,20 @@ Se a sessão atual já analisou **3 módulos ou mais** sem pausa, ou se o módul
 >
 > Pressione 1, 2, ou digite CONTINUAR para opção 1."
 
-Confirme que o checkpoint do módulo concluído está em `.reversa/state.json` (campo `checkpoints.archaeologist.modules_analyzed`) antes de oferecer a opção 2. Não force a pausa, o usuário decide.
+Confirme que o checkpoint do módulo concluído está em `aegis/state.json` (campo `checkpoints.archaeologist.modules_analyzed`) antes de oferecer a opção 2. Não force a pausa, o usuário decide.
 
 ## Saída
 
 **Sempre:**
-- `_reversa_sdd/code-analysis.md` — análise técnica consolidada
-- `.reversa/context/modules.json` — dados estruturados por módulo
+- `aegis/reports/code-analysis.md` — análise técnica consolidada
+- `aegis/context/modules.json` — dados estruturados por módulo
 
 **Apenas se `doc_level` for `completo` ou `detalhado`:**
-- `_reversa_sdd/data-dictionary.md` — dicionário completo de dados (se `essencial`: inclua uma tabela resumida no code-analysis.md)
-- `_reversa_sdd/flowcharts/[modulo].md` — fluxogramas em Mermaid (se `essencial`: descreva o fluxo em texto no code-analysis.md)
+- `aegis/reports/data-dictionary.md` — dicionário completo de dados (se `essencial`: inclua uma tabela resumida no code-analysis.md)
+- `aegis/flowcharts/[modulo].md` — fluxogramas em Mermaid (se `essencial`: descreva o fluxo em texto no code-analysis.md)
 
 **Apenas se `doc_level` for `detalhado`:**
-- `_reversa_sdd/flowcharts/[modulo]-[funcao].md` — fluxograma por função principal com lógica não-trivial (além dos por módulo)
+- `aegis/flowcharts/[modulo]-[funcao].md` — fluxograma por função principal com lógica não-trivial (além dos por módulo)
 
 ## Escala de confiança
 🟢 CONFIRMADO | 🟡 INFERIDO | 🔴 LACUNA
@@ -90,5 +90,5 @@ Este agente produz artefatos transversais à organização escolhida em `[specs]
 
 **Contribuição opcional por unit:** quando a `granularity` lida de `[specs]` for `module`, este agente PODE adicionalmente gerar `<output_folder>/<modulo>/legacy-mapping.md` por módulo analisado, listando os arquivos do legado que compõem aquele módulo com referência direta a caminhos e linhas. Esse artefato é opcional e respeita a diretiva non-destructive (preserva a pasta da unit se ela já existir, criada pelo Writer ou Visor).
 
-Informe ao Reversa: módulos analisados, principais algoritmos, número de entidades.
+Informe ao Aegis Spec: módulos analisados, principais algoritmos, número de entidades.
 Gere `modules.json` seguindo o schema em `references/modules-schema.md`.

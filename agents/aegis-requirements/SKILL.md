@@ -1,6 +1,6 @@
 ---
 name: aegis-requirements
-description: Transforma uma ideia em linguagem natural num documento de requisitos completo, ancorado nos artefatos da pipeline reversa. Use quando o usuário digitar "/aegis-requirements", "aegis-requirements", "quero levantar requisitos" ou pedir para iniciar uma nova feature a partir de uma frase. Primeiro skill do ciclo forward (requirements, doubt, plan, to-do, audit, quality, coding).
+description: Transforma uma ideia em linguagem natural num documento de requisitos completo, ancorado nos artefatos da pipeline de descoberta. Use quando o usuário digitar "/aegis-requirements", "aegis-requirements", "quero levantar requisitos" ou pedir para iniciar uma nova feature a partir de uma frase. Primeiro skill do ciclo forward (requirements, doubt, plan, to-do, audit, quality, coding).
 license: MIT
 compatibility: Claude Code, Codex, Cursor, Gemini CLI e demais agentes compatíveis com Agent Skills.
 metadata:
@@ -11,20 +11,20 @@ metadata:
   stage: requirements
 ---
 
-Você é o redator de requisitos do Reversa. Sua missão é converter o argumento livre passado pelo usuário (frase ou parágrafo descrevendo o objetivo da feature) num `requirements.md` completo, atravessando o conhecimento já extraído do sistema legado.
+Você é o redator de requisitos do Aegis Spec. Sua missão é converter o argumento livre passado pelo usuário (frase ou parágrafo descrevendo o objetivo da feature) num `requirements.md` completo, atravessando o conhecimento já extraído do sistema legado.
 
 ## Antes de começar
 
-1. Leia `.reversa/state.json`
-   1.1. `output_folder` → pasta da extração reversa (padrão `_reversa_sdd`)
-   1.2. `forward_folder` → pasta das features forward (padrão `_reversa_forward`)
+1. Leia `aegis/state.json`
+   1.1. `output_folder` → pasta da extração de especificações (padrão `aegis`)
+   1.2. `forward_folder` → pasta das features forward (padrão `aegis/forward`)
    1.3. `chat_language` e `doc_language` → idioma de interação e do documento
-2. A partir daqui, sempre que o texto deste skill mencionar `_reversa_sdd/`, troque pelo `output_folder` real
-3. Sempre que mencionar `_reversa_forward/`, troque pelo `forward_folder` real
+2. A partir daqui, sempre que o texto deste skill mencionar `aegis/`, troque pelo `output_folder` real
+3. Sempre que mencionar `aegis/forward/`, troque pelo `forward_folder` real
 
 ## Verificações Iniciais
 
-1. Tente ler `.reversa/hooks.yml`
+1. Tente ler `aegis/hooks.yml`
    1.1. Se o YAML for inválido ou inexistente, prossiga sem ganchos
    1.2. Se válido, procure a chave `before-requirements` e filtre entradas com `enabled: false`
 2. Para cada gancho restante:
@@ -36,7 +36,7 @@ Você é o redator de requisitos do Reversa. Sua missão é converter o argument
 
 Antes de criar feature nova, verifique se já existe uma anterior em andamento. A detecção é baseada em **artefatos físicos da feature**, não em campos auto-declarados, porque é resistente a skills que esquecem de atualizar metadados.
 
-1. Tente ler `.reversa/active-requirements.json`
+1. Tente ler `aegis/active-requirements.json`
    1.1. Se o arquivo não existir, NÃO há feature em andamento, pule esta seção e siga direto para "Resolução do diretório da feature"
    1.2. Se o JSON estiver inválido ou corrompido, trate como ausente, registre o problema em nota interna e siga adiante
 2. Leia o campo `feature-dir` do JSON
@@ -87,7 +87,7 @@ Aguarde a resposta. NÃO escolha por conta própria, NÃO interprete silêncio c
 ### Opção 1, continuar a anterior
 
 1. Não escreva em `active-requirements.json`
-2. Não crie pasta nova em `_reversa_forward/`
+2. Não crie pasta nova em `aegis/forward/`
 3. Sugira ao usuário o próximo skill apropriado para o estágio físico:
    3.1. `requirements` → `/aegis-doubt` (se houver marcadores `[DÚVIDA]` no `requirements.md`) ou `/aegis-plan`
    3.2. `plan` → `/aegis-to-do`
@@ -121,20 +121,20 @@ Aguarde a resposta. NÃO escolha por conta própria, NÃO interprete silêncio c
 
 1. Leia o `active-requirements.json` atual e o campo `paused-features`
    1.1. Se o campo não existir, considere `paused-features: []`
-2. NÃO adicione a feature recém-abandonada ao array `paused-features` (ela fica órfã na pasta `_reversa_forward/`, sem registro ativo, recuperável apenas por listagem manual)
+2. NÃO adicione a feature recém-abandonada ao array `paused-features` (ela fica órfã na pasta `aegis/forward/`, sem registro ativo, recuperável apenas por listagem manual)
 3. Siga normalmente. Ao escrever o `active-requirements.json` novo, preserve o array `paused-features` herdado do JSON anterior (sem adicionar a abandonada)
 
-A diretriz **non-destructive** vale aqui: em nenhuma das três opções a pasta da feature anterior em `_reversa_forward/` é apagada ou modificada. Apenas o `active-requirements.json` (gerenciado pelo Reversa) é reescrito.
+A diretriz **non-destructive** vale aqui: em nenhuma das três opções a pasta da feature anterior em `aegis/forward/` é apagada ou modificada. Apenas o `active-requirements.json` (gerenciado pelo Aegis Spec) é reescrito.
 
 ## Resolução do diretório da feature
 
-1. Leia `.reversa/setup.json`
-   1.1. Se `prefix-format` estiver ausente ou for `sequencial`, calcule o próximo `NNN` listando subpastas de `_reversa_forward/` no formato `NNN-*` e somando 1 ao maior
+1. Leia `aegis/setup.json`
+   1.1. Se `prefix-format` estiver ausente ou for `sequencial`, calcule o próximo `NNN` listando subpastas de `aegis/forward/` no formato `NNN-*` e somando 1 ao maior
    1.2. Se `prefix-format` for `timestamp`, use `YYYYMMDD-HHMMSS` da hora corrente
 2. Gere um `short-name` em kebab-case ASCII a partir do argumento livre, máximo trinta caracteres
-3. Defina `feature-dir = _reversa_forward/<NNN>-<short-name>` (ou `_reversa_forward/<TIMESTAMP>-<short-name>`)
+3. Defina `feature-dir = aegis/forward/<NNN>-<short-name>` (ou `aegis/forward/<TIMESTAMP>-<short-name>`)
 4. Crie `feature-dir` se não existir
-5. Atualize `.reversa/active-requirements.json` com o conteúdo abaixo, usando escrita atômica (tempfile mais rename):
+5. Atualize `aegis/active-requirements.json` com o conteúdo abaixo, usando escrita atômica (tempfile mais rename):
 
 ```json
 {
@@ -154,21 +154,21 @@ A diretriz **non-destructive** vale aqui: em nenhuma das três opções a pasta 
 
 Política de re-execução: se `active-requirements.json` já apontar para uma feature anterior, **pergunte ao usuário** antes de sobrescrever. Opções: continuar a anterior, criar nova feature em paralelo, ou abandonar a anterior.
 
-## Coleta de contexto a partir da extração reversa
+## Coleta de contexto a partir da extração de especificações
 
 Antes de escrever o requirements, leia, na ordem (pulando o que não existir):
 
-1. `_reversa_sdd/architecture.md` (panorama dos componentes)
-2. `_reversa_sdd/domain.md` (regras de negócio confirmadas)
-3. `_reversa_sdd/inventory.md` (superfície do código)
-4. `_reversa_sdd/code-analysis.md` SOMENTE nas seções dos componentes que o argumento livre parece tocar
-5. `.reversa/principles.md` (princípios do projeto, se existir)
+1. `aegis/architecture/architecture.md` (panorama dos componentes)
+2. `aegis/reports/domain.md` (regras de negócio confirmadas)
+3. `aegis/reports/inventory.md` (superfície do código)
+4. `aegis/reports/code-analysis.md` SOMENTE nas seções dos componentes que o argumento livre parece tocar
+5. `aegis/principles.md` (princípios do projeto, se existir)
 
-Identifique os arquivos relevantes. Cada citação dentro do requirements precisa apontar para essas fontes no formato `_reversa_sdd/<arquivo>#<seção>`.
+Identifique os arquivos relevantes. Cada citação dentro do requirements precisa apontar para essas fontes no formato `aegis/<arquivo>#<seção>`.
 
 ## Construção do requirements.md
 
-1. Carregue o template em `.reversa/templates/requirements-template.md`
+1. Carregue o template em `aegis/templates/requirements-template.md`
 2. Preserve a ordem das seções obrigatórias
 3. Preencha cada seção respeitando o comentário inline orientador
 4. Marque com `[DÚVIDA]` qualquer ponto onde a informação faltar ou for ambígua
@@ -192,7 +192,7 @@ Identifique os arquivos relevantes. Cada citação dentro do requirements precis
 
 ## Ganchos Pós-execução
 
-1. Procure `after-requirements` em `.reversa/hooks.yml`
+1. Procure `after-requirements` em `aegis/hooks.yml`
 2. Aplique a mesma regra de filtragem (`enabled: false` é descartado)
 3. Para `optional: true`, apresente links em "## Ganchos Disponíveis"
 4. Para `optional: false`, emita `EXECUTAR: <comando>` e aguarde

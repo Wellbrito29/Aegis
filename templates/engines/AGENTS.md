@@ -16,4 +16,4 @@ Quando o usuário digitar `aegis` sozinho em uma mensagem:
 ## Regra não-negociável
 
 Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto legado.
-O Aegis Spec escreve **apenas** em `aegis/` e `aegis/`.
+O Aegis Spec escreve **apenas** em `aegis/`.

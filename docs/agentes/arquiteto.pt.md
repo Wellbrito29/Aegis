@@ -1,6 +1,6 @@
 # Architect
 
-**Comando:** `/reversa-architect`
+**Comando:** `/aegis-architect`
 **Fase:** 3 - Interpretação
 
 ---
@@ -55,9 +55,9 @@ Uma matriz que mostra qual componente impacta qual. Útil para saber o raio de b
 
 | Arquivo | Conteúdo |
 |---------|----------|
-| `_reversa_sdd/architecture.md` | Visão geral arquitetural |
-| `_reversa_sdd/c4-context.md` | Diagrama C4: Contexto |
-| `_reversa_sdd/c4-containers.md` | Diagrama C4: Containers |
-| `_reversa_sdd/c4-components.md` | Diagrama C4: Componentes |
-| `_reversa_sdd/erd-complete.md` | ERD completo em Mermaid |
-| `_reversa_sdd/traceability/spec-impact-matrix.md` | Matriz de impacto |
+| `_aegis_sdd/architecture.md` | Visão geral arquitetural |
+| `_aegis_sdd/c4-context.md` | Diagrama C4: Contexto |
+| `_aegis_sdd/c4-containers.md` | Diagrama C4: Containers |
+| `_aegis_sdd/c4-components.md` | Diagrama C4: Componentes |
+| `_aegis_sdd/erd-complete.md` | ERD completo em Mermaid |
+| `_aegis_sdd/traceability/spec-impact-matrix.md` | Matriz de impacto |

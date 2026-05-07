@@ -1,7 +1,7 @@
 ---
 schemaVersion: 1
 generatedAt: <ISO-8601>
-reversa:
+aegis:
   version: "x.y.z"
 kind: target_architecture
 producedBy: designer

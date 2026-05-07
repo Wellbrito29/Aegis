@@ -1,6 +1,6 @@
 # N8N Translator
 
-**Comando:** `/reversa-n8n`
+**Comando:** `/aegis-n8n`
 **Fase:** Traducción (adaptador de entrada)
 
 ---
@@ -15,7 +15,7 @@ El traductor jurado toma un documento oficial en un idioma y produce otra versi�
 
 El N8N Translator es el punto de entrada cuando el "código" heredado no es código fuente, sino un workflow visual de N8N exportado como JSON. Recorre el grafo de nodos, interpreta cada paso semánticamente (no solo por el tipo del nodo) y emite tres artefactos SDD que describen el sistema de forma independiente de N8N.
 
-Tras generar la spec, el agente prepara `.reversa/state.json` y `.reversa/plan.md` para que el pipeline estándar de Reversa (Scout, Archaeologist, Detective, Architect, Writer, Reviewer) pueda continuar y refinar el análisis, si es necesario.
+Tras generar la spec, el agente prepara `.aegis/state.json` y `.aegis/plan.md` para que el pipeline estándar de Aegis Spec (Scout, Archaeologist, Detective, Architect, Writer, Reviewer) pueda continuar y refinar el análisis, si es necesario.
 
 ---
 
@@ -40,11 +40,11 @@ El agente usa una carpeta dedicada: `n8n_json_workflows/`. La carpeta se crea au
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_reversa_n8n/<slug>/workflow-overview.md` | Análisis de la fuente: metadatos, diagrama Mermaid, tabla de nodos, credenciales, ambigüedades |
-| `_reversa_n8n/<slug>/requirements.md` | Requisitos SDD: funcionales (`RF-NN`), no funcionales (`RNF-NN`), criterios de aceptación |
-| `_reversa_n8n/<slug>/design.md` | Guía de implementación Python: arquitectura, componentes, librerías, estructura de carpetas, manejo de errores, configuración, pruebas |
-| `.reversa/state.json` | Estado inicial del pipeline principal (con `source: "n8n"` y `source_artifacts`) |
-| `.reversa/plan.md` | Plan con sección `Fase 0: Origen N8N` marcando la etapa de traducción |
+| `_aegis_n8n/<slug>/workflow-overview.md` | Análisis de la fuente: metadatos, diagrama Mermaid, tabla de nodos, credenciales, ambigüedades |
+| `_aegis_n8n/<slug>/requirements.md` | Requisitos SDD: funcionales (`RF-NN`), no funcionales (`RNF-NN`), criterios de aceptación |
+| `_aegis_n8n/<slug>/design.md` | Guía de implementación Python: arquitectura, componentes, librerías, estructura de carpetas, manejo de errores, configuración, pruebas |
+| `.aegis/state.json` | Estado inicial del pipeline principal (con `source: "n8n"` y `source_artifacts`) |
+| `.aegis/plan.md` | Plan con sección `Fase 0: Origen N8N` marcando la etapa de traducción |
 
 ---
 
@@ -54,10 +54,10 @@ El agente usa una carpeta dedicada: `n8n_json_workflows/`. La carpeta se crea au
 
 - Documentarlo como spec SDD para revisión o auditoría
 - Reimplementarlo en Python (u otro lenguaje) sin tener N8N como dependencia de runtime
-- Migrar a arquitectura propia (FastAPI, worker, CLI) antes de aplicar el pipeline completo de Reversa
+- Migrar a arquitectura propia (FastAPI, worker, CLI) antes de aplicar el pipeline completo de Aegis Spec
 
 ```
-/reversa-n8n
+/aegis-n8n
 ```
 
-Cuando el agente termine, ejecute `/reversa` para continuar con el Scout y el resto del pipeline.
+Cuando el agente termine, ejecute `/aegis` para continuar con el Scout y el resto del pipeline.

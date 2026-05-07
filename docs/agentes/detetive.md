@@ -1,6 +1,6 @@
 # Detective
 
-**Command:** `/reversa-detective`
+**Command:** `/aegis-detective`
 **Phase:** 3 - Interpretation
 
 ---
@@ -60,10 +60,10 @@ For each entity with a status/state field, the Detective maps:
 
 | File | Content |
 |------|---------|
-| `_reversa_sdd/domain.md` | Glossary and domain rules |
-| `_reversa_sdd/state-machines.md` | State machines in Mermaid |
-| `_reversa_sdd/permissions.md` | Permission matrix |
-| `_reversa_sdd/adrs/[number]-[title].md` | One ADR per identified decision |
+| `_aegis_sdd/domain.md` | Glossary and domain rules |
+| `_aegis_sdd/state-machines.md` | State machines in Mermaid |
+| `_aegis_sdd/permissions.md` | Permission matrix |
+| `_aegis_sdd/adrs/[number]-[title].md` | One ADR per identified decision |
 
 ---
 

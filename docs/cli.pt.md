@@ -1,6 +1,6 @@
 # CLI
 
-O Reversa tem um CLI simples para gerenciar a instalação e o ciclo de vida dos agentes no seu projeto. Todos os comandos rodam com `npx reversa` na raiz do projeto.
+O Aegis Spec tem um CLI simples para gerenciar a instalação e o ciclo de vida dos agentes no seu projeto. Todos os comandos rodam com `npx aegis-spec` na raiz do projeto.
 
 ---
 
@@ -9,10 +9,10 @@ O Reversa tem um CLI simples para gerenciar a instalação e o ciclo de vida dos
 ### `install`
 
 ```bash
-npx reversa install
+npx aegis-spec install
 ```
 
-Instala o Reversa no projeto legado atual. Detecta as engines presentes, pergunta suas preferências e cria toda a estrutura necessária.
+Instala o Aegis Spec no projeto legado atual. Detecta as engines presentes, pergunta suas preferências e cria toda a estrutura necessária.
 
 Use uma vez, na raiz do projeto que você quer analisar.
 
@@ -21,7 +21,7 @@ Use uma vez, na raiz do projeto que você quer analisar.
 ### `status`
 
 ```bash
-npx reversa status
+npx aegis-spec status
 ```
 
 Mostra o estado atual da análise: qual fase está em andamento, quais agentes já rodaram, o que falta completar.
@@ -33,10 +33,10 @@ Mostra o estado atual da análise: qual fase está em andamento, quais agentes j
 ### `update`
 
 ```bash
-npx reversa update
+npx aegis-spec update
 ```
 
-Atualiza os agentes para a versão mais recente do Reversa.
+Atualiza os agentes para a versão mais recente do Aegis Spec.
 
 O comando é inteligente: ele verifica o manifesto SHA-256 de cada arquivo e nunca sobrescreve arquivos que você personalizou. Se você fez ajustes em algum agente, eles ficam intactos.
 
@@ -45,7 +45,7 @@ O comando é inteligente: ele verifica o manifesto SHA-256 de cada arquivo e nun
 ### `add-agent`
 
 ```bash
-npx reversa add-agent
+npx aegis-spec add-agent
 ```
 
 Adiciona um agente específico ao projeto. Útil se você não instalou todos os agentes na instalação inicial e agora quer incluir, por exemplo, o Data Master ou o Design System.
@@ -55,7 +55,7 @@ Adiciona um agente específico ao projeto. Útil se você não instalou todos os
 ### `add-engine`
 
 ```bash
-npx reversa add-engine
+npx aegis-spec add-engine
 ```
 
 Adiciona suporte a uma engine de IA que não estava presente quando você instalou. Por exemplo: instalou só para Claude Code e agora quer adicionar Codex também.
@@ -65,20 +65,20 @@ Adiciona suporte a uma engine de IA que não estava presente quando você instal
 ### `uninstall`
 
 ```bash
-npx reversa uninstall
+npx aegis-spec uninstall
 ```
 
-Remove o Reversa do projeto: apaga os arquivos criados pela instalação (`.reversa/`, `.agents/skills/reversa-*/`, os arquivos de entrada das engines).
+Remove o Aegis Spec do projeto: apaga os arquivos criados pela instalação (`.aegis/`, `.agents/skills/aegis-*/`, os arquivos de entrada das engines).
 
 !!! info "Seus arquivos continuam intactos"
-    O `uninstall` remove **apenas** o que o Reversa criou. Nenhum arquivo original do projeto é tocado. As especificações geradas em `_reversa_sdd/` também são preservadas por padrão. Hooks instalados via `add-hooks` também são removidos.
+    O `uninstall` remove **apenas** o que o Aegis Spec criou. Nenhum arquivo original do projeto é tocado. As especificações geradas em `_aegis_sdd/` também são preservadas por padrão. Hooks instalados via `add-hooks` também são removidos.
 
 ---
 
 ### `add-hooks`
 
 ```bash
-npx reversa add-hooks --engine claude-code
+npx aegis-spec add-hooks --engine claude-code
 ```
 
 Instala hooks do Keeper na config da engine pra ele rodar automaticamente após cada edição. Mostra preview, pede confirmação, escreve.
@@ -90,8 +90,8 @@ Engines suportadas: `claude-code`, `cursor`, `kimi-cli`, `codex`, `opencode`. Ve
 ### `remove-hooks`
 
 ```bash
-npx reversa remove-hooks --engine claude-code
-npx reversa remove-hooks --all
+npx aegis-spec remove-hooks --engine claude-code
+npx aegis-spec remove-hooks --all
 ```
 
 Remove os hooks do Keeper da config da engine. Outros hooks que você adicionou manualmente são preservados.
@@ -101,8 +101,8 @@ Remove os hooks do Keeper da config da engine. Outros hooks que você adicionou 
 ### `drift-check`
 
 ```bash
-npx reversa drift-check
-npx reversa drift-check --severity medium --format json
+npx aegis-spec drift-check
+npx aegis-spec drift-check --severity medium --format json
 ```
 
-CI gate. Lê `_reversa_sdd/drift.md` e exit 1 se houver specs pendentes no severity escolhido. Engine-agnostic — não carrega código de agente. Veja [drift-check](drift-check.pt.md) pra referência completa.
+CI gate. Lê `_aegis_sdd/drift.md` e exit 1 se houver specs pendentes no severity escolhido. Engine-agnostic — não carrega código de agente. Veja [drift-check](drift-check.pt.md) pra referência completa.

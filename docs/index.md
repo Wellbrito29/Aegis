@@ -1,16 +1,16 @@
-# Reversa
+# Aegis Spec
 
 **Turn legacy systems into executable specifications for AI agents.**
 
-You know that system nobody wants to touch? The one that's been running for 10 years, makes money every day, but nobody really knows what it does on the inside? Reversa was built for it.
+You know that system nobody wants to touch? The one that's been running for 10 years, makes money every day, but nobody really knows what it does on the inside? Aegis Spec was built for it.
 
 ---
 
-## What is Reversa?
+## What is Aegis Spec?
 
-Reversa is a specification reverse-engineering framework. You install it inside a legacy project, activate an AI agent you already use, and it coordinates a team of specialists to analyze the code and generate complete, traceable, ready-to-use specifications for any coding agent.
+Aegis Spec is a specification reverse-engineering framework. You install it inside a legacy project, activate an AI agent you already use, and it coordinates a team of specialists to analyze the code and generate complete, traceable, ready-to-use specifications for any coding agent.
 
-**In other words:** Reversa turns undocumented code into operational contracts that an AI agent can understand and use to safely evolve the system.
+**In other words:** Aegis Spec turns undocumented code into operational contracts that an AI agent can understand and use to safely evolve the system.
 
 ---
 
@@ -19,16 +19,16 @@ Reversa is a specification reverse-engineering framework. You install it inside 
 In the root of the legacy project:
 
 ```bash
-npx reversa install
+npx aegis-spec install
 ```
 
 Then open the project in your favorite AI agent and type:
 
 ```
-/reversa
+/aegis
 ```
 
-That's it. Reversa takes the wheel and guides you to the end.
+That's it. Aegis Spec takes the wheel and guides you to the end.
 
 ---
 
@@ -36,11 +36,11 @@ That's it. Reversa takes the wheel and guides you to the end.
 
 <div class="grid cards" markdown>
 
-- **Why Reversa exists**
+- **Why Aegis Spec exists**
 
     The problem it solves and why it matters.
 
-    [:octicons-arrow-right-24: Read more](por-que-reversa.md)
+    [:octicons-arrow-right-24: Read more](por-que-aegis.md)
 
 - **Installation**
 
@@ -67,7 +67,7 @@ That's it. Reversa takes the wheel and guides you to the end.
 ## Safety guarantee
 
 !!! danger "💾 Back up your project before starting"
-    Although Reversa never modifies your files, AI agents can make mistakes. **We strongly recommend:**
+    Although Aegis Spec never modifies your files, AI agents can make mistakes. **We strongly recommend:**
 
     1. **Version the project in Git** — make sure all files are committed before starting the analysis
     2. **Have the repository on GitHub** (or GitLab, Bitbucket) — so you have a safe remote copy
@@ -75,8 +75,8 @@ That's it. Reversa takes the wheel and guides you to the end.
 
     If something unexpected happens during analysis, you can restore the original state with `git restore .` or from the backup copy.
 
-!!! warning "Reversa never touches your files"
-    Agents write **only** to `.reversa/` and `_reversa_sdd/`. No file in your project is modified, deleted, or overwritten. Ever.
+!!! warning "Aegis Spec never touches your files"
+    Agents write **only** to `.aegis/` and `_aegis_sdd/`. No file in your project is modified, deleted, or overwritten. Ever.
 
 !!! info "No API keys"
-    Reversa does not request, store, or transmit API keys from any service. The intelligence comes from the agent you already use in your environment.
+    Aegis Spec does not request, store, or transmit API keys from any service. The intelligence comes from the agent you already use in your environment.

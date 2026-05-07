@@ -6,7 +6,7 @@
 
 ## Cómo se recoge
 
-`/reversa-migrate` conduce una entrevista interactiva en la primera ejecución. En ejecuciones posteriores ofrece **revisar / mantener / recrear**.
+`/aegis-migrate` conduce una entrevista interactiva en la primera ejecución. En ejecuciones posteriores ofrece **revisar / mantener / recrear**.
 
 ---
 
@@ -33,7 +33,7 @@ El brief **no pregunta sobre apetito**: se deriva después de las elecciones de 
 ---
 schemaVersion: 1
 generatedAt: 2026-05-02T14:30:00Z
-reversa:
+aegis:
   version: "1.2.17"
 kind: migration_brief
 producedBy: orchestrator

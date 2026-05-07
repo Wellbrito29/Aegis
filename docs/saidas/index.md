@@ -1,6 +1,6 @@
 # Generated outputs
 
-Everything Reversa produces goes to the `_reversa_sdd/` folder (or whatever name you configure in `config.toml`). The legacy project is never touched.
+Everything Aegis Spec produces goes to the `_aegis_sdd/` folder (or whatever name you configure in `config.toml`). The legacy project is never touched.
 
 The set of artifacts generated depends on the **documentation level** chosen at the start of the analysis:
 
@@ -15,7 +15,7 @@ The set of artifacts generated depends on the **documentation level** chosen at 
 ## Full structure
 
 ```
-_reversa_sdd/
+_aegis_sdd/
 ├── inventory.md              # Project inventory — all levels
 ├── dependencies.md           # Dependencies with versions — all levels
 ├── code-analysis.md          # Technical analysis per module — all levels
@@ -86,14 +86,14 @@ Two files connect everything:
 
 ## What not to commit
 
-Suggested `.gitignore` to avoid versioning Reversa outputs alongside code (unless you want to):
+Suggested `.gitignore` to avoid versioning Aegis Spec outputs alongside code (unless you want to):
 
 ```gitignore
-# Reversa outputs (optional: remove if you want to version the specs)
-_reversa_sdd/
+# Aegis Spec outputs (optional: remove if you want to version the specs)
+_aegis_sdd/
 
-# Personal Reversa configuration (never commit)
-.reversa/config.user.toml
+# Personal Aegis Spec configuration (never commit)
+.aegis/config.user.toml
 ```
 
 ---

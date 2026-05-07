@@ -1,12 +1,12 @@
-# Control plane Reversa
+# Control plane Aegis Spec
 
-O Reversa 2.0 entrega um control plane em volta de código gerado por IA.
+O Aegis Spec 2.0 entrega um control plane em volta de código gerado por IA.
 Três pilares trabalham juntos:
 
 | Pilar | O que faz | Onde mora |
 |---|---|---|
-| **Reversa** | Autoridade de spec — features, contratos, invariantes, ADRs | `_reversa_sdd/` |
-| **Keeper** | Drift gate — mantém spec e código em sync, opcionalmente via LLM | `agents/reversa-keeper/` + `lib/auto/` |
+| **Aegis Spec** | Autoridade de spec — features, contratos, invariantes, ADRs | `_aegis_sdd/` |
+| **Keeper** | Drift gate — mantém spec e código em sync, opcionalmente via LLM | `agents/aegis-keeper/` + `lib/auto/` |
 | **Graph** | Oráculo do código — knowledge graph do código real | `lib/graph/` |
 
 Tudo MIT, tudo roda local; chamadas a LLM são opt-in.
@@ -29,7 +29,7 @@ Stages 1–2 produzem specs. Stage 3 produz código. Stage 4 mantém os dois hon
 | **Hook pre-edit** | `Stop` / `afterFileEdit` na sua IDE | Bloqueia signature break por edit |
 | **CLI `policy-check`** | CI em todo PR | Bloqueia PR com mudança de contrato |
 | **`keeper auto`** | Depois do CI passar (ou via bot) | Atualiza specs ou escala pra humano |
-| **Audit log** | Toda decisão | Persiste quem/o quê/por quê em `.reversa/audit/` |
+| **Audit log** | Toda decisão | Persiste quem/o quê/por quê em `.aegis/audit/` |
 
 ## Linguagens
 
@@ -52,7 +52,7 @@ binary falta, a linguagem cai pra L0.
 | **Hybrid** (recomendado) | Auto whitelist + HITL blacklist | Default em produção |
 
 Auto mode exige `ANTHROPIC_API_KEY` e `auto_resolve.enabled: true` em
-`_reversa_sdd/auto-policy.yaml`. Ver `docs/keeper-auto.pt.md`.
+`_aegis_sdd/auto-policy.yaml`. Ver `docs/keeper-auto.pt.md`.
 
 ## CI
 

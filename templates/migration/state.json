@@ -20,7 +20,7 @@
   "artifacts": {},
   "auto": false,
   "engine": null,
-  "reversaVersion": "{{VERSION}}",
+  "aegisVersion": "{{VERSION}}",
   "briefPath": "_aegis_sdd/migration/migration_brief.md",
   "expectedLegacyArtifacts": "templates/migration/expected_legacy_artifacts.yaml"
 }

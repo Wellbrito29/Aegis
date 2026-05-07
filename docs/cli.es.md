@@ -1,6 +1,6 @@
 # CLI
 
-Reversa tiene un CLI simple para gestionar la instalación y el ciclo de vida de los agentes en tu proyecto. Todos los comandos se ejecutan con `npx reversa` en la raíz del proyecto.
+Aegis Spec tiene un CLI simple para gestionar la instalación y el ciclo de vida de los agentes en tu proyecto. Todos los comandos se ejecutan con `npx aegis-spec` en la raíz del proyecto.
 
 ---
 
@@ -9,10 +9,10 @@ Reversa tiene un CLI simple para gestionar la instalación y el ciclo de vida de
 ### `install`
 
 ```bash
-npx reversa install
+npx aegis-spec install
 ```
 
-Instala Reversa en el proyecto heredado actual. Detecta los motores presentes, pregunta tus preferencias y crea toda la estructura necesaria.
+Instala Aegis Spec en el proyecto heredado actual. Detecta los motores presentes, pregunta tus preferencias y crea toda la estructura necesaria.
 
 Úsalo una vez, en la raíz del proyecto que quieres analizar.
 
@@ -21,7 +21,7 @@ Instala Reversa en el proyecto heredado actual. Detecta los motores presentes, p
 ### `status`
 
 ```bash
-npx reversa status
+npx aegis-spec status
 ```
 
 Muestra el estado actual del análisis: qué fase está en curso, qué agentes ya corrieron, qué falta completar.
@@ -33,10 +33,10 @@ Muestra el estado actual del análisis: qué fase está en curso, qué agentes y
 ### `update`
 
 ```bash
-npx reversa update
+npx aegis-spec update
 ```
 
-Actualiza los agentes a la versión más reciente de Reversa.
+Actualiza los agentes a la versión más reciente de Aegis Spec.
 
 El comando es inteligente: verifica el manifiesto SHA-256 de cada archivo y nunca sobreescribe archivos que hayas personalizado.
 
@@ -45,7 +45,7 @@ El comando es inteligente: verifica el manifiesto SHA-256 de cada archivo y nunc
 ### `add-agent`
 
 ```bash
-npx reversa add-agent
+npx aegis-spec add-agent
 ```
 
 Agrega un agente específico al proyecto. Útil si no instalaste todos los agentes en la instalación inicial y ahora quieres incluir, por ejemplo, el Data Master o el Design System.
@@ -55,7 +55,7 @@ Agrega un agente específico al proyecto. Útil si no instalaste todos los agent
 ### `add-engine`
 
 ```bash
-npx reversa add-engine
+npx aegis-spec add-engine
 ```
 
 Agrega soporte para un motor de IA que no estaba presente cuando instalaste.
@@ -65,20 +65,20 @@ Agrega soporte para un motor de IA que no estaba presente cuando instalaste.
 ### `uninstall`
 
 ```bash
-npx reversa uninstall
+npx aegis-spec uninstall
 ```
 
-Elimina Reversa del proyecto: borra los archivos creados por la instalación.
+Elimina Aegis Spec del proyecto: borra los archivos creados por la instalación.
 
 !!! info "Tus archivos quedan intactos"
-    `uninstall` elimina **solo** lo que Reversa creó. Ningún archivo original del proyecto es tocado. Las especificaciones generadas en `_reversa_sdd/` también se conservan por defecto. Los hooks instalados vía `add-hooks` también son eliminados.
+    `uninstall` elimina **solo** lo que Aegis Spec creó. Ningún archivo original del proyecto es tocado. Las especificaciones generadas en `_aegis_sdd/` también se conservan por defecto. Los hooks instalados vía `add-hooks` también son eliminados.
 
 ---
 
 ### `add-hooks`
 
 ```bash
-npx reversa add-hooks --engine claude-code
+npx aegis-spec add-hooks --engine claude-code
 ```
 
 Instala hooks del Keeper en la config de la engine para que corra automáticamente tras cada edición. Muestra preview, pide confirmación, escribe.
@@ -90,8 +90,8 @@ Engines: `claude-code`, `cursor`, `kimi-cli`, `codex`, `opencode`. Ver [Hooks](h
 ### `remove-hooks`
 
 ```bash
-npx reversa remove-hooks --engine claude-code
-npx reversa remove-hooks --all
+npx aegis-spec remove-hooks --engine claude-code
+npx aegis-spec remove-hooks --all
 ```
 
 Elimina hooks del Keeper. Otros hooks añadidos manualmente se preservan.
@@ -101,7 +101,7 @@ Elimina hooks del Keeper. Otros hooks añadidos manualmente se preservan.
 ### `drift-check`
 
 ```bash
-npx reversa drift-check
+npx aegis-spec drift-check
 ```
 
-CI gate. Lee `_reversa_sdd/drift.md` y exit 1 si hay specs pendientes. Ver [drift-check](drift-check.es.md).
+CI gate. Lee `_aegis_sdd/drift.md` y exit 1 si hay specs pendientes. Ver [drift-check](drift-check.es.md).

@@ -1,6 +1,6 @@
-# Reversa Roadmap — Control Plane v2.0
+# Aegis Spec Roadmap — Control Plane v2.0
 
-Roadmap discriminado pra evoluir Reversa de framework de spec generation pra **control plane completo** pra agentes de IA.
+Roadmap discriminado pra evoluir Aegis Spec de framework de spec generation pra **control plane completo** pra agentes de IA.
 
 ## Visão geral
 
@@ -8,20 +8,20 @@ Roadmap discriminado pra evoluir Reversa de framework de spec generation pra **c
 
 | Pilar | Função |
 |---|---|
-| **Reversa** | Spec authority — features, contratos, invariantes, ADRs |
+| **Aegis Spec** | Spec authority — features, contratos, invariantes, ADRs |
 | **Keeper** | Drift gate — sync entre spec e código |
 | **Graph** (próprio, MIT) | Codebase oracle — knowledge graph do código real |
 
-Decisão arquitetural: **construir graph próprio**, não usar GitNexus (license PolyForm Noncommercial + scope mismatch). Mantém Reversa MIT puro.
+Decisão arquitetural: **construir graph próprio**, não usar GitNexus (license PolyForm Noncommercial + scope mismatch). Mantém Aegis Spec MIT puro.
 
 ## Pipeline (4 estágios)
 
 ```
 Stage 1 — Discovery     →  Scout, Archaeologist, Detective, Architect, Writer, Reviewer
-                            código legado → _reversa_sdd/ specs
+                            código legado → _aegis_sdd/ specs
 
 Stage 2 — Migração      →  Paradigm Advisor, Curator, Strategist, Designer, Inspector
-                            _reversa_sdd/ → _reversa_sdd/migration/ plan + parity tests
+                            _aegis_sdd/ → _aegis_sdd/migration/ plan + parity tests
 
 Stage 3 — Build         →  agente codificador do user (Claude / Codex / Cursor / Gemini / Kimi)
                             migration plan → código novo
@@ -65,8 +65,8 @@ L0 (file imports via regex) + L1 (AST symbols/calls via tree-sitter) pra:
 | 1.4 | `lib/installer/hooks/cursor.js` | afterFileEdit só append + debounce 30s timer no runner |
 | 1.5 | `lib/installer/hooks/kimi.js` | Pre→remove; Post leve; instala git pre-commit fallback |
 | 1.6 | `lib/installer/hooks/codex.js` | Mesmo padrão Kimi |
-| 1.7 | `agents/reversa-keeper/SKILL.md` | Lê `.reversa/keeper-queue.jsonl` em vez de `.json` snapshot; dedup por arquivo |
-| 1.8 | `agents/reversa-keeper/references/queue-schema.md` | Schema JSONL |
+| 1.7 | `agents/aegis-keeper/SKILL.md` | Lê `.aegis/keeper-queue.jsonl` em vez de `.json` snapshot; dedup por arquivo |
+| 1.8 | `agents/aegis-keeper/references/queue-schema.md` | Schema JSONL |
 
 ### Exit criteria
 
@@ -113,7 +113,7 @@ L0 (file imports via regex) + L1 (AST symbols/calls via tree-sitter) pra:
 
 ### Exit criteria
 
-- [ ] Roda em repo Reversa próprio (TS/JS) → graph com >50 nodes
+- [ ] Roda em repo Aegis Spec próprio (TS/JS) → graph com >50 nodes
 - [ ] Roda em repo Python sample → resolve imports relativos + absolutos
 - [ ] Resolve tsconfig paths
 - [ ] Performance: 1000-file repo em <2s
@@ -128,22 +128,22 @@ L0 (file imports via regex) + L1 (AST symbols/calls via tree-sitter) pra:
 
 | Item | Arquivo | O que faz |
 |---|---|---|
-| 3.1 | `lib/graph/store.js` | Read/write `.reversa/context/graph.json`. Atomic writes. |
+| 3.1 | `lib/graph/store.js` | Read/write `.aegis/context/graph.json`. Atomic writes. |
 | 3.2 | `lib/graph/queries/impact.js` | BFS: file → todos arquivos que dependem (transitive) |
 | 3.3 | `lib/graph/queries/deps.js` | Diretas: arquivos que `file` importa |
 | 3.4 | `lib/graph/queries/reverse-deps.js` | Inverse: quem importa `file` (1 nível) |
 | 3.5 | `lib/graph/incremental.js` | Update incremental: re-parse só `dirty_files` |
-| 3.6 | `lib/commands/graph.js` | CLI: `reversa graph build|impact|deps|stats` |
-| 3.7 | `bin/reversa.js` | Registra comando `graph` |
+| 3.6 | `lib/commands/graph.js` | CLI: `aegis graph build|impact|deps|stats` |
+| 3.7 | `bin/aegis.js` | Registra comando `graph` |
 
 ### CLI exemplos
 
 ```bash
-npx reversa graph build           # construct full graph
-npx reversa graph build --since HEAD~10  # incremental from N commits ago
-npx reversa graph impact src/auth/login.js
-npx reversa graph deps src/auth/login.js
-npx reversa graph stats
+npx aegis-spec graph build           # construct full graph
+npx aegis-spec graph build --since HEAD~10  # incremental from N commits ago
+npx aegis-spec graph impact src/auth/login.js
+npx aegis-spec graph deps src/auth/login.js
+npx aegis-spec graph stats
 ```
 
 ### Exit criteria
@@ -163,7 +163,7 @@ npx reversa graph stats
 
 | Item | Arquivo | O que faz |
 |---|---|---|
-| 4.1 | `lib/policy/index-builder.js` | Lê specs em `_reversa_sdd/sdd/`, extrai frontmatter `protected:` + `contracts:`, gera `.reversa/context/policy-index.json` |
+| 4.1 | `lib/policy/index-builder.js` | Lê specs em `_aegis_sdd/sdd/`, extrai frontmatter `protected:` + `contracts:`, gera `.aegis/context/policy-index.json` |
 | 4.2 | `lib/policy/check.js` | Decision engine: file path → spec → protected? + auto-policy.yaml blacklist |
 | 4.3 | `lib/policy/decisions.js` | 3 níveis: approve / approve+advisory / block |
 | 4.4 | `lib/policy/adapters/claude.js` | Output `{ "decision": "block", "reason": "..." }` |
@@ -173,7 +173,7 @@ npx reversa graph stats
 | 4.8 | `lib/policy/adapters/opencode.js` | Throw com message |
 | 4.9 | `lib/policy/overrides.js` | Detecta override: ADR existe, commit msg flag, CLI unprotect |
 | 4.10 | `lib/installer/hooks/runner.js` | Adiciona policy-check ANTES do queue append; se block, retorna decision |
-| 4.11 | `lib/commands/policy-index.js` | CLI: `reversa policy-index build` |
+| 4.11 | `lib/commands/policy-index.js` | CLI: `aegis policy-index build` |
 
 ### Spec frontmatter usado
 
@@ -206,8 +206,8 @@ protected_files:
 
 | Item | Arquivo | O que muda |
 |---|---|---|
-| 5.1 | `agents/reversa-keeper/SKILL.md` | Step 2 atualizado: usa `reversa graph impact <file>` pra blast radius |
-| 5.2 | `agents/reversa-keeper/references/drift-rules.md` | Nova regra: "Mudança em arquivo com 5+ reverse-deps = severidade HIGH" |
+| 5.1 | `agents/aegis-keeper/SKILL.md` | Step 2 atualizado: usa `aegis graph impact <file>` pra blast radius |
+| 5.2 | `agents/aegis-keeper/references/drift-rules.md` | Nova regra: "Mudança em arquivo com 5+ reverse-deps = severidade HIGH" |
 | 5.3 | `lib/commands/drift-check.js` | Adiciona campo `affected_files` no output JSON usando graph |
 | 5.4 | `lib/installer/hooks/runner.js` | Stop hook chama graph incremental update antes de Keeper |
 | 5.5 | `docs/keeper-graph-integration.{md,pt.md,es.md}` | Doc 3 langs |
@@ -264,8 +264,8 @@ protected_files:
 
 ### Exit criteria
 
-- [ ] Parse Reversa próprio (TS) → graph tem >100 symbols
-- [ ] `reversa graph context login` retorna assinatura + callers
+- [ ] Parse Aegis Spec próprio (TS) → graph tem >100 symbols
+- [ ] `aegis graph context login` retorna assinatura + callers
 - [ ] Performance: 1000-file repo em <8s
 
 ---
@@ -333,7 +333,7 @@ Bump pra `1.9.0`.
 | Item | Arquivo |
 |---|---|
 | 11.1 | `lib/commands/policy-check.js` |
-| 11.2 | `bin/reversa.js` (registra `policy-check`) |
+| 11.2 | `bin/aegis.js` (registra `policy-check`) |
 | 11.3 | `--format=text` (default) e `--format=json` |
 | 11.4 | `--severity` flag (high/medium/low) |
 | 11.5 | `templates/ci/github-actions.yml` |
@@ -345,7 +345,7 @@ Bump pra `1.10.0`.
 ### CLI exemplo
 
 ```bash
-npx reversa policy-check --base origin/main --head HEAD --severity high
+npx aegis-spec policy-check --base origin/main --head HEAD --severity high
 # Comparing origin/main...HEAD (severity=high)
 #   ✗ src/auth/login.js: Signature change to protected `login` ...
 #       kind: signature_change
@@ -361,7 +361,7 @@ npx reversa policy-check --base origin/main --head HEAD --severity high
 
 ## Fase 12 — Auto Keeper mode → v2.0.0-alpha.1 (5-7 dias) ✅ shipped
 
-**Implementado:** Pipeline de decisão completo, com LLM opt-in. Decision tree puro JS roda whitelist/blacklist/escalate antes de qualquer call à API; só quando nada cobre o caso, o classifier (Haiku) é chamado. Spec rewriter (Sonnet) só roda em ROUTE_AUTO. CLI `reversa keeper auto --dry-run` valida policy + queue sem rede — útil em CI. Anthropic SDK declarado em `optionalDependencies` + lazy load via createRequire (offline / dry-run não exige instalação). Prompt caching via system blocks: instrução estável + spec context separados, breakpoint no segundo bloco, diff per-PR no user turn (segue prefix-match invariant). Audit writer append-only em `.reversa/audit/YYYY-MM-DD.jsonl`.
+**Implementado:** Pipeline de decisão completo, com LLM opt-in. Decision tree puro JS roda whitelist/blacklist/escalate antes de qualquer call à API; só quando nada cobre o caso, o classifier (Haiku) é chamado. Spec rewriter (Sonnet) só roda em ROUTE_AUTO. CLI `aegis keeper auto --dry-run` valida policy + queue sem rede — útil em CI. Anthropic SDK declarado em `optionalDependencies` + lazy load via createRequire (offline / dry-run não exige instalação). Prompt caching via system blocks: instrução estável + spec context separados, breakpoint no segundo bloco, diff per-PR no user turn (segue prefix-match invariant). Audit writer append-only em `.aegis/audit/YYYY-MM-DD.jsonl`.
 
 | Item | Arquivo |
 |---|---|
@@ -405,7 +405,7 @@ auto_resolve:
 
 ### Exit criteria
 
-- [ ] `reversa keeper auto --dry-run` mostra decisões sem aplicar
+- [ ] `aegis keeper auto --dry-run` mostra decisões sem aplicar
 - [ ] Whitelist de paths funciona (test files auto-resolved)
 - [ ] Confidence threshold escalations funciona
 - [ ] LLM cost <$0.10 por PR médio (cache hit ratio >70%)
@@ -414,7 +414,7 @@ auto_resolve:
 
 ## Fase 13 — Audit log + bot → v2.0.0-beta.1 (4-5 dias) ✅ shipped
 
-**Implementado:** Audit writer ganhou redação configurável via `_reversa_sdd/audit-policy.json` (`{ "redact": [...] }` substitui campos por `sha256:<16hex>` mantendo correlação). Schema documentado em `lib/audit/schema.md`. Bot scaffold é webhook-shape-agnostic — handler `pr.js` aceita qualquer client com formato Octokit, executa `policy-index build` + `policy-check` + `keeper auto` via spawn (mesmo path que humano usa local), comita atualizações de spec com guard hard-fail se algo fora de `_reversa_sdd/**` aparecer no porcelain. Labels mapeadas em `lib/auto/labels.js` com escalate dominante.
+**Implementado:** Audit writer ganhou redação configurável via `_aegis_sdd/audit-policy.json` (`{ "redact": [...] }` substitui campos por `sha256:<16hex>` mantendo correlação). Schema documentado em `lib/audit/schema.md`. Bot scaffold é webhook-shape-agnostic — handler `pr.js` aceita qualquer client com formato Octokit, executa `policy-index build` + `policy-check` + `keeper auto` via spawn (mesmo path que humano usa local), comita atualizações de spec com guard hard-fail se algo fora de `_aegis_sdd/**` aparecer no porcelain. Labels mapeadas em `lib/auto/labels.js` com escalate dominante.
 
 | Item | Arquivo |
 |---|---|
@@ -432,7 +432,7 @@ Bump pra `2.0.0-beta.1`.
 ### Exit criteria
 
 - [ ] Bot scaffold deployado (manifest + permissions)
-- [ ] Bot commita só em `_reversa_sdd/**` (path-restricted)
+- [ ] Bot commita só em `_aegis_sdd/**` (path-restricted)
 - [ ] Audit log persiste todas decisões
 - [ ] PR labels aplicados corretamente
 
@@ -440,7 +440,7 @@ Bump pra `2.0.0-beta.1`.
 
 ## Fase 14 — CI templates + docs final → v2.0.0 (2-3 dias) ✅ shipped
 
-**Implementado:** Templates CI prontos pra colar (GitHub Actions, GitLab CI, CircleCI), todos com 3 jobs (drift-check → policy-check → keeper-auto opcional). O job auto é gated pela secret `ANTHROPIC_API_KEY` em todos os três providers — sem secret o resto do gate continua rodando. Audit log é uploaded como artifact em todos. Pre-commit hook local idempotente via `lib/installer/git-hooks.js` (block guarded pelos markers `>>> reversa policy-check >>>`). Doc do control plane em 3 langs cobre toolset, modos HITL/Auto/Hybrid, lista de arquivos, e CI templates. Migration guide 1.x→2.0 enumera mudanças e rollback.
+**Implementado:** Templates CI prontos pra colar (GitHub Actions, GitLab CI, CircleCI), todos com 3 jobs (drift-check → policy-check → keeper-auto opcional). O job auto é gated pela secret `ANTHROPIC_API_KEY` em todos os três providers — sem secret o resto do gate continua rodando. Audit log é uploaded como artifact em todos. Pre-commit hook local idempotente via `lib/installer/git-hooks.js` (block guarded pelos markers `>>> aegis policy-check >>>`). Doc do control plane em 3 langs cobre toolset, modos HITL/Auto/Hybrid, lista de arquivos, e CI templates. Migration guide 1.x→2.0 enumera mudanças e rollback.
 
 | Item | Arquivo |
 |---|---|
@@ -452,7 +452,7 @@ Bump pra `2.0.0-beta.1`.
 | 14.6 | `docs/migration-1.x-to-2.0.md` |
 | 14.7 | `README.md` (refs ao policy-check shipped) |
 
-Bump pra `2.0.0`. **Reversa 2.0 GA.**
+Bump pra `2.0.0`. **Aegis Spec 2.0 GA.**
 
 ### Exit criteria
 
@@ -507,7 +507,7 @@ Pode mergear em main por fase (cada fase = PR independente).
 | Decisão | Razão |
 |---|---|
 | **Não usar GitNexus** | License PolyForm Noncommercial bloqueia users comerciais; scope 80% sobrando |
-| **Build graph próprio MIT** | Controle total, tailored ao Reversa, license limpa |
+| **Build graph próprio MIT** | Controle total, tailored ao Aegis Spec, license limpa |
 | **Tree-sitter como dep** | MIT, mature, multi-lang |
 | **L0 + L1 layered** | L0 cobre todas langs raso (regex); L1 deep per-lang (AST) |
 | **Hooks leves + batch** | Onerar sistema na ordem de 9s/task → 300ms/task |
@@ -520,9 +520,9 @@ Pode mergear em main por fase (cada fase = PR independente).
 
 ## Modos de uso target
 
-| Perfil | Como usa Reversa 2.0 |
+| Perfil | Como usa Aegis Spec 2.0 |
 |---|---|
-| Time legado | Reversa extrai spec + Keeper mantém atualizada |
+| Time legado | Aegis Spec extrai spec + Keeper mantém atualizada |
 | Time com agent farm | Auto mode + auto-policy.yaml + audit |
 | Empresa regulada | HITL mode + audit log persistente |
 | Open source maintainer | drift-check + policy-check em CI bloqueia PR ruim |

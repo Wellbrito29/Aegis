@@ -5,7 +5,7 @@ working tree (or any ref) against a base ref, parses each changed file with
 the L1 layer (JS, TS, Python, Go, Java) and reports decisions.
 
 ```bash
-npx reversa policy-check --base origin/main --head HEAD --severity high
+npx aegis-spec policy-check --base origin/main --head HEAD --severity high
 ```
 
 Exit codes:
@@ -21,7 +21,7 @@ Exit codes:
 ## Options
 
 ```
-npx reversa policy-check [--base <ref>] [--head <ref>]
+npx aegis-spec policy-check [--base <ref>] [--head <ref>]
                          [--format text|json] [--severity high|medium|low]
                          [--cwd <path>]
 ```
@@ -48,7 +48,7 @@ changes (signature, exported flag, extends) trigger a block.
 
 ## How decisions are made
 
-1. `policy-index.json` is read. Build it with `npx reversa policy-index build`.
+1. `policy-index.json` is read. Build it with `npx aegis-spec policy-index build`.
 2. For each file in `git diff base...head`:
    - Read the file at `base` and at `head` (`git show ref:path`)
    - Run the smart gate from Phase 10 — diff symbols by canonical id, classify

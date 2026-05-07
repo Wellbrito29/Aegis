@@ -4,11 +4,11 @@ O agente que impede que código novo vire legado.
 
 ## O que faz
 
-O Keeper fecha o ciclo de feedback entre as specs geradas pelo Reversa e as mudanças diárias de código. Roda em dois modos — antes da mudança (briefing read-only) e depois (atualiza specs, changelog e dashboard de drift).
+O Keeper fecha o ciclo de feedback entre as specs geradas pelo Aegis Spec e as mudanças diárias de código. Roda em dois modos — antes da mudança (briefing read-only) e depois (atualiza specs, changelog e dashboard de drift).
 
 ## Por que existe
 
-O Reversa gera specs a partir do código legado. Mas as specs envelhecem rapidamente conforme o código continua mudando. Sem um guardião, as specs ficam dessincronizadas em semanas e se tornam tão inúteis quanto a documentação ausente que o Reversa veio resolver.
+O Aegis Spec gera specs a partir do código legado. Mas as specs envelhecem rapidamente conforme o código continua mudando. Sem um guardião, as specs ficam dessincronizadas em semanas e se tornam tão inúteis quanto a documentação ausente que o Aegis Spec veio resolver.
 
 O Keeper é esse guardião. Trata specs como **fontes de verdade ativas**, não snapshots.
 
@@ -21,12 +21,12 @@ O Keeper é esse guardião. Trata specs como **fontes de verdade ativas**, não 
 Briefing read-only. Use **antes** de começar a mudança.
 
 ```
-/reversa-keeper before lib/auth/login.js
-/reversa-keeper before "vou adicionar rate limiting no login"
+/aegis-keeper before lib/auth/login.js
+/aegis-keeper before "vou adicionar rate limiting no login"
 ```
 
 O agente:
-1. Lê `_reversa_sdd/traceability/code-spec-matrix.md` para identificar specs que cobrem os arquivos afetados
+1. Lê `_aegis_sdd/traceability/code-spec-matrix.md` para identificar specs que cobrem os arquivos afetados
 2. Lê apenas essas specs (consciente de tokens — não percorre tudo)
 3. Apresenta os contratos, invariantes e regras de negócio que a mudança precisa respeitar
 4. Pergunta se sua mudança planejada respeita esses pontos
@@ -37,12 +37,12 @@ O agente:
 Modo padrão se houver mudanças não-commitadas ou eventos enfileirados pelos hooks. Use **depois** que terminar.
 
 ```
-/reversa-keeper after
-/reversa-keeper            # também usa after quando há queue
+/aegis-keeper after
+/aegis-keeper            # também usa after quando há queue
 ```
 
 O agente:
-1. Coleta arquivos modificados via `git diff HEAD` e (se hooks instalados) `.reversa/keeper-queue.json`
+1. Coleta arquivos modificados via `git diff HEAD` e (se hooks instalados) `.aegis/keeper-queue.json`
 2. Mapeia arquivos pra specs impactadas via `code-spec-matrix.md`
 3. Faz 3 perguntas curtas: **Por quê** a mudança, **quebra de compatibilidade**, **contexto extra**
 4. Atualiza cada spec impactada in-place, reclassifica confiança (🟢/🟡/🔴) seguindo as regras em `references/drift-rules.md`
@@ -56,11 +56,11 @@ O agente:
 
 | Arquivo | Quando |
 |---|---|
-| `_reversa_sdd/changelog/YYYY-MM-DD.md` | Modo `after`, sempre |
-| `_reversa_sdd/sdd/[componente].md` | Modo `after`, atualizado in-place se impactado |
-| `_reversa_sdd/traceability/code-spec-matrix.md` | Modo `after`, quando arquivos adicionados/deletados |
-| `_reversa_sdd/drift.md` | Modo `after`, sempre (o dashboard) |
-| `.reversa/state.json` | Modo `after`, checkpoint |
+| `_aegis_sdd/changelog/YYYY-MM-DD.md` | Modo `after`, sempre |
+| `_aegis_sdd/sdd/[componente].md` | Modo `after`, atualizado in-place se impactado |
+| `_aegis_sdd/traceability/code-spec-matrix.md` | Modo `after`, quando arquivos adicionados/deletados |
+| `_aegis_sdd/drift.md` | Modo `after`, sempre (o dashboard) |
+| `.aegis/state.json` | Modo `after`, checkpoint |
 
 Modo `before` não escreve nada.
 
@@ -93,16 +93,16 @@ Após processar uma mudança, o Keeper pode subir ou descer a confiança de afir
 
 ## Trigger manual vs automatizado
 
-Você pode rodar o Keeper **manualmente** via `/reversa-keeper` a qualquer momento — funciona em todas as engines suportadas sem setup adicional.
+Você pode rodar o Keeper **manualmente** via `/aegis-keeper` a qualquer momento — funciona em todas as engines suportadas sem setup adicional.
 
-Para invocação **automática** quando arquivos são editados, instale hooks via [`npx reversa add-hooks`](../hooks.pt.md). Os hooks enfileiram eventos em `.reversa/keeper-queue.json` e pré-preenchem stubs no changelog. Da próxima vez que você rodar `/reversa-keeper after`, o agente enriquece com as 3 perguntas e atualiza as specs.
+Para invocação **automática** quando arquivos são editados, instale hooks via [`npx aegis-spec add-hooks`](../hooks.pt.md). Os hooks enfileiram eventos em `.aegis/keeper-queue.json` e pré-preenchem stubs no changelog. Da próxima vez que você rodar `/aegis-keeper after`, o agente enriquece com as 3 perguntas e atualiza as specs.
 
 ---
 
 ## Quando NÃO rodar
 
-- Sem `_reversa_sdd/`: rode `/reversa` primeiro pra fazer bootstrap
-- Sem `code-spec-matrix.md`: rode `/reversa-architect` ou `/reversa-writer` primeiro
+- Sem `_aegis_sdd/`: rode `/aegis` primeiro pra fazer bootstrap
+- Sem `code-spec-matrix.md`: rode `/aegis-architect` ou `/aegis-writer` primeiro
 - Sem mudanças de código (queue vazia + git diff limpo): nada a fazer
 
 ---

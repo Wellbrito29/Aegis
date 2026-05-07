@@ -1,6 +1,6 @@
 # Detective
 
-**Comando:** `/reversa-detective`
+**Comando:** `/aegis-detective`
 **Fase:** 3 - Interpretación
 
 ---
@@ -23,7 +23,7 @@ No excava más código. Interpreta lo que fue excavado. Es el especialista en ex
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_reversa_sdd/domain.md` | Glosario y reglas de dominio |
-| `_reversa_sdd/state-machines.md` | Máquinas de estado en Mermaid |
-| `_reversa_sdd/permissions.md` | Matriz de permisos |
-| `_reversa_sdd/adrs/[numero]-[titulo].md` | Un ADR por decisión identificada |
+| `_aegis_sdd/domain.md` | Glosario y reglas de dominio |
+| `_aegis_sdd/state-machines.md` | Máquinas de estado en Mermaid |
+| `_aegis_sdd/permissions.md` | Matriz de permisos |
+| `_aegis_sdd/adrs/[numero]-[titulo].md` | Un ADR por decisión identificada |

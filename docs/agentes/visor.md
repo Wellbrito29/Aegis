@@ -1,6 +1,6 @@
 # Visor
 
-**Command:** `/reversa-visor`
+**Command:** `/aegis-visor`
 **Phase:** Any
 
 ---
@@ -47,6 +47,6 @@ Send the images and it handles the rest.
 
 | File | Content |
 |------|---------|
-| `_reversa_sdd/ui/inventory.md` | Complete screen inventory |
-| `_reversa_sdd/ui/flow.md` | Navigation flow in Mermaid |
-| `_reversa_sdd/ui/screens/[screen-name].md` | Detailed spec per screen |
+| `_aegis_sdd/ui/inventory.md` | Complete screen inventory |
+| `_aegis_sdd/ui/flow.md` | Navigation flow in Mermaid |
+| `_aegis_sdd/ui/screens/[screen-name].md` | Detailed spec per screen |

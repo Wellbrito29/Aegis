@@ -1,6 +1,6 @@
-# Reversa (Orquestador)
+# Aegis Spec (Orquestador)
 
-**Comando:** `/reversa`
+**Comando:** `/aegis`
 **Fase:** Orquestación
 
 ---
@@ -21,7 +21,7 @@ Sin él, cada agente tocaría su parte sin conectarse con los demás. Con él, t
 
 ## Responsabilidades
 
-- Verifica si hay un análisis en curso (lee `.reversa/state.json`)
+- Verifica si hay un análisis en curso (lee `.aegis/state.json`)
 - Primera sesión: crea el plan de exploración personalizado y lo presenta al usuario
 - Sesiones posteriores: retoma exactamente donde se quedó
 - Ejecuta los agentes del plan **secuencialmente**, uno a la vez
@@ -44,10 +44,10 @@ Sin él, cada agente tocaría su parte sin conectarse con los demás. Con él, t
 
 === "Claude Code / Cursor / Gemini CLI"
     ```
-    /reversa
+    /aegis
     ```
 
 === "Codex y motores sin slash commands"
     ```
-    reversa
+    aegis
     ```

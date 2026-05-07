@@ -3,7 +3,7 @@
 CLI standalone pra falhar o build de CI quando specs estão fora de sincronia com o código.
 
 ```bash
-npx reversa drift-check
+npx aegis-spec drift-check
 ```
 
 Exit codes:
@@ -12,14 +12,14 @@ Exit codes:
 |---|---|
 | 0 | Limpo — sem drift no severity escolhido |
 | 1 | Drift detectado — bloqueia o build |
-| 2 | `_reversa_sdd/drift.md` ausente — projeto não inicializado |
+| 2 | `_aegis_sdd/drift.md` ausente — projeto não inicializado |
 
 ---
 
 ## Opções
 
 ```
-npx reversa drift-check [--format text|json] [--severity high|medium|low] [--folder <path>]
+npx aegis-spec drift-check [--format text|json] [--severity high|medium|low] [--folder <path>]
 ```
 
 ### `--severity`
@@ -39,7 +39,7 @@ npx reversa drift-check [--format text|json] [--severity high|medium|low] [--fol
 
 ### `--folder`
 
-Override do output folder. Por padrão lê `output_folder` de `.reversa/state.json` com fallback `_reversa_sdd`.
+Override do output folder. Por padrão lê `output_folder` de `.aegis/state.json` com fallback `_aegis_sdd`.
 
 ---
 
@@ -47,7 +47,7 @@ Override do output folder. Por padrão lê `output_folder` de `.reversa/state.js
 
 Sem este gate, o drift loop é puramente disciplina humana. Hooks enfileiram eventos, Keeper atualiza specs — mas nada impede um PR de mergear com specs ainda em `pending`.
 
-`drift-check` fecha o ciclo: build que tenta enviar drift não-resolvido falha. Desenvolvedores ou rodam `/reversa-keeper after` pra resolver, ou explicitamente baixam a severidade (com justificativa) pra aquele PR.
+`drift-check` fecha o ciclo: build que tenta enviar drift não-resolvido falha. Desenvolvedores ou rodam `/aegis-keeper after` pra resolver, ou explicitamente baixam a severidade (com justificativa) pra aquele PR.
 
 ---
 
@@ -65,7 +65,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npx reversa drift-check --severity high --format json
+      - run: npx aegis-spec drift-check --severity high --format json
 ```
 
 ### GitLab CI
@@ -74,7 +74,7 @@ jobs:
 drift-check:
   image: node:20
   script:
-    - npx reversa drift-check --severity high
+    - npx aegis-spec drift-check --severity high
 ```
 
 ### pre-push hook genérico
@@ -82,8 +82,8 @@ drift-check:
 ```bash
 #!/bin/sh
 # .git/hooks/pre-push
-if ! npx reversa drift-check --severity high; then
-  echo "Push bloqueado. Rode /reversa-keeper after pra resolver."
+if ! npx aegis-spec drift-check --severity high; then
+  echo "Push bloqueado. Rode /aegis-keeper after pra resolver."
   exit 1
 fi
 ```
@@ -94,8 +94,8 @@ fi
 
 Esse comando NÃO carrega código de agente, chalk, inquirer ou geradores de hook. Só:
 
-1. Lê `.reversa/state.json` pra achar output folder (best-effort)
-2. Parseia a tabela markdown em `_reversa_sdd/drift.md`
+1. Lê `.aegis/state.json` pra achar output folder (best-effort)
+2. Parseia a tabela markdown em `_aegis_sdd/drift.md`
 3. Conta status
 4. Sai
 
@@ -108,22 +108,22 @@ Cold start rápido (sem imports pesados), serve em qualquer CI runner.
 ```json
 {
   "severity": "high",
-  "source": "/abs/path/to/_reversa_sdd/drift.md",
+  "source": "/abs/path/to/_aegis_sdd/drift.md",
   "counts": { "pending": 1, "stale": 2, "resolved": 12 },
   "blocking": [
-    { "spec": "sdd/notifications.md", "status": "pending", "action": "Rodar /reversa-keeper after" }
+    { "spec": "sdd/notifications.md", "status": "pending", "action": "Rodar /aegis-keeper after" }
   ],
   "clean": false
 }
 ```
 
-Quando `_reversa_sdd/drift.md` está ausente, saída JSON:
+Quando `_aegis_sdd/drift.md` está ausente, saída JSON:
 
 ```json
 {
   "error": "drift.md not found",
-  "path": "/abs/path/to/_reversa_sdd/drift.md",
-  "hint": "Rode /reversa pra inicializar, depois /reversa-keeper after pra popular drift.md"
+  "path": "/abs/path/to/_aegis_sdd/drift.md",
+  "hint": "Rode /aegis pra inicializar, depois /aegis-keeper after pra popular drift.md"
 }
 ```
 

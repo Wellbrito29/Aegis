@@ -1,47 +1,47 @@
 # Como usar
 
-## Ativar o Reversa
+## Ativar o Aegis Spec
 
-Após instalar, abra o projeto no seu agente de IA e ative o Reversa:
+Após instalar, abra o projeto no seu agente de IA e ative o Aegis Spec:
 
 === "Claude Code / Cursor / Gemini CLI"
 
     ```
-    /reversa
+    /aegis
     ```
 
 === "Codex e engines sem slash commands"
 
     ```
-    reversa
+    aegis
     ```
 
-É só isso. O Reversa assume o controle e coordena toda a análise a partir daí.
+É só isso. O Aegis Spec assume o controle e coordena toda a análise a partir daí.
 
 ---
 
 ## O que acontece quando você ativa
 
-O Reversa verifica se existe uma análise em andamento:
+O Aegis Spec verifica se existe uma análise em andamento:
 
 **Primeira vez:** ele cria um plano de exploração personalizado para o seu projeto, apresenta ao usuário para aprovação e começa a análise pela fase 1.
 
-**Sessão retomada:** ele lê o checkpoint salvo em `.reversa/state.json` e continua exatamente de onde parou. Não importa se você fechou o editor, reiniciou a máquina ou deixou dormindo por três dias.
+**Sessão retomada:** ele lê o checkpoint salvo em `.aegis/state.json` e continua exatamente de onde parou. Não importa se você fechou o editor, reiniciou a máquina ou deixou dormindo por três dias.
 
 ---
 
 ## Fluxo típico de uma análise completa
 
 ```
-Você digita /reversa
+Você digita /aegis
         ↓
-Reversa cria o plano de exploração
+Aegis Spec cria o plano de exploração
         ↓
 Você revisa e aprova o plano
         ↓
 Scout mapeia a superfície do projeto
         ↓
-Reversa apresenta o resumo do Scout e você escolhe o nível de documentação
+Aegis Spec apresenta o resumo do Scout e você escolhe o nível de documentação
         ↓
 Archaeologist analisa módulo por módulo
         ↓
@@ -51,10 +51,10 @@ Writer gera as especificações (uma por vez, com sua aprovação)
         ↓
 Reviewer revisa tudo e levanta perguntas para validação
         ↓
-Especificações prontas em _reversa_sdd/
+Especificações prontas em _aegis_sdd/
 ```
 
-O processo é incremental e conversacional. Você não precisa estar presente o tempo todo: o Reversa avisa quando precisa de você.
+O processo é incremental e conversacional. Você não precisa estar presente o tempo todo: o Aegis Spec avisa quando precisa de você.
 
 ---
 
@@ -74,9 +74,9 @@ O Archaeologist analisa um módulo por sessão para economizar contexto. Para pr
 
 ## Dica: estouro de contexto
 
-Se a sessão ficar muito longa e o contexto começar a acabar, o Reversa salva o checkpoint automaticamente e avisa:
+Se a sessão ficar muito longa e o contexto começar a acabar, o Aegis Spec salva o checkpoint automaticamente e avisa:
 
-> "Vou pausar aqui. Tudo está salvo. Digite `/reversa` em uma nova sessão para continuar."
+> "Vou pausar aqui. Tudo está salvo. Digite `/aegis` em uma nova sessão para continuar."
 
 Sem drama. Sem perda. É só continuar depois.
 
@@ -84,7 +84,7 @@ Sem drama. Sem perda. É só continuar depois.
 
 ## Nível de documentação
 
-Depois que o Scout termina, o Reversa apresenta um resumo do que encontrou (quantos módulos, integrações, se há banco de dados) e pergunta qual volume de documentação você quer para o projeto:
+Depois que o Scout termina, o Aegis Spec apresenta um resumo do que encontrou (quantos módulos, integrações, se há banco de dados) e pergunta qual volume de documentação você quer para o projeto:
 
 | Nível | Quando usar | O que gera |
 |-------|-------------|------------|
@@ -92,7 +92,7 @@ Depois que o Scout termina, o Reversa apresenta um resumo do que encontrou (quan
 | **Completo** | Projetos médios, equipes pequenas (padrão) | Tudo do essencial + diagramas C4, ERD, ADRs, OpenAPI, user stories e matrizes de rastreabilidade |
 | **Detalhado** | Sistemas enterprise, múltiplas equipes | Tudo do completo + flowcharts por função, ADRs expandidos, diagrama de deployment e revisão cruzada obrigatória |
 
-A escolha fica salva em `.reversa/state.json` e todos os agentes seguintes a respeitam automaticamente. Se precisar ajustar depois de iniciada a análise, basta editar o campo `doc_level` no arquivo.
+A escolha fica salva em `.aegis/state.json` e todos os agentes seguintes a respeitam automaticamente. Se precisar ajustar depois de iniciada a análise, basta editar o campo `doc_level` no arquivo.
 
 ---
 
@@ -101,9 +101,9 @@ A escolha fica salva em `.reversa/state.json` e todos os agentes seguintes a res
 Se quiser rodar um agente avulso, sem passar pelo orquestrador:
 
 ```
-/reversa-scout
-/reversa-detective
-/reversa-data-master
+/aegis-scout
+/aegis-detective
+/aegis-data-master
 ```
 
 Útil quando você já tem uma análise em andamento e quer executar um agente específico por algum motivo pontual.

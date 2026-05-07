@@ -2,14 +2,14 @@
 
 Instala hooks en tu engine de IA para que el Keeper corra automáticamente cuando edites un archivo.
 
-`/reversa-keeper after` manual siempre funciona como fallback.
+`/aegis-keeper after` manual siempre funciona como fallback.
 
 ---
 
 ## Quick start
 
 ```bash
-npx reversa add-hooks --engine claude-code   # o cursor, kimi-cli, codex, opencode
+npx aegis-spec add-hooks --engine claude-code   # o cursor, kimi-cli, codex, opencode
 ```
 
 Verás un preview antes de escribir. Confirma para instalar.
@@ -17,22 +17,22 @@ Verás un preview antes de escribir. Confirma para instalar.
 Para desinstalar:
 
 ```bash
-npx reversa remove-hooks --engine claude-code
-npx reversa remove-hooks --all
+npx aegis-spec remove-hooks --engine claude-code
+npx aegis-spec remove-hooks --all
 ```
 
 ---
 
 ## Qué hace el hook
 
-Cuando la engine dispara un tool que edita archivos, el hook invoca el runner en `.reversa/_hooks/runner.js`. El runner:
+Cuando la engine dispara un tool que edita archivos, el hook invoca el runner en `.aegis/_hooks/runner.js`. El runner:
 
-1. Append en `.reversa/keeper-queue.json` (con lock para concurrencia)
-2. Stub en `_reversa_sdd/changelog/YYYY-MM-DD.md`
-3. Marca specs afectadas como `🔴 pending` en `_reversa_sdd/drift.md`
+1. Append en `.aegis/keeper-queue.json` (con lock para concurrencia)
+2. Stub en `_aegis_sdd/changelog/YYYY-MM-DD.md`
+3. Marca specs afectadas como `🔴 pending` en `_aegis_sdd/drift.md`
 4. Warning en stderr si se afectó spec de alta confianza
 
-Nunca bloquea la engine. Nunca modifica tu código. Errores en `.reversa/keeper-errors.log`.
+Nunca bloquea la engine. Nunca modifica tu código. Errores en `.aegis/keeper-errors.log`.
 
 ---
 
@@ -44,7 +44,7 @@ Nunca bloquea la engine. Nunca modifica tu código. Errores en `.reversa/keeper-
 | Cursor | `.cursor/hooks.json` | afterFileEdit |
 | Kimi CLI | `.kimi/config.toml` o `~/.kimi/config.toml` (con backup) | PreToolUse + PostToolUse |
 | Codex | `.codex/hooks.toml` | PreToolUse + PostToolUse (apply_patch) |
-| Opencode | `.opencode/plugins/reversa-keeper.js` | tool.execute.before/after |
+| Opencode | `.opencode/plugins/aegis-keeper.js` | tool.execute.before/after |
 
 ---
 
@@ -60,9 +60,9 @@ Nunca bloquea la engine. Nunca modifica tu código. Errores en `.reversa/keeper-
 
 ## Integración CI
 
-Combina con [`npx reversa drift-check`](drift-check.es.md):
+Combina con [`npx aegis-spec drift-check`](drift-check.es.md):
 
 ```yaml
-- name: Reversa drift gate
-  run: npx reversa drift-check --severity high
+- name: Aegis Spec drift gate
+  run: npx aegis-spec drift-check --severity high
 ```

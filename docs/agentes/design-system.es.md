@@ -1,6 +1,6 @@
 # Design System
 
-**Comando:** `/reversa-design-system`
+**Comando:** `/aegis-design-system`
 **Fase:** Cualquiera
 
 ---
@@ -23,8 +23,8 @@ El estilista cataloga el guardarropa del sistema: paleta de colores, tipografía
 
 | Archivo | Contenido |
 |---------|-----------|
-| `_reversa_sdd/design-system/color-palette.md` | Paleta completa con valores |
-| `_reversa_sdd/design-system/typography.md` | Sistema tipográfico |
-| `_reversa_sdd/design-system/spacing.md` | Espaciado, grid y breakpoints |
-| `_reversa_sdd/design-system/tokens.md` | Todos los tokens en tabla |
-| `_reversa_sdd/design-system/design-system.md` | Documento consolidado |
+| `_aegis_sdd/design-system/color-palette.md` | Paleta completa con valores |
+| `_aegis_sdd/design-system/typography.md` | Sistema tipográfico |
+| `_aegis_sdd/design-system/spacing.md` | Espaciado, grid y breakpoints |
+| `_aegis_sdd/design-system/tokens.md` | Todos los tokens en tabla |
+| `_aegis_sdd/design-system/design-system.md` | Documento consolidado |

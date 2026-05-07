@@ -1,6 +1,6 @@
 # Supported engines
 
-Reversa works with the leading AI engines on the market. The installer automatically detects which ones are present in the environment, but you can add more at any time with `npx reversa add-engine`.
+Aegis Spec works with the leading AI engines on the market. The installer automatically detects which ones are present in the environment, but you can add more at any time with `npx aegis-spec add-engine`.
 
 ---
 
@@ -8,32 +8,32 @@ Reversa works with the leading AI engines on the market. The installer automatic
 
 | Engine | File created | Skills path | How to activate |
 |--------|-------------|-------------|-----------------|
-| **Claude Code** ⭐ | `CLAUDE.md` | `.claude/skills/reversa-*/` and `.agents/skills/reversa-*/` | `/reversa` |
-| **Codex** ⭐ | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
-| **Cursor** ⭐ | `.cursorrules` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Gemini CLI** | `GEMINI.md` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Windsurf** | `.windsurfrules` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Antigravity** | `AGENTS.md` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Kiro** | (none) | `.kiro/skills/reversa-*/` and `.agents/skills/reversa-*/` | `/reversa` |
-| **Opencode** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
-| **Kimi CLI** | `AGENTS.md` | `.agents/skills/reversa-*/` | `reversa` |
-| **Cline** | `.clinerules` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Roo Code** | `.roorules` | `.agents/skills/reversa-*/` | `/reversa` |
-| **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/reversa-*/` | `/reversa` |
-| **Aider** | `CONVENTIONS.md` | `.agents/skills/reversa-*/` | `reversa` |
-| **Amazon Q Developer** | `.amazonq/rules/reversa.md` | `.agents/skills/reversa-*/` | `/reversa` |
+| **Claude Code** ⭐ | `CLAUDE.md` | `.claude/skills/aegis-*/` and `.agents/skills/aegis-*/` | `/aegis` |
+| **Codex** ⭐ | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
+| **Cursor** ⭐ | `.cursorrules` | `.agents/skills/aegis-*/` | `/aegis` |
+| **Gemini CLI** | `GEMINI.md` | `.agents/skills/aegis-*/` | `/aegis` |
+| **Windsurf** | `.windsurfrules` | `.agents/skills/aegis-*/` | `/aegis` |
+| **Antigravity** | `AGENTS.md` | `.agents/skills/aegis-*/` | `/aegis` |
+| **Kiro** | (none) | `.kiro/skills/aegis-*/` and `.agents/skills/aegis-*/` | `/aegis` |
+| **Opencode** | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
+| **Kimi CLI** | `AGENTS.md` | `.agents/skills/aegis-*/` | `aegis` |
+| **Cline** | `.clinerules` | `.agents/skills/aegis-*/` | `/aegis` |
+| **Roo Code** | `.roorules` | `.agents/skills/aegis-*/` | `/aegis` |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | `.agents/skills/aegis-*/` | `/aegis` |
+| **Aider** | `CONVENTIONS.md` | `.agents/skills/aegis-*/` | `aegis` |
+| **Amazon Q Developer** | `.amazonq/rules/aegis.md` | `.agents/skills/aegis-*/` | `/aegis` |
 
 ---
 
 ## Claude Code
 
-The most tested engine with the best support. Uses native slash commands, making activation intuitive. Reversa creates files in both `.claude/skills/` and `.agents/skills/` (for compatibility with other engines that may be added later).
+The most tested engine with the best support. Uses native slash commands, making activation intuitive. Aegis Spec creates files in both `.claude/skills/` and `.agents/skills/` (for compatibility with other engines that may be added later).
 
 ---
 
 ## Codex
 
-Fully compatible. Since Codex doesn't use slash commands, activation is by the agent name directly: `reversa`, `reversa-scout`, etc. The `AGENTS.md` file at the project root serves as the entry point.
+Fully compatible. Since Codex doesn't use slash commands, activation is by the agent name directly: `aegis`, `aegis-scout`, etc. The `AGENTS.md` file at the project root serves as the entry point.
 
 ---
 
@@ -57,25 +57,25 @@ Google's agentic development platform, released in November 2025. Reads `AGENTS.
 
 ## Kiro
 
-Amazon's agentic IDE. Kiro natively discovers skills in `.kiro/skills/`, no steering document required. The installer places agents in `.kiro/skills/` (and also in `.agents/skills/` for compatibility with other engines). Activation is via `/reversa` or auto-discovery from the skill description.
+Amazon's agentic IDE. Kiro natively discovers skills in `.kiro/skills/`, no steering document required. The installer places agents in `.kiro/skills/` (and also in `.agents/skills/` for compatibility with other engines). Activation is via `/aegis` or auto-discovery from the skill description.
 
 ---
 
 ## Opencode
 
-Open source coding agent for the terminal (SST). Reads `AGENTS.md` natively, same convention as Codex. CLI command: `opencode`. Like Codex, activation is by agent name: `reversa`.
+Open source coding agent for the terminal (SST). Reads `AGENTS.md` natively, same convention as Codex. CLI command: `opencode`. Like Codex, activation is by agent name: `aegis`.
 
 ---
 
 ## Kimi CLI
 
-Moonshot AI's terminal coding agent. Reads `AGENTS.md` natively (merged from project root to working directory) — same convention as Codex/Opencode. If any of those is already installed, the existing `AGENTS.md` is reused without duplication. Skills are auto-discovered from `.agents/skills/` and `.kimi/skills/`. CLI command: `kimi`. Activation is by agent name: `reversa`.
+Moonshot AI's terminal coding agent. Reads `AGENTS.md` natively (merged from project root to working directory) — same convention as Codex/Opencode. If any of those is already installed, the existing `AGENTS.md` is reused without duplication. Skills are auto-discovered from `.agents/skills/` and `.kimi/skills/`. CLI command: `kimi`. Activation is by agent name: `aegis`.
 
 ---
 
 ## Cline and Roo Code
 
-VS Code extensions with custom rules support via `.clinerules` and `.roorules` respectively. The pattern is identical to Cursor and Windsurf: a rules file at the project root that instructs the agent when activating `/reversa`.
+VS Code extensions with custom rules support via `.clinerules` and `.roorules` respectively. The pattern is identical to Cursor and Windsurf: a rules file at the project root that instructs the agent when activating `/aegis`.
 
 ---
 
@@ -87,13 +87,13 @@ Uses `.github/copilot-instructions.md` as a custom instructions file, automatica
 
 ## Aider
 
-Coding agent for the terminal. The entry file `CONVENTIONS.md` at the root is passed via `--read CONVENTIONS.md` or configured in `.aider.conf.yml`. Like Codex and Opencode, activation is by name: `reversa`.
+Coding agent for the terminal. The entry file `CONVENTIONS.md` at the root is passed via `--read CONVENTIONS.md` or configured in `.aider.conf.yml`. Like Codex and Opencode, activation is by name: `aegis`.
 
 ---
 
 ## Amazon Q Developer
 
-AWS AI CLI. Uses rules in `.amazonq/rules/` to instruct the agent per project. The installer creates `.amazonq/rules/reversa.md` without interfering with other rules you may already have in that folder.
+AWS AI CLI. Uses rules in `.amazonq/rules/` to instruct the agent per project. The installer creates `.amazonq/rules/aegis.md` without interfering with other rules you may already have in that folder.
 
 ---
 

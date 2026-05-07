@@ -5,7 +5,7 @@ working tree (o cualquier ref) contra un base ref, parsea cada archivo
 modificado con el layer L1 (JS, TS, Python, Go, Java) y reporta decisiones.
 
 ```bash
-npx reversa policy-check --base origin/main --head HEAD --severity high
+npx aegis-spec policy-check --base origin/main --head HEAD --severity high
 ```
 
 Códigos de salida:
@@ -21,7 +21,7 @@ Códigos de salida:
 ## Opciones
 
 ```
-npx reversa policy-check [--base <ref>] [--head <ref>]
+npx aegis-spec policy-check [--base <ref>] [--head <ref>]
                          [--format text|json] [--severity high|medium|low]
                          [--cwd <path>]
 ```
@@ -48,7 +48,7 @@ Cambios sólo en el body de funciones en archivos protegidos siempre aprueban
 
 ## Cómo se toman las decisiones
 
-1. `policy-index.json` se lee. Constrúyelo con `npx reversa policy-index build`.
+1. `policy-index.json` se lee. Constrúyelo con `npx aegis-spec policy-index build`.
 2. Por cada archivo en `git diff base...head`:
    - Lee el contenido en `base` y en `head` (`git show ref:path`)
    - Corre el smart gate de la Fase 10 — diff de símbolos por id canonical,

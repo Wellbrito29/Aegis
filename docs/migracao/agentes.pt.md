@@ -1,6 +1,6 @@
 # Os 5 agentes do Time de Migração
 
-Os agentes rodam em sequência fixa. Cada um lê o que os anteriores produziram e adiciona um artefato. O `/reversa-migrate` orquestra tudo.
+Os agentes rodam em sequência fixa. Cada um lê o que os anteriores produziram e adiciona um artefato. O `/aegis-migrate` orquestra tudo.
 
 ---
 
@@ -16,7 +16,7 @@ Entre cada agente há uma pausa para revisão humana. O modo padrão é interati
 
 ## 1. Paradigm Advisor
 
-**Comando:** `/reversa-paradigm-advisor` (geralmente invocado pelo `/reversa-migrate`)
+**Comando:** `/aegis-paradigm-advisor` (geralmente invocado pelo `/aegis-migrate`)
 
 Detecta o paradigma do sistema legado, infere o paradigma natural da stack alvo declarada no brief e alerta sobre gaps. Força uma decisão consciente do usuário, porque trocar de linguagem não é só mudança sintática, é frequentemente mudança fundamental de modelo mental.
 
@@ -26,7 +26,7 @@ Detecta o paradigma do sistema legado, infere o paradigma natural da stack alvo 
 
 ## 2. Curator
 
-**Comando:** `/reversa-curator`
+**Comando:** `/aegis-curator`
 
 Lê as regras de negócio do legado e decide, regra por regra: **MIGRAR**, **DESCARTAR** ou **DECISÃO HUMANA**. Considera o paradigma escolhido: regras que são artefatos do paradigma legado (ex: lock manual em sistema procedural síncrono) podem ser descartadas em alvo event-driven.
 
@@ -36,7 +36,7 @@ Lê as regras de negócio do legado e decide, regra por regra: **MIGRAR**, **DES
 
 ## 3. Strategist
 
-**Comando:** `/reversa-strategist`
+**Comando:** `/aegis-strategist`
 
 Avalia estratégias possíveis (Strangler Fig, Big Bang, Parallel Run, Branch by Abstraction), apresenta trade-offs explícitos e recomenda uma. A decisão final é humana.
 
@@ -48,7 +48,7 @@ Considera o apetite derivado do `paradigm_decision.md`: apetite conservador favo
 
 ## 4. Designer
 
-**Comando:** `/reversa-designer`
+**Comando:** `/aegis-designer`
 
 Desenha as specs do sistema novo: arquitetura alvo (com diagrama Mermaid), domain model, data model e plano de migração de dados. Honra o paradigma escolhido (event-driven exige eventos explícitos, OO com DI exige interfaces, etc.).
 
@@ -60,7 +60,7 @@ Não decompõe ingenuamente 1-para-1: identifica bounded contexts reais e justif
 
 ## 5. Inspector
 
-**Comando:** `/reversa-inspector`
+**Comando:** `/aegis-inspector`
 
 Define como provar que o sistema novo é comportamentalmente equivalente ao legado nos pontos críticos. Adapta os critérios ao paradigma: mudança síncrono → event-driven exige cobertura de ordem de mensagens, idempotência e consistência eventual.
 
@@ -70,9 +70,9 @@ Define como provar que o sistema novo é comportamentalmente equivalente ao lega
 
 ## Quando rodar manualmente
 
-Você quase nunca precisa chamar um agente isolado. O `/reversa-migrate` orquestra todos. Mas se um agente falhou ou você quer rerodar a partir de um ponto específico:
+Você quase nunca precisa chamar um agente isolado. O `/aegis-migrate` orquestra todos. Mas se um agente falhou ou você quer rerodar a partir de um ponto específico:
 
 ```
-/reversa-migrate --resume                    # retoma do último agente que concluiu
-/reversa-migrate --regenerate=designer       # apaga Designer + Inspector e refaz
+/aegis-migrate --resume                    # retoma do último agente que concluiu
+/aegis-migrate --regenerate=designer       # apaga Designer + Inspector e refaz
 ```

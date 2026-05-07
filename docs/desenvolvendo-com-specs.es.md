@@ -1,6 +1,6 @@
 # Desarrollando desde los specs
 
-Una vez que Reversa ha generado todos los specs en `_reversa_sdd/`, puedes copiar esos archivos a cualquier máquina y comenzar a construir el sistema desde cero. Aquí está el orden recomendado.
+Una vez que Aegis Spec ha generado todos los specs en `_aegis_sdd/`, puedes copiar esos archivos a cualquier máquina y comenzar a construir el sistema desde cero. Aquí está el orden recomendado.
 
 ---
 
@@ -10,9 +10,9 @@ Comienza leyendo estos tres archivos:
 
 | Archivo | Por qué leer primero |
 |---|---|
-| `_reversa_sdd/confidence-report.md` | Muestra qué tiene alta confianza (verde) vs. brechas (rojo). Evita implementar algo basado en inferencias incorrectas. |
-| `_reversa_sdd/gaps.md` | Lista lo que Reversa no pudo determinar. Completa manualmente antes de comenzar. |
-| `_reversa_sdd/architecture.md` + diagramas C4 | Muestra el panorama general: capas, módulos, límites del sistema. |
+| `_aegis_sdd/confidence-report.md` | Muestra qué tiene alta confianza (verde) vs. brechas (rojo). Evita implementar algo basado en inferencias incorrectas. |
+| `_aegis_sdd/gaps.md` | Lista lo que Aegis Spec no pudo determinar. Completa manualmente antes de comenzar. |
+| `_aegis_sdd/architecture.md` + diagramas C4 | Muestra el panorama general: capas, módulos, límites del sistema. |
 
 ---
 
@@ -30,7 +30,7 @@ Comienza leyendo estos tres archivos:
 
 ## Qué unit va primero
 
-Abre `_reversa_sdd/traceability/code-spec-matrix.md`. Lista cada unit y sus dependencias.
+Abre `_aegis_sdd/traceability/code-spec-matrix.md`. Lista cada unit y sus dependencias.
 
 Implementa primero las units que no dependen de ninguna otra (hojas del árbol de dependencias), y sube hacia las units que integran múltiples componentes.
 
@@ -38,11 +38,11 @@ Implementa primero las units que no dependen de ninguna otra (hojas del árbol d
 
 ## Mantener la trazabilidad durante el desarrollo
 
-Usa `_reversa_sdd/traceability/code-spec-matrix.md` como referencia durante el desarrollo para saber qué fragmento de código implementado corresponde a qué spec. Esto mantiene la trazabilidad precisa a medida que el código crece.
+Usa `_aegis_sdd/traceability/code-spec-matrix.md` como referencia durante el desarrollo para saber qué fragmento de código implementado corresponde a qué spec. Esto mantiene la trazabilidad precisa a medida que el código crece.
 
 ---
 
 ## Ver también
 
-- [Salidas generadas](saidas/index.md): lista completa de archivos producidos por Reversa
+- [Salidas generadas](saidas/index.md): lista completa de archivos producidos por Aegis Spec
 - [Escala de confianza](escala-confianca.md): cómo interpretar los marcadores 🟢🟡🔴 en los specs

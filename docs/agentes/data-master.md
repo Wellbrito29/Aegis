@@ -1,6 +1,6 @@
 # Data Master
 
-**Command:** `/reversa-data-master`
+**Command:** `/aegis-data-master`
 **Phase:** Any
 
 ---
@@ -59,11 +59,11 @@ Generated in Mermaid (`erDiagram`). For large databases, generates partial ERDs 
 
 | File | Content |
 |------|---------|
-| `_reversa_sdd/database/erd.md` | Full ERD in Mermaid |
-| `_reversa_sdd/database/data-dictionary.md` | All tables and columns |
-| `_reversa_sdd/database/relationships.md` | Detailed relationships |
-| `_reversa_sdd/database/business-rules.md` | Business rules in the database |
-| `_reversa_sdd/database/procedures.md` | Stored procedures and functions (if any) |
+| `_aegis_sdd/database/erd.md` | Full ERD in Mermaid |
+| `_aegis_sdd/database/data-dictionary.md` | All tables and columns |
+| `_aegis_sdd/database/relationships.md` | Detailed relationships |
+| `_aegis_sdd/database/business-rules.md` | Business rules in the database |
+| `_aegis_sdd/database/procedures.md` | Stored procedures and functions (if any) |
 
 ---
 

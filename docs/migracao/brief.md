@@ -6,7 +6,7 @@
 
 ## How it is collected
 
-`/reversa-migrate` runs an interactive interview on first execution. On subsequent runs, it offers **review / keep / recreate**.
+`/aegis-migrate` runs an interactive interview on first execution. On subsequent runs, it offers **review / keep / recreate**.
 
 ---
 
@@ -33,7 +33,7 @@ The brief **does not ask about appetite**: it is derived later from paradigm cho
 ---
 schemaVersion: 1
 generatedAt: 2026-05-02T14:30:00Z
-reversa:
+aegis:
   version: "1.2.17"
 kind: migration_brief
 producedBy: orchestrator

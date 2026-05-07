@@ -6,7 +6,7 @@ O `migration_brief.md` é o primeiro artefato. Ele captura o critério de migra�
 
 ## Como é coletado
 
-O `/reversa-migrate` conduz uma entrevista interativa na primeira execução. Em execuções seguintes, oferece **revisar / manter / recriar**.
+O `/aegis-migrate` conduz uma entrevista interativa na primeira execução. Em execuções seguintes, oferece **revisar / manter / recriar**.
 
 ---
 
@@ -33,7 +33,7 @@ O brief **não pergunta apetite**: ele é derivado depois das escolhas de paradi
 ---
 schemaVersion: 1
 generatedAt: 2026-05-02T14:30:00Z
-reversa:
+aegis:
   version: "1.2.17"
 kind: migration_brief
 producedBy: orchestrator

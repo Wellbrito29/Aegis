@@ -1,6 +1,6 @@
 # Archaeologist
 
-**Command:** `/reversa-archaeologist`
+**Command:** `/aegis-archaeologist`
 **Phase:** 2 - Excavation
 
 ---
@@ -42,10 +42,10 @@ The Archaeologist analyzes one module at a time, intentionally. For projects wit
 
 | File | Content |
 |------|---------|
-| `_reversa_sdd/code-analysis.md` | Consolidated technical analysis |
-| `_reversa_sdd/data-dictionary.md` | Complete data dictionary |
-| `_reversa_sdd/flowcharts/[module].md` | Mermaid flowchart per module |
-| `.reversa/context/modules.json` | Structured data per module for the next agents |
+| `_aegis_sdd/code-analysis.md` | Consolidated technical analysis |
+| `_aegis_sdd/data-dictionary.md` | Complete data dictionary |
+| `_aegis_sdd/flowcharts/[module].md` | Mermaid flowchart per module |
+| `.aegis/context/modules.json` | Structured data per module for the next agents |
 
 ---
 

@@ -2,14 +2,14 @@
 
 Instala configuração de hooks na sua engine de IA para o Keeper rodar automaticamente toda vez que você editar um arquivo.
 
-`/reversa-keeper after` manual sempre funciona como fallback. Hooks só removem a fricção.
+`/aegis-keeper after` manual sempre funciona como fallback. Hooks só removem a fricção.
 
 ---
 
 ## Quick start
 
 ```bash
-npx reversa add-hooks --engine claude-code   # ou cursor, kimi-cli, codex, opencode
+npx aegis-spec add-hooks --engine claude-code   # ou cursor, kimi-cli, codex, opencode
 ```
 
 Vai aparecer um preview do que será escrito. Confirme para instalar.
@@ -17,26 +17,26 @@ Vai aparecer um preview do que será escrito. Confirme para instalar.
 Para desinstalar:
 
 ```bash
-npx reversa remove-hooks --engine claude-code
-npx reversa remove-hooks --all                # todas as engines de uma vez
+npx aegis-spec remove-hooks --engine claude-code
+npx aegis-spec remove-hooks --all                # todas as engines de uma vez
 ```
 
 ---
 
 ## O que o hook faz
 
-Quando a engine dispara um tool que edita arquivo (`Edit`, `Write`, `MultiEdit`, `apply_patch`, `afterFileEdit`, etc.), o hook invoca o **Reversa hook runner** — um script Node pequeno instalado em `.reversa/_hooks/runner.js`.
+Quando a engine dispara um tool que edita arquivo (`Edit`, `Write`, `MultiEdit`, `apply_patch`, `afterFileEdit`, etc.), o hook invoca o **Aegis Spec hook runner** — um script Node pequeno instalado em `.aegis/_hooks/runner.js`.
 
 O runner:
 
-1. Faz append de uma entrada em `.reversa/keeper-queue.json` (com lock para edições concorrentes)
-2. Escreve um stub em `_reversa_sdd/changelog/YYYY-MM-DD.md` pra mudança ser mencionada mesmo se você nunca rodar o Keeper
-3. Marca specs afetadas como `🔴 pending` em `_reversa_sdd/drift.md`
+1. Faz append de uma entrada em `.aegis/keeper-queue.json` (com lock para edições concorrentes)
+2. Escreve um stub em `_aegis_sdd/changelog/YYYY-MM-DD.md` pra mudança ser mencionada mesmo se você nunca rodar o Keeper
+3. Marca specs afetadas como `🔴 pending` em `_aegis_sdd/drift.md`
 4. Imprime warning no terminal se uma spec de alta confiança foi tocada
 
-O runner **nunca bloqueia** a engine e **nunca modifica seu código**. Erros são logados silenciosamente em `.reversa/keeper-errors.log`.
+O runner **nunca bloqueia** a engine e **nunca modifica seu código**. Erros são logados silenciosamente em `.aegis/keeper-errors.log`.
 
-Depois, quando você roda `/reversa-keeper after`, o agente lê a queue, faz as 3 perguntas, enriquece o changelog, atualiza as specs e limpa a queue.
+Depois, quando você roda `/aegis-keeper after`, o agente lê a queue, faz as 3 perguntas, enriquece o changelog, atualiza as specs e limpa a queue.
 
 ---
 
@@ -48,30 +48,30 @@ Depois, quando você roda `/reversa-keeper after`, o agente lê a queue, faz as 
 | Cursor | `.cursor/hooks.json` | afterFileEdit (matcher `**/*`) |
 | Kimi CLI | `.kimi/config.toml` (projeto) ou `~/.kimi/config.toml` (global, com backup) | PreToolUse + PostToolUse (matcher `Edit\|Write`) |
 | Codex | `.codex/hooks.toml` | PreToolUse + PostToolUse (matcher `apply_patch`) |
-| Opencode | `.opencode/plugins/reversa-keeper.js` | tool.execute.before/after |
+| Opencode | `.opencode/plugins/aegis-keeper.js` | tool.execute.before/after |
 
-Para engines não listadas (Gemini CLI, Aider, Roo, Cline, Copilot, Windsurf, Antigravity, Kiro, Amazon Q): use o fluxo manual `/reversa-keeper`.
+Para engines não listadas (Gemini CLI, Aider, Roo, Cline, Copilot, Windsurf, Antigravity, Kiro, Amazon Q): use o fluxo manual `/aegis-keeper`.
 
 ---
 
 ## Garantias de segurança
 
 - **Preview antes de escrever.** `add-hooks` mostra o JSON/TOML exato que será escrito e pede confirmação.
-- **Sem overwrite cego.** Ao mesclar com config existente (ex.: `.claude/settings.json`), o Reversa preserva todas as chaves e hook entries existentes. Só toca em entradas identificadas pelo marcador `reversa/_hooks/runner.js` no command.
-- **Backup pra config global.** Ao editar `~/.kimi/config.toml`, um backup timestamped é salvo como `~/.kimi/config.toml.bak.reversa-<ISO>`.
-- **Install idempotente.** Rodar `add-hooks` duas vezes pra mesma engine substitui os hooks Reversa anteriores; não duplica.
-- **Uninstall limpo.** `remove-hooks` tira só entradas Reversa. Outros hooks que você adicionou manualmente ficam preservados. `npx reversa uninstall` faz o mesmo automaticamente.
+- **Sem overwrite cego.** Ao mesclar com config existente (ex.: `.claude/settings.json`), o Aegis Spec preserva todas as chaves e hook entries existentes. Só toca em entradas identificadas pelo marcador `aegis-spec/_hooks/runner.js` no command.
+- **Backup pra config global.** Ao editar `~/.kimi/config.toml`, um backup timestamped é salvo como `~/.kimi/config.toml.bak.aegis-<ISO>`.
+- **Install idempotente.** Rodar `add-hooks` duas vezes pra mesma engine substitui os hooks Aegis Spec anteriores; não duplica.
+- **Uninstall limpo.** `remove-hooks` tira só entradas Aegis Spec. Outros hooks que você adicionou manualmente ficam preservados. `npx aegis-spec uninstall` faz o mesmo automaticamente.
 
 ---
 
 ## Integração com CI
 
-Hooks disparam só dentro da engine. Para garantir resolução de drift em PRs, combine hooks com [`npx reversa drift-check`](drift-check.pt.md) no CI.
+Hooks disparam só dentro da engine. Para garantir resolução de drift em PRs, combine hooks com [`npx aegis-spec drift-check`](drift-check.pt.md) no CI.
 
 ```yaml
 # .github/workflows/ci.yml
-- name: Reversa drift gate
-  run: npx reversa drift-check --severity high
+- name: Aegis Spec drift gate
+  run: npx aegis-spec drift-check --severity high
 ```
 
 Assim: hooks mantêm queue e dashboard atualizados enquanto o dev codifica local, e CI bloqueia merge se ficou algo não resolvido.
@@ -87,14 +87,14 @@ Assim: hooks mantêm queue e dashboard atualizados enquanto o dev codifica local
 [Hook da engine → spawna runner]
         │
         ▼
-[.reversa/_hooks/runner.js]
-        ├─→ append em .reversa/keeper-queue.json
-        ├─→ stub em _reversa_sdd/changelog/YYYY-MM-DD.md
-        ├─→ marca _reversa_sdd/drift.md como pending
+[.aegis/_hooks/runner.js]
+        ├─→ append em .aegis/keeper-queue.json
+        ├─→ stub em _aegis_sdd/changelog/YYYY-MM-DD.md
+        ├─→ marca _aegis_sdd/drift.md como pending
         └─→ warning no stderr (specs de alta confiança)
         │
         ▼ (depois, quando dev roda o agente)
-[/reversa-keeper after]
+[/aegis-keeper after]
         ├─→ faz 3 perguntas (por quê / breaking / contexto)
         ├─→ enriquece changelog
         ├─→ atualiza specs in-place + reclassifica confiança
@@ -102,6 +102,6 @@ Assim: hooks mantêm queue e dashboard atualizados enquanto o dev codifica local
         └─→ limpa queue
         │
         ▼ (em CI)
-[npx reversa drift-check]
+[npx aegis-spec drift-check]
         └─→ exit 1 se drift.md ainda tem pending → bloqueia merge
 ```

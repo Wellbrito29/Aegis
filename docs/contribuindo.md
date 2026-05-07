@@ -13,8 +13,8 @@ Open an issue first to discuss what you want to change. This avoids wasted work 
 ## Local setup
 
 ```bash
-git clone https://github.com/sandeco/reversa.git
-cd reversa
+git clone https://github.com/sandeco/aegis.git
+cd aegis
 npm install
 ```
 
@@ -23,9 +23,9 @@ npm install
 ## Project structure
 
 ```
-reversa/
+aegis-spec/
 ├── agents/             ← each agent has its folder with SKILL.md
-├── bin/                ← CLI entry point (reversa.js)
+├── bin/                ← CLI entry point (aegis.js)
 ├── lib/
 │   ├── commands/       ← CLI command implementations
 │   └── installer/      ← installation and engine detection logic
@@ -37,7 +37,7 @@ reversa/
 
 ## Adding a new agent
 
-1. Create the folder `agents/reversa-[name]/`
+1. Create the folder `agents/aegis-[name]/`
 2. Create `SKILL.md` following the format of existing agents (required frontmatter: `name`, `description`, `license`, `compatibility`, `metadata`)
 3. Add a `references/` folder if the agent needs schema or reference templates
 4. Update `lib/installer/` to include the new agent in the install list
@@ -46,4 +46,4 @@ reversa/
 
 ## License
 
-MIT. See [LICENSE](https://github.com/sandeco/reversa/blob/main/LICENSE) for details.
+MIT. See [LICENSE](https://github.com/sandeco/aegis/blob/main/LICENSE) for details.

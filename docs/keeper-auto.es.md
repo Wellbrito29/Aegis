@@ -1,17 +1,17 @@
 # Keeper modo auto
 
-Triaje de drift vía LLM en el Reversa Keeper. El modo auto reemplaza las
+Triaje de drift vía LLM en el Aegis Spec Keeper. El modo auto reemplaza las
 tres preguntas HITL por un árbol de decisión determinístico, recurriendo
 a Claude Haiku sólo cuando la policy no cubre el caso. La reescritura de
 specs usa Claude Sonnet, y sólo en el camino que auto-resuelve.
 
 ```bash
-npx reversa keeper auto --dry-run
+npx aegis-spec keeper auto --dry-run
 ```
 
 ## Archivo de policy
 
-`_reversa_sdd/auto-policy.yaml` se lee en cada ejecución. Auto está **off**
+`_aegis_sdd/auto-policy.yaml` se lee en cada ejecución. Auto está **off**
 por defecto — requiere `auto_resolve.enabled: true`.
 
 ```yaml
@@ -47,7 +47,7 @@ entrada de cola ─┬─ blacklist match? ────────► escalate_
 ## CLI
 
 ```
-npx reversa keeper auto [--dry-run] [--max-specs N] [--cwd <path>]
+npx aegis-spec keeper auto [--dry-run] [--max-specs N] [--cwd <path>]
                         [--format text|json]
 ```
 
@@ -60,9 +60,9 @@ npx reversa keeper auto [--dry-run] [--max-specs N] [--cwd <path>]
 
 ## Audit log
 
-Toda decisión va a `.reversa/audit/YYYY-MM-DD.jsonl`. Esquema en
+Toda decisión va a `.aegis/audit/YYYY-MM-DD.jsonl`. Esquema en
 `lib/audit/schema.md`. Configure redacción vía
-`_reversa_sdd/audit-policy.json`:
+`_aegis_sdd/audit-policy.json`:
 
 ```json
 { "redact": ["diff", "commit_message"] }
@@ -72,4 +72,4 @@ Toda decisión va a `.reversa/audit/YYYY-MM-DD.jsonl`. Esquema en
 
 `bot/keeper-bot/` trae un handler agnóstico de webhook. Setup en
 `bot/keeper-bot/install.md`. El bot está restringido a commits bajo
-`_reversa_sdd/**` — cualquier cambio fuera de ese prefijo aborta el push.
+`_aegis_sdd/**` — cualquier cambio fuera de ese prefijo aborta el push.

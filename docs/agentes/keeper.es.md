@@ -4,11 +4,11 @@ El agente que impide que el código nuevo se vuelva legado.
 
 ## Qué hace
 
-El Keeper cierra el ciclo de feedback entre las specs generadas por Reversa y los cambios diarios de código. Funciona en dos modos — antes de un cambio (briefing solo lectura) y después (actualiza specs, changelog y el dashboard de drift).
+El Keeper cierra el ciclo de feedback entre las specs generadas por Aegis Spec y los cambios diarios de código. Funciona en dos modos — antes de un cambio (briefing solo lectura) y después (actualiza specs, changelog y el dashboard de drift).
 
 ## Por qué existe
 
-Reversa genera specs a partir del código legado existente. Pero el código sigue cambiando, y las specs envejecen en semanas. Sin un guardián, las specs se desincronizan y se vuelven tan inútiles como la documentación ausente que Reversa vino a resolver.
+Aegis Spec genera specs a partir del código legado existente. Pero el código sigue cambiando, y las specs envejecen en semanas. Sin un guardián, las specs se desincronizan y se vuelven tan inútiles como la documentación ausente que Aegis Spec vino a resolver.
 
 El Keeper es ese guardián. Trata las specs como **fuentes de verdad activas**, no snapshots.
 
@@ -21,12 +21,12 @@ El Keeper es ese guardián. Trata las specs como **fuentes de verdad activas**, 
 Briefing solo lectura. Úsalo **antes** del cambio.
 
 ```
-/reversa-keeper before lib/auth/login.js
-/reversa-keeper before "voy a agregar rate limiting al login"
+/aegis-keeper before lib/auth/login.js
+/aegis-keeper before "voy a agregar rate limiting al login"
 ```
 
 El agente:
-1. Lee `_reversa_sdd/traceability/code-spec-matrix.md` para identificar specs que cubren los archivos afectados
+1. Lee `_aegis_sdd/traceability/code-spec-matrix.md` para identificar specs que cubren los archivos afectados
 2. Lee solo esas specs (consciente de tokens)
 3. Presenta contratos, invariantes y reglas de negocio que el cambio debe respetar
 4. Pregunta si tu cambio planeado los respeta
@@ -37,12 +37,12 @@ El agente:
 Modo predeterminado si hay cambios sin commitear o eventos en cola. Úsalo **después** del cambio.
 
 ```
-/reversa-keeper after
-/reversa-keeper
+/aegis-keeper after
+/aegis-keeper
 ```
 
 El agente:
-1. Recolecta archivos modificados de `git diff HEAD` y (si hay hooks) `.reversa/keeper-queue.json`
+1. Recolecta archivos modificados de `git diff HEAD` y (si hay hooks) `.aegis/keeper-queue.json`
 2. Mapea archivos a specs impactadas vía `code-spec-matrix.md`
 3. Hace 3 preguntas: **Por qué** el cambio, **breaking change**, **contexto extra**
 4. Actualiza cada spec impactada in-place, reclasifica confianza (🟢/🟡/🔴)
@@ -56,26 +56,26 @@ El agente:
 
 | Archivo | Cuándo |
 |---|---|
-| `_reversa_sdd/changelog/YYYY-MM-DD.md` | Modo `after`, siempre |
-| `_reversa_sdd/sdd/[componente].md` | Modo `after`, in-place si impactado |
-| `_reversa_sdd/traceability/code-spec-matrix.md` | Modo `after`, con archivos nuevos/eliminados |
-| `_reversa_sdd/drift.md` | Modo `after`, siempre (dashboard) |
-| `.reversa/state.json` | Modo `after`, checkpoint |
+| `_aegis_sdd/changelog/YYYY-MM-DD.md` | Modo `after`, siempre |
+| `_aegis_sdd/sdd/[componente].md` | Modo `after`, in-place si impactado |
+| `_aegis_sdd/traceability/code-spec-matrix.md` | Modo `after`, con archivos nuevos/eliminados |
+| `_aegis_sdd/drift.md` | Modo `after`, siempre (dashboard) |
+| `.aegis/state.json` | Modo `after`, checkpoint |
 
 ---
 
 ## Trigger manual vs automatizado
 
-Manual: `/reversa-keeper` funciona en cualquier engine sin setup.
+Manual: `/aegis-keeper` funciona en cualquier engine sin setup.
 
-Automatizado: instala hooks vía [`npx reversa add-hooks`](../hooks.es.md). Los hooks encolan eventos para que el agente los procese después.
+Automatizado: instala hooks vía [`npx aegis-spec add-hooks`](../hooks.es.md). Los hooks encolan eventos para que el agente los procese después.
 
 ---
 
 ## Cuándo NO ejecutar
 
-- Sin `_reversa_sdd/`: corre `/reversa` primero
-- Sin `code-spec-matrix.md`: corre `/reversa-architect` primero
+- Sin `_aegis_sdd/`: corre `/aegis` primero
+- Sin `code-spec-matrix.md`: corre `/aegis-architect` primero
 - Sin cambios de código: nada que hacer
 
 ---

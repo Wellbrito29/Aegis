@@ -14,7 +14,7 @@ REGRAS DE PREENCHIMENTO:
 
 > Identificador: `<NNN>-<short-name>`
 > Data: `YYYY-MM-DD`
-> Pasta da extração reversa: `_aegis_sdd/`
+> Pasta da extração aegis: `_aegis_sdd/`
 > Confidência: 🟢 CONFIRMADO, 🟡 INFERIDO, 🔴 LACUNA / DÚVIDA
 
 ## 1. Resumo executivo

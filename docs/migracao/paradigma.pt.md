@@ -24,7 +24,7 @@ O Paradigm Advisor pega isso antes.
 
 ## O que ele faz
 
-1. **Detecta** o paradigma do legado a partir das specs do `_reversa_sdd/`. Procura por marcas concretas: estrutura de classes, padrões de acesso a dados, presença de eventos, fluxo síncrono linear, etc.
+1. **Detecta** o paradigma do legado a partir das specs do `_aegis_sdd/`. Procura por marcas concretas: estrutura de classes, padrões de acesso a dados, presença de eventos, fluxo síncrono linear, etc.
 
 2. **Infere** o paradigma natural da stack alvo declarada no brief. Node moderno é async/event-driven. Go é CSP/goroutines. Elixir é actor model. Não há escolha "neutra".
 

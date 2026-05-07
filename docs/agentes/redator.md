@@ -1,6 +1,6 @@
 # Writer
 
-**Command:** `/reversa-writer`
+**Command:** `/aegis-writer`
 **Phase:** 4 - Generation
 
 ---

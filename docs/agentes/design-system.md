@@ -1,6 +1,6 @@
 # Design System
 
-**Command:** `/reversa-design-system`
+**Command:** `/aegis-design-system`
 **Phase:** Any
 
 ---
@@ -61,8 +61,8 @@ If there's a custom component library: list of components, variants, and main pr
 
 | File | Content |
 |------|---------|
-| `_reversa_sdd/design-system/color-palette.md` | Complete palette with values |
-| `_reversa_sdd/design-system/typography.md` | Typography system |
-| `_reversa_sdd/design-system/spacing.md` | Spacing, grid, and breakpoints |
-| `_reversa_sdd/design-system/tokens.md` | All tokens in a table |
-| `_reversa_sdd/design-system/design-system.md` | Consolidated document |
+| `_aegis_sdd/design-system/color-palette.md` | Complete palette with values |
+| `_aegis_sdd/design-system/typography.md` | Typography system |
+| `_aegis_sdd/design-system/spacing.md` | Spacing, grid, and breakpoints |
+| `_aegis_sdd/design-system/tokens.md` | All tokens in a table |
+| `_aegis_sdd/design-system/design-system.md` | Consolidated document |

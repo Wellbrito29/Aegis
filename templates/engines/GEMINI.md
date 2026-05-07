@@ -1,19 +1,19 @@
-# Reversa
+# Aegis Spec
 
-> Framework de Engenharia Reversa instalado neste projeto.
+> Framework de Engenharia Aegis Spec instalado neste projeto.
 
 ## Como usar
 
-Digite `/reversa` para ativar o Reversa e iniciar ou retomar a análise do projeto.
+Digite `/aegis` para ativar o Aegis Spec e iniciar ou retomar a análise do projeto.
 
 ## Comportamento ao ativar
 
-Quando o usuário digitar `/reversa` ou a palavra `reversa` sozinha em uma mensagem:
+Quando o usuário digitar `/aegis` ou a palavra `aegis` sozinha em uma mensagem:
 
-1. Ative o skill `reversa` disponível em `.agents/skills/reversa/SKILL.md`
-2. Leia o SKILL.md na íntegra e siga exatamente as instruções do Reversa
+1. Ative o skill `aegis` disponível em `.agents/skills/aegis/SKILL.md`
+2. Leia o SKILL.md na íntegra e siga exatamente as instruções do Aegis Spec
 
 ## Regra não-negociável
 
 Nunca apague, modifique ou sobrescreva arquivos pré-existentes do projeto legado.
-O Reversa escreve **apenas** em `.aegis/` e `_aegis_sdd/`.
+O Aegis Spec escreve **apenas** em `.aegis/` e `_aegis_sdd/`.

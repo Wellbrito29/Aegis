@@ -1,6 +1,6 @@
 # The 5 agents of the Migration Team
 
-The agents run in fixed sequence. Each one reads what the previous produced and adds its own artifact. `/reversa-migrate` orchestrates everything.
+The agents run in fixed sequence. Each one reads what the previous produced and adds its own artifact. `/aegis-migrate` orchestrates everything.
 
 ---
 
@@ -16,7 +16,7 @@ There is a human review pause between agents. Default mode is interactive.
 
 ## 1. Paradigm Advisor
 
-**Command:** `/reversa-paradigm-advisor` (usually invoked by `/reversa-migrate`)
+**Command:** `/aegis-paradigm-advisor` (usually invoked by `/aegis-migrate`)
 
 Detects the paradigm of the legacy system, infers the natural paradigm of the target stack declared in the brief, and flags gaps. Forces a conscious user decision, because changing language is rarely just a syntactic change, it is often a fundamental change of mental model.
 
@@ -26,7 +26,7 @@ Detects the paradigm of the legacy system, infers the natural paradigm of the ta
 
 ## 2. Curator
 
-**Command:** `/reversa-curator`
+**Command:** `/aegis-curator`
 
 Reads the legacy business rules and decides, rule by rule: **MIGRATE**, **DISCARD** or **HUMAN DECISION**. Considers the chosen paradigm: rules that are artifacts of the legacy paradigm (e.g. manual locks in a synchronous procedural system) may be discarded under an event-driven target.
 
@@ -36,7 +36,7 @@ Reads the legacy business rules and decides, rule by rule: **MIGRATE**, **DISCAR
 
 ## 3. Strategist
 
-**Command:** `/reversa-strategist`
+**Command:** `/aegis-strategist`
 
 Evaluates possible strategies (Strangler Fig, Big Bang, Parallel Run, Branch by Abstraction), presents explicit trade-offs, and recommends one. Final decision is human.
 
@@ -48,7 +48,7 @@ Considers the appetite derived from `paradigm_decision.md`: conservative appetit
 
 ## 4. Designer
 
-**Command:** `/reversa-designer`
+**Command:** `/aegis-designer`
 
 Drafts the new system specs: target architecture (with Mermaid diagram), domain model, data model, and data migration plan. Honors the chosen paradigm (event-driven requires explicit events, OO with DI requires interfaces, etc.).
 
@@ -60,7 +60,7 @@ Does not naively decompose 1-to-1: identifies real bounded contexts and justifie
 
 ## 5. Inspector
 
-**Command:** `/reversa-inspector`
+**Command:** `/aegis-inspector`
 
 Defines how to prove the new system is behaviorally equivalent to the legacy where it matters. Adapts criteria to the paradigm: a sync → event-driven shift requires coverage of message ordering, idempotency, and eventual consistency.
 
@@ -70,9 +70,9 @@ Defines how to prove the new system is behaviorally equivalent to the legacy whe
 
 ## Running manually
 
-You almost never need to call an isolated agent. `/reversa-migrate` orchestrates everything. But if an agent failed or you want to rerun from a specific point:
+You almost never need to call an isolated agent. `/aegis-migrate` orchestrates everything. But if an agent failed or you want to rerun from a specific point:
 
 ```
-/reversa-migrate --resume                    # resumes from the last completed agent
-/reversa-migrate --regenerate=designer       # deletes Designer + Inspector outputs and redoes them
+/aegis-migrate --resume                    # resumes from the last completed agent
+/aegis-migrate --regenerate=designer       # deletes Designer + Inspector outputs and redoes them
 ```

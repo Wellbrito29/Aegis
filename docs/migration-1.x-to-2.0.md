@@ -1,13 +1,13 @@
-# Migrating from Reversa 1.x to 2.0
+# Migrating from Aegis Spec 1.x to 2.0
 
-Reversa 2.0 adds the **Stage 4 control plane**: a knowledge graph, a
+Aegis Spec 2.0 adds the **Stage 4 control plane**: a knowledge graph, a
 signature-aware policy gate, an LLM-driven keeper, an audit log, and a
 GitHub bot scaffold. Stages 1–3 are unchanged.
 
 ## Compatibility
 
-- Existing specs under `_reversa_sdd/sdd/` keep working as-is.
-- The drift queue (`.reversa/keeper-queue.jsonl`) format is unchanged.
+- Existing specs under `_aegis_sdd/sdd/` keep working as-is.
+- The drift queue (`.aegis/keeper-queue.jsonl`) format is unchanged.
 - All new behavior is opt-in: the policy gate only blocks files declared
   protected, the auto keeper only runs when `auto_resolve.enabled: true`,
   and the LLM is only called when an `ANTHROPIC_API_KEY` is present.
@@ -18,21 +18,21 @@ GitHub bot scaffold. Stages 1–3 are unchanged.
 |---|---|---|
 | Hooks runner | Append to queue | Append to queue + run pre-edit policy gate |
 | Spec frontmatter | `protected: true` only | + `contracts: [{ name, file, protected, reason }]` and `protected_files: ["glob/**"]` |
-| Drift triage | HITL only | HITL by default; auto-mode opt-in (`_reversa_sdd/auto-policy.yaml`) |
+| Drift triage | HITL only | HITL by default; auto-mode opt-in (`_aegis_sdd/auto-policy.yaml`) |
 | CI | `drift-check` | + `policy-check` (signature gate) and optional `keeper auto` |
-| Audit | none | `.reversa/audit/YYYY-MM-DD.jsonl` (append-only, optionally redacted) |
+| Audit | none | `.aegis/audit/YYYY-MM-DD.jsonl` (append-only, optionally redacted) |
 
 ## Step-by-step
 
-### 1. Update Reversa
+### 1. Update Aegis Spec
 
 ```bash
-npm install -g reversa@latest
+npm install -g aegis@latest
 ```
 
 ### 2. (Optional) Mark contracts protected
 
-In any spec under `_reversa_sdd/sdd/`, add frontmatter:
+In any spec under `_aegis_sdd/sdd/`, add frontmatter:
 
 ```yaml
 ---
@@ -49,7 +49,7 @@ protected_files:
 Then build the index:
 
 ```bash
-npx reversa policy-index build
+npx aegis-spec policy-index build
 ```
 
 ### 3. (Optional) Wire CI
@@ -66,21 +66,21 @@ unset disables auto mode but keeps drift-check + policy-check active.
 ### 4. (Optional) Enable auto mode
 
 Copy `templates/auto-policy.example.yaml` to
-`_reversa_sdd/auto-policy.yaml`, set `enabled: true`, and tune the
+`_aegis_sdd/auto-policy.yaml`, set `enabled: true`, and tune the
 whitelist / blacklist / `confidence_threshold`. Run with `--dry-run`
 first to see how the policy routes your queue.
 
 ### 5. (Optional) Install the local pre-commit hook
 
 ```bash
-node -e "import('reversa/lib/installer/git-hooks.js').then(m => m.installGitHook(process.cwd()))"
+node -e "import('aegis-spec/lib/installer/git-hooks.js').then(m => m.installGitHook(process.cwd()))"
 ```
 
 This catches signature breaks before they ever reach CI.
 
 ## Rollback
 
-`reversa@1.x` and `reversa@2.x` read the same `_reversa_sdd/`. Pinning
+`aegis-spec@1.x` and `aegis-spec@2.x` read the same `_aegis_sdd/`. Pinning
 back to 1.x in `package.json` is sufficient — the only artifacts the 2.x
-pipeline produces (graph, policy index, audit log) live under `.reversa/`,
+pipeline produces (graph, policy index, audit log) live under `.aegis/`,
 which 1.x ignores.

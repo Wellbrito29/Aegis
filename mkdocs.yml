@@ -96,6 +96,7 @@ plugins:
             Plan: Plan
             To-Do: To-Do
             Audit: Audit
+            Quality: Quality
             Translators: Tradutores
             N8N Translator: N8N Translator
             Generated outputs: Saídas geradas
@@ -133,6 +134,7 @@ plugins:
             Plan: Plan
             To-Do: To-Do
             Audit: Audit
+            Quality: Quality
             Translators: Traductores
             N8N Translator: N8N Translator
             Generated outputs: Salidas generadas
@@ -178,6 +180,7 @@ nav:
     - Plan: agentes/plan.md
     - To-Do: agentes/to-do.md
     - Audit: agentes/audit.md
+    - Quality: agentes/quality.md
   - Translators:
     - N8N Translator: agentes/n8n.md
   - Drift loop:

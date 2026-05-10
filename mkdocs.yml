@@ -89,6 +89,8 @@ plugins:
             Overview: Visão geral
             Guide with analogies: Guia com analogias
             Aegis Spec (Orchestrator): Aegis Spec (Orquestrador)
+            Forward cycle: Ciclo forward
+            Tech Brief: Tech Brief
             Translators: Tradutores
             N8N Translator: N8N Translator
             Generated outputs: Saídas geradas
@@ -119,6 +121,8 @@ plugins:
             Overview: Visión general
             Guide with analogies: Guía con analogías
             Aegis Spec (Orchestrator): Aegis Spec (Orquestador)
+            Forward cycle: Ciclo forward
+            Tech Brief: Tech Brief
             Translators: Traductores
             N8N Translator: N8N Translator
             Generated outputs: Salidas generadas
@@ -157,6 +161,8 @@ nav:
     - Data Master: agentes/data-master.md
     - Design System: agentes/design-system.md
     - Keeper: agentes/keeper.md
+  - Forward cycle:
+    - Tech Brief: agentes/tech-brief.md
   - Translators:
     - N8N Translator: agentes/n8n.md
   - Drift loop:

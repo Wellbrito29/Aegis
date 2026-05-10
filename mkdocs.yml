@@ -95,6 +95,7 @@ plugins:
             Doubt: Doubt
             Plan: Plan
             To-Do: To-Do
+            Audit: Audit
             Translators: Tradutores
             N8N Translator: N8N Translator
             Generated outputs: Saídas geradas
@@ -131,6 +132,7 @@ plugins:
             Doubt: Doubt
             Plan: Plan
             To-Do: To-Do
+            Audit: Audit
             Translators: Traductores
             N8N Translator: N8N Translator
             Generated outputs: Salidas generadas
@@ -175,6 +177,7 @@ nav:
     - Doubt: agentes/doubt.md
     - Plan: agentes/plan.md
     - To-Do: agentes/to-do.md
+    - Audit: agentes/audit.md
   - Translators:
     - N8N Translator: agentes/n8n.md
   - Drift loop:

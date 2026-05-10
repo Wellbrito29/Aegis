@@ -99,6 +99,7 @@ plugins:
             Quality: Quality
             Coding: Coding
             Principles: Principles
+            Resume: Resume
             Translators: Tradutores
             N8N Translator: N8N Translator
             Generated outputs: Saídas geradas
@@ -139,6 +140,7 @@ plugins:
             Quality: Quality
             Coding: Coding
             Principles: Principles
+            Resume: Resume
             Translators: Traductores
             N8N Translator: N8N Translator
             Generated outputs: Salidas generadas
@@ -187,6 +189,7 @@ nav:
     - Quality: agentes/quality.md
     - Coding: agentes/coding.md
     - Principles: agentes/principles.md
+    - Resume: agentes/resume.md
   - Translators:
     - N8N Translator: agentes/n8n.md
   - Drift loop:

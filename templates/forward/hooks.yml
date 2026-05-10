@@ -19,6 +19,10 @@ schema-version: 1
 before-requirements: []
 after-requirements: []
 
+# Ganchos do /aegis-tech-brief
+before-tech-brief: []
+after-tech-brief: []
+
 # Ganchos do /aegis-doubt
 before-doubt: []
 after-doubt: []

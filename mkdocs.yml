@@ -94,6 +94,7 @@ plugins:
             Tech Brief: Tech Brief
             Doubt: Doubt
             Plan: Plan
+            To-Do: To-Do
             Translators: Tradutores
             N8N Translator: N8N Translator
             Generated outputs: Saídas geradas
@@ -129,6 +130,7 @@ plugins:
             Tech Brief: Tech Brief
             Doubt: Doubt
             Plan: Plan
+            To-Do: To-Do
             Translators: Traductores
             N8N Translator: N8N Translator
             Generated outputs: Salidas generadas
@@ -172,6 +174,7 @@ nav:
     - Tech Brief: agentes/tech-brief.md
     - Doubt: agentes/doubt.md
     - Plan: agentes/plan.md
+    - To-Do: agentes/to-do.md
   - Translators:
     - N8N Translator: agentes/n8n.md
   - Drift loop:

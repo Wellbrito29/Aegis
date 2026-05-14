@@ -76,8 +76,27 @@ export function seedJsProject(root) {
 }
 
 /**
+ * Mock inquirer.prompt to return a queue of canned answers. Each call to
+ * inquirer.prompt() pops the next answer object. Returns a restore fn.
+ *
+ * Usage: const restore = mockInquirer([{ proceed: false }]); ... restore();
+ */
+export async function mockInquirer(answers) {
+  const inquirer = await import('inquirer');
+  const original = inquirer.default.prompt;
+  let i = 0;
+  inquirer.default.prompt = async () => {
+    const a = answers[i] ?? {};
+    i++;
+    return a;
+  };
+  return () => { inquirer.default.prompt = original; };
+}
+
+/**
  * Run a command-module's default export with args. Captures stdout/stderr
- * and exit code without exiting the test process.
+ * (both console.* and process.stdout/stderr.write) and exit code without
+ * exiting the test process.
  */
 export async function runCommand(modulePath, args = [], { cwd } = {}) {
   const stdout = [];
@@ -85,22 +104,42 @@ export async function runCommand(modulePath, args = [], { cwd } = {}) {
   const origLog = console.log;
   const origErr = console.error;
   const origCwd = process.cwd();
+  const origStdoutWrite = process.stdout.write.bind(process.stdout);
+  const origStderrWrite = process.stderr.write.bind(process.stderr);
   let exitCode = 0;
   const origExit = process.exit;
   process.exit = (code) => { exitCode = code ?? 0; throw new Error(`__test_exit_${exitCode}__`); };
   console.log = (...a) => stdout.push(a.map(String).join(' '));
   console.error = (...a) => stderr.push(a.map(String).join(' '));
+  process.stdout.write = (chunk, ...rest) => {
+    stdout.push(typeof chunk === 'string' ? chunk : chunk.toString('utf8'));
+    return true;
+  };
+  process.stderr.write = (chunk, ...rest) => {
+    stderr.push(typeof chunk === 'string' ? chunk : chunk.toString('utf8'));
+    return true;
+  };
   if (cwd) process.chdir(cwd);
   try {
     const mod = await import(modulePath);
     await mod.default(args);
   } catch (e) {
-    if (!String(e.message).startsWith('__test_exit_')) throw e;
+    if (!String(e.message).startsWith('__test_exit_')) {
+      console.log = origLog;
+      console.error = origErr;
+      process.stdout.write = origStdoutWrite;
+      process.stderr.write = origStderrWrite;
+      process.exit = origExit;
+      if (cwd) process.chdir(origCwd);
+      throw e;
+    }
   } finally {
     console.log = origLog;
     console.error = origErr;
+    process.stdout.write = origStdoutWrite;
+    process.stderr.write = origStderrWrite;
     process.exit = origExit;
     if (cwd) process.chdir(origCwd);
   }
-  return { stdout: stdout.join('\n'), stderr: stderr.join('\n'), exitCode };
+  return { stdout: stdout.join(''), stderr: stderr.join(''), exitCode };
 }

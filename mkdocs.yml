@@ -111,6 +111,7 @@ plugins:
             Strategies: Estratégias
             Brief schema: Schema do brief
             Contributing: Contribuindo
+            Presentation: Apresentação
             Drift loop: Ciclo de drift
             Hooks (auto Keeper): Hooks (Keeper automático)
             drift-check (CI gate): drift-check (CI gate)
@@ -152,6 +153,7 @@ plugins:
             Strategies: Estrategias
             Brief schema: Schema del brief
             Contributing: Contribuir
+            Presentation: Presentación
             Drift loop: Ciclo de drift
             Hooks (auto Keeper): Hooks (Keeper automático)
             drift-check (CI gate): drift-check (CI gate)
@@ -205,3 +207,4 @@ nav:
     - Strategies: migracao/estrategias.md
     - Brief schema: migracao/brief.md
   - Contributing: contribuindo.md
+  - Presentation: presentation/index.html

@@ -17,21 +17,22 @@
       securityLevel: 'loose',
       themeVariables: {
         background: 'transparent',
-        primaryColor: '#0B1115',
+        primaryColor: '#0F1A14',
         primaryTextColor: '#F5F7FA',
         primaryBorderColor: '#00D084',
         lineColor: '#00E676',
-        secondaryColor: '#11161D',
+        secondaryColor: '#0B1115',
         tertiaryColor: '#05080B',
-        clusterBkg: 'rgba(0,208,132,0.04)',
-        clusterBorder: 'rgba(0,230,118,0.3)',
+        clusterBkg: 'rgba(0,208,132,0.05)',
+        clusterBorder: 'rgba(0,230,118,0.35)',
         fontFamily: 'Inter, sans-serif',
-        fontSize: '14px'
+        fontSize: '13px'
       },
       flowchart: { curve: 'basis', padding: 16, htmlLabels: true, useMaxWidth: true },
       sequence: { actorMargin: 60, messageFontSize: 13, useMaxWidth: true },
       state: { useMaxWidth: true }
     });
+    window.__mermaid = mermaid;
     window.addEventListener('DOMContentLoaded', async () => {
       const nodes = document.querySelectorAll('.mermaid');
       for (const n of nodes) {
@@ -47,25 +48,32 @@
       --bg-0: #05080B;
       --bg-1: #0B1115;
       --bg-2: #11161D;
-      --bg-3: #1A2330;
-      --border: rgba(255,255,255,0.08);
+      --bg-3: #19222B;
+      --border: rgba(255,255,255,0.07);
       --border-strong: rgba(255,255,255,0.16);
       --text: #F5F7FA;
       --text-dim: #A9B4BE;
-      --text-faint: #64748B;
+      --text-faint: #6B7785;
       --emerald: #00D084;
       --emerald-2: #00E676;
+      --emerald-3: #008C58;
       --amber: #FFB000;
       --amber-2: #FFA203;
-      --accent-cyan: #67E8F9;
       --accent-purple: #A78BFA;
+      --accent-cyan: #67E8F9;
+      --accent-pink: #F472B6;
+      --accent-blue: #60A5FA;
       --accent-red: #EF4444;
     }
     * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; box-sizing: border-box; }
     html, body { background: var(--bg-0); color: var(--text); font-family: 'Inter', sans-serif; }
     body { overflow: hidden; height: 100vh; margin: 0; display: grid; place-items: center; }
     .mono { font-family: 'JetBrains Mono', monospace; }
-    .stage { position: relative; width: 1600px; height: 900px; transform-origin: center center; }
+    .stage {
+      position: relative;
+      width: 1600px; height: 900px;
+      transform-origin: center center;
+    }
     .deck { position: relative; width: 100%; height: 100%; }
     .slide {
       position: absolute; inset: 0;
@@ -91,7 +99,7 @@
       width: fit-content;
     }
     .slide-title { font-size: 56px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; margin-top: 16px; }
-    .slide-subtitle { font-size: 20px; color: var(--text-dim); margin-top: 12px; max-width: 920px; line-height: 1.4; }
+    .slide-subtitle { font-size: 20px; color: var(--text-dim); margin-top: 12px; max-width: 980px; line-height: 1.4; }
     .glass {
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
       border: 1px solid var(--border);
@@ -110,10 +118,12 @@
       background: rgba(167,139,250,0.1); color: var(--accent-purple);
       border: 1px solid rgba(167,139,250,0.2);
     }
-    .pill.green { background: rgba(0,208,132,0.1); color: var(--emerald-2); border-color: rgba(0,230,118,0.25); }
-    .pill.amber { background: rgba(255,176,0,0.08); color: var(--amber); border-color: rgba(255,176,0,0.25); }
+    .pill.green { background: rgba(0,208,132,0.1); color: var(--emerald-2); border-color: rgba(0,230,118,0.3); }
+    .pill.amber { background: rgba(255,176,0,0.1); color: var(--amber); border-color: rgba(255,176,0,0.25); }
     .pill.cyan { background: rgba(103,232,249,0.08); color: var(--accent-cyan); border-color: rgba(103,232,249,0.2); }
-    .pill.red { background: rgba(239,68,68,0.08); color: var(--accent-red); border-color: rgba(239,68,68,0.25); }
+    .pill.pink { background: rgba(244,114,182,0.08); color: var(--accent-pink); border-color: rgba(244,114,182,0.2); }
+    .pill.blue { background: rgba(96,165,250,0.08); color: var(--accent-blue); border-color: rgba(96,165,250,0.2); }
+    .pill.red { background: rgba(239,68,68,0.1); color: var(--accent-red); border-color: rgba(239,68,68,0.25); }
     .nav { position: fixed; bottom: 24px; left: 32px; z-index: 50; display: flex; gap: 6px; align-items: center; }
     .nav-btn {
       width: 32px; height: 32px; border-radius: 8px;
@@ -126,9 +136,10 @@
     .progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.04); z-index: 100; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--emerald), var(--emerald-2)); transition: width 360ms cubic-bezier(.22,1,.36,1); }
     .grain {
-      position: absolute; inset: 0; pointer-events: none; opacity: 0.4; z-index: 0;
-      background-image: radial-gradient(circle at 20% 10%, rgba(0,208,132,0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 90%, rgba(255,176,0,0.06) 0%, transparent 50%);
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.55; z-index: 0;
+      background-image:
+        radial-gradient(circle at 18% 12%, rgba(0,208,132,0.12) 0%, transparent 42%),
+        radial-gradient(circle at 82% 88%, rgba(255,176,0,0.08) 0%, transparent 50%);
     }
     .slide > * { position: relative; z-index: 1; }
     .code-block {
@@ -142,9 +153,11 @@
     .code-str { color: var(--emerald-2); }
     .code-cmt { color: var(--text-faint); font-style: italic; }
     .code-fn { color: var(--accent-purple); }
+    .code-op { color: var(--accent-pink); }
     .code-num { color: var(--amber); }
     .mermaid { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; min-height: 0; }
     .mermaid svg { max-width: 100% !important; max-height: 100% !important; width: auto !important; height: auto !important; }
+    .mermaid .cluster rect { rx: 8; ry: 8; }
     .mermaid .nodeLabel { color: #F5F7FA !important; }
     .mermaid .edgeLabel { background: var(--bg-1) !important; color: var(--text-dim) !important; padding: 2px 6px !important; border-radius: 4px; }
     .keystroke {
@@ -154,33 +167,46 @@
       color: var(--text-dim);
     }
     .grid-bg {
-      position: absolute; inset: 0; opacity: 0.4;
+      position: absolute; inset: 0; opacity: 0.45;
       background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     }
-    .glow-emerald { box-shadow: 0 0 80px -20px rgba(0,208,132,0.5); }
+    .glow-emerald { box-shadow: 0 0 80px -20px rgba(0,208,132,0.55); }
     .glow-amber { box-shadow: 0 0 80px -20px rgba(255,176,0,0.4); }
+    .glow-purple { box-shadow: 0 0 80px -20px rgba(167,139,250,0.4); }
     .stat-num { font-size: 64px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
     .stat-label { font-size: 13px; color: var(--text-dim); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 8px; }
     .check::before { content: '✓'; color: var(--emerald-2); font-weight: 700; margin-right: 8px; }
     .cross::before { content: '✗'; color: var(--accent-red); font-weight: 700; margin-right: 8px; }
     .arrow::before { content: '→'; color: var(--emerald-2); font-weight: 600; margin-right: 8px; }
-    .layer { border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; background: rgba(255,255,255,0.015); transition: all 240ms; }
+    .badge-phase {
+      display: inline-flex; padding: 3px 8px; border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      background: rgba(0,208,132,0.12); color: var(--emerald-2);
+      border: 1px solid rgba(0,230,118,0.3);
+    }
+    .badge-phase.amber { background: rgba(255,176,0,0.1); color: var(--amber); border-color: rgba(255,176,0,0.3); }
+    .badge-phase.purple { background: rgba(167,139,250,0.1); color: var(--accent-purple); border-color: rgba(167,139,250,0.3); }
+    h2.section-h { font-size: 14px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    .layer {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 18px; background: rgba(255,255,255,0.015);
+      transition: all 240ms;
+    }
     .layer:hover { background: rgba(0,208,132,0.04); border-color: rgba(0,230,118,0.3); }
     .cover-bg {
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 30% 20%, rgba(0,208,132,0.3) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 80%, rgba(255,176,0,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 28% 18%, rgba(0,208,132,0.32) 0%, transparent 50%),
+        radial-gradient(ellipse at 72% 82%, rgba(255,176,0,0.18) 0%, transparent 50%),
         radial-gradient(ellipse at 50% 50%, rgba(103,232,249,0.05) 0%, transparent 70%);
     }
     .blink { animation: blink 1.4s infinite; }
     @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0.2} }
-    h2.section-h { font-size: 14px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
-    .conf-emoji { font-size: 22px; }
+    .confidence-dot { width: 12px; height: 12px; border-radius: 999px; display: inline-block; margin-right: 8px; vertical-align: middle; }
   </style>
 </head>
 <body>
@@ -190,40 +216,42 @@
 <div class="stage" id="stage">
 <div class="deck" id="deck">
 
-  <!-- =========== SLIDE 1: COVER =========== -->
+  <!-- SLIDE 1: COVER -->
   <section class="slide active" data-title="Cover">
     <div class="cover-bg"></div>
     <div class="grid-bg"></div>
     <div class="flex flex-col justify-center h-full max-w-5xl">
-      <div class="flex items-center gap-3 mb-8">
-        <img src="logo.png" alt="" class="w-12 h-12 rounded-lg" />
-        <span class="mono text-sm" style="color: var(--text-dim); letter-spacing: 0.2em;">AEGIS SPEC · v2.0</span>
+      <div class="flex items-center gap-4 mb-8">
+        <img src="logo.png" alt="" class="w-14 h-14 rounded-lg" />
+        <span class="mono text-sm" style="color: var(--text-dim); letter-spacing: 0.22em;">AEGIS SPEC · CONTROL PLANE v2.0</span>
       </div>
-      <h1 class="font-black tracking-tighter" style="font-size: 96px; line-height: 0.95;">
-        Control Plane for <span style="background: linear-gradient(135deg, var(--emerald-2), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AI-assisted</span> code
+      <h1 class="font-black tracking-tighter" style="font-size: 92px; line-height: 0.95;">
+        Specs as <span style="background: linear-gradient(135deg, var(--emerald-2), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">contracts</span>.<br/>
+        Code as <span style="color: var(--emerald-2);">ground truth</span>.
       </h1>
-      <p class="mt-6 text-2xl font-light" style="color: var(--text-dim); max-width: 880px; line-height: 1.4;">
-        Turn legacy systems into <span style="color: var(--text);">executable specifications</span> and keep them aligned as <span style="color: var(--emerald-2); font-weight: 500;">AI agents change the code</span>.
+      <p class="mt-6 text-2xl font-light" style="color: var(--text-dim); max-width: 860px; line-height: 1.4;">
+        Turn legacy systems into <span style="color: var(--text);">executable specifications</span> and keep them aligned as AI agents change the code.
       </p>
-      <div class="mt-12 flex items-center gap-6">
-        <span class="pill green">npm i -g aegis-spec</span>
-        <span class="mono text-sm" style="color: var(--text-faint);">github.com/Wellbrito29/Aegis</span>
+      <div class="mt-12 flex items-center gap-4 flex-wrap">
+        <span class="pill green">npx aegis-spec install</span>
+        <span class="badge-phase">v2.0.0 · 24 commits ahead of upstream</span>
+        <span class="mono text-sm" style="color: var(--text-faint);">github.com/Wellbrito29/Aegis · MIT</span>
       </div>
       <div class="mt-16 flex items-center gap-3 text-sm" style="color: var(--text-faint);">
         <span class="keystroke">→</span> next
         <span class="keystroke">←</span> back
         <span class="keystroke">F</span> fullscreen
-        <span class="ml-4 blink">●</span> live demo
+        <span class="ml-4 blink">●</span> live
       </div>
     </div>
   </section>
 
-  <!-- =========== SLIDE 2: PROBLEM =========== -->
+  <!-- SLIDE 2: PROBLEM -->
   <section class="slide" data-title="Problem">
     <div class="grid-bg"></div>
     <span class="slide-title-tag">● The problem</span>
     <h1 class="slide-title">AI agents need specs to be safe</h1>
-    <p class="slide-subtitle">Greenfield: write spec, agent executes. Legacy or vibe-coded: no spec → agent has no idea what it cannot break.</p>
+    <p class="slide-subtitle">Greenfield: write spec, agent executes. Legacy or vibe-coded: no spec → agent has no idea what it cannot break. Drift compounds; refactors stall behind fear of unknown contracts.</p>
 
     <div class="grid grid-cols-2 gap-6 mt-10 flex-1">
       <div class="glass p-8 flex flex-col">
@@ -236,9 +264,12 @@
           <li class="cross">Implicit business rules nobody can cite</li>
           <li class="cross">Agent rewrites a function, breaks an invariant</li>
           <li class="cross">Drift between code and Confluence wiki</li>
-          <li class="cross">"Why did it work yesterday?" loop</li>
+          <li class="cross">"Why did it work yesterday?" loops</li>
           <li class="cross">Refactor blocked by fear of unknown contracts</li>
         </ul>
+        <div class="mt-auto pt-6 border-t" style="border-color: var(--border);">
+          <div class="mono text-xs" style="color: var(--text-faint);">spec = wiki page · drift = silent · review = vibes</div>
+        </div>
       </div>
 
       <div class="glass-strong p-8 flex flex-col glow-emerald">
@@ -247,408 +278,881 @@
           <span class="mono text-xs" style="color: var(--text-faint);">spec-as-contract</span>
         </div>
         <ul class="space-y-3 text-base" style="color: var(--text);">
-          <li class="check">Specs extracted from real code, line-traceable</li>
-          <li class="check">Contracts marked 🟢 confirmed / 🟡 inferred / 🔴 gap</li>
+          <li class="check">Specs extracted from real code · file:line traceable</li>
+          <li class="check">Contracts marked 🟢 confirmed · 🟡 inferred · 🔴 gap</li>
           <li class="check">Drift loop catches every diverging edit</li>
           <li class="check">Policy gate blocks signature breaks at the PR</li>
           <li class="check">Knowledge graph shows blast radius before merge</li>
           <li class="check">Agents read specs first, then write</li>
         </ul>
+        <div class="mt-auto pt-6 border-t" style="border-color: var(--border);">
+          <div class="mono text-xs" style="color: var(--emerald-2);">spec = executable · drift = CI gate · review = enforced</div>
+        </div>
       </div>
     </div>
-    <span class="slide-num">02 / 12</span>
+    <span class="slide-num">02 / 22</span>
   </section>
 
-  <!-- =========== SLIDE 3: THREE PILLARS =========== -->
-  <section class="slide" data-title="Three Pillars">
+  <!-- SLIDE 3: NUMBERS -->
+  <section class="slide" data-title="Numbers">
     <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Foundation</span>
-    <h1 class="slide-title">Three pillars</h1>
-    <p class="slide-subtitle">Specs are the contract. Graph is the ground truth. Keeper is the gate that keeps them aligned.</p>
-
-    <div class="grid grid-cols-3 gap-6 mt-10 flex-1">
-      <div class="glass-strong p-8 flex flex-col glow-emerald">
-        <div class="text-5xl font-black mb-4" style="color: var(--emerald-2);">📜</div>
-        <h2 class="text-2xl font-bold mb-3">Aegis Spec</h2>
-        <p class="text-sm mb-4" style="color: var(--text-dim);">Spec authority. Features, contracts, invariants, retroactive ADRs.</p>
-        <div class="mt-auto pt-4 border-t" style="border-color: var(--border);">
-          <div class="mono text-xs" style="color: var(--text-faint);">aegis/specs/sdd · adrs · openapi</div>
-        </div>
-      </div>
-
-      <div class="glass-strong p-8 flex flex-col glow-amber">
-        <div class="text-5xl font-black mb-4" style="color: var(--amber);">🛡️</div>
-        <h2 class="text-2xl font-bold mb-3">Keeper</h2>
-        <p class="text-sm mb-4" style="color: var(--text-dim);">Drift gate. Hooks queue edits, Keeper updates specs in 3 questions.</p>
-        <div class="mt-auto pt-4 border-t" style="border-color: var(--border);">
-          <div class="mono text-xs" style="color: var(--text-faint);">/aegis-keeper before · after</div>
-        </div>
-      </div>
-
-      <div class="glass-strong p-8 flex flex-col">
-        <div class="text-5xl font-black mb-4" style="color: var(--accent-cyan);">🕸️</div>
-        <h2 class="text-2xl font-bold mb-3">Graph</h2>
-        <p class="text-sm mb-4" style="color: var(--text-dim);">Codebase oracle. L0 file imports + L1 symbols/signatures via tree-sitter.</p>
-        <div class="mt-auto pt-4 border-t" style="border-color: var(--border);">
-          <div class="mono text-xs" style="color: var(--text-faint);">aegis graph build · impact</div>
-        </div>
-      </div>
-    </div>
-    <span class="slide-num">03 / 12</span>
-  </section>
-
-  <!-- =========== SLIDE 4: PIPELINE =========== -->
-  <section class="slide" data-title="Pipeline">
-    <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Pipeline</span>
-    <h1 class="slide-title">4 stages — Specify, Understand, Guard, Deploy</h1>
-    <p class="slide-subtitle">Discovery extracts specs. Migration plans the rewrite. Build delegates to your coding agent. Control plane stops drift.</p>
-
-    <div class="flex-1 mt-6 grid grid-cols-2 gap-6">
-      <div class="flex items-center justify-center">
-        <img src="workflow.png" alt="Workflow" style="max-width: 100%; max-height: 460px;" class="rounded-lg" />
-      </div>
-      <div class="space-y-3">
-        <div class="layer">
-          <div class="flex items-center gap-2 mb-1"><span class="pill green">STAGE 1</span><div class="font-medium">Discovery</div></div>
-          <div class="text-sm" style="color: var(--text-dim);">Scout · Archaeologist · Detective · Architect · Writer · Reviewer → legacy code into <span class="mono">aegis/</span> specs.</div>
-        </div>
-        <div class="layer">
-          <div class="flex items-center gap-2 mb-1"><span class="pill amber">STAGE 2 (opt)</span><div class="font-medium">Migration</div></div>
-          <div class="text-sm" style="color: var(--text-dim);">Paradigm Advisor · Curator · Strategist · Designer · Inspector → migration plan + parity tests.</div>
-        </div>
-        <div class="layer">
-          <div class="flex items-center gap-2 mb-1"><span class="pill cyan">STAGE 3</span><div class="font-medium">Build</div></div>
-          <div class="text-sm" style="color: var(--text-dim);">Hand off to your coding agent (Claude · Codex · Cursor · Gemini · Kimi) — the migration plan drives new code.</div>
-        </div>
-        <div class="layer" style="border-color: rgba(0,230,118,0.3);">
-          <div class="flex items-center gap-2 mb-1"><span class="pill green">STAGE 4 ⭐</span><div class="font-medium">Control plane (this fork)</div></div>
-          <div class="text-sm" style="color: var(--text-dim);">Keeper + Graph + Policy gate (file-level + signature diff). Drift never lands.</div>
-        </div>
-      </div>
-    </div>
-    <span class="slide-num">04 / 12</span>
-  </section>
-
-  <!-- =========== SLIDE 5: DRIFT LOOP =========== -->
-  <section class="slide" data-title="Drift Loop">
-    <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Drift loop</span>
-    <h1 class="slide-title">Hook · Queue · Keeper · CI gate</h1>
-    <p class="slide-subtitle">Every code edit emits an event. Keeper closes the loop. CI gate refuses PRs whose drift is unresolved.</p>
-
-    <div class="flex-1 mt-6 mermaid">
-flowchart LR
-  Edit["Edit a file<br/><small>code agent or human</small>"]
-  Hook["Engine hook<br/><small>~300ms append-only</small>"]
-  Queue[("keeper-queue.jsonl<br/><small>drift queue</small>")]
-  Stub["Stub in changelog/<br/><small>spec marked 🔴 pending</small>"]
-  Keeper["/aegis-keeper after<br/><small>3 questions</small>"]
-  Spec["Specs updated in-place<br/><small>🟢 confirmed</small>"]
-  PR["PR opened"]
-  CI["CI: aegis drift-check<br/>+ policy-check"]
-  Block["BLOCK<br/><small>drift pending or contract broken</small>"]
-  Pass["Ready for review<br/><small>blast radius posted</small>"]
-
-  Edit --> Hook --> Queue --> Stub
-  Stub --> Keeper --> Spec
-  Spec --> PR --> CI
-  CI -->|exit 1| Block
-  CI -->|exit 0| Pass
-
-  classDef ok fill:#0B1115,stroke:#00E676,color:#F5F7FA
-  classDef warn fill:#0B1115,stroke:#FFB000,color:#F5F7FA
-  classDef stop fill:#0B1115,stroke:#EF4444,color:#F5F7FA
-  class Edit,Hook,Queue ok
-  class Stub,Keeper warn
-  class Spec,Pass ok
-  class Block stop
-    </div>
-    <span class="slide-num">05 / 12</span>
-  </section>
-
-  <!-- =========== SLIDE 6: ARCHITECTURE =========== -->
-  <section class="slide" data-title="Architecture">
-    <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Architecture</span>
-    <h1 class="slide-title">Layout v2 single-folder</h1>
-    <p class="slide-subtitle">Everything lives under <code class="mono">aegis/</code>. Config, specs, runtime, reports — one tree, one source of truth.</p>
-
-    <div class="grid grid-cols-2 gap-6 mt-10 flex-1">
-      <div class="glass p-6">
-        <h2 class="section-h">Folder layout</h2>
-        <pre class="code-block text-xs">aegis/
-  config/
-    state.json              <span class="code-cmt"># session state</span>
-    config.toml             <span class="code-cmt"># project</span>
-    auto-policy.yaml        <span class="code-cmt"># Keeper auto</span>
-    files-manifest.json     <span class="code-cmt"># SHA-256</span>
-  runtime/
-    context/
-      graph.json            <span class="code-cmt"># L0/L1 graph</span>
-      policy-index.json     <span class="code-cmt"># protected</span>
-    queue/keeper-queue.jsonl
-    audit/YYYY-MM-DD.jsonl
-  specs/
-    sdd/  adrs/  openapi/
-  reports/
-    drift.md  gaps.md  questions.md
-  architecture/
-    c4-context.md  c4-containers.md
-  traceability/
-    code-spec-matrix.md</pre>
-      </div>
-
-      <div class="space-y-4">
-        <div class="glass p-5">
-          <h2 class="section-h">CLI surface</h2>
-          <pre class="code-block text-xs">npx aegis-spec install
-npx aegis-spec graph build [--level L1]
-npx aegis-spec policy-index build
-npx aegis-spec policy-check --base origin/main
-npx aegis-spec drift-check --severity high
-npx aegis-spec keeper auto --dry-run
-npx aegis-spec add-hooks --engine claude-code</pre>
-        </div>
-        <div class="glass p-5">
-          <h2 class="section-h">Stack</h2>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="pill green">Node 18+</span>
-            <span class="pill">ESM only</span>
-            <span class="pill cyan">Babel L1 JS/TS</span>
-            <span class="pill amber">tree-sitter Py/Go/Java</span>
-            <span class="pill">Anthropic SDK opt</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <span class="slide-num">06 / 12</span>
-  </section>
-
-  <!-- =========== SLIDE 7: AGENTS =========== -->
-  <section class="slide" data-title="Agents">
-    <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Agents</span>
-    <h1 class="slide-title">29 specialized skills</h1>
-    <p class="slide-subtitle">Each agent ships as a SKILL.md installed into your engine of choice — Claude Code, Codex, Cursor, Gemini, Kimi, and 9 more.</p>
-
-    <div class="grid grid-cols-3 gap-5 mt-8 flex-1">
-      <div class="glass p-5">
-        <h2 class="section-h">Discovery (required)</h2>
-        <ul class="space-y-2 text-sm" style="color: var(--text-dim);">
-          <li><span class="font-medium" style="color: var(--text);">Aegis Spec</span> · orchestrator</li>
-          <li><span class="font-medium" style="color: var(--text);">Scout</span> · maps surface</li>
-          <li><span class="font-medium" style="color: var(--text);">Archaeologist</span> · deep code dive</li>
-          <li><span class="font-medium" style="color: var(--text);">Detective</span> · implicit rules + ADRs</li>
-          <li><span class="font-medium" style="color: var(--text);">Architect</span> · C4 + ERD synthesis</li>
-          <li><span class="font-medium" style="color: var(--text);">Writer</span> · spec generation</li>
-          <li><span class="font-medium" style="color: var(--text);">Reviewer</span> · validates gaps</li>
-        </ul>
-      </div>
-
-      <div class="glass p-5">
-        <h2 class="section-h">Migration team</h2>
-        <ul class="space-y-2 text-sm" style="color: var(--text-dim);">
-          <li><span class="font-medium" style="color: var(--text);">Migrate</span> · orchestrator</li>
-          <li><span class="font-medium" style="color: var(--text);">Paradigm Advisor</span></li>
-          <li><span class="font-medium" style="color: var(--text);">Curator</span> · keep / discard</li>
-          <li><span class="font-medium" style="color: var(--text);">Strategist</span> · Strangler / Big Bang</li>
-          <li><span class="font-medium" style="color: var(--text);">Designer</span> · target arch</li>
-          <li><span class="font-medium" style="color: var(--text);">Inspector</span> · parity Gherkin</li>
-        </ul>
-      </div>
-
-      <div class="glass p-5">
-        <h2 class="section-h">Forward + control</h2>
-        <ul class="space-y-2 text-sm" style="color: var(--text-dim);">
-          <li><span class="font-medium" style="color: var(--text);">Requirements</span> · idea → doc</li>
-          <li><span class="font-medium" style="color: var(--text);">Tech Brief · Plan · To-Do</span></li>
-          <li><span class="font-medium" style="color: var(--text);">Coding · Audit · Quality</span></li>
-          <li><span class="font-medium" style="color: var(--text);">Principles · Resume</span></li>
-          <li><span class="font-medium" style="color: var(--emerald-2);">Keeper ⭐</span> · drift gate</li>
-          <li><span class="font-medium" style="color: var(--text);">Visor · Data Master · Design System</span></li>
-        </ul>
-      </div>
-    </div>
-    <span class="slide-num">07 / 12</span>
-  </section>
-
-  <!-- =========== SLIDE 8: CONFIDENCE SCALE =========== -->
-  <section class="slide" data-title="Confidence Scale">
-    <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Trust model</span>
-    <h1 class="slide-title">Every claim labelled with confidence</h1>
-    <p class="slide-subtitle">Hallucination is the mortal enemy of legacy specs. Aegis annotates every statement so humans know what to trust.</p>
-
-    <div class="grid grid-cols-3 gap-6 mt-12 flex-1">
-      <div class="glass-strong p-8 flex flex-col glow-emerald">
-        <div class="conf-emoji" style="font-size: 48px;">🟢</div>
-        <h2 class="text-2xl font-bold mt-4 mb-3" style="color: var(--emerald-2);">CONFIRMED</h2>
-        <p class="text-sm" style="color: var(--text-dim);">Extracted directly from code. Citable with file path and line number. Safe to cite in PRs.</p>
-        <div class="mono text-xs mt-auto pt-4 border-t" style="border-color: var(--border); color: var(--text-faint);">e.g. <span style="color: var(--emerald-2);">src/auth/login.js:42</span></div>
-      </div>
-
-      <div class="glass-strong p-8 flex flex-col glow-amber">
-        <div class="conf-emoji" style="font-size: 48px;">🟡</div>
-        <h2 class="text-2xl font-bold mt-4 mb-3" style="color: var(--amber);">INFERRED</h2>
-        <p class="text-sm" style="color: var(--text-dim);">Deduced from patterns or naming. May be wrong. Validate with stakeholder before relying on it.</p>
-        <div class="mono text-xs mt-auto pt-4 border-t" style="border-color: var(--border); color: var(--text-faint);">e.g. naming convention says retry, no test confirms</div>
-      </div>
-
-      <div class="glass-strong p-8 flex flex-col" style="border-color: rgba(239,68,68,0.4);">
-        <div class="conf-emoji" style="font-size: 48px;">🔴</div>
-        <h2 class="text-2xl font-bold mt-4 mb-3" style="color: var(--accent-red);">GAP</h2>
-        <p class="text-sm" style="color: var(--text-dim);">Not determinable from code alone. Lands in <code class="mono text-xs">aegis/reports/questions.md</code> for human resolution.</p>
-        <div class="mono text-xs mt-auto pt-4 border-t" style="border-color: var(--border); color: var(--text-faint);">e.g. business policy not in code</div>
-      </div>
-    </div>
-    <span class="slide-num">08 / 12</span>
-  </section>
-
-  <!-- =========== SLIDE 9: ENGINES =========== -->
-  <section class="slide" data-title="Engines">
-    <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Engines</span>
-    <h1 class="slide-title">14 supported engines, one install</h1>
-    <p class="slide-subtitle">Aegis ships skills, entry files, and hooks that work across Claude Code, Codex, Cursor, Kimi, Opencode, and more.</p>
-
-    <div class="grid grid-cols-4 gap-4 mt-8 flex-1">
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill green">⭐</span><div class="font-medium">Claude Code</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">CLAUDE.md · /aegis</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill green">⭐</span><div class="font-medium">Codex</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">AGENTS.md</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill green">⭐</span><div class="font-medium">Cursor</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">.cursorrules</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Gemini CLI</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">GEMINI.md</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Windsurf</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">.windsurfrules</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Antigravity</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">AGENTS.md</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Opencode</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">AGENTS.md</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Kimi CLI</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">AGENTS.md</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Cline</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">.clinerules</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Roo Code</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">.roorules</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">GitHub Copilot</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">.github/copilot-*.md</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Aider</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">CONVENTIONS.md</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Amazon Q</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">.amazonq/rules/</div></div>
-      <div class="layer"><div class="flex items-center gap-2"><span class="pill">·</span><div class="font-medium">Kiro</div></div><div class="mono text-xs mt-1" style="color: var(--text-dim);">aegis/skills/</div></div>
-    </div>
-
-    <div class="mt-6 mono text-xs" style="color: var(--text-faint);">
-      Detection by project marker (.claude/, .cursorrules, …) or global binary in PATH.
-    </div>
-    <span class="slide-num">09 / 12</span>
-  </section>
-
-  <!-- =========== SLIDE 10: STATS =========== -->
-  <section class="slide" data-title="Stats">
-    <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Numbers</span>
-    <h1 class="slide-title">Project at a glance</h1>
-    <p class="slide-subtitle">Compact codebase, broad coverage. v2.0 single-folder layout, MIT, Node-18-or-newer, zero non-optional native deps.</p>
+    <span class="slide-title-tag">● Impact</span>
+    <h1 class="slide-title">In numbers</h1>
+    <p class="slide-subtitle">Fork v2.0.0 ships the control plane upstream Reversa never had — graph, policy, drift, audit, bot. All MIT, all in one CLI.</p>
 
     <div class="grid grid-cols-4 gap-5 mt-12">
-      <div class="glass p-7"><div class="stat-num" style="color: var(--emerald-2);">29</div><div class="stat-label">specialized skills</div></div>
-      <div class="glass p-7"><div class="stat-num" style="color: var(--amber);">14</div><div class="stat-label">engines supported</div></div>
-      <div class="glass p-7"><div class="stat-num" style="color: var(--accent-cyan);">16</div><div class="stat-label">CLI subcommands</div></div>
-      <div class="glass p-7"><div class="stat-num" style="color: var(--accent-purple);">5</div><div class="stat-label">L1 languages (JS/TS/Py/Go/Java)</div></div>
+      <div class="glass p-7"><div class="stat-num" style="color: var(--emerald-2);">30</div><div class="stat-label">agents</div></div>
+      <div class="glass p-7"><div class="stat-num" style="color: var(--accent-cyan);">14</div><div class="stat-label">engines supported</div></div>
+      <div class="glass p-7"><div class="stat-num" style="color: var(--accent-purple);">8.3k</div><div class="stat-label">LoC core (lib/)</div></div>
+      <div class="glass p-7"><div class="stat-num" style="color: var(--amber);">47</div><div class="stat-label">unit test suites</div></div>
     </div>
 
     <div class="grid grid-cols-3 gap-5 mt-6">
       <div class="layer">
-        <h2 class="section-h">Test coverage</h2>
-        <div class="text-3xl font-bold" style="color: var(--emerald-2);">82% line</div>
-        <p class="text-sm mt-2" style="color: var(--text-dim);">342 tests on Node 18 / 20 / 22</p>
+        <h2 class="section-h">Pipeline stages</h2>
+        <div class="text-3xl font-bold" style="color: var(--emerald-2);">4</div>
+        <p class="text-sm mt-2" style="color: var(--text-dim);">Discovery → Migration → Build → Control Plane</p>
       </div>
       <div class="layer">
-        <h2 class="section-h">Codebase size</h2>
-        <div class="text-3xl font-bold" style="color: var(--emerald-2);">~8.4k LOC</div>
-        <p class="text-sm mt-2" style="color: var(--text-dim);">85 .js files, no build step</p>
+        <h2 class="section-h">Languages (Graph L1)</h2>
+        <div class="text-3xl font-bold" style="color: var(--emerald-2);">5</div>
+        <p class="text-sm mt-2" style="color: var(--text-dim);">JS · TS · Python · Go · Java via tree-sitter</p>
       </div>
       <div class="layer">
-        <h2 class="section-h">Docs</h2>
-        <div class="text-3xl font-bold" style="color: var(--emerald-2);">3 langs</div>
-        <p class="text-sm mt-2" style="color: var(--text-dim);">EN · PT · ES via mkdocs-i18n</p>
+        <h2 class="section-h">Fork delta vs upstream</h2>
+        <div class="text-3xl font-bold" style="color: var(--emerald-2);">+24</div>
+        <p class="text-sm mt-2" style="color: var(--text-dim);">commits past <code class="mono text-xs">144aee2</code> (Reversa v1.2.28)</p>
       </div>
     </div>
 
-    <div class="mt-8 flex gap-3">
-      <span class="pill green">✓ MIT License</span>
-      <span class="pill green">✓ ESM only</span>
-      <span class="pill green">✓ Zero required native deps</span>
-      <span class="pill green">✓ CI on Node 18/20/22</span>
+    <div class="mt-8 flex gap-2 flex-wrap">
+      <span class="badge-phase">Phase 1 Hooks</span>
+      <span class="badge-phase">Phase 2 Graph L0</span>
+      <span class="badge-phase">Phase 6-9 Graph L1 (JS/TS/PY/Go/Java)</span>
+      <span class="badge-phase">Phase 10 Signature diff</span>
+      <span class="badge-phase">Phase 11 policy-check CLI</span>
+      <span class="badge-phase">Phase 12 Auto Keeper</span>
+      <span class="badge-phase">Phase 13 Audit + bot</span>
+      <span class="badge-phase">Phase 14 CI templates</span>
     </div>
-    <span class="slide-num">10 / 12</span>
+    <span class="slide-num">03 / 22</span>
   </section>
 
-  <!-- =========== SLIDE 11: ROADMAP =========== -->
+  <!-- SLIDE 4: THREE PILLARS -->
+  <section class="slide" data-title="Three Pillars">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Foundation</span>
+    <h1 class="slide-title">Three pillars</h1>
+    <p class="slide-subtitle">Specs are the contract. Graph is the ground truth. Keeper is the gate that keeps them aligned. Removing any one collapses the loop.</p>
+
+    <div class="grid grid-cols-3 gap-6 mt-10 flex-1">
+      <div class="glass-strong p-7 flex flex-col glow-emerald">
+        <span class="pill green w-fit">PILLAR 1</span>
+        <h2 class="text-3xl font-bold mt-4 mb-3">Aegis Spec</h2>
+        <p class="text-sm mb-4" style="color: var(--text-dim);">Spec authority. Features, contracts, invariants, retroactive ADRs. Generated by Discovery agents, line-traceable to real code.</p>
+        <div class="space-y-1.5 text-xs" style="color: var(--text-dim);">
+          <div class="arrow"><code class="mono">aegis/specs/sdd/</code></div>
+          <div class="arrow"><code class="mono">aegis/specs/adrs/</code></div>
+          <div class="arrow"><code class="mono">aegis/specs/openapi/</code></div>
+          <div class="arrow"><code class="mono">aegis/specs/user-stories/</code></div>
+        </div>
+        <div class="mt-auto pt-4 border-t" style="border-color: var(--border);">
+          <div class="mono text-xs" style="color: var(--emerald-2);">Architect · Writer · Detective · Archaeologist · Scout</div>
+        </div>
+      </div>
+
+      <div class="glass-strong p-7 flex flex-col glow-amber">
+        <span class="pill amber w-fit">PILLAR 2</span>
+        <h2 class="text-3xl font-bold mt-4 mb-3">Keeper</h2>
+        <p class="text-sm mb-4" style="color: var(--text-dim);">Drift gate. Hooks queue every edit, Keeper updates impacted specs in 3 questions and reclassifies confidence.</p>
+        <div class="space-y-1.5 text-xs" style="color: var(--text-dim);">
+          <div class="arrow"><code class="mono">/aegis-keeper before</code> · pre-edit context</div>
+          <div class="arrow"><code class="mono">/aegis-keeper after</code> · post-edit sync</div>
+          <div class="arrow"><code class="mono">keeper-queue.jsonl</code> · event queue</div>
+          <div class="arrow"><code class="mono">drift.md</code> · 🔴 pending dashboard</div>
+        </div>
+        <div class="mt-auto pt-4 border-t" style="border-color: var(--border);">
+          <div class="mono text-xs" style="color: var(--amber);">Manual · Hooked · Auto · Hybrid</div>
+        </div>
+      </div>
+
+      <div class="glass-strong p-7 flex flex-col">
+        <span class="pill cyan w-fit">PILLAR 3</span>
+        <h2 class="text-3xl font-bold mt-4 mb-3">Graph</h2>
+        <p class="text-sm mb-4" style="color: var(--text-dim);">Codebase oracle. L0 universal file imports (regex). L1 symbols & signatures via tree-sitter for 5 languages.</p>
+        <div class="space-y-1.5 text-xs" style="color: var(--text-dim);">
+          <div class="arrow"><code class="mono">graph build [--level L0|L1]</code></div>
+          <div class="arrow"><code class="mono">graph impact &lt;file&gt;</code> · BFS blast radius</div>
+          <div class="arrow"><code class="mono">graph symbols / callers</code></div>
+          <div class="arrow"><code class="mono">graph.json</code> · in-house, MIT, no deps</div>
+        </div>
+        <div class="mt-auto pt-4 border-t" style="border-color: var(--border);">
+          <div class="mono text-xs" style="color: var(--accent-cyan);">parsers-l0 · parsers-l1 · extractors · resolve</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">04 / 22</span>
+  </section>
+
+  <!-- SLIDE 5: PIPELINE -->
+  <section class="slide" data-title="Pipeline">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Pipeline · 4 stages</span>
+    <h1 class="slide-title">From legacy code to guarded code</h1>
+    <p class="slide-subtitle">Stage 1-2 are upstream Reversa heritage (spec generation). Stage 4 is the fork delta — control plane that runs forever after Stage 3 ships.</p>
+
+    <div class="grid grid-cols-4 gap-4 mt-10 flex-1">
+      <div class="glass p-6 flex flex-col">
+        <span class="pill green w-fit">STAGE 1</span>
+        <h2 class="text-xl font-bold mt-3 mb-2">Discovery</h2>
+        <p class="text-xs mb-3" style="color: var(--text-dim);">Legacy code → <code class="mono">aegis/</code> specs.</p>
+        <ul class="text-xs space-y-1" style="color: var(--text-dim);">
+          <li>Scout</li><li>Archaeologist</li><li>Detective</li><li>Architect</li><li>Writer</li><li>Reviewer</li>
+        </ul>
+      </div>
+      <div class="glass p-6 flex flex-col">
+        <span class="pill cyan w-fit">STAGE 2</span>
+        <h2 class="text-xl font-bold mt-3 mb-2">Migration <span class="text-xs font-normal" style="color: var(--text-faint);">(optional)</span></h2>
+        <p class="text-xs mb-3" style="color: var(--text-dim);">Specs → migration plan + parity tests.</p>
+        <ul class="text-xs space-y-1" style="color: var(--text-dim);">
+          <li>Paradigm Advisor</li><li>Curator</li><li>Strategist</li><li>Designer</li><li>Inspector</li>
+        </ul>
+      </div>
+      <div class="glass p-6 flex flex-col">
+        <span class="pill purple w-fit">STAGE 3</span>
+        <h2 class="text-xl font-bold mt-3 mb-2">Build</h2>
+        <p class="text-xs mb-3" style="color: var(--text-dim);">User's coding agent ships new code.</p>
+        <ul class="text-xs space-y-1" style="color: var(--text-dim);">
+          <li>Claude Code</li><li>Codex</li><li>Cursor</li><li>Gemini</li><li>Kimi · Opencode · …</li>
+        </ul>
+      </div>
+      <div class="glass-strong p-6 flex flex-col glow-emerald">
+        <span class="pill amber w-fit">STAGE 4 · FORK DELTA</span>
+        <h2 class="text-xl font-bold mt-3 mb-2">Control plane</h2>
+        <p class="text-xs mb-3" style="color: var(--text-dim);">New code → guarded against drift, signature break, blast radius.</p>
+        <ul class="text-xs space-y-1" style="color: var(--text);">
+          <li class="check">Keeper drift loop</li>
+          <li class="check">Graph impact</li>
+          <li class="check">Policy gate</li>
+          <li class="check">Audit log</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-6 glass p-4">
+      <div class="mono text-xs flex items-center gap-3" style="color: var(--text-faint);">
+        <span class="badge-phase">aegis/runtime/context/</span>
+        <span>→</span>
+        <span class="badge-phase">graph.json + policy-index.json</span>
+        <span>→</span>
+        <span class="badge-phase">drift.md + changelog/</span>
+        <span>→</span>
+        <span class="badge-phase">audit/YYYY-MM-DD.jsonl</span>
+      </div>
+    </div>
+    <span class="slide-num">05 / 22</span>
+  </section>
+
+  <!-- SLIDE 6: C4 CONTAINER -->
+  <section class="slide" data-title="Architecture">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Container view</span>
+    <h1 class="slide-title">One CLI, every gate</h1>
+    <p class="slide-subtitle">All modules ship in <code class="mono text-base">aegis-spec</code> npm package. No daemon, no service — just a CLI invoked from hooks, the agent, or CI.</p>
+
+    <div class="flex-1 mt-4 mermaid" style="min-height: 0;">
+flowchart LR
+  USER["AI Agent<br/><small>Claude · Codex · Cursor · …</small>"]
+  HOOK["Engine Hook<br/><small>PostToolUse · file save</small>"]
+  CI["CI Job<br/><small>GitHub · GitLab · CircleCI</small>"]
+  subgraph CLI ["aegis-spec CLI · bin/aegis.js"]
+    direction TB
+    INST["installer/<br/><small>detect · prompts · manifest</small>"]
+    AGENTS["agents/ · 30 skills<br/><small>copied to aegis/skills/</small>"]
+    GRAPH["graph/<br/><small>L0 + L1 · 5 languages</small>"]
+    POLICY["policy/<br/><small>index · check · adapters</small>"]
+    AUTO["auto/<br/><small>classifier · spec-writer</small>"]
+    AUDIT["audit/<br/><small>JSONL + redact</small>"]
+  end
+  SPECS[("aegis/<br/><small>specs · runtime · reports</small>")]
+  USER --> CLI
+  HOOK --> CLI
+  CI --> CLI
+  CLI --> SPECS
+  GRAPH --> SPECS
+  POLICY --> SPECS
+  AUTO --> SPECS
+  AUDIT --> SPECS
+    </div>
+    <span class="slide-num">06 / 22</span>
+  </section>
+
+  <!-- SLIDE 7: AGENTS ROSTER -->
+  <section class="slide" data-title="Agent Roster">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● 30 skills</span>
+    <h1 class="slide-title">Agents installed as skills</h1>
+    <p class="slide-subtitle">Each agent ships verbatim into <code class="mono text-base">aegis/skills/aegis-*/</code>. The engine activates them via <code class="mono text-base">/aegis</code>. Required core + optional specialists + input translators.</p>
+
+    <div class="grid grid-cols-3 gap-5 mt-8 flex-1">
+      <div class="glass-strong p-5">
+        <h2 class="section-h">Required core</h2>
+        <div class="space-y-2 text-sm">
+          <div class="layer"><span class="pill green">Aegis Spec</span> orchestrator · checkpoints</div>
+          <div class="layer"><span class="pill green">Scout</span> surface · entrypoints · deps</div>
+          <div class="layer"><span class="pill green">Archaeologist</span> module-by-module deep dive</div>
+          <div class="layer"><span class="pill green">Detective</span> rules · state · permissions</div>
+          <div class="layer"><span class="pill green">Architect</span> C4 · ERD · tech debt</div>
+          <div class="layer"><span class="pill green">Writer</span> spec generation w/ traceability</div>
+        </div>
+      </div>
+
+      <div class="glass-strong p-5">
+        <h2 class="section-h">Optional specialists</h2>
+        <div class="space-y-2 text-sm">
+          <div class="layer"><span class="pill amber">Reviewer</span> spec inconsistencies + gaps</div>
+          <div class="layer"><span class="pill amber">Visor</span> screenshots → UI spec</div>
+          <div class="layer"><span class="pill amber">Data Master</span> DDL · ORM · ERD · triggers</div>
+          <div class="layer"><span class="pill amber">Design System</span> tokens · themes · components</div>
+          <div class="layer"><span class="pill amber">Reconstructor</span> bottom-up rebuild plan</div>
+          <div class="layer"><span class="pill amber">Keeper</span> drift loop + changelog</div>
+        </div>
+      </div>
+
+      <div class="glass-strong p-5">
+        <h2 class="section-h">Migration + translators</h2>
+        <div class="space-y-2 text-sm">
+          <div class="layer"><span class="pill cyan">Paradigm Advisor</span> stack fit</div>
+          <div class="layer"><span class="pill cyan">Curator</span> what survives migration</div>
+          <div class="layer"><span class="pill cyan">Strategist</span> sequence + parity</div>
+          <div class="layer"><span class="pill cyan">Designer</span> target architecture</div>
+          <div class="layer"><span class="pill cyan">Inspector</span> parity tests</div>
+          <div class="layer"><span class="pill purple">N8N Translator</span> visual flow → SDD</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">07 / 22</span>
+  </section>
+
+  <!-- SLIDE 8: DRIFT LOOP LOCAL -->
+  <section class="slide" data-title="Drift Loop Local">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Keeper · local flow</span>
+    <h1 class="slide-title">Edit → queue → 3 questions → in-sync</h1>
+    <p class="slide-subtitle">Hooks fire on every save. Keeper asks <strong>why</strong> · <strong>breaking?</strong> · <strong>context?</strong>, then rewrites the impacted spec and reclassifies confidence 🟢🟡🔴.</p>
+
+    <div class="grid grid-cols-12 gap-6 mt-8 flex-1">
+      <div class="glass-strong p-6 col-span-7 glow-emerald">
+        <h2 class="section-h">Local flow</h2>
+        <pre class="code-block text-xs">[Edit file]            <span class="code-cmt"># agent or human</span>
+   │
+   └─ engine hook (PostToolUse / save)
+        ├─ <span class="code-str">aegis/runtime/queue/keeper-queue.jsonl</span>
+        ├─ stub appended to <span class="code-str">changelog/YYYY-MM-DD.md</span>
+        └─ impacted spec marked <span style="color: var(--accent-red);">🔴 pending</span> in <span class="code-str">drift.md</span>
+
+[/aegis-keeper after]   <span class="code-cmt"># dev triggers manually or on Stop hook</span>
+   │
+   ├─ asks 3 Qs: why? breaking? context?
+   ├─ rewrites impacted specs in-place
+   ├─ reclassifies <span class="code-fn">🟢 confirmed</span> / <span style="color: var(--amber);">🟡 inferred</span> / <span style="color: var(--accent-red);">🔴 gap</span>
+   └─ marks specs as <span class="code-fn">🟢 resolved</span>
+
+[git push]              <span class="code-cmt"># dev commits both code + updated specs</span></pre>
+        <div class="mt-4 flex gap-2 flex-wrap">
+          <span class="pill green">no LLM mandatory</span>
+          <span class="pill amber">human intent captured</span>
+          <span class="pill cyan">spec ↔ code stay in lockstep</span>
+        </div>
+      </div>
+
+      <div class="glass p-6 col-span-5">
+        <h2 class="section-h">Three layers · opt-in</h2>
+        <div class="space-y-3 mt-3">
+          <div class="layer">
+            <div class="flex items-center gap-2 mb-1"><span class="pill green">1. MANUAL</span></div>
+            <div class="text-sm" style="color: var(--text-dim);">Run <code class="mono text-xs">/aegis-keeper after</code> whenever the dev decides.</div>
+          </div>
+          <div class="layer">
+            <div class="flex items-center gap-2 mb-1"><span class="pill amber">2. HOOKED</span></div>
+            <div class="text-sm" style="color: var(--text-dim);"><code class="mono text-xs">npx aegis-spec add-hooks --engine claude-code</code><br/>covers cursor · kimi-cli · codex · opencode.</div>
+          </div>
+          <div class="layer">
+            <div class="flex items-center gap-2 mb-1"><span class="pill red">3. ENFORCED</span></div>
+            <div class="text-sm" style="color: var(--text-dim);"><code class="mono text-xs">drift-check --severity high</code> in CI — PR fails if drift pending.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">08 / 22</span>
+  </section>
+
+  <!-- SLIDE 9: DRIFT LOOP CI -->
+  <section class="slide" data-title="Drift Loop CI">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Control plane · CI</span>
+    <h1 class="slide-title">CI enforces — never resolves</h1>
+    <p class="slide-subtitle">Keeper <strong>never runs automatically in CI</strong>: it needs human intent. CI only enforces that drift was resolved locally and the contract was not silently broken.</p>
+
+    <div class="flex-1 mt-6 mermaid" style="min-height: 0;">
+flowchart TD
+  PR[PR opened or updated] --> CO[Checkout + restore aegis/runtime/context cache]
+  CO --> GRAPH["npx aegis-spec graph build --level L1"]
+  GRAPH --> IDX["npx aegis-spec policy-index build"]
+  IDX --> DRIFT{"drift-check<br/>--severity high"}
+  DRIFT -->|exit 1| BLOCK1["BLOCK · spec drift pending<br/><small>dev must /aegis-keeper after locally</small>"]
+  DRIFT -->|exit 0| POLICY{"policy-check<br/>signature gate"}
+  POLICY -->|contract broken| BLOCK2["BLOCK · 🟢 contract violated<br/><small>protected file or signature diff</small>"]
+  POLICY -->|clean| IMPACT["aegis graph impact<br/><small>blast radius posted as PR comment</small>"]
+  IMPACT --> PASS["Ready for review"]
+  classDef block fill:#3a0e0e,stroke:#EF4444,color:#fff;
+  classDef ok fill:#0e3a25,stroke:#00E676,color:#fff;
+  class BLOCK1,BLOCK2 block
+  class PASS ok
+    </div>
+    <span class="slide-num">09 / 22</span>
+  </section>
+
+  <!-- SLIDE 10: GRAPH -->
+  <section class="slide" data-title="Graph">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Codebase oracle</span>
+    <h1 class="slide-title">Graph L0 universal · L1 per-language</h1>
+    <p class="slide-subtitle">L0 = regex import parsers for any text file. L1 = tree-sitter symbol + signature extraction. Output: <code class="mono text-base">aegis/runtime/context/graph.json</code>.</p>
+
+    <div class="grid grid-cols-12 gap-6 mt-8 flex-1">
+      <div class="glass-strong p-6 col-span-7">
+        <h2 class="section-h">Modules · lib/graph/</h2>
+        <pre class="code-block text-xs">lib/graph/
+├─ builder.js          <span class="code-cmt"># L0 walker · file imports</span>
+├─ builder-l1.js       <span class="code-cmt"># L1 walker · symbols / calls</span>
+├─ incremental.js      <span class="code-cmt"># dirty-file merge</span>
+├─ store.js            <span class="code-cmt"># atomic JSON write</span>
+├─ resolve.js          <span class="code-cmt"># 4 strategies · TS paths · py · go · java</span>
+├─ parsers-l0/         <span class="code-cmt"># js · ts · py · go · java · …</span>
+├─ parsers-l1/         <span class="code-cmt"># tree-sitter per language</span>
+├─ extractors/         <span class="code-cmt"># symbols · signatures · const exports</span>
+└─ queries/            <span class="code-cmt"># impact · callers · symbols</span></pre>
+      </div>
+
+      <div class="glass p-6 col-span-5">
+        <h2 class="section-h">CLI</h2>
+        <pre class="code-block text-xs">$ aegis graph build --level L1
+  <span class="code-cmt">→ aegis/runtime/context/graph.json</span>
+
+$ aegis graph impact src/api.ts
+  <span class="code-cmt">→ BFS of files touched</span>
+
+$ aegis graph symbols src/api.ts
+$ aegis graph callers parseToken</pre>
+        <div class="mt-4 flex flex-col gap-2">
+          <span class="pill green">in-house · MIT · no PolyForm</span>
+          <span class="pill cyan">tree-sitter optional dep</span>
+          <span class="pill amber">~1000 files in &lt;2s</span>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">10 / 22</span>
+  </section>
+
+  <!-- SLIDE 11: POLICY ENGINE -->
+  <section class="slide" data-title="Policy Engine">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Contract gate</span>
+    <h1 class="slide-title">Policy: file-level + signature diff</h1>
+    <p class="slide-subtitle">Two layers. File-level blocks protected paths. Signature gate detects exported API changes via L1 graph diff. Adapters emit reason in the right format for each AI tool.</p>
+
+    <div class="grid grid-cols-2 gap-6 mt-8 flex-1">
+      <div class="glass-strong p-6 glow-emerald">
+        <h2 class="section-h">lib/policy/</h2>
+        <div class="space-y-2 text-sm">
+          <div class="layer"><span class="pill green">index-builder</span> builds <code class="mono text-xs">policy-index.json</code></div>
+          <div class="layer"><span class="pill green">check</span> APPROVE · WARN · BLOCK per file</div>
+          <div class="layer"><span class="pill green">diff-detector</span> signature change between commits</div>
+          <div class="layer"><span class="pill green">overrides</span> 3 sources: config · skill · inline</div>
+          <div class="layer"><span class="pill green">decisions / reason-builder</span> human-readable verdicts</div>
+          <div class="layer"><span class="pill green">alternatives</span> suggested safe path</div>
+        </div>
+        <div class="mt-4 mono text-xs" style="color: var(--text-faint);">62 / 62 policy tests green · matchGlob mid-path /**/ bug fixed</div>
+      </div>
+
+      <div class="glass p-6">
+        <h2 class="section-h">Adapters · 5 AI tools</h2>
+        <pre class="code-block text-xs">lib/policy/adapters/
+├─ claude-code.js    <span class="code-cmt"># JSON hook output</span>
+├─ cursor.js         <span class="code-cmt"># .cursorrules signals</span>
+├─ codex.js          <span class="code-cmt"># text reason</span>
+├─ kimi-cli.js       <span class="code-cmt"># Kimi protocol</span>
+└─ opencode.js       <span class="code-cmt"># Opencode hook fmt</span></pre>
+        <div class="mt-4 flex flex-col gap-2">
+          <span class="pill amber">27 adapter tests</span>
+          <span class="pill cyan">deterministic — same diff, same verdict</span>
+        </div>
+        <div class="mt-4 layer">
+          <div class="mono text-xs" style="color: var(--text-dim);">$ aegis policy-check --base main --head HEAD<br/>→ exit 1 if BLOCK · prints reason · signed block in commit msg</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">11 / 22</span>
+  </section>
+
+  <!-- SLIDE 12: AUTO MODE -->
+  <section class="slide" data-title="Auto Mode">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Phase 12 · Keeper auto</span>
+    <h1 class="slide-title">Auto resolution · LLM-classified</h1>
+    <p class="slide-subtitle">Whitelist paths get auto-resolved by Claude (Anthropic SDK). Blacklist stays HITL. Decision tree decides; auto-policy.yaml controls scope. <code class="mono text-base">--dry-run</code> skips LLM + writes.</p>
+
+    <div class="grid grid-cols-12 gap-5 mt-8 flex-1">
+      <div class="glass-strong p-6 col-span-5 glow-purple">
+        <h2 class="section-h">lib/auto/</h2>
+        <div class="space-y-2 text-sm">
+          <div class="layer"><span class="pill purple">classifier</span> trivial · review · skip</div>
+          <div class="layer"><span class="pill purple">decision-tree</span> 14 cases covered by tests</div>
+          <div class="layer"><span class="pill purple">spec-writer</span> Anthropic SDK call · prompt-cache</div>
+          <div class="layer"><span class="pill purple">prompt-cache</span> cache 5-min reuse</div>
+          <div class="layer"><span class="pill purple">labels</span> 🟢 auto · 🟡 needs review · 🔴 escalate</div>
+          <div class="layer"><span class="pill purple">policy-schema</span> YAML validator</div>
+        </div>
+      </div>
+
+      <div class="glass p-6 col-span-7">
+        <h2 class="section-h">aegis/config/auto-policy.yaml</h2>
+        <pre class="code-block text-xs"><span class="code-key">auto_resolve</span>: <span class="code-num">true</span>
+<span class="code-key">model</span>: <span class="code-str">claude-opus-4-7</span>
+
+<span class="code-key">whitelist</span>:
+  - <span class="code-str">"src/utils/**"</span>      <span class="code-cmt"># auto-resolve drift here</span>
+  - <span class="code-str">"src/**/*.test.js"</span>
+
+<span class="code-key">blacklist</span>:
+  - <span class="code-str">"src/auth/**"</span>        <span class="code-cmt"># always HITL</span>
+  - <span class="code-str">"aegis/specs/adrs/**"</span>
+
+<span class="code-key">caps</span>:
+  <span class="code-key">max_per_run</span>: <span class="code-num">10</span>
+  <span class="code-key">max_per_day</span>: <span class="code-num">50</span></pre>
+        <div class="mt-4 flex gap-2 flex-wrap">
+          <span class="pill green">opt-in</span>
+          <span class="pill amber">needs ANTHROPIC_API_KEY</span>
+          <span class="pill cyan">JSONL tolerant — bad lines skipped</span>
+          <span class="pill red">dry-run by default in CI</span>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">12 / 22</span>
+  </section>
+
+  <!-- SLIDE 13: CONFIDENCE SCALE -->
+  <section class="slide" data-title="Confidence">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Spec confidence</span>
+    <h1 class="slide-title">Every statement is marked</h1>
+    <p class="slide-subtitle">Aegis never pretends. Each claim carries a confidence mark, so reviewers know what is fact, what is inference, what needs a human.</p>
+
+    <div class="grid grid-cols-3 gap-6 mt-12 flex-1">
+      <div class="glass-strong p-8 flex flex-col glow-emerald">
+        <div class="flex items-center mb-4"><span class="confidence-dot" style="background: var(--emerald-2);"></span><h2 class="text-3xl font-bold">CONFIRMED</h2></div>
+        <p class="text-base mb-4" style="color: var(--text-dim);">Extracted directly from code. Can be cited with file + line.</p>
+        <div class="layer text-sm">
+          <div class="mono text-xs" style="color: var(--text-faint);">example</div>
+          <div class="mt-1" style="color: var(--text);">"User cannot login after 3 failed attempts (auth/login.js:84)"</div>
+        </div>
+        <div class="mt-auto pt-4 border-t mono text-xs" style="border-color: var(--border); color: var(--emerald-2);">audit trail · ground truth</div>
+      </div>
+
+      <div class="glass-strong p-8 flex flex-col glow-amber">
+        <div class="flex items-center mb-4"><span class="confidence-dot" style="background: var(--amber);"></span><h2 class="text-3xl font-bold">INFERRED</h2></div>
+        <p class="text-base mb-4" style="color: var(--text-dim);">Deduced from patterns. May be wrong.</p>
+        <div class="layer text-sm">
+          <div class="mono text-xs" style="color: var(--text-faint);">example</div>
+          <div class="mt-1" style="color: var(--text);">"Likely intended for SSO integration based on session metadata."</div>
+        </div>
+        <div class="mt-auto pt-4 border-t mono text-xs" style="border-color: var(--border); color: var(--amber);">needs validation</div>
+      </div>
+
+      <div class="glass-strong p-8 flex flex-col">
+        <div class="flex items-center mb-4"><span class="confidence-dot" style="background: var(--accent-red);"></span><h2 class="text-3xl font-bold">GAP</h2></div>
+        <p class="text-base mb-4" style="color: var(--text-dim);">Not determinable from code. Requires human input.</p>
+        <div class="layer text-sm">
+          <div class="mono text-xs" style="color: var(--text-faint);">example</div>
+          <div class="mt-1" style="color: var(--text);">"Discount tiers above $10k — value unknown. Open question."</div>
+        </div>
+        <div class="mt-auto pt-4 border-t mono text-xs" style="border-color: var(--border); color: var(--accent-red);">queue in <code class="mono">questions.md</code></div>
+      </div>
+    </div>
+    <span class="slide-num">13 / 22</span>
+  </section>
+
+  <!-- SLIDE 14: ENGINES -->
+  <section class="slide" data-title="Engines">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● 14 supported</span>
+    <h1 class="slide-title">Plug into any coding agent</h1>
+    <p class="slide-subtitle">Installer auto-detects engines present in the environment. Each gets its native entry file. Skills land in <code class="mono text-base">aegis/skills/</code> verbatim.</p>
+
+    <div class="grid grid-cols-4 gap-3 mt-8 flex-1 text-sm">
+      <div class="layer"><span class="pill green">Claude Code ⭐</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">CLAUDE.md · /aegis</div></div>
+      <div class="layer"><span class="pill green">Codex ⭐</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">AGENTS.md · aegis</div></div>
+      <div class="layer"><span class="pill green">Cursor ⭐</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">.cursorrules · /aegis</div></div>
+      <div class="layer"><span class="pill amber">Gemini CLI</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">GEMINI.md · /aegis</div></div>
+      <div class="layer"><span class="pill amber">Windsurf</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">.windsurfrules</div></div>
+      <div class="layer"><span class="pill amber">Antigravity</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">AGENTS.md</div></div>
+      <div class="layer"><span class="pill amber">Kiro</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">skills only</div></div>
+      <div class="layer"><span class="pill amber">Opencode</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">AGENTS.md · aegis</div></div>
+      <div class="layer"><span class="pill cyan">Cline</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">.clinerules</div></div>
+      <div class="layer"><span class="pill cyan">Roo Code</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">.roorules</div></div>
+      <div class="layer"><span class="pill cyan">GitHub Copilot</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">.github/copilot-instructions.md</div></div>
+      <div class="layer"><span class="pill cyan">Aider</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">CONVENTIONS.md · aegis</div></div>
+      <div class="layer"><span class="pill purple">Amazon Q Developer</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">.amazonq/rules/aegis.md</div></div>
+      <div class="layer"><span class="pill purple">Kimi CLI</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">AGENTS.md · aegis · fork-new</div></div>
+      <div class="layer glass-strong p-3"><span class="pill green">+ hooks</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">claude · cursor · kimi · codex · opencode</div></div>
+      <div class="layer glass-strong p-3"><span class="pill green">+ git hooks</span><div class="mono text-xs mt-2" style="color: var(--text-faint);">pre-commit policy gate</div></div>
+    </div>
+    <span class="slide-num">14 / 22</span>
+  </section>
+
+  <!-- SLIDE 15: CLI -->
+  <section class="slide" data-title="CLI">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Surface</span>
+    <h1 class="slide-title">CLI commands</h1>
+    <p class="slide-subtitle">Everything is one binary: install, hook, build, gate, audit, migrate. No daemon. No service. Idempotent.</p>
+
+    <div class="grid grid-cols-2 gap-6 mt-8 flex-1">
+      <div class="glass p-6">
+        <h2 class="section-h">Setup & lifecycle</h2>
+        <pre class="code-block text-xs">$ npx aegis-spec install
+$ npx aegis-spec status
+$ npx aegis-spec update          <span class="code-cmt"># SHA-256 protected</span>
+$ npx aegis-spec add-agent
+$ npx aegis-spec add-engine
+$ npx aegis-spec add-hooks --engine claude-code
+$ npx aegis-spec remove-hooks --engine claude-code
+$ npx aegis-spec uninstall       <span class="code-cmt"># only touches aegis/</span></pre>
+      </div>
+
+      <div class="glass p-6">
+        <h2 class="section-h">Control plane</h2>
+        <pre class="code-block text-xs">$ aegis graph build --level L1
+$ aegis graph impact src/auth.ts
+$ aegis policy-index build
+$ aegis policy-check --base main --head HEAD
+$ aegis drift-check --severity high
+$ aegis keeper-auto              <span class="code-cmt"># Phase 12 auto loop</span>
+$ aegis migrate-reversa          <span class="code-cmt"># Reversa → Aegis v2</span>
+$ aegis migrate-layout           <span class="code-cmt"># legacy → single-folder</span>
+$ aegis export-diagrams</pre>
+      </div>
+    </div>
+
+    <div class="mt-6 glass p-4 flex items-center justify-between">
+      <div class="mono text-xs" style="color: var(--text-faint);">17 command modules · lib/commands/*.js</div>
+      <div class="flex gap-2">
+        <span class="badge-phase">idempotent</span>
+        <span class="badge-phase">exit-code aware</span>
+        <span class="badge-phase">CI-ready</span>
+        <span class="badge-phase">no daemon</span>
+      </div>
+    </div>
+    <span class="slide-num">15 / 22</span>
+  </section>
+
+  <!-- SLIDE 16: GENERATED LAYOUT -->
+  <section class="slide" data-title="Generated">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● What gets generated</span>
+    <h1 class="slide-title">Everything lives under <code style="font-size: 0.85em;">aegis/</code></h1>
+    <p class="slide-subtitle">Single folder. Never touches existing project files. Runtime state, specs, reports, architecture, traceability — all addressable, all versioned by the user.</p>
+
+    <div class="grid grid-cols-2 gap-6 mt-6 flex-1">
+      <div class="glass p-5">
+        <pre class="code-block text-xs">aegis/
+├─ config/
+│   ├─ state.json          <span class="code-cmt"># session checkpoints</span>
+│   ├─ config.toml         <span class="code-cmt"># project config</span>
+│   ├─ config.user.toml    <span class="code-cmt"># personal · gitignored</span>
+│   ├─ auto-policy.yaml    <span class="code-cmt"># Keeper auto scope</span>
+│   ├─ manifest.yaml
+│   └─ files-manifest.json <span class="code-cmt"># SHA-256</span>
+├─ runtime/
+│   ├─ context/
+│   │   ├─ surface.json
+│   │   ├─ modules.json
+│   │   ├─ graph.json
+│   │   └─ policy-index.json
+│   ├─ queue/keeper-queue.jsonl
+│   └─ audit/YYYY-MM-DD.jsonl
+├─ skills/                 <span class="code-cmt"># installed agents</span></pre>
+      </div>
+      <div class="glass p-5">
+        <pre class="code-block text-xs">├─ specs/
+│   ├─ sdd/                <span class="code-cmt"># per-component</span>
+│   ├─ user-stories/
+│   ├─ adrs/
+│   └─ openapi/
+├─ reports/
+│   ├─ inventory.md
+│   ├─ dependencies.md
+│   ├─ confidence-report.md
+│   ├─ gaps.md
+│   ├─ questions.md
+│   ├─ drift.md            <span class="code-cmt"># 🔴 pending dashboard</span>
+│   └─ changelog/YYYY-MM-DD.md
+├─ architecture/
+│   ├─ c4-context.md · c4-containers.md · c4-components.md
+│   └─ erd-complete.md
+├─ traceability/
+│   ├─ spec-impact-matrix.md
+│   └─ code-spec-matrix.md
+└─ migration/              <span class="code-cmt"># optional</span></pre>
+      </div>
+    </div>
+    <span class="slide-num">16 / 22</span>
+  </section>
+
+  <!-- SLIDE 17: AUDIT + QUEUE -->
+  <section class="slide" data-title="Audit">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Observability</span>
+    <h1 class="slide-title">Audit log + replay queue</h1>
+    <p class="slide-subtitle">Every Keeper decision lands in a daily JSONL. Sensitive fields auto-redacted. Queue tolerates corrupt lines — bad JSON skipped, never blocks the loop.</p>
+
+    <div class="grid grid-cols-12 gap-6 mt-8 flex-1">
+      <div class="glass-strong p-6 col-span-7">
+        <h2 class="section-h">lib/audit/</h2>
+        <pre class="code-block text-xs">audit/
+├─ writer.js           <span class="code-cmt"># append-only JSONL</span>
+├─ redact.js           <span class="code-cmt"># API keys · tokens · emails</span>
+└─ schema.md           <span class="code-cmt"># event shape contract</span>
+
+aegis/runtime/audit/2026-05-14.jsonl
+<span class="code-cmt">{</span><span class="code-key">"ts"</span><span class="code-cmt">:</span><span class="code-str">"2026-05-14T13:25:00Z"</span><span class="code-cmt">,</span><span class="code-key">"actor"</span><span class="code-cmt">:</span><span class="code-str">"keeper-auto"</span><span class="code-cmt">,</span>
+<span class="code-key">"file"</span><span class="code-cmt">:</span><span class="code-str">"src/api/auth.ts"</span><span class="code-cmt">,</span><span class="code-key">"verdict"</span><span class="code-cmt">:</span><span class="code-str">"APPROVE"</span><span class="code-cmt">,</span>
+<span class="code-key">"spec_updated"</span><span class="code-cmt">:</span><span class="code-str">"aegis/specs/sdd/auth.md"</span><span class="code-cmt">,</span>
+<span class="code-key">"reason"</span><span class="code-cmt">:</span><span class="code-str">"signature unchanged · whitelist hit"</span><span class="code-cmt">}</span></pre>
+      </div>
+
+      <div class="glass p-6 col-span-5">
+        <h2 class="section-h">Queue (lib/commands/keeper-auto.js)</h2>
+        <div class="space-y-2 text-sm mt-3">
+          <div class="layer"><span class="pill green">JSONL tolerant</span> bad line → skip + warn</div>
+          <div class="layer"><span class="pill amber">whitelist routing</span> auto-resolve path</div>
+          <div class="layer"><span class="pill red">cap per run/day</span> stops runaway costs</div>
+          <div class="layer"><span class="pill cyan">resume safe</span> idempotent re-process</div>
+        </div>
+        <div class="mt-4 mono text-xs" style="color: var(--text-faint);">14+ unit tests · keeper-auto queue contract</div>
+      </div>
+    </div>
+    <span class="slide-num">17 / 22</span>
+  </section>
+
+  <!-- SLIDE 18: INSTALLER -->
+  <section class="slide" data-title="Installer">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Safety</span>
+    <h1 class="slide-title">Installer · SHA-256 manifest</h1>
+    <p class="slide-subtitle">Aegis never modifies user code. New files only. <code class="mono text-base">update</code> detects user edits via hash and refuses to overwrite customisations. <code class="mono text-base">uninstall</code> removes only what Aegis wrote.</p>
+
+    <div class="grid grid-cols-2 gap-6 mt-8 flex-1">
+      <div class="glass-strong p-6 glow-emerald">
+        <h2 class="section-h">lib/installer/</h2>
+        <div class="space-y-2 text-sm">
+          <div class="layer"><span class="pill green">detector</span> finds 14 engines via fs markers</div>
+          <div class="layer"><span class="pill green">prompts</span> interactive · sensible defaults</div>
+          <div class="layer"><span class="pill green">orange-prompts</span> dangerous-action UX</div>
+          <div class="layer"><span class="pill green">manifest</span> SHA-256 per installed file</div>
+          <div class="layer"><span class="pill green">writer</span> installSkill · installEntryFile</div>
+          <div class="layer"><span class="pill green">validator</span> input sanity</div>
+          <div class="layer"><span class="pill green">git-hooks</span> pre-commit policy gate</div>
+          <div class="layer"><span class="pill green">hooks/</span> generators per engine</div>
+        </div>
+      </div>
+
+      <div class="glass p-6">
+        <h2 class="section-h">Invariants</h2>
+        <ul class="space-y-3 text-base" style="color: var(--text);">
+          <li class="check">Only writes new files</li>
+          <li class="check">Never deletes outside <code class="mono text-sm">aegis/</code></li>
+          <li class="check">Detects edited installed files via hash</li>
+          <li class="check">Refuses to overwrite user-modified skill</li>
+          <li class="check">No API keys requested · stored · transmitted</li>
+          <li class="check">Engine intelligence lives in the engine</li>
+        </ul>
+        <div class="mt-6 layer">
+          <div class="mono text-xs" style="color: var(--text-faint);">47 installer tests · manifest · git-hooks · writer · detector</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-num">18 / 22</span>
+  </section>
+
+  <!-- SLIDE 19: TESTS -->
+  <section class="slide" data-title="Tests">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Quality</span>
+    <h1 class="slide-title">Test coverage by module</h1>
+    <p class="slide-subtitle">node --test runner · 47 suites. Static ESM imports throughout. Module-cache stubs for SDK isolation. Real git history used in policy-check e2e.</p>
+
+    <div class="grid grid-cols-4 gap-4 mt-10 flex-1">
+      <div class="glass p-5"><div class="stat-num" style="color: var(--emerald-2);">62</div><div class="stat-label">policy tests</div><div class="text-xs mt-2" style="color: var(--text-faint);">match · check · overrides · adapters · index</div></div>
+      <div class="glass p-5"><div class="stat-num" style="color: var(--accent-cyan);">40</div><div class="stat-label">graph tests</div><div class="text-xs mt-2" style="color: var(--text-faint);">store · builder · L1 · incremental · resolver</div></div>
+      <div class="glass p-5"><div class="stat-num" style="color: var(--accent-purple);">47</div><div class="stat-label">installer tests</div><div class="text-xs mt-2" style="color: var(--text-faint);">manifest · detector · git-hooks · writer</div></div>
+      <div class="glass p-5"><div class="stat-num" style="color: var(--amber);">14</div><div class="stat-label">auto tests</div><div class="text-xs mt-2" style="color: var(--text-faint);">classifier · decision-tree · spec-writer</div></div>
+      <div class="glass p-5"><div class="stat-num" style="color: var(--emerald-2);">9</div><div class="stat-label">drift-check</div><div class="text-xs mt-2" style="color: var(--text-faint);">exit codes · severity</div></div>
+      <div class="glass p-5"><div class="stat-num" style="color: var(--accent-cyan);">9</div><div class="stat-label">graph cmd</div><div class="text-xs mt-2" style="color: var(--text-faint);">subcommands + exit codes</div></div>
+      <div class="glass p-5"><div class="stat-num" style="color: var(--accent-pink);">e2e</div><div class="stat-label">policy-check</div><div class="text-xs mt-2" style="color: var(--text-faint);">real git history</div></div>
+      <div class="glass p-5"><div class="stat-num" style="color: var(--amber);">8</div><div class="stat-label">matchGlob</div><div class="text-xs mt-2" style="color: var(--text-faint);">incl. mid-path /**/ fix</div></div>
+    </div>
+
+    <div class="mt-6 glass p-4 mono text-xs" style="color: var(--text-faint);">
+      $ npm test  · node --test --test-reporter=spec test/unit/**/*.test.js
+    </div>
+    <span class="slide-num">19 / 22</span>
+  </section>
+
+  <!-- SLIDE 20: FORK DELTA -->
+  <section class="slide" data-title="Fork Delta">
+    <div class="grid-bg"></div>
+    <span class="slide-title-tag">● Fork vs upstream</span>
+    <h1 class="slide-title">What this fork adds</h1>
+    <p class="slide-subtitle">Upstream <code class="mono text-base">sandeco/reversa v1.2.28</code> = spec generation. Fork = spec + graph + policy + drift + audit + bot + CI templates. Same MIT.</p>
+
+    <div class="grid grid-cols-2 gap-6 mt-8 flex-1">
+      <div class="glass p-7">
+        <h2 class="section-h">Upstream Reversa</h2>
+        <ul class="space-y-2 text-sm" style="color: var(--text-dim);">
+          <li class="arrow">Discovery agents (Scout · Archaeologist · …)</li>
+          <li class="arrow">Migration agents</li>
+          <li class="arrow">Spec generation pipeline</li>
+          <li class="arrow">Engine entry files</li>
+          <li class="arrow">5-phase orchestrator</li>
+        </ul>
+        <div class="mt-6 mono text-xs" style="color: var(--text-faint);">tag base: upstream/main · 144aee2</div>
+      </div>
+      <div class="glass-strong p-7 glow-emerald">
+        <h2 class="section-h">Fork delta · v2.0.0</h2>
+        <ul class="space-y-2 text-sm" style="color: var(--text);">
+          <li class="check">Keeper agent — drift loop after generation</li>
+          <li class="check">Graph (in-house, MIT) — L0 + L1, 5 langs</li>
+          <li class="check">Policy gate — file + signature diff + adapters</li>
+          <li class="check">Auto mode — opt-in LLM resolution</li>
+          <li class="check">Audit log + JSONL queue + redaction</li>
+          <li class="check">Hook generators — Claude · Cursor · Kimi · Codex · Opencode</li>
+          <li class="check">Bot scaffold — <code class="mono text-xs">bot/keeper-bot/</code></li>
+          <li class="check">CI templates — GitHub · GitLab · CircleCI</li>
+          <li class="check">Kimi CLI engine support</li>
+          <li class="check">Single-folder layout · <code class="mono text-xs">aegis/</code></li>
+        </ul>
+      </div>
+    </div>
+    <span class="slide-num">20 / 22</span>
+  </section>
+
+  <!-- SLIDE 21: ROADMAP -->
   <section class="slide" data-title="Roadmap">
     <div class="grid-bg"></div>
-    <span class="slide-title-tag">● Roadmap</span>
-    <h1 class="slide-title">Where it's going</h1>
-    <p class="slide-subtitle">Phases 1–13 shipped: hooks, L0+L1 graph, drift loop, policy gates, Keeper auto, audit + redaction. Next: bot adoption, OTel, more languages.</p>
+    <span class="slide-title-tag">● Shipped + next</span>
+    <h1 class="slide-title">Phases 1 – 14 · all shipped</h1>
+    <p class="slide-subtitle">v2.0.0 closes the control-plane roadmap. Next: deeper language coverage, smarter blast-radius scoring, telemetry-grade audit, bot for self-hosted GitHub/GitLab.</p>
 
-    <div class="grid grid-cols-2 gap-6 mt-10 flex-1">
-      <div class="glass p-6">
-        <h2 class="section-h">Shipped</h2>
-        <ul class="space-y-2 text-sm" style="color: var(--text-dim);">
-          <li class="check">P1 — lightweight hooks (append-only JSONL)</li>
-          <li class="check">P2 — L0 import graph (5 languages)</li>
-          <li class="check">P3 — graph store + queries + impact</li>
-          <li class="check">P4 — policy-index + policy-check</li>
-          <li class="check">P5 — Keeper auto (whitelist + LLM)</li>
-          <li class="check">P10 — smart signature gate</li>
-          <li class="check">P12 — audit log + redaction</li>
-          <li class="check">P13 — bot scaffold + CI templates</li>
-        </ul>
+    <div class="grid grid-cols-12 gap-5 mt-8 flex-1">
+      <div class="glass p-6 col-span-7">
+        <h2 class="section-h">Delivered</h2>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="badge-phase">P1 Hooks · v1.7.0</span>
+          <span class="badge-phase">P2 Graph L0 · v1.8.0-α1</span>
+          <span class="badge-phase">P3 Storage + queries · v1.8.0-α2</span>
+          <span class="badge-phase">P4 File-level policy · v1.8.0-α3</span>
+          <span class="badge-phase">P5 Keeper ↔ L0 · v1.8.0</span>
+          <span class="badge-phase">P6 Graph L1 JS/TS · v1.9.0-α1</span>
+          <span class="badge-phase">P7 Graph L1 Python · v1.9.0-α2</span>
+          <span class="badge-phase">P8 Graph L1 Go · v1.9.0-α3</span>
+          <span class="badge-phase">P9 Graph L1 Java · v1.9.0-α4</span>
+          <span class="badge-phase">P10 Signature diff · v1.9.0</span>
+          <span class="badge-phase">P11 policy-check CLI · v1.10.0</span>
+          <span class="badge-phase">P12 Auto Keeper · v2.0.0-α1</span>
+          <span class="badge-phase">P13 Audit + bot · v2.0.0-β1</span>
+          <span class="badge-phase">P14 CI templates + docs · v2.0.0</span>
+        </div>
+        <div class="mt-5 pt-4 border-t" style="border-color: var(--border);">
+          <h2 class="section-h">Architectural calls</h2>
+          <div class="text-sm space-y-1" style="color: var(--text-dim);">
+            <div class="arrow">Build graph in-house instead of GitNexus (PolyForm license + scope mismatch)</div>
+            <div class="arrow">tree-sitter is optional dep — L0 always works</div>
+            <div class="arrow">Single-folder layout <code class="mono text-xs">aegis/</code> replaces split <code class="mono text-xs">_aegis_sdd/</code> + <code class="mono text-xs">_reversa_sdd/</code></div>
+          </div>
+        </div>
       </div>
-      <div class="glass p-6">
-        <h2 class="section-h">Next</h2>
-        <ul class="space-y-2 text-sm" style="color: var(--text-dim);">
-          <li class="arrow">More L1 languages (Rust, C#)</li>
-          <li class="arrow">OpenTelemetry traces per agent</li>
-          <li class="arrow">Bot turnkey (GitHub App)</li>
-          <li class="arrow">Spec versioning + diff history</li>
-          <li class="arrow">Dashboard for drift / blast radius</li>
-          <li class="arrow">Cost guardrails for Keeper auto</li>
-          <li class="arrow">Pluggable LLM provider (Bedrock, Vertex)</li>
-        </ul>
+
+      <div class="glass-strong p-6 col-span-5 glow-amber">
+        <h2 class="section-h">Backlog · v2.1+</h2>
+        <div class="space-y-3">
+          <div class="layer">
+            <div class="flex items-center gap-2"><span class="pill amber">P0</span><div class="font-medium">Self-hosted bot</div></div>
+            <div class="text-sm mt-1" style="color: var(--text-dim);">keeper-bot for self-hosted GitHub/GitLab · OAuth-app flow</div>
+          </div>
+          <div class="layer">
+            <div class="flex items-center gap-2"><span class="pill amber">P0</span><div class="font-medium">Rust + C# Graph L1</div></div>
+            <div class="text-sm mt-1" style="color: var(--text-dim);">extend parsers-l1/ with tree-sitter-rust · tree-sitter-c-sharp</div>
+          </div>
+          <div class="layer">
+            <div class="flex items-center gap-2"><span class="pill blue">P1</span><div class="font-medium">Telemetry-grade audit</div></div>
+            <div class="text-sm mt-1" style="color: var(--text-dim);">OpenTelemetry export · grafana dashboard from JSONL</div>
+          </div>
+          <div class="layer">
+            <div class="flex items-center gap-2"><span class="pill blue">P1</span><div class="font-medium">Spec impact scoring</div></div>
+            <div class="text-sm mt-1" style="color: var(--text-dim);">weight impact by call-count + criticality not just BFS depth</div>
+          </div>
+          <div class="layer">
+            <div class="flex items-center gap-2"><span class="pill purple">P2</span><div class="font-medium">Web dashboard</div></div>
+            <div class="text-sm mt-1" style="color: var(--text-dim);">static MkDocs page rendering drift.md + graph viz</div>
+          </div>
+        </div>
       </div>
     </div>
-    <span class="slide-num">11 / 12</span>
+    <span class="slide-num">21 / 22</span>
   </section>
 
-  <!-- =========== SLIDE 12: OUTRO =========== -->
+  <!-- SLIDE 22: THANKS -->
   <section class="slide" data-title="Thanks">
     <div class="cover-bg"></div>
     <div class="grid-bg"></div>
-    <div class="flex flex-col justify-center h-full max-w-5xl">
-      <div class="flex items-center gap-3 mb-8">
-        <img src="logo.png" alt="" class="w-12 h-12 rounded-lg" />
-        <span class="mono text-sm" style="color: var(--text-dim); letter-spacing: 0.2em;">AEGIS SPEC · v2.0</span>
-      </div>
-      <h1 class="font-black tracking-tighter" style="font-size: 84px; line-height: 0.95;">
-        <span style="background: linear-gradient(135deg, var(--emerald-2), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Specify · Protect · Detect · Assure</span>
+    <div class="flex flex-col justify-center items-center h-full text-center">
+      <img src="logo.png" alt="" class="w-24 h-24 rounded-2xl mb-8 glow-emerald" />
+      <h1 class="font-black tracking-tighter" style="font-size: 80px; line-height: 1;">
+        <span style="background: linear-gradient(135deg, var(--emerald-2), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Aegis Spec</span>
       </h1>
-      <p class="mt-6 text-2xl font-light" style="color: var(--text-dim); max-width: 880px; line-height: 1.4;">
-        Specs are the contract. Graph is the ground truth. Keeper is the gate.
+      <p class="mt-6 text-2xl font-light" style="color: var(--text-dim); max-width: 760px; line-height: 1.4;">
+        Specs as contracts. Graph as ground truth. Keeper as the gate that keeps them aligned.
       </p>
-      <div class="mt-12 flex items-center gap-6">
-        <span class="pill green">npm i -g aegis-spec</span>
-        <span class="mono text-sm" style="color: var(--text-faint);">github.com/Wellbrito29/Aegis</span>
-        <span class="mono text-sm" style="color: var(--text-faint);">wellbrito29.github.io/Aegis</span>
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-3">
+        <span class="pill green">npx aegis-spec install</span>
+        <span class="pill amber">github.com/Wellbrito29/Aegis</span>
+        <span class="pill cyan">wellbrito29.github.io/Aegis</span>
+        <span class="pill purple">MIT · fork of sandeco/reversa</span>
       </div>
-      <div class="mt-12 text-base" style="color: var(--text-dim);">questions?</div>
+      <div class="mt-16 flex items-center gap-3 text-sm" style="color: var(--text-faint);">
+        <span class="keystroke">Home</span> first
+        <span class="keystroke">End</span> last
+        <span class="keystroke">F</span> fullscreen
+        <span class="ml-4">· thanks · questions?</span>
+      </div>
     </div>
-    <span class="slide-num">12 / 12</span>
+    <span class="slide-num">22 / 22</span>
   </section>
 
 </div>
 </div>
 
 <div class="nav">
-  <button class="nav-btn" id="prev" title="Previous (←)">
+  <button class="nav-btn" id="prev" title="Prev (←)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
   </button>
   <button class="nav-btn" id="next" title="Next (→)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
   </button>
-  <span class="mono text-xs ml-3" id="counter" style="color: var(--text-faint);">01 / 12</span>
+  <span class="mono text-xs ml-3" id="counter" style="color: var(--text-faint);">01 / 22</span>
 </div>
 
 <script>

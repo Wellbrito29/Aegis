@@ -116,11 +116,19 @@ export async function runCommand(modulePath, args = [], { cwd } = {}) {
   process.exit = (code) => { exitCode = code ?? 0; throw new Error(`__test_exit_${exitCode}__`); };
   console.log = (...a) => stdout.push(a.map(String).join(' '));
   console.error = (...a) => stderr.push(a.map(String).join(' '));
+  // Filter Node test runner IPC frames (V8 serializer output written to
+  // child-process stdout on Node < 22). They start with 0xff followed by a
+  // version byte. Legit CLI output never starts with 0xff.
+  const isTestRunnerFrame = (chunk) => (
+    Buffer.isBuffer(chunk) && chunk.length >= 2 && chunk[0] === 0xff
+  );
   process.stdout.write = (chunk, ...rest) => {
+    if (isTestRunnerFrame(chunk)) return true;
     stdout.push(typeof chunk === 'string' ? chunk : outDecoder.write(chunk));
     return true;
   };
   process.stderr.write = (chunk, ...rest) => {
+    if (isTestRunnerFrame(chunk)) return true;
     stderr.push(typeof chunk === 'string' ? chunk : errDecoder.write(chunk));
     return true;
   };

@@ -99,6 +99,11 @@ export async function mockInquirer(answers) {
  * exiting the test process.
  */
 export async function runCommand(modulePath, args = [], { cwd } = {}) {
+  // Use StringDecoder so multi-byte UTF-8 chars (em-dash, accented Portuguese
+  // chars) split across chunk boundaries don't become replacement chars.
+  const { StringDecoder } = await import('node:string_decoder');
+  const outDecoder = new StringDecoder('utf8');
+  const errDecoder = new StringDecoder('utf8');
   const stdout = [];
   const stderr = [];
   const origLog = console.log;
@@ -112,11 +117,11 @@ export async function runCommand(modulePath, args = [], { cwd } = {}) {
   console.log = (...a) => stdout.push(a.map(String).join(' '));
   console.error = (...a) => stderr.push(a.map(String).join(' '));
   process.stdout.write = (chunk, ...rest) => {
-    stdout.push(typeof chunk === 'string' ? chunk : chunk.toString('utf8'));
+    stdout.push(typeof chunk === 'string' ? chunk : outDecoder.write(chunk));
     return true;
   };
   process.stderr.write = (chunk, ...rest) => {
-    stderr.push(typeof chunk === 'string' ? chunk : chunk.toString('utf8'));
+    stderr.push(typeof chunk === 'string' ? chunk : errDecoder.write(chunk));
     return true;
   };
   if (cwd) process.chdir(cwd);
@@ -134,6 +139,8 @@ export async function runCommand(modulePath, args = [], { cwd } = {}) {
       throw e;
     }
   } finally {
+    stdout.push(outDecoder.end());
+    stderr.push(errDecoder.end());
     console.log = origLog;
     console.error = origErr;
     process.stdout.write = origStdoutWrite;
